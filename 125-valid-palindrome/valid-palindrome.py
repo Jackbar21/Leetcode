@@ -1,6 +1,5 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        # filtered_s = s.lower() # convert all uppercase to lowercase
         filtered_s = ''.join(
             filter(lambda x:x.isalnum(), s)
         ).lower()
