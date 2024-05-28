@@ -1,6 +1,5 @@
 public class Solution {
     public bool IsAnagram(string s, string t) {
-        // Console.WriteLine(WordToDict(s).ToString());
         if (s.Length != t.Length)
             return false;
         
