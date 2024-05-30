@@ -13,26 +13,25 @@ class Solution:
         # empty (since otherwise not all parentheses were closed), 
         # and can return as such.
 
-        stack = []
-
         open_to_closed = {
             '(': ')',
             '[': ']',
             '{': '}'
         }
-        
         open_parentheses = open_to_closed.keys()
 
         closed_to_open = {value: key for key, value in open_to_closed.items()}
         closed_parentheses = closed_to_open.keys()
 
+        stack = []
         for parenthese in s:
-            print(parenthese)
             if parenthese in open_parentheses:
+                # Open parenthese case
                 stack.append(parenthese)
             else:
-                open_parenthese = closed_to_open[parenthese]
-                if len(stack) == 0 or stack[-1] != open_parenthese:
+                # Closed parenthese case
+                matching_parenthese = closed_to_open[parenthese]
+                if len(stack) == 0 or stack[-1] != matching_parenthese:
                     return False
                 stack.pop()
         
