@@ -3,8 +3,6 @@ public class Solution {
         int index = s.Length - 1;
         if (index == -1)
             return 0;
-        // if (index == 0)
-        //     return s[0] == ' ' ? 0 : 1;
         
         while (s[index] == ' ')
         {
