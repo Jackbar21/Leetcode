@@ -13,10 +13,8 @@
  */
 public class Solution {
     public IList<int> PostorderTraversal(TreeNode root) {
-        if (root == null){
-            // return new int[0];
+        if (root == null)
             return Enumerable.Empty<int>().ToList();
-        }
 
         return PostorderTraversal(root.left)
             .Concat(PostorderTraversal(root.right))
