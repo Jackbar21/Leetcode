@@ -13,6 +13,8 @@ class Solution:
         d = self.wordToDict(s1)
         k = len(s1)
         for i in range(len(s2)-k+1):
+            if d.get(s2[i], 0) == 0:
+                continue
             if self.wordToDict(s2[i:i+k]) == d:
                 return True
         return False
