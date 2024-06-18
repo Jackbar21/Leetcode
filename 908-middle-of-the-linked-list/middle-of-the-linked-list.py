@@ -9,7 +9,6 @@ class Solution:
             return head
         
         tor, hare = head, head.next
-
         while hare and hare.next:
             tor = tor.next
             hare = hare.next.next
