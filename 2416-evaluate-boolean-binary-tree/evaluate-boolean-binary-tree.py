@@ -13,6 +13,12 @@ class Solution:
         if not root.left and not root.right:
             return root.val == 1
         
-        e1, e2 = self.evaluateTree(root.left), self.evaluateTree(root.right)
-        return (e1 or e2) if root.val == 2 else (e1 and e2)
+        # OR case
+        if root.val == 2:
+            return self.evaluateTree(root.left) or self.evaluateTree(root.right)
+        
+        # AND case
+        if not self.evaluateTree(root.left):
+            return False
+        return self.evaluateTree(root.right)
         
