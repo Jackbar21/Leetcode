@@ -5,15 +5,12 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isLeaf(self, root):
-        if not root:
-            return False
-        return not root.left and not root.right
     def evaluateTree(self, root: Optional[TreeNode]) -> bool:
-        if not root:
-            raise Exception("Not Reachable")
+        # if not root:
+        #     raise Exception("Not Reachable")
         
-        if self.isLeaf(root):
+        # if root is leaf node
+        if not root.left and not root.right:
             return root.val == 1
         
         e1, e2 = self.evaluateTree(root.left), self.evaluateTree(root.right)
