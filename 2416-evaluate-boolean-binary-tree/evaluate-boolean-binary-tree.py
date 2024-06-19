@@ -15,7 +15,9 @@ class Solution:
         
         # OR case
         if root.val == 2:
-            return self.evaluateTree(root.left) or self.evaluateTree(root.right)
+            if self.evaluateTree(root.left):
+                return True
+            return self.evaluateTree(root.right)
         
         # AND case
         if not self.evaluateTree(root.left):
