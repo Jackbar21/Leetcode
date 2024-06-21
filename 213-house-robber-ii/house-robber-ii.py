@@ -18,6 +18,8 @@ class Solution:
 
         return max(case1, case2)
     def rob(self, nums: List[int]) -> int:
-        res = max(nums[0], self.classic_rob(nums[1:]))
+        if len(nums) <= 1:
+            return 0 if len(nums) <= 0 else nums[0]
+        res = self.classic_rob(nums[1:])
         self.memo = {}
         return max(res, self.classic_rob(nums[:-1]))
