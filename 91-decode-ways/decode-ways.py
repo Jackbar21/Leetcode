@@ -17,12 +17,12 @@ class Solution:
         if s[pos] == "0":
             return 0
         
-        # if pos+1 < self.length and s[pos+1] == "0":
-        #     return self.numDecPos(s, pos+2)
         
-        self.memo[pos] = 0 if s[pos] == "0" else self.numDecPos(s, pos+1)
-
-        if pos+1 < self.length and (s[pos] == "1" or (s[pos] == "2" and 0 <= int(s[pos+1]) <= 6)):
+        self.memo[pos] = self.numDecPos(s, pos+1)
+        if pos+1 < self.length and (
+            s[pos] == "1" or 
+            (s[pos] == "2" and 0 <= int(s[pos+1]) <= 6)
+        ):
             self.memo[pos] += self.numDecPos(s, pos+2)
         
         return self.memo[pos]
