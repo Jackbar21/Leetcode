@@ -4,15 +4,15 @@ class Solution:
         self.memo = {}
     def numDecodings(self, s: str) -> int:
         self.length = len(s)
-        self.memo[len(s)] = 1
+        # self.memo[len(s)] = 1
         return self.numDecPos(s, 0)
         
     def numDecPos(self, s, pos):
         if pos in self.memo:
             return self.memo[pos]
     
-        # if self.length - pos <= 0:
-        #     return 0
+        if self.length - pos <= 0:
+            return 1
         
         # if s[pos] == "0":
         #     return 0
