@@ -4,7 +4,6 @@ class Solution:
         self.memo = {}
     def numDecodings(self, s: str) -> int:
         self.length = len(s)
-        # self.memo[len(s)] = 1
         return self.numDecPos(s, 0)
         
     def numDecPos(self, s, pos):
