@@ -11,11 +11,11 @@ class Solution:
         if pos in self.memo:
             return self.memo[pos]
     
-        if self.length - pos <= 0:
+        if pos == self.length:
             return 1
         
-        # if s[pos] == "0":
-        #     return 0
+        if s[pos] == "0":
+            return 0
         
         # if pos+1 < self.length and s[pos+1] == "0":
         #     return self.numDecPos(s, pos+2)
