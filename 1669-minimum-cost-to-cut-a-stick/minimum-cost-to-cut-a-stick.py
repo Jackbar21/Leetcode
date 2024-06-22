@@ -4,11 +4,14 @@ class Solution:
         self.memo = {}
     def minCost(self, n: int, cuts: List[int]) -> int:
         self.cuts = cuts
-        for i in range(n):
-            self.memo[(i,i)] = 0
+        # for i in range(n):
+        #     self.memo[(i,i)] = 0
         return self.minCostDp(0, n)
 
     def minCostDp(self, l, r):
+        if r - l == 1:
+            return 0
+
         if (l,r) in self.memo:
             return self.memo[(l,r)]
 
