@@ -6,8 +6,8 @@ class Solution:
             return n
         
         if n not in self.memo:
-            v1 = 0 + self.climbStairs(n - 1)
-            v2 = 0 + self.climbStairs(n - 2)
+            v1 = self.climbStairs(n - 1)
+            v2 = self.climbStairs(n - 2)
             self.memo[n] = v1 + v2
 
         return self.memo[n]
