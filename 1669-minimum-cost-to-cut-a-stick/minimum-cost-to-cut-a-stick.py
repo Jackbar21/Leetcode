@@ -9,8 +9,8 @@ class Solution:
         return self.minCostDp(0, n)
 
     def minCostDp(self, l, r):
-        if r - l == 1:
-            return 0
+        # if r - l == 1:
+        #     return 0
 
         if (l,r) in self.memo:
             return self.memo[(l,r)]
