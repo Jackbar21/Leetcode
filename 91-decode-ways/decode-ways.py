@@ -16,7 +16,6 @@ class Solution:
         if s[pos] == "0":
             return 0
         
-        
         self.memo[pos] = self.numDecPos(s, pos+1)
         if pos+1 < self.length and (
             s[pos] == "1" or 
