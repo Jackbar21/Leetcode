@@ -6,10 +6,7 @@ class Solution:
             return self.memo[amount]
         
         if amount <= 0:
-            return 0
-        
-        if amount in coins:
-            return 1
+            return 0 if amount == 0 else -1
         
         res = float("inf")
         for coin in coins:
