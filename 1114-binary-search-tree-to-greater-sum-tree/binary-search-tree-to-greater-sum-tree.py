@@ -17,16 +17,14 @@ class Solution:
         if root == None:
             return
         
-        
         # inorder traversal
         root.left = self.bstToGst(root.left)
 
         # logic here
-        # print(self.sum, root.val)
         self.sum -= root.val
         root.val += self.sum
-        
 
+        # end inorder
         root.right = self.bstToGst(root.right)
 
         return root
