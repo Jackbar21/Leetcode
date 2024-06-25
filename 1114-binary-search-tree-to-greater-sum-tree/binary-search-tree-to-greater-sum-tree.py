@@ -9,13 +9,11 @@ class Solution:
         self.d = {}
         self.sum = None
     def bstToGst(self, root: TreeNode) -> TreeNode:
-        if self.sum == None:
-            self.sum = self.getSum(root)
-            print(self.sum)
-            assert self.sum is not None
-        
         if root == None:
             return
+
+        if self.sum == None:
+            self.sum = self.getSum(root)
         
         # inorder traversal
         root.left = self.bstToGst(root.left)
