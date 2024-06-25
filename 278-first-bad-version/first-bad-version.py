@@ -14,7 +14,6 @@ class Solution:
             return cur_index
 
         mid = l + (r - l)//2
-
         if isBadVersion(mid):
             cur_index = mid
             return self.firstBadAcc(l, mid-1, cur_index)
