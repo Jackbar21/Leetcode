@@ -6,25 +6,18 @@
 #         self.right = right
 class Solution:
     def __init__(self):
-        self.values = None
+        self.values = []
     def balanceBST(self, root: TreeNode) -> TreeNode:
-        if self.values == None:
-            self.values = []
-            self.generateValues(root)
-        
+        self.generateValues(root)
         return self.balBST(0, len(self.values)-1)
-    
     def balBST(self, l, r):
         if l > r:
             return None
-        
         mid = l + (r - l)//2
         root = TreeNode(self.values[mid])
         root.left = self.balBST(l, mid-1)
         root.right = self.balBST(mid+1, r)
-
         return root
-    
     def generateValues(self, root):
         if not root:
             return
