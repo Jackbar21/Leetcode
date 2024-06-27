@@ -5,21 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def __init__(self):
-        self.arr = []
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        # First idea: just get all the elements, heapify array, and pop k times
-        # for total complexity of O(n + klogn)
-        self.populateArr(root)
+        value, num_seen = -1, 0
+        stack = []
 
-        # Nevermind, as I got here I realized I can just add elements inorder,
-        # and return self.arr[k]
-        return self.arr[k-1]
-    
-    def populateArr(self, root):
-        if not root:
-            return
-        
-        self.populateArr(root.left)
-        self.arr.append(root.val)
-        self.populateArr(root.right)
+        while root or stack:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                root = stack.pop()
+                value = root.val
+                num_seen += 1
+                if num_seen == k:
+                    return value
+                root = root.right
