@@ -5,5 +5,5 @@ class Solution:
             edge = edges[i]
             if c1 not in edge:
                 return c2
-            if c2 not in edge:
+            elif c2 not in edge:
                 return c1
