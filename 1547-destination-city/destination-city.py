@@ -1,14 +1,12 @@
 class Solution:
     def destCity(self, paths: List[List[str]]) -> str:
-        d = {}
+        possible = set()
+        impossible = set()
         for A, B in paths:
-            if A not in d:
-                d[A] = set()
-            if B not in d:
-                d[B] = set()
-            d[A].add(B)
-        
-        print(d)
-        for key in d:
-            if len(d[key]) == 0:
-                return key
+            impossible.add(A)
+            if A in possible:
+                possible.remove(A)   
+            if B not in impossible:
+                possible.add(B)
+
+        return list(possible)[0]
