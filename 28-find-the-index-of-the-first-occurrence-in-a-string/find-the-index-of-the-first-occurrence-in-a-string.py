@@ -16,7 +16,7 @@ class Solution:
             return -1        
         
         if self.haystack[i] == self.needle[j]:
-            k = 0
+            k = 1
             while (
                 j+k < len(self.needle) 
                 and i+k < len(self.haystack)
