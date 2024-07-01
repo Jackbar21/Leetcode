@@ -9,17 +9,16 @@ class Solution:
         self.d = {}
     def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
         self.populateTree(root, 0)
-        d = self.d
-        for level in d:
+        for level in self.d:
             if level % 2 == 0:
                 prev_val = float("-inf")
-                for val in d[level]:
+                for val in self.d[level]:
                     if val % 2 == 0 or prev_val >= val:
                         return False
                     prev_val = val
             else:
                 prev_val = float("inf")
-                for val in d[level]:
+                for val in self.d[level]:
                     if val % 2 == 1 or prev_val <= val:
                         return False
                     prev_val = val
@@ -32,8 +31,7 @@ class Solution:
         
         # inorder traversal
         self.populateTree(root.left, depth+1)
-        d = self.d
-        if depth not in d:
-            d[depth] = []
-        d[depth].append(root.val)
+        if depth not in self.d:
+            self.d[depth] = []
+        self.d[depth].append(root.val)
         self.populateTree(root.right, depth+1)
