@@ -1,12 +1,17 @@
 class Solution:
-    def isPalindrome(self, word, l, r):
-        if r - l + 1 <= 1:
+    def isPalindrome(self, word):
+        if len(word) <= 1:
             return True
-        if l > r or l < 0 or r > len(word) or word[l] != word[r]:
-            return False
-        return self.isPalindrome(word, l+1, r-1)
+
+        l,r = 0, len(word)-1
+        while l < r:
+            if word[l] != word[r]:
+                return False
+            l += 1
+            r -= 1
+        return True
     def firstPalindrome(self, words: List[str]) -> str:
         for word in words:
-            if self.isPalindrome(word, 0, len(word)-1):
+            if self.isPalindrome(word):
                 return word
         return ""
