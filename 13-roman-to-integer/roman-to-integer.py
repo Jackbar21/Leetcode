@@ -5,6 +5,7 @@ class Solution:
         
         letters = [letter.upper() for letter in 'ivxlcdm']
         values = [1,5,10,50,100,500,1000]
+        assert len(letters) == len(values)
         d = {
             letters[i]: values[i] for i in range(len(values))
         }
