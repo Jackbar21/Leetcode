@@ -1,6 +1,10 @@
+from collections import deque
 class Solution:
     def sortArrayByParity(self, nums: List[int]) -> List[int]:
-        even,odd = [],[]
+        res = deque()
         for num in nums:
-            (odd if num%2 else even).append(num)
-        return even + odd
+            if num % 2 == 0:
+                res.appendleft(num)
+            else:
+                res.append(num)
+        return res
