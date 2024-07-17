@@ -13,9 +13,9 @@ class Solution:
         for val in to_delete:
             for i in range(len(self.res)):
                 self.res[i] = self.delNode(self.res[i], val)
-                # if self.found:
-                #     self.found = False
-                #     break
+                if self.found:
+                    self.found = False
+                    break
 
         return [i for i in self.res if i]
         
