@@ -12,14 +12,12 @@ class Solution:
         self.res = [root]
         for val in to_delete:
             for i in range(len(self.res)):
-                rt = self.res[i]
-                self.res[i] = self.delNode(rt, val)
-
+                self.res[i] = self.delNode(self.res[i], val)
                 if self.found:
                     self.found = False
                     break
 
-        return [i for i in self.res if i is not None]
+        return [i for i in self.res if i]
         
     def delNode(self, root, val):
         if not root:
@@ -30,7 +28,6 @@ class Solution:
             root.right = self.delNode(root.right, val)
             return root
 
-        # root.val == val
         if root.left:
             self.res.append(root.left)
         if root.right:
