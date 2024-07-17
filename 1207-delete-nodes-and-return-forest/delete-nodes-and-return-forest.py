@@ -25,8 +25,6 @@ class Solution:
         if not root:
             return root
         
-        print(root.val, val)
-        
         if root.val != val:
             root.left = self.delNode(root.left, val)
             root.right = self.delNode(root.right, val)
