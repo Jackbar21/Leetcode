@@ -7,8 +7,6 @@
 class Solution:
     def __init__(self):
         self.pairs = set()
-        self.left_leaves = None
-        self.right_leaves = None
         self.leaves = []
     
     def countPairs(self, root: TreeNode, distance: int) -> int:
@@ -16,7 +14,6 @@ class Solution:
             return 0
 
         if not root or self.isLeaf(root):
-            # TODO: check if should do this
             return len(self.pairs) // 2
         
         if not root.left:
@@ -48,10 +45,7 @@ class Solution:
                     self.pairs.add((left_leaf, right_leaf))
                     self.pairs.add((right_leaf, left_leaf))
 
-        # print("left", left_leaves)
-        # print("right", right_leaves)
         return len(self.pairs) // 2
-
     
     def populateLeaves(self, root, distance):
         if not root:
@@ -62,14 +56,6 @@ class Solution:
         
         self.populateLeaves(root.left, distance + 1)
         self.populateLeaves(root.right, distance + 1)
-        
-
-        
-
-
-        
-
-        
 
     def isLeaf(self, root):
         if not root:
