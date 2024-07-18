@@ -22,12 +22,11 @@ class Solution:
         if not root.right:
             return self.countPairs(root.left, distance)
         
-        total = 0
         # Case 1: pairs of leaves to the left of root
-        total += self.countPairs(root.left, distance)
+        self.countPairs(root.left, distance)
 
         # Case 2: pairs of leaves to the right of root
-        total += self.countPairs(root.right, distance)
+        self.countPairs(root.right, distance)
 
         # Case 3: pairs of leaves where one is to the left of root, 
         #         and other to the right
