@@ -31,5 +31,5 @@ class Solution:
             if (row_num, col_num) in lucky_contenders:
                 res.append(matrix[row_num][col_num])
         
-        return list(res)
+        return res
             
