@@ -8,16 +8,7 @@ class Solution:
                 index = i
                 min_el = arr[i]
         return index
-    def argMax(self, arr):
-        max_el = float("-inf")
-        index = -1
-        for i in range(len(arr)):
-            if arr[i] > max_el:
-                index = i
-                max_el = arr[i]
-        return index
     def restoreMatrix(self, rowSum: List[int], colSum: List[int]) -> List[List[int]]:
-        # TODO: verify if should be len colSum then rowSum, or vice versa
         matrix = [[0] * len(colSum) for i in range(len(rowSum))]
 
         # cur_sum = 0
