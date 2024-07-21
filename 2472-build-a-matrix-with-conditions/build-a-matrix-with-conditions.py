@@ -44,9 +44,6 @@ class Solution:
         c = self.buildRow(k, colConditions)
         r = self.buildRow(k, rowConditions)
 
-        print(f"Column / Horizontal Values: {[i+1 for i in c]}")
-        print(f" Row  /  Vertical   Values: {[i+1 for i in r]}")
-
         if len(c) == 0 or len(r) == 0:
             return []
         
