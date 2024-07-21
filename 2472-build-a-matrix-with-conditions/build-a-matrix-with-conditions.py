@@ -44,8 +44,8 @@ class Solution:
         c = self.buildRow(k, colConditions)
         r = self.buildRow(k, rowConditions)
 
-        # print(f"Column / Horizontal Values: {[i+1 for i in c]}")
-        # print(f" Row  /  Vertical   Values: {[i+1 for i in r]}")
+        print(f"Column / Horizontal Values: {[i+1 for i in c]}")
+        print(f" Row  /  Vertical   Values: {[i+1 for i in r]}")
 
         if len(c) == 0 or len(r) == 0:
             return []
@@ -60,16 +60,3 @@ class Solution:
             matrix[i][index] = element_to_place + 1
 
         return matrix
-    
-
-
-
-
-
-
-
-    def getIndex(self, arr, val):
-        for i in range(len(arr)):
-            if arr[i] == val:
-                return i
-        return -1
