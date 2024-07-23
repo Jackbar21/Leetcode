@@ -5,7 +5,7 @@ class Solution:
         for num in nums:
             d[num] = d.get(num, 0) + 1
             max_freq = max(max_freq, d[num])
-        print(d)
+
         frequencies = {
             i: [] for i in range(1,max_freq+1)
         }
@@ -13,10 +13,10 @@ class Solution:
         
         for num in d:
             frequencies[d[num]].append(num)
-        print(frequencies)
+
         for key in frequencies:
             frequencies[key] = sorted(frequencies[key], reverse=True)
-        print(frequencies)
+
         res = []
         for frequency in range(1,max_freq+1):
             for num in frequencies[frequency]:
