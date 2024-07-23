@@ -5,19 +5,24 @@ class Solution:
         for num in nums:
             d[num] = d.get(num, 0) + 1
             max_freq = max(max_freq, d[num])
-        
+        print(d)
         frequencies = {
             i: [] for i in range(1,max_freq+1)
         }
 
         
         for num in d:
-            for _ in range(d[num]):
-                frequencies[d[num]].append(num)
-        
+            frequencies[d[num]].append(num)
+        print(frequencies)
+        for key in frequencies:
+            frequencies[key] = sorted(frequencies[key], reverse=True)
+        print(frequencies)
         res = []
-        for i in range(1,max_freq+1):
-            res += sorted(frequencies[i], reverse=True)
+        for frequency in range(1,max_freq+1):
+            for num in frequencies[frequency]:
+                # for _ in range(frequency):
+                #     res.append(num)
+                res += [num]*frequency
         
         return res
 
