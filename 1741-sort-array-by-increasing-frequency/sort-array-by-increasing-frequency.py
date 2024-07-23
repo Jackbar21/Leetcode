@@ -20,9 +20,8 @@ class Solution:
         res = []
         for frequency in range(1,max_freq+1):
             for num in frequencies[frequency]:
-                # for _ in range(frequency):
-                #     res.append(num)
-                res += [num]*frequency
+                for _ in range(frequency):
+                    res.append(num)
         
         return res
 
