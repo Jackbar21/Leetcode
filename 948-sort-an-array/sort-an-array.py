@@ -4,10 +4,12 @@ class Solution:
             return nums
         
         mid = len(nums) // 2
-        left, right = self.sortArray(nums[:mid]), self.sortArray(nums[mid:])
+        left = self.sortArray(nums[:mid])
+        right = self.sortArray(nums[mid:])
+
+        l,r = 0,0
 
         res = []
-        l,r = 0,0
         while l < len(left) and r < len(right):
             if left[l] < right[r]:
                 res.append(left[l])
@@ -16,4 +18,9 @@ class Solution:
                 res.append(right[r])
                 r += 1
         
-        return res + left[l:] if l < len(left) else res + right[r:]
+        if l >= len(left):
+            res += right[r:]
+        else:
+            res += left[l:]
+        
+        return res
