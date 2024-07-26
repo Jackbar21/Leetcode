@@ -61,13 +61,13 @@ class Solution:
                 for j in range(n):
                     case1 = dp[i][j] # i->j, k-1
                     case2 = dp[i][k] + dp[k][j]
-                    new_dp[i][j] = min(case1, case2)
+                    dp[i][j] = min(case1, case2)
             
             # update dp
-            for i in range(n):
-                for j in range(n):
-                    assert new_dp[i][j] <= dp[i][j]
-                    dp[i][j] = new_dp[i][j]
+            # for i in range(n):
+            #     for j in range(n):
+            #         assert new_dp[i][j] <= dp[i][j]
+            #         dp[i][j] = new_dp[i][j]
         
         cities_dict = {i: set() for i in range(n)}
         for i in range(n):
