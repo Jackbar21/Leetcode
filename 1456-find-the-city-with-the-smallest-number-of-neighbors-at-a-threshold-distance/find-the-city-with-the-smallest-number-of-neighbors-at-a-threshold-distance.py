@@ -43,7 +43,6 @@ class Solution:
         for edge in edges:
             u,v,cost = edge
             edge_dict[(u,v)] = cost
-            edge_dict[(v,u)] = cost
 
         # k == -1 setup
         dp = [[float("inf")]*n for _ in range(n)]
@@ -51,23 +50,15 @@ class Solution:
             for j in range(n):
                 if i == j:
                     dp[i][j] = 0
-                elif (i,j) in edge_dict:
-                    dp[i][j] = edge_dict[(i,j)]
-
-        new_dp = [[dp[i][j] for j in range(n)] for i in range(n)]
+                elif (i,j) in edge_dict or (j,i) in edge_dict:
+                    dp[i][j] = edge_dict[(i,j)] if (i,j) in edge_dict else edge_dict[(j,i)]
         
-        for k in range(n): # k = 0
+        for k in range(n):
             for i in range(n):
                 for j in range(n):
-                    case1 = dp[i][j] # i->j, k-1
+                    case1 = dp[i][j]
                     case2 = dp[i][k] + dp[k][j]
                     dp[i][j] = min(case1, case2)
-            
-            # update dp
-            # for i in range(n):
-            #     for j in range(n):
-            #         assert new_dp[i][j] <= dp[i][j]
-            #         dp[i][j] = new_dp[i][j]
         
         cities_dict = {i: set() for i in range(n)}
         for i in range(n):
