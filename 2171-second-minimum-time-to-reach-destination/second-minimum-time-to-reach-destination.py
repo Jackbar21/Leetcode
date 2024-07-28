@@ -42,6 +42,8 @@ class Solution:
 
                 # Case 1: double visited
                 if reach_times[neighbor][SECOND] != float("inf"):
+                    if neighbor == n:
+                        return reach_times[neighbor][SECOND]
                     continue
                 
                 if neighbor_reach_time < reach_times[neighbor][FIRST]:
