@@ -21,7 +21,7 @@ class Solution:
         
         added_height = 0
         res = float("inf")
-        for j in range(count_books): # TODO: Need the +1?
+        for j in range(count_books):
             _, book_height = self.books[i + j]
             added_height = max(added_height, book_height)
             res = min(
