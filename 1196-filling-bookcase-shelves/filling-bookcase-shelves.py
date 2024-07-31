@@ -4,7 +4,7 @@ class Solution:
         self.memo = {} # (i, shelf_thickness, shelf_height)
         self.books = None
         self.shelfWidth = None
-    def minHeightShelvesDp(self, i, shelf_thickness=0, shelf_height=0):
+    def minHeightShelvesDp(self, i):
         THICKNESS, HEIGHT = 0, 1
         if i in self.memo:
             return self.memo[i]
@@ -43,59 +43,6 @@ class Solution:
         self.memo[i] = res
         return res
 
-            
-
-
-
-        added_height = 0
-        if book_height > shelf_height:
-            added_height += (book_height - shelf_height)
-            shelf_height = book_height
-        shelf_thickness += book_thickness
-        assert shelf_thickness <= self.shelfWidth
-        
-        case2 = added_height + self.minHeightShelvesRec(i + 1, shelf_thickness, shelf_height)
-
-        
-
-
-
-
-    def minHeightShelvesRec(self, i, shelf_thickness=0, shelf_height=0):
-        # if (i, shelf_thickness) in self.memo:
-            # return self.memo[(i, shelf_thickness)]
-        if i in self.memo:
-            return self.memo[i]
-
-        if i >= len(self.books):
-            return 0
-        
-        book_thickness, book_height = self.books[i]
-        
-        # Case 1: add book to new shelf
-        case1 = book_height + self.minHeightShelvesRec(i + 1, book_thickness, book_height)
-
-        remaining_thickness = self.shelfWidth - shelf_thickness
-        if not (book_thickness <= remaining_thickness):
-            return case1
-
-        # Case 2: add book to current shelf
-        added_height = 0
-        if book_height > shelf_height:
-            added_height += (book_height - shelf_height)
-            shelf_height = book_height
-        shelf_thickness += book_thickness
-        assert shelf_thickness <= self.shelfWidth
-        
-        case2 = added_height + self.minHeightShelvesRec(i + 1, shelf_thickness, shelf_height)
-
-        case1 = book_height + self.minHeightShelvesRec(i + 1, book_thickness, book_height)
-
-        # self.memo[(i, shelf_thickness)] = min(case1, case2)
-        # self.memo[(i, shelf_thickness)] = min(case1, case2)
-        self.memo[i] = min(case1, case2)
-        return min(case1, case2)
-
     def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
         # Presetup
         thickness, height = books[0]
@@ -106,7 +53,3 @@ class Solution:
         self.shelfWidth = shelfWidth
         self.books = books
         return self.minHeightShelvesDp(0)
-        return self.minHeightShelvesRec(0, 0, 0)
-        res = height + self.minHeightShelvesRec(1, cur_thickness, shelf_height)
-        # print(self.memo)
-        return res+1
