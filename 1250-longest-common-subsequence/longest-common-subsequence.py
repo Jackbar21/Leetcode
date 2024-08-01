@@ -12,9 +12,9 @@ class Solution:
         if i >= len(self.text1) or j >= len(self.text2):
             return 0
         
-        res = max(self.lcs(i + 1, j), self.lcs(i, j + 1))
         if self.text1[i] == self.text2[j]:
-            res = max(res, 1 + self.lcs(i + 1, j + 1))
+            self.memo[(i, j)] = 1 + self.lcs(i + 1, j + 1)
+        else:
+            self.memo[(i, j)] = max(self.lcs(i + 1, j), self.lcs(i, j + 1))
 
-        self.memo[(i, j)] = res
-        return res
+        return self.memo[(i, j)]
