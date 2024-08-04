@@ -22,7 +22,8 @@ class Solution:
         res = 0
         for i in range(left-1,right):
             res += subarray_sums[i]
-        return res % (10 ** 9 + 7)
+            res %= (10 ** 9 + 7)
+        return res
         
         # print(d)
         return 0
