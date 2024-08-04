@@ -14,8 +14,8 @@ class Solution:
         res = 0
         for i in range(left - 1, right):
             res += self.subarray_sums[i]
-            res %= magic_modulo_num
-        return res
+            # res %= magic_modulo_num
+        return res % magic_modulo_num
 
     def populateSubarraySums(self, level):
         n = self.n
