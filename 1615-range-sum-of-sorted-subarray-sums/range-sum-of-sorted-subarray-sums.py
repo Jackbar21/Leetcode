@@ -3,9 +3,10 @@ class Solution:
         self.subarray_sums = []
         self.n = None
         self.nums = None
+        self.right = None
     def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
         magic_modulo_num = (10 ** 9) + 7
-        self.n, self.nums = n, nums
+        self.n, self.nums, self.right = n, nums, right
 
         for level in range(1, n + 1):
             self.populateSubarraySums(level)
@@ -14,8 +15,9 @@ class Solution:
         res = 0
         for i in range(left - 1, right):
             res += self.subarray_sums[i]
-            # res %= magic_modulo_num
-        return res % magic_modulo_num
+            res %= magic_modulo_num
+
+        return res
 
     def populateSubarraySums(self, level):
         n = self.n
