@@ -3,6 +3,7 @@ class Solution:
         self.subarrays = []
     def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
         prefix_sums = []
+        magic_modulo_num = (10 ** 9) + 7
         assert n == len(nums)
         cur_sum = 0
         for i in range(len(nums)):
@@ -11,18 +12,21 @@ class Solution:
         # print(prefix_sums)
         # return 0
 
-        # d = {}
+        d = {}
         subarray_sums = []
         for level in range(1,len(nums)+1):
             # d[level] = self.populateSubarraySums(nums, level)
             subarray_sums += self.populateSubarraySums(nums, level)
+        # print(d)
+        # return 0
+
         
         subarray_sums.sort()
 
         res = 0
         for i in range(left-1,right):
             res += subarray_sums[i]
-            res %= (10 ** 9 + 7)
+            res %= magic_modulo_num
         return res
         
         # print(d)
