@@ -7,19 +7,19 @@ class Solution:
             if string not in seen:
                 # First time we see string
                 distinct.add(string)
-            else:
-                # 2nd or more time we see string
-                if string in distinct:
-                    distinct.remove(string)
+            elif string in distinct:
+                # 2nd time we see string
+                distinct.remove(string)
             seen.add(string)
         
-        # print(distinct, seen)
-        seen.clear()
+        if len(distinct) < k:
+            return ""
 
+        seen.clear()
         for string in arr:
             if string in distinct:
                 seen.add(string)
                 if len(seen) == k:
                     return string
         
-        return ""
+        raise Exception("Unreachable code")
