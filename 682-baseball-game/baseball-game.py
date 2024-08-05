@@ -4,8 +4,7 @@ class Solution:
 
         for op in operations:
             if op == "C":
-                if len(stack) > 0:
-                    stack.pop()
+                stack.pop()
             elif op == "D":
                 stack.append(2 * stack[-1])
             elif op == "+":
