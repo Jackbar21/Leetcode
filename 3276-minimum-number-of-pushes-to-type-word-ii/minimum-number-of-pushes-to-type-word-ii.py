@@ -1,22 +1,18 @@
 class Solution:
     def minimumPushes(self, word: str) -> int:
-        d = {}
+        letter_frequencies = [0] * 26
         for letter in word:
-            d[letter] = d.get(letter, 0) + 1
+            letter_frequencies[ord(letter) - ord('a')] += 1
+        letter_frequencies.sort(reverse=True)
 
-        number_slots = 8 # Constant
-        multiplier = number_slots
+        NUMBER_SLOTS = 8
+        mult = NUMBER_SLOTS
         total_pushes = 0
 
-        min_heap = []
-
-        for letter in d:
-            heapq.heappush(min_heap, -d[letter])
-        
-        while len(min_heap) > 0:
-            letter_freq = -heapq.heappop(min_heap)
-            total_pushes += letter_freq * (multiplier // number_slots)
-            multiplier += 1
+        # O(1)
+        for letter_freq in letter_frequencies:
+            total_pushes += letter_freq * (mult // NUMBER_SLOTS)
+            mult += 1
         
         return total_pushes
 
