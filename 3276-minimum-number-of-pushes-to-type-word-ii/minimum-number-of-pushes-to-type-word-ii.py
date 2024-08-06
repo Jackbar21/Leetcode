@@ -8,9 +8,13 @@ class Solution:
         multiplier = number_slots
         total_pushes = 0
 
-        # O(1)
-        for letter in sorted(d.keys(), key=lambda key: d[key], reverse=True):
-            letter_freq = d[letter]
+        min_heap = []
+
+        for letter in d:
+            heapq.heappush(min_heap, -d[letter])
+        
+        while len(min_heap) > 0:
+            letter_freq = -heapq.heappop(min_heap)
             total_pushes += letter_freq * (multiplier // number_slots)
             multiplier += 1
         
