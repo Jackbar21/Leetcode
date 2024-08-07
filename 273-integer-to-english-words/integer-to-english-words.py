@@ -35,14 +35,7 @@ class Solution:
         }
     def numberToWords(self, num: int) -> str:
         str_num = str(num)
-        assert len(str_num) <= 10
-
-        # if len(str_num) <= 3:
-        #     return self.hundredsHelper(hundreds)
-        
-        # elif len(str_num) <= 6:
-        #     hundreds = str_num[-3:]
-        #     thousands = str_num
+        assert len(str_num) <= 10   # Since 0 <= num <= 2^31 - 1
 
         hundreds = str_num[-3:]
         thousands = str_num[-6:-3]
@@ -58,17 +51,6 @@ class Solution:
         ]
         
         return " ".join(filter(lambda word: word != "", words_to_join)).strip()
-
-        return (self.billionsHelper(billions)
-            + " " + self.millionsHelper(millions)
-            + " " + self.thousandsHelper(thousands)
-            + " " + self.hundredsHelper(hundreds)
-        ).strip()
-
-        if len(str_num) <= 3:
-            return self.hundredsHelper(str_num)
-        
-        return None
     
     def hundredsHelper(self, str_num):
         assert len(str_num) <= 3
