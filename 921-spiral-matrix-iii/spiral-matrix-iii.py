@@ -269,48 +269,34 @@ class Solution:
         #     self.spiralMatrixHelper(rStart, cStart, "north")
         #     return self.visited_arr
 
-        assert self.cols > 1
-        if r == self.rows - 1 and r > 0 and c != self.cols - 1:
+        
+        if r == self.rows - 1 and c != self.cols - 1:
+            assert r > 0 # True since self.rows > 1
             self.visited.add((rStart, cStart))
             self.visited.add((rStart, cStart + 1))
             self.visited_arr.append((rStart, cStart))
             self.visited_arr.append((rStart, cStart + 1))
-            # print(f"DSSAASA: {rStart=}, {cStart=}")
             if c == 0:
                 self.spiralMatrixHelper(rStart - 1, cStart, "north")
             elif c < self.cols - 1:
                 self.spiralMatrixHelper(rStart, cStart - 1, "west")
             return self.visited_arr
         
-        # if r == self.rows - 1 and r > 0:
-        #     assert c > 0
-        #     self.visited.add((rStart, cStart))
-        #     self.visited.add((rStart, cStart + 1))
-        #     self.visited_arr.append((rStart, cStart))
-        #     self.visited_arr.append((rStart, cStart + 1))
-            
-
-        
-        # 1 2 3 4 5
-
-        
-        # print(f"SEE THIS: {c}, {self.cols - 1}")
         if c == self.cols - 1 and r > 0:
             self.visited.add((rStart, cStart))
             self.visited_arr.append((rStart, cStart))
-            # print("TRUE BROOO 111")
-            if self.cols == 1 or c == 0:
-                # Single column case
-                assert self.cols == 1 and c == 0
-                # print("TRUE BROOO")
-                # print(rStart, cStart)
-                # want below, but if not exist: get above
-                if self.isValid(rStart + 1, cStart):
-                    self.spiralMatrixHelper(rStart + 1, cStart, "west")
-                else:
-                    assert self.isValid(rStart - 1, cStart)
-                    self.spiralMatrixHelper(rStart - 1, cStart, "east")
-                return self.visited_arr
+            # if self.cols == 1 or c == 0:
+            #     # Single column case
+            #     assert self.cols == 1 and c == 0
+            #     # print("TRUE BROOO")
+            #     # print(rStart, cStart)
+            #     # want below, but if not exist: get above
+            #     if self.isValid(rStart + 1, cStart):
+            #         self.spiralMatrixHelper(rStart + 1, cStart, "west")
+            #     else:
+            #         assert self.isValid(rStart - 1, cStart)
+            #         self.spiralMatrixHelper(rStart - 1, cStart, "east")
+            #     return self.visited_arr
 
             if r == self.rows - 1:
                 self.spiralMatrixHelper(rStart, cStart - 1, "west")
