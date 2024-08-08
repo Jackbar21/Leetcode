@@ -209,7 +209,7 @@ class Solution:
 
             return self.visited_arr
         
-        if c == self.cols - 1 and r > 0:
+        if c == self.cols - 1:
             self.visited.add((rStart, cStart))
             self.visited_arr.append((rStart, cStart))
 
