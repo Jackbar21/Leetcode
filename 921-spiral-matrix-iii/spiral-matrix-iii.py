@@ -204,7 +204,7 @@ class Solution:
 
             if c == 0:
                 self.spiralMatrixHelper(rStart - 1, cStart, "north")
-            elif c < self.cols - 1:
+            else:
                 self.spiralMatrixHelper(rStart, cStart - 1, "west")
 
             return self.visited_arr
