@@ -44,5 +44,5 @@ class Solution:
 
     def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
         self.grid = grid
-        r, c = len(grid) - 2, len(grid[0]) - 2
-        return sum(self.isMagicSquare(i, j) for i in range(r) for j in range(c))
+        n, m = len(grid) - 2, len(grid[0]) - 2
+        return sum(self.isMagicSquare(i, j) for i in range(n) for j in range(m))
