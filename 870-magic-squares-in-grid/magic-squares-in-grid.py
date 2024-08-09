@@ -22,46 +22,30 @@ class Solution:
                     return False
                 seen.add(grid[r + rowIndex][c + colIndex])
         
-        neg_diag = [grid[r + i][c + i] for i in range(3)]
-        # print(f"{neg_diag=}")
-        SUM = sum(neg_diag)
-    
-        pos_diag = [grid[r + (2 - i)][c + i] for i in range(3)]
-        # print(f"{SUM=}, {sum(pos_diag)=}")
-        if sum(pos_diag) != SUM:
+        # Since numbers are distinct from 1 to 9, if it's a magic
+        # square, the sums of each row, column, and diagonal must be 15
+        SUM = 15
+
+        negDiagSum = sum(grid[r + i][c + i] for i in range(3))
+        if negDiagSum != SUM:
             return False
+    
+        posDiagSum = sum(grid[r + (2 - i)][c + i] for i in range(3))
+        if posDiagSum != SUM:
+            return False
+
         for rowIndex in range(3):
-            row = []
-            col = []
+            rowSum, colSum = 0, 0
             for colIndex in range(3):
-                row.append(grid[r + rowIndex][c + colIndex])
-                col.append(grid[r + colIndex][c + rowIndex])
-            row_sum, col_sum = sum(row), sum(col)
-            # print(f"{row_sum=}, {col_sum=}, {SUM=}")
-            if sum(row) != SUM or sum(col) != SUM:
+                rowSum += grid[r + rowIndex][c + colIndex]
+                colSum += grid[r + colIndex][c + rowIndex]
+
+            if rowSum != SUM or colSum != SUM:
                 return False
 
-        assert SUM == 15
         return True
 
-
-
-        
-
-    def numMagicHelper(self, r, c):
-        is_magic_square = self.isMagicSquare(r, c)
-
-        
     def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
         self.grid = grid
-        # return self.numMagicHelper(0, 0)
-        count = 0
-        for r in range(len(grid)):
-            for c in range(len(grid)):
-                count += int(self.isMagicSquare(r, c))
-        return count
-        # return 1 if self.isMagicSquare(0, 0) else 0
-
-#  5 5
-# 5 5 5
-# 5 5 5
+        r, c = len(grid), len(grid[0])
+        return sum(self.isMagicSquare(i, j) for i in range(r) for j in range(c))
