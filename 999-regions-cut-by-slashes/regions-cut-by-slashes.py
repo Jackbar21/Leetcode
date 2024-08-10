@@ -29,7 +29,7 @@ class Solution:
                     new_grid[r][c] = 1
                     new_grid[r + 1][c + 1] = 1
                     new_grid[r + 2][c + 2] = 1
-
+        print(new_grid)
         self.grid = new_grid
         num_regions = 0
         for i in range(len(self.grid)):
