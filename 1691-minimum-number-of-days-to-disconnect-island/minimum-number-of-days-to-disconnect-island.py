@@ -1,7 +1,7 @@
 class Solution:
     def __init__(self):
         self.grid = None
-        self.visited = {} # (i, j)
+        self.visited = {} # (i, j) position pairs
     def minDays(self, grid: List[List[int]]) -> int:
         # Case 1: Less than one island
         # Case 2: Exactly one island (CONNECTED)
@@ -45,20 +45,14 @@ class Solution:
         
         rows = {i: 0 for i in range(len(grid))}
         cols = {i: 0 for i in range(len(grid[0]))}
-        # pos_diags = {i: 0 for i in range(len(rows) + len(cols))} # row + col
-        # neg_diags = {i: 0 for i in range(-len(cols), len(rows))} # row - col
         for pos in self.visited:
             row, col = pos
             if self.grid[row][col] == 1:
                 rows[row] += 1
                 cols[col] += 1
-                # pos_diags[row + col] += 1
-                # neg_diags[row - col] += 1
         
         if (min(rows.values()) == 1 
             or min(cols.values()) == 1
-            # or min(pos_diags.values()) == 1
-            # or min(neg_diags.values()) == 1
         ):
             return 1
         
@@ -81,7 +75,6 @@ class Solution:
             if j == rightmost_column:
                 right_topmost_row = min(right_topmost_row, i)
                 right_deepest_row = max(right_deepest_row, i)
-
             if j == leftmost_column:
                 left_topmost_row = min(left_topmost_row, i)
                 left_deepest_row = max(left_deepest_row, i)
@@ -99,129 +92,39 @@ class Solution:
             self.visited[pos] <= 2 # should NOT be possible to be < 2
             and pos not in four_corners
         ), self.visited))
-        print("FLAG MOMENT")
-        print(self.visited)
-        print("FLAG 2 MOMENT")
-        print(positions_to_check)
-        # return 2
-
+        # 'positions_to_check' is greedy, but might also need to check
+        # all the other ones (as possible in rare cases removing them
+        # actually disconnects the island!)
         threes = list(filter(lambda pos: (
             self.visited[pos] == 3
             and pos not in four_corners
         ), self.visited))
-
         fours = list(filter(lambda pos: (
             self.visited[pos] >= 4 # should NOT be possible to be > 4
             and pos not in four_corners
         ), self.visited))
 
         prev_visited_set = {i: self.visited[i] for i in self.visited}
-        # positions_to_check = [(2,3)]
-        print("GOT HERE")
         for pos in positions_to_check + threes + fours:
             i, j = pos
             assert self.grid[i][j] == 1
             self.grid[i][j] = 0
-            
-            # 0 1 1
-            # 1 1 1
-            # 1 1 0
 
+            # Number of islands call
             self.visited.clear()
             if self.numberOfIslands() != 1:
                 return 1
             self.visited = prev_visited_set
-            assert len(prev_visited_set) == len(self.visited)
-            for el in prev_visited_set:
-                assert el in self.visited
-                assert self.visited[el] == prev_visited_set[el]
 
             self.grid[i][j] = 1
 
-        return 2
-
-        
-
-
-
-        return min(self.visited.values())
-
-        # [[1,1,0,1,1],[1,1,1,1,1],[1,1,0,1,1],[1,1,0,1,1]]
-
-        # 1 1 0 1 1
-        # 1 1 1 1 1
-        # 1 1 0 1 1
-        # 1 1 1 1 1
-
-        # 1 0
-        # 0
-
-        #                                     1
-        #                           1 1 1 1 1 1
-        #   1 1 1         1         1         1
-        # 1 1 1 1 1 1 1 1 1 1 1 1 1 1         1
-        #                                     1 --> no 1
-        #                                     no one below
-        #   1 1 1         1
-
-        # Step 1: Find column of rightmost 1
-        ROW, COL = 0, 1
-        _, rightmost_column = max(self.visited, key = lambda pos: pos[COL])
-        
-        # Step 2: Find "deepest" 1 inside column from step 1
-        deepest_row = 0
-        for pos in self.visited:
-            i, j = pos
-            if j == rightmost_column:
-                deepest_row = max(deepest_row, i)
-
-        # This one has AT MOST two 1s next to it, 
-        # and AT LEAST one 1 next to it
-        # Case 1: only one neighbor 1
-        # Case 2: two neighbor 1s
-
-        left_pos = (deepest_row, rightmost_column - 1)
-        above_pos = (deepest_row - 1, rightmost_column)
-
-
-
-        if (not self.isInBounds(left_pos[ROW], left_pos[COL]) 
-            or not self.isInBounds(above_pos[ROW], above_pos[COL])
-        ):
-            # There must be exactly one 1
-            if self.isInBounds(left_pos[ROW], left_pos[COL]):
-                i,j = left_pos
-                assert not self.isInBounds(above_pos[ROW], above_pos[COL])
-                assert self.grid[i][j] == 1
-                return 1
-            
-            assert self.isInBounds(above_pos[ROW], above_pos[COL])
-            i,j = above_pos
-            assert self.grid[i][j] == 1
-            return 1
-        
-        #      0
-        #    0 1 -
-        #      |
-        assert self.isInBounds(left_pos[ROW], left_pos[COL]) and self.isInBounds(above_pos[ROW], above_pos[COL])
-        if grid[left_pos[ROW]][left_pos[COL]] != 1:
-            return 1
-        if grid[above_pos[ROW]][above_pos[COL]] != 1:
-            return 1
-        
-        # TODO: what if can disconnect island somewhere else with just 1 cut?
-        return 2
-        
-
-
-        
+        return 2     
     
     def numberOfIslands(self):
         number_of_islands = 0
         for i in range(len(self.grid)):
             for j in range(len(self.grid[i])):
                 if self.grid[i][j] == 1 and (i,j) not in self.visited:
-                    # self.visited.add((i,j))
                     self.visited[(i,j)] = self.getNumAdjacentOnes(i,j)
                     self.visitAllLandNeighbors(i, j)
                     number_of_islands += 1
@@ -239,7 +142,6 @@ class Solution:
                 and (new_i, new_j) not in self.visited
                 and self.grid[new_i][new_j] == 1
             ):
-                # self.visited.add((new_i, new_j))
                 self.visited[(new_i, new_j)] = self.getNumAdjacentOnes(new_i, new_j)
                 self.visitAllLandNeighbors(new_i, new_j)
 
@@ -255,18 +157,9 @@ class Solution:
             if (self.isInBounds(new_i, new_j)
                 and self.grid[new_i][new_j] == 1
             ):
-                # if (i,j) in [(3,2), (5,2)]:
-                #     self.printGrid
-                #     print(f"I,J --> {i},{j}")
-                #     print(f"NEW_I,NEW_J --> {new_i},{new_j}")
                 num_ones += 1
-        # if (i,j) in [(3,2), (5,2)]:
-        #     print(f"({i},{j}) --> {num_ones=}")
+
         return num_ones
     
     def isInBounds(self, i, j):
         return 0 <= i < len(self.grid) and 0 <= j < len(self.grid[i])
-    
-    def printGrid(self):
-        for row in self.grid:
-            print(" ".join(str(i) for i in row))
