@@ -161,5 +161,12 @@ class Solution:
 
         return num_ones
     
+    # 1 1
+    # 1 1 X ...                     1
+    #   X 0 0 00 0 00 0 00 0 0 00 0 1 00 0 0
+    #   .
+    #   .
+    #   .  00 0 0 00 0 0 00 0 0 00 0 0 0 0 
+
     def isInBounds(self, i, j):
         return 0 <= i < len(self.grid) and 0 <= j < len(self.grid[i])
