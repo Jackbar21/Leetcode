@@ -105,15 +105,20 @@ class Solution:
         print(positions_to_check)
         # return 2
 
-        additional_positions_to_check = list(filter(lambda pos: (
-            self.visited[pos] > 2 # should NOT be possible to be < 2
+        threes = list(filter(lambda pos: (
+            self.visited[pos] == 3
+            and pos not in four_corners
+        ), self.visited))
+
+        fours = list(filter(lambda pos: (
+            self.visited[pos] >= 4 # should NOT be possible to be > 4
             and pos not in four_corners
         ), self.visited))
 
         prev_visited_set = {i: self.visited[i] for i in self.visited}
         # positions_to_check = [(2,3)]
         print("GOT HERE")
-        for pos in positions_to_check + additional_positions_to_check:
+        for pos in positions_to_check + threes + fours:
             i, j = pos
             assert self.grid[i][j] == 1
             self.grid[i][j] = 0
