@@ -11,6 +11,7 @@ class KthLargest:
         while len(self.nums) > self.k:
             heapq.heappop(self.nums)
         
+        # Minimum element always at beginning of array in min-heap
         return self.nums[0]
 
 
