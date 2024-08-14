@@ -3,14 +3,14 @@
 class Solution:
     def __init__(self):
         self.num_pairs = -1
-        self.sorted_nums = None
+        self.nums = None
     def countNumPairsGreaterThanX(self, X):
-        n, l, count = len(self.sorted_nums), 0, 0
+        n, l, count = len(self.nums), 0, 0
 
         # O(n)
         for r in range(n):
             count += l
-            while self.sorted_nums[r] - self.sorted_nums[l] > X:
+            while self.nums[r] - self.nums[l] > X:
                 count += 1
                 l += 1
 
@@ -20,7 +20,7 @@ class Solution:
     def smallestDistancePair(self, nums: List[int], k: int) -> int:
         n = len(nums)
         nums.sort()
-        self.sorted_nums = nums
+        self.nums = nums
         self.num_pairs = n * (n - 1) // 2
 
         l, r = 0, nums[-1] - nums[0]
