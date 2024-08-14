@@ -7,6 +7,7 @@ class Solution:
     def countNumPairsGreaterThanX(self, X):
         n, l, count = len(self.nums), 0, 0
 
+        # O(n)
         for r in range(n):
             count += l
             while self.nums[r] - self.nums[l] > X:
