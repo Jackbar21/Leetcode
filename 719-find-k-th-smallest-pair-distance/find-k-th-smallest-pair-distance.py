@@ -3,7 +3,7 @@
 class Solution:
     def __init__(self):
         self.num_pairs = -1
-        self.nums = None # sorted!!
+        self.nums = None
     def countNumPairsGreaterThanX(self, X):
         n, l, count = len(self.nums), 0, 0
 
