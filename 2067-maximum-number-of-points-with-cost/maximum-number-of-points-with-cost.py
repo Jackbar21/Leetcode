@@ -1,3 +1,10 @@
+# THIS SOLUTION is essentially copy-paste from editorial...
+# I had an extremely difficult time understanding the left & right sweeps
+# idea and implementing it into my own top-down dp approach. I ended giving
+# up on trying to implement this idea about ~5 hours working on the problem,
+# and "copied" the editorial solution (with at least understanding how it works)
+# so that I can keep on going with my streak, move on, and hopefully become a better
+# developer out of it :)
 class Solution:
     def maxPoints(self, points: List[List[int]]) -> int:
         m, n = len(points), len(points[0])
