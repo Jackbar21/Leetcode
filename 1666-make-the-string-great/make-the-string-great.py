@@ -1,15 +1,12 @@
 class Solution:
     def makeGood(self, s: str) -> str:
-        stack = deque()
-        stack.append("@")
+        stack = [s[0]]
 
-        for c in s:
-            prev_c = stack[-1]
-            if c == prev_c.upper() or c == prev_c.lower():
-                if c != prev_c:
-                    stack.pop()
-                    continue
-            stack.append(c)
+        for i in range(1,len(s)):
+            letter = s[i]
+            if stack and stack[-1] != letter and stack[-1].lower() == letter.lower():
+                stack.pop()
+            else:
+                stack.append(letter)
         
-        stack.popleft()
-        return "".join(stack)
+        return ''.join(stack)
