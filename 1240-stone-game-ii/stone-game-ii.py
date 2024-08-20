@@ -3,7 +3,6 @@ class Solution:
         self.piles = None
         self.alice_memo = {}
         self.bob_memo = {}
-        # self.M = 1
     def stoneGameII(self, piles: List[int]) -> int:
         self.piles, i, M = piles, 0, 1
         return self.alice(i, M)
@@ -16,7 +15,7 @@ class Solution:
         if (i, M) in self.alice_memo:
             return self.alice_memo[(i, M)]
         
-        # No piles left to take, so return 0
+        # No piles left to take, so return 0 score
         if i >= len(self.piles):
             assert i == len(self.piles)
             return 0
@@ -32,7 +31,6 @@ class Solution:
             num_stones += self.piles[i + X - 1]
             num_piles_bob_takes = self.bob(i + X, max(M, X))
             new_M = max(M, X, num_piles_bob_takes)
-            # new_M = max(X, new_M)
 
             res = num_stones + self.alice(i + X + num_piles_bob_takes, new_M)
             best_res = max(best_res, res)
@@ -40,28 +38,28 @@ class Solution:
         self.alice_memo[(i, M)] = best_res
         return best_res
 
-    
     # MIN player
     # Bob returns the NUMBER OF PILES he should grab to MINIMIZE Alice's score.
     def bob(self, i, M):
-        if (i, M) in self.bob_memo:
-            return self.bob_memo[(i, M)]
         # i represents that piles[:i] have already been taken (i not inclusive?)
         # M is taken from M, to generate X
+        if (i, M) in self.bob_memo:
+            return self.bob_memo[(i, M)]
+
+        # No piles left to take, so return 0 moves
         if i >= len(self.piles):
-            # print(f"BOB (BASE CASE 1): {len(self.piles) - i}")
             assert i == len(self.piles)
             return 0
         
+        # If can grab all remaining piles, then Bob should absolutely do so!
         if len(self.piles) - i <= 2 * M:
-            # return sum(self.piles[j] for j in range(i, len(self.piles)))
-            # print(f"BOB (BASE CASE 2): {len(self.piles) - i}")
             return len(self.piles) - i
         
-        alice_score = float("inf") # want to minimize!
+        alice_score = float("inf") # Want to minimize!
         best_X = None
         for X in range(1, 2 * M + 1):
-            # num_stones += self.piles[i + X - 1]
+            # Don't care about how many stones Bob gets, only
+            # care about minimizing Alice's total score (hehehe >:D)
             new_alice_score = self.alice(i + X, max(M, X))
             if new_alice_score < alice_score:
                 alice_score = new_alice_score
