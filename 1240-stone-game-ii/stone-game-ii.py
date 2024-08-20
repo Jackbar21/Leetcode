@@ -27,23 +27,15 @@ class Solution:
         
         num_stones = 0
         best_res = float("-inf")
-        best_X = None
-        best_num_stones = 0
-        best_bob_X = None
 
         for X in range(1, 2 * M + 1):
             num_stones += self.piles[i + X - 1]
             num_piles_bob_takes = self.bob(i + X, max(M, X))
-            new_M = max(M, num_piles_bob_takes)
-            new_M = max(X, new_M)
+            new_M = max(M, X, num_piles_bob_takes)
+            # new_M = max(X, new_M)
 
             res = num_stones + self.alice(i + X + num_piles_bob_takes, new_M)
             best_res = max(best_res, res)
-            # if res > best_res:
-            #     best_res = res
-            #     best_X = X
-            #     best_num_stones = num_stones
-            #     best_bob_X = num_piles_bob_takes
 
         self.alice_memo[(i, M)] = best_res
         return best_res
