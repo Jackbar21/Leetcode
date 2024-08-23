@@ -31,8 +31,9 @@ class Solution:
         den = b * y
 
         fraction = f"{num}/{den}"
+        # Can reduce fraction here, but numbers will be small enough
+        # that we can afford to just recude one time at the end of the summing
         return fraction
-        return self.reduceFraction(fraction)
     
     def parseFraction(self, frac):
         num, den = frac.split("/")
