@@ -33,7 +33,6 @@ class Solution:
         fraction = f"{num}/{den}"
         # Can reduce fraction here, but numbers will be small enough
         # that we can afford to just recude one time at the end of the summing
-        return self.reduceFraction(fraction)
         return fraction
     
     def parseFraction(self, frac):
