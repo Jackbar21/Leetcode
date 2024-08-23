@@ -53,4 +53,5 @@ class Solution:
         factor = math.gcd(num, den)
         assert factor != 0
 
+        # Divide by gcd to get completely reduced fraction
         return f"{num // factor}/{den // factor}"
