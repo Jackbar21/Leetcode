@@ -2,12 +2,6 @@ class Solution:
     def fractionAddition(self, expression: str) -> str:
         if len(expression) == 0:
             return "0/1"
-        # a/b + x/y
-        # ay/by + bx/by
-        # (ay + bx) / by
-        # 4 / 6 --> 2 / 3
-
-        # "1/3-1/2" --> "1/3+-1/2"
 
         exp = "".join(c if c != "-" else "+-" for c in expression)
         stack = exp.split("+")
@@ -15,12 +9,10 @@ class Solution:
             stack = stack[1:]
         
         assert len(stack) >= 1
-        print(stack)
         while len(stack) > 1:
             frac1, frac2 = stack.pop(), stack.pop()
             frac = self.addFractions(frac1, frac2)
             stack.append(frac)
-            print(stack)
 
         return self.reduceFraction(stack[0])
     
@@ -39,23 +31,17 @@ class Solution:
         den = b * y
 
         fraction = f"{num}/{den}"
+        return fraction
         return self.reduceFraction(fraction)
     
     def parseFraction(self, frac):
-        numerator, denominator = frac.split("/")
-        numerator, denominator = int(numerator), int(denominator)
-
-        assert denominator != 0
-        print(f"parseFraction: {frac} == {numerator}, {denominator}")
-        return (numerator, denominator)
-
-
+        num, den = frac.split("/")
+        num, den = int(num), int(den)
+        assert den != 0
+        return (num, den)
     
     def reduceFraction(self, frac):
-        # return frac
-        
         num, den = self.parseFraction(frac)
-        print(f"{num=}, {den=}")
         assert den != 0
         if num == 0:
             return f"0/1"
@@ -65,6 +51,5 @@ class Solution:
         
         factor = math.gcd(num, den)
         assert factor != 0
-        print(factor, num, den)
 
         return f"{num // factor}/{den // factor}"
