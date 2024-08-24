@@ -23,53 +23,17 @@ class Solution:
         mid = len(n) // 2
         left = n[:mid] if len(n) % 2 == 0 else n[:mid]
         right = n[mid:] if len(n) % 2 == 0 else n[mid + 1:]
-        s = """
-        #           13         +          100         -     83
-        # print(f"UP COST: {str(int(left) + 1)[::-1]} + {pow(10, len(right))} - {int(right)}")
-        up_cost = (int(str(int(left) + 1)[::-1])) + (pow(10, len(right)) - int(right))
-        #               83     -    12
-        down_cost = int(right) - int(left[::-1])
 
-        # Recompute up_cost and down_cost if odd length n
-        # if len(n) % 2 == 1:
-
-
-        
-        print(f"left before: {left}")
-        print(f"{up_cost=}, {down_cost=}")
-        if up_cost < down_cost:
-            if len(n) % 2 == 0:
-                n = f"{int(left) + 1}{right}"
-            else:
-                n = f"{left}{int(n[mid]) + 1}{right}"
-            
-            # Recompute just in case
-            mid = len(n) // 2
-            left = n[:mid] if len(n) % 2 == 0 else n[:mid]
-            right = n[mid:] if len(n) % 2 == 0 else n[mid + 1:]
-        """
-        print(f"left after: {left}")
-
-        
-
-        if self.isPalindrome(left + right):
-            mid = int(n[mid])
-            print(f"{mid=}")
-            # halfway_num = int('5' + '0' * (right - 1))
-            # print(f"{halfway_num=}")
-
-
-            # return left + str(mid - 1) + right
-
-            if mid > 0:
-                # print(f"CHECK: {right=}, {mid=}, {f'{9 * len(right)}'}")
-                if right == f"{'9' * len(right)}" and mid == 9:
-                    return str(int(n) + 2)
-                return left + str(mid - 1) + right
-            else:
-                if right == f"{'0' * (len(right) - 1)}1":
-                    return str(int(n) - 2)
-                return left + str(mid + 1) + right
+        # if self.isPalindrome(left + right):
+        #     mid = int(n[mid])
+        #     if mid > 0:
+        #         if mid == 9 and right == f"{'9' * len(right)}":
+        #             return str(int(n) + 2)
+        #         return left + str(mid - 1) + right
+        #     else:
+        #         if right == f"{'0' * (len(right) - 1)}1":
+        #             return str(int(n) - 2)
+        #         return left + str(mid + 1) + right
 
         
         # Idea is to make the right substring equivalent to the left
