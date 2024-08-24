@@ -23,18 +23,6 @@ class Solution:
         mid = len(n) // 2
         left = n[:mid] if len(n) % 2 == 0 else n[:mid]
         right = n[mid:] if len(n) % 2 == 0 else n[mid + 1:]
-
-        # if self.isPalindrome(left + right):
-        #     mid = int(n[mid])
-        #     if mid > 0:
-        #         if mid == 9 and right == f"{'9' * len(right)}":
-        #             return str(int(n) + 2)
-        #         return left + str(mid - 1) + right
-        #     else:
-        #         if right == f"{'0' * (len(right) - 1)}1":
-        #             return str(int(n) - 2)
-        #         return left + str(mid + 1) + right
-
         
         # Idea is to make the right substring equivalent to the left
         # substring, but in reverse. This is because changing the numbers
@@ -45,7 +33,6 @@ class Solution:
         # Hence, since we want the closest palindrome, given the definition of distance,
         # it will be much "cheaper" to fit the right substring to be the reverse of the left one.
         diff = abs(int(left[::-1]) - int(right))
-        print(f"{diff=}")
         if self.isPalindrome(str(int(n) - diff)):
             return str(int(n) - diff)
         return str(int(n) + diff)
@@ -55,7 +42,7 @@ class Solution:
         if num <= 10:
             return str(num - 1)
         
-        if len(n) >= 4:
+        if len(n) >= 3:
             return self.large(n)
         
         offset = 1
