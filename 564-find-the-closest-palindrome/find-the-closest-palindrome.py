@@ -12,14 +12,9 @@ class Solution:
         # substring by either -1, 0, or 1. Hence, we need to consider all three cases,
         # and return the best result out of all of them.
         candidates = [int(left) - 1, int(left), int(left) + 1]
-        res = []
-        for l in candidates:
-            res.append(self.largeHelper(f"{l}{right}"))
-        print(f"{res=}")
-        d = {x: (abs(int(n) - int(x)), x) for x in res}
-        print(d)
-        res.sort(key=lambda x: (abs(int(n) - int(x)), x))
+        res = [self.largeHelper(f"{l}{right}") for l in candidates]
         res = list(filter(lambda x: x!= self.n, res))
+        res.sort(key=lambda x: (abs(int(n) - int(x)), x)) # O(1), only 3 elements
         return res[0] if res[0] != self.n else res[1]
     def largeHelper(self, n):
         # First thing to check is if n is of even or odd length
