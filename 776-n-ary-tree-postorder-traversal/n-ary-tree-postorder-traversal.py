@@ -12,9 +12,10 @@ class Solution:
     def postorder(self, root: 'Node') -> List[int]:
         if not root:
             return root
-
+        
         for node in root.children:
             self.postorder(node)
+
         # Once done with all children nodes, 
         # finally add root node to the array
         self.res.append(root.val)
