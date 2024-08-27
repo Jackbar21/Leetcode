@@ -1,7 +1,6 @@
 class Solution:
     def __init__(self):
         self.n = None
-        self.directed_edges = {} # Edge to ln weights (mapped from succProb)
         self.prev = None
         self.end_node = None
         self.adj_list = None
@@ -51,7 +50,6 @@ class Solution:
                 # want s --> v to be min(s --> v, s --> u + cost(u,v)), 
                 #       where cost(u,v) is computed using "log trick"
 
-                # d[v] = min(d[v], d[u] + self.directed_edges[(u,v)])
                 mapped_prob = -math.log(prob)
                 new_cost = d[u] + mapped_prob
                 if new_cost < d[v]:
@@ -121,4 +119,3 @@ class Solution:
             cur_node = prev_node
         
         return res_prob
-
