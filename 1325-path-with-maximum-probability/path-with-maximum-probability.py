@@ -6,22 +6,25 @@ class Solution:
         self.directed_edges = {} # Edge to ln weights (mapped from succProb)
         self.prev = None
         self.end_node = None
+        self.adj_list = None
     def dijkstra(self, s):
         # Dictionary mapping of shortest path (from s) for each node
-        d = [0] * self.n
-        d[s] = 1
+        d = {
+            i: float("inf") for i in range(self.n)
+        }
+        d[s] = 0
         # min_heap = [(d[i], i) for i in range(self.n)]
         # heapq.heapify(min_heap) # O(n)
         # node_to_index = {s: 0}
-        # Simulate max_heap by using internal python heapq min-heap, and multiplying
-        # all values by negative 1.
-
-        max_heap = [(-1, s)]
+        min_heap = [(0, s)]
         for i in range(self.n):
             if i == s:
                 continue
-            max_heap.append((0, i))
-
+            min_heap.append((float("inf"), i))
+        self.prev = {
+            i: None for i in range(self.n)
+        }
+        self.prev[s] = s
 
         visited = set()
 
@@ -29,8 +32,7 @@ class Solution:
         # while len(min_heap) > 0:
         # while self.end_node not in visited:
             # Want to pop node with HIGHEST d-value that is NOT in visited
-            best_prob, best_node = heapq.heappop(max_heap)
-            best_prob = -best_prob
+            best_val, best_node = heapq.heappop(min_heap)
             # Min heap will have at most n + m <= 3n elements inside
             # of it at any given point in time. So the complexity will
             # still be O((n+m)logn) = O(nlogn) [since m <= 2n], similar
@@ -38,8 +40,7 @@ class Solution:
             # at most n elements (without visited set) and frequent calls
             # CHANGE-KEY (i.e. changing priority level of element in heap).
             while best_node in visited:
-                best_prob, best_node = heapq.heappop(max_heap)
-                best_prob = -best_prob
+                best_val, best_node = heapq.heappop(min_heap)
             
             # We only care about shortest path from s to self.end_node.
             # So if we've computed the result ALREADY for self.end_node
@@ -47,37 +48,32 @@ class Solution:
             if best_node == self.end_node:
                 return d
 
+
             visited.add(best_node)
             # for u, v in self.directed_edges:
             # for u, v in self.edges:
-            for i in range(len(self.edges)):
-                u, v = self.edges[i]
+            # for i in range(len(self.edges)):
+            u = best_node
+            for v, prob in self.adj_list[u]:
+                # u, v = self.edges[i]
                 # Hacky trick for now...
-                if v == best_node:
-                    u, v = v, u
-                if u == best_node:
+                # if v == best_node:
+                #     u, v = v, u
+                # if u == best_node:
+                if True:
                     # s --> best_node
                     # just "popped" best_node (== u)
                     # and for each edge (u, v)
-                    # then want s --> v to be min(s --> v, s --> u + cost(u,v))
+                    # then want s --> v to be max(s --> v, s --> u + cost(u,v))
 
                     # d[v] = min(d[v], d[u] + self.directed_edges[(u,v)])
                     # mapped_val = float("inf") if self.succProb[i] == 0 else -math.log(self.succProb[i])
-                    # mapped_val = -math.log(self.succProb[i])
+                    mapped_prob = -math.log(prob)
                     # new_cost = d[u] + self.directed_edges[(u,v)]
-                    # new_cost = d[u] + mapped_val
-
-                    # UPDATE: 
-                    # new_cost instead of being:
-                    #        min(s --> v, s --> u + cost(u,v)) ; with -log trick
-                    # will now be:
-                    #        max(s --> v, s --> u * prob(u,v))
-                    new_cost = d[u] * self.succProb[i]
-
-                    # if new_cost < d[v]:
-                    if new_cost > d[v]:
+                    new_cost = d[u] + mapped_prob
+                    if new_cost < d[v]:
                         d[v] = new_cost
-                        # self.prev[v] = u
+                        self.prev[v] = u
                     
                         # When we get to v in some future iteration (if not yet seen),
                         # the nice property is that even if there are many entries for
@@ -85,31 +81,11 @@ class Solution:
                         # (i.e. smallest) found candidate for v will be considered, and
                         # thus this algorithm will still be correct & optimal.
                         if v not in visited:
-                            heapq.heappush(max_heap, (-d[v], v))
+                            heapq.heappush(min_heap, (d[v], v))
 
         return d
 
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
-        start, end = start_node, end_node
-        graph = defaultdict(list)
-        for i, (u, v) in enumerate(edges):
-            graph[u].append((v, succProb[i]))
-            graph[v].append((u, succProb[i]))
-        
-        max_prob = [0.0] * n
-        max_prob[start] = 1.0
-        
-        pq = [(-1.0, start)]    
-        while pq:
-            cur_prob, cur_node = heapq.heappop(pq)
-            if cur_node == end:
-                return -cur_prob
-            for nxt_node, path_prob in graph[cur_node]:
-
-                if -cur_prob * path_prob > max_prob[nxt_node]:
-                    max_prob[nxt_node] = -cur_prob * path_prob
-                    heapq.heappush(pq, (-max_prob[nxt_node], nxt_node))
-        return 0.0
         self.n = n
         self.edges = edges
         self.succProb = succProb
@@ -131,11 +107,23 @@ class Solution:
         #     mapped_val = -math.log(succProb[i])
         #     self.directed_edges[(u,v)] = mapped_val
         #     self.directed_edges[(v,u)] = mapped_val
+
+        # Create adjaceny list of graph for faster edge population
+        # traversals inside dijkstra's algorithm call. We can afford
+        # this computation below efficiently since m is bounded by 2 * n :)
+        self.adj_list = { i: [] for i in range(self.n) }
+        for i in range(len(edges)):
+            u, v = edges[i]
+            prob = succProb[i]
+            mapped_prob = -math.log(prob)
+
+            self.adj_list[u].append((v, prob))
+            self.adj_list[v].append((u, prob))
         
         # Naive array implementation: O(n^2)
         # Heap implementation: O((n+m)logn) = O(nlogn) [since m <= 2n]
         d = self.dijkstra(start_node)
-        return d[self.end_node]
+        print(d)
 
         # Now we have access to self.prev, which gives us the previous node
         # in the shortest path with source node s to any destination node.
@@ -144,27 +132,27 @@ class Solution:
         
 
         # If there is no path from start_node to end_node, return 0
-        # if self.prev[end_node] == None:
-        #     return 0
+        if self.prev[end_node] == None:
+            return 0
         
-        # # O(n)
-        # probs = {}
-        # for i in range(len(edges)):
-        #     u, v = edges[i]
-        #     probs[(u, v)] = succProb[i]
-        #     # probs[(v, u)] = succProb[i]
+        # O(n)
+        probs = {}
+        for i in range(len(edges)):
+            u, v = edges[i]
+            probs[(u, v)] = succProb[i]
+            # probs[(v, u)] = succProb[i]
         
-        # # O(n) work
-        # res_prob = 1
-        # cur_node = end_node
-        # while cur_node != start_node:
-        #     prev_node = self.prev[cur_node]
-        #     if (prev_node, cur_node) in probs:
-        #         res_prob *= probs[(prev_node, cur_node)]
-        #     else:
-        #         assert (cur_node, prev_node) in probs
-        #         res_prob *= probs[(cur_node, prev_node)]
-        #     cur_node = prev_node
+        # O(n) work
+        res_prob = 1
+        cur_node = end_node
+        while cur_node != start_node:
+            prev_node = self.prev[cur_node]
+            if (prev_node, cur_node) in probs:
+                res_prob *= probs[(prev_node, cur_node)]
+            else:
+                assert (cur_node, prev_node) in probs
+                res_prob *= probs[(cur_node, prev_node)]
+            cur_node = prev_node
         
-        # return res_prob
+        return res_prob
 
