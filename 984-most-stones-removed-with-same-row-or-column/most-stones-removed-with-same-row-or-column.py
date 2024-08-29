@@ -30,7 +30,10 @@ class Solution:
         for stone in stones:
             stone_x, stone_y = stone
             group_index = -1
+            can_break = False
             for i, group in enumerate(groups):
+                if can_break:
+                    break
                 # Check if stone belongs to group
                 for (x, y) in group:
                     if stone_x == x or stone_y == y:
@@ -52,7 +55,7 @@ class Solution:
                             # print(f"{groups[i].union(groups[group_index])=}")
                             groups[i] = groups[i].union(groups[group_index])
                             del groups[group_index]
-                            group_index = i
+                            can_break = True
                             # print(f"{stone=}, groups after: {groups}")
                         
                         break
