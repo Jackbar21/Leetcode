@@ -1,15 +1,3 @@
-# Idea 1: Just do greedy
-# Idea 2: DP with connected groups
-# I.e. in first case, notice:
-#       {(0, 0): 2, (0, 1): 2, (1, 0): 2, (1, 2): 2, (2, 1): 2, (2, 2): 2}
-# first three elements are "connected" together, as well as last 3. can use these
-# as the "subproblems" for a DP solution. -- Correction, groups might not be "closed" off...
-# still worth investigating this idea, but might not be as helpful as you think...
-
-
-# Greedy idea 1: make sure to ALSO include non-directly touching stones for each stone in d
-# Greedy idea 2: always remove stone that MINIMIZES impact, instead of one with smallest direct impact
-
 class Solution:
     def removeStones(self, stones: List[List[int]]) -> int:
         groups = [] # List of lists of "touching" stones.
