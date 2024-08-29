@@ -11,29 +11,32 @@
 # Greedy idea 2: always remove stone that MINIMIZES impact, instead of one with smallest direct impact
 
 class Solution:
-    def __init__(self):
-        self.d = None
-        self.num_stones = 0
     def removeStones(self, stones: List[List[int]]) -> int:
-        # d = {
-        #     tuple(stone): set() for stone in stones
-        # }
 
-        groups = []
-        # print(sorted(stones))
+        """
+        stones = [
+            [5,8],
+            [6,8],
+            [8,5],
+            [6,5]
+        ]
+
+        groups = [
+            { [5,8], [6,8], [6,5], [8,5] },
+        ]
+        """
+
+        groups = [] # List of lists of "touching" stones.
         for stone in stones:
             stone_x, stone_y = stone
             group_index = -1
             for i, group in enumerate(groups):
-                # if found_group:
-                #     break
                 # Check if stone belongs to group
                 for (x, y) in group:
                     if stone_x == x or stone_y == y:
                         if group_index == -1:
                             group.add((stone_x, stone_y))
                             group_index = i
-                            break
                         else:
                             # We've already found a group.
                             # Since we can add the stone to this
@@ -49,87 +52,30 @@ class Solution:
                             # print(f"{groups[i].union(groups[group_index])=}")
                             groups[i] = groups[i].union(groups[group_index])
                             del groups[group_index]
+                            group_index = i
                             # print(f"{stone=}, groups after: {groups}")
-                            break
+                        
+                        break
                         
             
             if group_index == -1:
                 # print(stone, groups)
                 groups.append(set([(stone_x, stone_y)]))
-        
-        # print(groups)
-        # return 1
+
+        # Idea: if we can find a connected network of stones such
+        # that they all "touch" each other. A stone X directly touches 
+        # a stone Y if and only if stone X and stone Y are in the same 
+        # row and/or column. A stone X' and stone Y' "touch" each other if:
+        #  (1) stone X' and stone Y' directly touch one another, OR
+        #  (2) there exists a sequence of stones S_1,S_2,...,S_n such that 
+        #      stone X' touches stone S_1, stone S_{i} touches stone S_{i+1}
+        #      for all 1 <= i < n, and stone S_n touches stone Y'
         res = 0
         for group in groups:
-            res += len(group) - 1
+            num_stones = len(group)
+            # In a group of 'num_stones' stones, we can remove
+            # num_stones - 1 many stones, and then be left with
+            # exactly 1 stone (which we than can't delete since it
+            # doesn't touch any other stone, let alone directly touch one).
+            res += num_stones - 1
         return res
-                
-
-
-
-    #     for i in range(len(stones)):
-    #         x, y = stones[i]
-    #         for stone in d:
-    #             if stone[0] == x or stone[1] == y:
-    #                 d[stone].add((x, y))
-        
-    #     # Remove each stone from its own list of "touching" stones
-    #     for stone in d:
-    #         d[stone].remove(stone)
-        
-    #     # If a stone isn't "touching" any other stone,
-    #     # it cannot ever be removed, and hence doesn't need
-    #     # to be considered
-    #     # for stone in d:
-    #     #     if d[stone] == 0:
-    #     #         del d[stone]
-    #     self.d = {
-    #         key: d[key] for key in d if len(d[key]) > 0
-    #     }
-
-    #     # No stones left to remove
-    #     if len(self.d.keys()) == 0:
-    #         return 0
-
-        
-    #     # for key in self.d:
-    #     #     print(f"{key=}: {d[key]=}")
-    #     # return 1
-
-    #     # Want to remove the stone with FEWEST number of "touching" stones.
-    #     # Where a stone i is touch stone j if and only if stone i and j are in the
-    #     # same row and/or i and j are in the same column.
-    #     # next_stone = min(self.d.keys(), key=lambda k: len(self.d[k]))
-    #     next_stone = self.nextStone()
-        
-    #     # Returns the stone that was removed, or None if no more stones can be removed
-    #     while next_stone is not None:
-    #         self.removeStone(next_stone)
-    #         # next_stone = min(self.d.keys(), key=lambda k: len(self.d[k])) # O(n)
-    #         next_stone = self.nextStone()
-        
-
-    #     return self.num_stones
-
-    # def nextStone(self):
-    #     best_stone, best_val = None, float("inf")
-    #     for stone in self.d:
-    #         if len(self.d[stone]) > 0 and len(self.d[stone]) < best_val:
-    #             best_val = len(self.d[stone])
-    #             best_stone = stone
-        
-    #     return best_stone
-
-    # def removeStone(self, del_stone):
-    #     # x, y = next_stone
-    #     assert del_stone in self.d
-
-    #     del self.d[del_stone]
-    #     self.num_stones += 1
-
-    #     for stone in self.d:
-    #         if del_stone in self.d[stone]:
-    #             self.d[stone].remove(del_stone)
-        
-    #     return del_stone
-
