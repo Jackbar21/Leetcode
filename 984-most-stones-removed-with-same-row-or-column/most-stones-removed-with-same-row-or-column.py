@@ -15,24 +15,14 @@ class Solution:
                             # We've already found a group.
                             # Since we can add the stone to this
                             # other group as well, we should MERGE
-                            # these two groups together. Since we
-                            # can't modify groups in place, we will
-                            # do this by always keeping track of a
-                            # second 'new_group' list
-                            # union_group = groups[group_index]
+                            # these two groups together.
                             assert i > group_index
-                            # print(f"{stone=}, groups before: {groups}")
-                            # print(f"{i=}, {group_index=}, {groups[i]=}, {groups[group_index]=}")
-                            # print(f"{groups[i].union(groups[group_index])=}")
                             groups[i] = groups[i].union(groups[group_index])
                             del groups[group_index]
-                            # print(f"{stone=}, groups after: {groups}")
                         
                         break
                         
-            
             if group_index == -1:
-                # print(stone, groups)
                 groups.append(set([(stone_x, stone_y)]))
 
         # Idea: if we can find a connected network of stones such
