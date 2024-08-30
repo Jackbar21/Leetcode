@@ -236,9 +236,6 @@ class Solution:
             self.reset_mod_edges()
             shortest_path = self.get_shortest_path(prev)
 
-            # Loop Invariant
-            d, prev, shortest_path = d, prev, shortest_path
-
 
         # Our idea didn't work. There's two possible cases:
         # (1) at least one of the other paths are not editable,
@@ -250,8 +247,6 @@ class Solution:
         # EDIT: I'm realizing that case (1) is actually NOT POSSIBLE
         # We essentially have to keep trying other paths, until we've
         # exhausted them all (which nevermind - maybe case 1 is true?)
+        # But if it were possible (which it isn't), we'd of course return
+        # an empty array here :)
         return []
-
-        
-
-       
