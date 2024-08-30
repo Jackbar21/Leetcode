@@ -2,8 +2,7 @@ class Solution:
     def __init__(self):
         self.adj_list = None # a_i: [b_i, ...]
         self.edge_costs = None # {(a_i,b_i): w_i, ...}
-        self.n = None
-        self.edges = None
+        self.n = None # n
         self.source = None # source
         self.dest = None # destination
         self.banned_mod_edges = set() # edges banned from modification in other paths
@@ -45,9 +44,9 @@ class Solution:
             
             u, v = edge
             cost = self.edge_costs[edge]
-            # ignore_edges.add((u, v))
             ignore_edges.add((v, u))
             edges.append([u, v, cost])
+
         return edges
     def set_edge_cost(self, edge, new_cost):
         u, v = edge
@@ -59,6 +58,7 @@ class Solution:
         # Heap implementation: O((n+m)logn) --> better when m = O(n)
         #     since m == edges.length <= n * (n - 1) / 2, m = O(n^2)
         #     therefore, Naive array implementation is BETTER!
+        # But, for the 
 
         d = {
             i: float("inf") for i in range(self.n)
@@ -72,15 +72,25 @@ class Solution:
         # heapq.heapify(heap) # O(n)
 
         while len(visited) < self.n:
-            assert len(heap) > 0
-            weight, node = heapq.heappop(heap)
-            if node in visited:
-                continue
+            # assert len(heap) > 0
+            # weight, node = heapq.heappop(heap)
+            # if node in visited:
+            #     continue
             
-            # We popped 'node'. Call this node 'u'.
-            # We now have shortest path of cost 'weight' from s ----> u.
-            u = node
-            d[u] = weight
+            # # We popped 'node'. Call this node 'u'.
+            # # We now have shortest path of cost 'weight' from s ----> u.
+            # u = node
+            # d[u] = weight
+            # visited.add(u)
+            best_val, best_node = float("inf"), None
+            for node in d:
+                if node in visited:
+                    continue
+                if d[node] <= best_val:
+                    best_val = d[node]
+                    best_node = node
+            u = best_node
+            assert d[u] == best_val
             visited.add(u)
 
             # For every edge (u,v), we can then say that:
@@ -93,17 +103,35 @@ class Solution:
                     assert v not in visited
                     d[v] = d[u] + cost
                     prev[v] = u
-                    heapq.heappush(heap, (d[v], v))
+                    # heapq.heappush(heap, (d[v], v))
         
         return (d, prev)
+    def get_shortest_path(self, prev):
+        # PRE-CONDITION: self.banned_mod_edges must be empty
+        assert len(self.banned_mod_edges) == 0
+
+        shortest_path = collections.deque()
+        cur_node = self.dest
+        while cur_node != self.source:
+            prev_node = prev[cur_node]
+            assert prev_node is not None
+            edge = (prev_node, cur_node)
+            shortest_path.appendleft(edge)
+            if edge in self.modifiable_edges:
+                self.ban_mod_edge(edge)
+
+            # Loop Invariant
+            cur_node = prev_node
+        
+        return tuple(shortest_path)
     def modifiedGraphEdges(self, n: int, edges: List[List[int]], source: int, destination: int, target: int) -> List[List[int]]:
-        self.n, self.source, self.dest, self.edges = n, source, destination, edges
+        self.n, self.source, self.dest = n, source, destination
         self.adj_list = {
             i: [] for i in range(self.n)
         }
 
         self.edge_costs = {}
-        for (u,v,cost) in self.edges:
+        for (u,v,cost) in edges:
             # (u,v,cost) <--> (a,b,w)
             # self.adj_list[u].append((v, cost))
             self.adj_list[u].append(v)
@@ -249,28 +277,6 @@ class Solution:
 
 
 
-
-
-
-    def get_shortest_path(self, prev):
-        # Precondition: self.banned_mod_edges must be empty
-        assert len(self.banned_mod_edges) == 0
-
-        shortest_path = collections.deque()
-        cur_node = self.dest
-        while cur_node != self.source:
-            prev_node = prev[cur_node]
-            assert prev_node is not None
-            edge = (prev_node, cur_node)
-            shortest_path.appendleft(edge)
-            if edge in self.modifiable_edges:
-                # self.banned_mod_edges.add(edge)
-                self.ban_mod_edge(edge)
-            # Loop Invariant
-            cur_node = prev_node
-        
-        return tuple(shortest_path)
-
         # Our idea didn't work. There's two possible cases:
         # (1) at least one of the other paths are not editable,
         #     AND the cost of the path is less than target, 
@@ -288,10 +294,3 @@ class Solution:
         #    with the rationaly behind this being to set all other editable paths
         #         to have total path cost >= target, with at least our initial
         #         shortest path having value of target.
-
-        
-
-
-        # print(d)
-        # print(prev)
-        # return self.get_current_edges()
