@@ -224,20 +224,20 @@ class Solution:
             #         shortest path having value of target.
             self.set_mod_edges(target)
 
-            new_d, new_prev = self.dijkstra(self.source)
+            d, prev = self.dijkstra(self.source)
             cur_edges = self.get_current_edges()
-            assert new_d[self.dest] <= target
-            if new_d[self.dest] == target:
+            assert d[self.dest] <= target
+            if d[self.dest] == target:
                 return cur_edges
 
             # Otherwise, ban this current shortest path, and try
             # again with the new sub-path with path-cost < target!
             self.banned_paths.add(shortest_path)
             self.reset_mod_edges()
-            new_shortest_path = self.get_shortest_path(new_prev)
+            shortest_path = self.get_shortest_path(prev)
 
             # Loop Invariant
-            d, prev, shortest_path = new_d, new_prev, new_shortest_path
+            d, prev, shortest_path = d, prev, shortest_path
 
 
         # Our idea didn't work. There's two possible cases:
