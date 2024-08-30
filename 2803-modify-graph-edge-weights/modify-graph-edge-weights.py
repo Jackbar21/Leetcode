@@ -58,8 +58,10 @@ class Solution:
         # Heap implementation: O((n+m)logn) --> better when m = O(n)
         #     since m == edges.length <= n * (n - 1) / 2, m = O(n^2)
         #     therefore, Naive array implementation is BETTER!
-        # But, for the 
-
+        # But, for the sake of being more comfortable writing
+        # the heap-implementation of dijkstra's algorith from memory,
+        # I decided to go with the latter (albeit the technically worse
+        # overall asymptotic complexity.)
         d = {
             i: float("inf") for i in range(self.n)
         }
@@ -69,28 +71,19 @@ class Solution:
         prev = {
             i: None for i in range(self.n)
         }
+        # Don't need to heapify, as already in order!
         # heapq.heapify(heap) # O(n)
 
         while len(visited) < self.n:
-            # assert len(heap) > 0
-            # weight, node = heapq.heappop(heap)
-            # if node in visited:
-            #     continue
+            assert len(heap) > 0
+            weight, node = heapq.heappop(heap)
+            if node in visited:
+                continue
             
-            # # We popped 'node'. Call this node 'u'.
-            # # We now have shortest path of cost 'weight' from s ----> u.
-            # u = node
-            # d[u] = weight
-            # visited.add(u)
-            best_val, best_node = float("inf"), None
-            for node in d:
-                if node in visited:
-                    continue
-                if d[node] <= best_val:
-                    best_val = d[node]
-                    best_node = node
-            u = best_node
-            assert d[u] == best_val
+            # We popped 'node'. Call this node 'u'.
+            # We now have shortest path of cost 'weight' from s ----> u.
+            u = node
+            d[u] = weight
             visited.add(u)
 
             # For every edge (u,v), we can then say that:
@@ -103,7 +96,7 @@ class Solution:
                     assert v not in visited
                     d[v] = d[u] + cost
                     prev[v] = u
-                    # heapq.heappush(heap, (d[v], v))
+                    heapq.heappush(heap, (d[v], v))
         
         return (d, prev)
     def get_shortest_path(self, prev):
@@ -133,7 +126,6 @@ class Solution:
         self.edge_costs = {}
         for (u,v,cost) in edges:
             # (u,v,cost) <--> (a,b,w)
-            # self.adj_list[u].append((v, cost))
             self.adj_list[u].append(v)
             self.adj_list[v].append(u)
             if cost == -1:
@@ -152,19 +144,8 @@ class Solution:
         d, prev = self.dijkstra(self.source)
         assert prev[self.dest] is not None
 
-        # Get shortest path, and set of modifiable
-        # edges in that path
-        # cur_node = self.dest
-        # while cur_node != self.source:
-        #     prev_node = prev[cur_node]
-        #     assert prev_node is not None
-        #     edge = (prev_node, cur_node)
-        #     shortest_path.appendleft(edge)
-        #     if edge in self.modifiable_edges:
-        #         # self.banned_mod_edges.add(edge)
-        #         self.ban_mod_edge(edge)
-        #     # Loop Invariant
-        #     cur_node = prev_node
+        # Get shortest path, updating banned_mod_edges
+        # while doing so :)
         shortest_path = self.get_shortest_path(prev)
         
         # Base Case #1: Shortest path doesn't contain any modifiable
@@ -223,9 +204,7 @@ class Solution:
         # then becomes less than target, it's because there exists a
         # no-longer editable path from source to destination, in which
         # case we simply return [].
-
         while shortest_path not in self.banned_paths:
-
             # Step 1: Modify weight of current shortest path to be equal to target
             # We can do this by taking literally any edge in self.banned_mod_edges, and adding
             # to its cost the missing difference between current shortest path and target.
@@ -239,42 +218,26 @@ class Solution:
             self.set_edge_cost(edge, cost + missing_difference)
             self.banned_mod_edges.add(edge)
 
-            # Step 2: Modify all other modifiable edges to be equal to target
-            # print(self.get_current_edges())
-            # print(f"{self.banned_mod_edges=}, {self.modifiable_edges=}")
-            # for edge in self.modifiable_edges:
-            #     u, v = edge
-            #     if (u, v) not in self.banned_mod_edges and (v, u) not in self.banned_mod_edges:
-            #         print(f"MODIFYING: {edge}")
-            #         self.set_edge_cost(edge, target)
+            # Step 2: Modify all other modifiable edges to be equal to target, with
+            #         the rationaly behind this being to set all other editable paths
+            #         to have total path cost >= target, with at least our initial
+            #         shortest path having value of target.
             self.set_mod_edges(target)
 
-
             new_d, new_prev = self.dijkstra(self.source)
-            # print(new_d)
             cur_edges = self.get_current_edges()
-            # print(cur_edges)
             assert new_d[self.dest] <= target
             if new_d[self.dest] == target:
                 return cur_edges
-            # else:
+
+            # Otherwise, ban this current shortest path, and try
+            # again with the new sub-path with path-cost < target!
             self.banned_paths.add(shortest_path)
             self.reset_mod_edges()
             new_shortest_path = self.get_shortest_path(new_prev)
-            # if new_shortest_path in self.banned_paths:
-            #     return []
 
             # Loop Invariant
             d, prev, shortest_path = new_d, new_prev, new_shortest_path
-            
-            # print("GIGA!!")
-            # print(self.banned_mod_edges)
-            # print(self.modifiable_edges)
-        
-        return []    
-
-
-
 
 
         # Our idea didn't work. There's two possible cases:
@@ -287,10 +250,8 @@ class Solution:
         # EDIT: I'm realizing that case (1) is actually NOT POSSIBLE
         # We essentially have to keep trying other paths, until we've
         # exhausted them all (which nevermind - maybe case 1 is true?)
+        return []
 
         
 
-        # step 2 additional commentary...:
-        #    with the rationaly behind this being to set all other editable paths
-        #         to have total path cost >= target, with at least our initial
-        #         shortest path having value of target.
+       
