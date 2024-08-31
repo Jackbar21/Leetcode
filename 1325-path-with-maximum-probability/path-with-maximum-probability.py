@@ -31,7 +31,7 @@ class Solution:
 
             # We now have the BEST (maximum-product not minimum-sum) path from s to u,
             # s ---> u. Now for every edge (u,v), we want to update s ---> v to be the
-            # better (in this case larger) between s ---> v and s ---> u (== d[u]) + cost(u,v)
+            # better (in this case larger) between s ---> v and s ---> u (== d[u]) * cost(u,v)
             for v, prob in self.adj_list[u]:
                 new_cost = d[u] * prob
                 if new_cost > d[v]:
