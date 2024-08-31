@@ -2,6 +2,7 @@ class Solution:
     def __init__(self):
         self.adj_list = None
         self.n = None
+        self.end_node = None
     def dijkstra(self, s):
         # This is a special version of dijkstra, which returns the maximum-product
         # path instead of the minimum-sum path.
@@ -17,6 +18,10 @@ class Solution:
             best_val, best_node = heapq.heappop(max_heap)
             if best_node in visited:
                 continue
+            
+            if best_node == self.end_node:
+                return -best_val # -best_val since max heap!
+
             
             # Since we're simulating a max heap using python's heapq min-heap
             # implementation by multiplying all the values by -1, we must make
@@ -34,7 +39,7 @@ class Solution:
                     d[v] = new_cost
                     heapq.heappush(max_heap, (-new_cost, v)) # -new_cost since max-heap!
         
-        return d
+        return 0
 
 
 
@@ -42,6 +47,7 @@ class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
         self.n = n
         self.adj_list = {i: [] for i in range(self.n)}
+        self.end_node = end_node
         assert len(edges) == len(succProb)
         for i in range(len(edges)):
             u, v = edges[i]
@@ -49,5 +55,4 @@ class Solution:
             self.adj_list[u].append((v, prob))
             self.adj_list[v].append((u, prob))
 
-        d = self.dijkstra(start_node)
-        return d[end_node]
+        return self.dijkstra(start_node)
