@@ -21,7 +21,6 @@ class Solution:
             
             if best_node == self.end_node:
                 return -best_val # -best_val since max heap!
-
             
             # Since we're simulating a max heap using python's heapq min-heap
             # implementation by multiplying all the values by -1, we must make
@@ -40,9 +39,6 @@ class Solution:
                     heapq.heappush(max_heap, (-new_cost, v)) # -new_cost since max-heap!
         
         return 0
-
-
-
 
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
         self.n = n
