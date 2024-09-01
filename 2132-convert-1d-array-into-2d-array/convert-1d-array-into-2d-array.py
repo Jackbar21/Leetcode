@@ -4,9 +4,7 @@ class Solution:
             return []
         
         res = [[]]
-        # for num in original:
-        for i in range(m * n):
-            num = original[i]
+        for num in original:
             if len(res[-1]) < n:
                 res[-1].append(num)
             else:
