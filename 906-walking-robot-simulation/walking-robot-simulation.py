@@ -7,6 +7,7 @@ class Solution:
             "east": (1, 0),
             "west": (-1, 0)
         }
+
     def getDistance(self, origin, dest):
         x1, y1 = origin
         x2, y2 = dest
