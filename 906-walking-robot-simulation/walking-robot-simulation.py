@@ -1,9 +1,5 @@
 class Solution:
     def __init__(self):
-        self.x = None
-        self.y = None
-        self.dir = None # direction, i.e. "north", "east", "south", or "west"
-        self.max_dist = 0
         self.obstacles = None
         self.dir_map = { 
             "north": (0, 1),
@@ -17,24 +13,25 @@ class Solution:
         return pow((x1 - x2), 2) + pow((y1 - y2), 2)
 
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
-        self.x, self.y = 0, 0 # current position (initially origin)
-        self.dir = "north" # can be "north", "east", "south", or "west"
+        ORIGIN = (0, 0)
+        x, y = ORIGIN # current position (initially origin point)
+        cur_dir = "north" # i.e. "north", "east", "south", or "west"
         self.obstacles = set(tuple(obstacle) for obstacle in obstacles)
+        max_dist = 0
 
         for command in commands:
             # Turn left
             if command == -2:
-                self.dir = self.changeDirection("left")
+                cur_dir = self.changeDirection(cur_dir, "left")
                 continue
 
             # Turn right
             if command == -1:
-                self.dir = self.changeDirection("right")
+                cur_dir = self.changeDirection(cur_dir, "right")
                 continue
             
             # Move k steps forward
             k = command
-            # print(k, command, commands)
             assert 1 <= k <= 9
             # Idea: want to move up to k steps forward. We can do this
             # with a for loop that iterates up to k times, moving 1 step
@@ -44,43 +41,41 @@ class Solution:
             # well as updating the maximum squared Euclidian distance
             # found so far (if the current position happens to be the largest).
             for _ in range(k):
-                assert self.dir in self.dir_map
-                dx, dy = self.dir_map[self.dir]
-                origin = (0, 0)
-                new_pos = (self.x + dx, self.y + dy)
-                # print(f"{new_pos}")
+                assert cur_dir in self.dir_map
+                dx, dy = self.dir_map[cur_dir]
+                new_pos = (x + dx, y + dy)
                 if self.isObstacle(new_pos):
                     break
 
-                new_dist = self.getDistance(origin, new_pos)
-                self.max_dist = max(self.max_dist, new_dist)
-                self.x, self.y = new_pos
+                new_dist = self.getDistance(ORIGIN, new_pos)
+                max_dist = max(max_dist, new_dist)
+                x, y = new_pos
 
-        return self.max_dist
+        return max_dist
     
-    def changeDirection(self, turn_direction):
+    def changeDirection(self, cur_dir, turn_direction):
         assert turn_direction in ["left", "right"]
-        return self.turnLeft() if turn_direction == "left" else self.turnRight()
+        return self.turnLeft(cur_dir) if turn_direction == "left" else self.turnRight(cur_dir)
     
-    def turnLeft(self):
+    def turnLeft(self, cur_dir):
         d = {
             "north": "west",
             "west": "south",
             "south": "east",
             "east": "north"
         }
-        assert self.dir in d
-        return d[self.dir]
+        assert cur_dir in d
+        return d[cur_dir]
     
-    def turnRight(self):
+    def turnRight(self, cur_dir):
         d = {
             "north": "east",
             "east": "south",
             "south": "west",
             "west": "north"
         }
-        assert self.dir in d
-        return d[self.dir]
+        assert cur_dir in d
+        return d[cur_dir]
 
     def isObstacle(self, pos):
         x, y = pos
