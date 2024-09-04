@@ -48,9 +48,9 @@ class Solution:
                 if self.isObstacle(new_pos):
                     break
 
-                new_dist = self.getDistance(ORIGIN, new_pos)
-                max_dist = max(max_dist, new_dist)
                 x, y = new_pos
+                new_dist = self.getDistance(ORIGIN, new_pos)
+                max_dist = max(max_dist, new_dist)     
 
         return max_dist
     
