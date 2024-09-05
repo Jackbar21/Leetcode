@@ -34,21 +34,8 @@ class Solution:
 
         # Return a sequence of n dice rolls that sum up to X
         base_num, remainder = X // n, (X % n)
-        res = []
-        for _ in range(remainder):
-            res.append(base_num + 1)
-        for _ in range(n - remainder):
-            res.append(base_num)
-        # res = [base_num] * n
-        # for i in range(remainder):
-        #     res[i] += 1
+        res = [base_num] * n
+        for i in range(remainder):
+            res[i] += 1
         
         return res
-
-        # covers n == X and 6 * n == X cases 
-        # for val in possible_values:
-        #     if n * val == target_sum:
-        #         return [val] * target_sum
-        
-        # mean = self.getMean(possible_values)
-        # assert mean == 3.5
