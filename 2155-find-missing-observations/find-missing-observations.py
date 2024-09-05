@@ -1,5 +1,6 @@
 class Solution:
     def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
+        # Time Complexity: O(m + n), where m = len(rolls)
         """
         mean --> f(i) / (m + n) for i in range(m + n) [for 0 <= i < m, f(i) == rolls[i] ]
              --> sum(rolls)/(m + n) + X/(m + n), where X is the sum of the remaining n rolls.
