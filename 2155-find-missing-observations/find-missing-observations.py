@@ -45,23 +45,10 @@ class Solution:
         # assert mean == 3.5
 
         base_num, remainder = target_sum // n, (target_sum % n)
-        print(f"{base_num=}, {remainder=}, {n=}")
-        res = [base_num] * n
-        if remainder == 0:
-            return res
-
-        print(f"{n / remainder =}")
-        # for i in range(0, n, n // remainder):
-        for i in range(remainder):
-            res[i] += 1
+        # print(f"{base_num=}, {remainder=}, {n=}")
+        # res = [base_num] * n
+        # for i in range(remainder):
+        #     res[i] += 1
         
+        res = ([base_num + 1] * remainder) + ([base_num] * (n - remainder))
         return res
-
-        target_sum / n
-
-        3.5 * n > target_sum # make smaller, so add 1,2,3 to target_sum ?
-        3.5 * n < target_sum # make larger, so add 4,5,6 to target_sum ?
-        
-    
-    def getMean(self, arr):
-        return sum(arr) / len(arr)
