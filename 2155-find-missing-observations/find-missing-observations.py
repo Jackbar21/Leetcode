@@ -29,20 +29,21 @@ class Solution:
         if n > X:
             return []
         
-        # assert n <= target_sum and 6 * n >= target_sum # If false, then problem is impossible
+        # If false, then problem is impossible
+        assert n <= X and 6 * n >= X 
 
         # Return a sequence of n dice rolls that sum up to X
         base_num, remainder = X // n, (X % n)
-        res = [base_num] * n
-        for i in range(remainder):
-            res[i] += 1
+        res = []
+        for _ in range(remainder):
+            res.append(base_num + 1)
+        for _ in range(n - remainder):
+            res.append(base_num)
+        # res = [base_num] * n
+        # for i in range(remainder):
+        #     res[i] += 1
         
         return res
-    
-    # Return a sequence of n dice rolls that sum up to target_sum
-    def convertSumToDice(self, target_sum, n, possible_values):
-        
-        assert n <= target_sum and 6 * n >= target_sum # If false, then problem is impossible
 
         # covers n == X and 6 * n == X cases 
         # for val in possible_values:
@@ -51,5 +52,3 @@ class Solution:
         
         # mean = self.getMean(possible_values)
         # assert mean == 3.5
-
-        
