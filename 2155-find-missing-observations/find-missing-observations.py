@@ -29,11 +29,19 @@ class Solution:
         if n > X:
             return []
         
-        assert n <= X and 6 * n >= X
-        return self.convertSumToDice(X, n, [1, 2, 3, 4, 5, 6])
+        # assert n <= target_sum and 6 * n >= target_sum # If false, then problem is impossible
+
+        # Return a sequence of n dice rolls that sum up to X
+        base_num, remainder = X // n, (X % n)
+        res = [base_num] * n
+        for i in range(remainder):
+            res[i] += 1
+        
+        return res
     
+    # Return a sequence of n dice rolls that sum up to target_sum
     def convertSumToDice(self, target_sum, n, possible_values):
-        # Return a sequence of n dice rolls that sum up to target_sum
+        
         assert n <= target_sum and 6 * n >= target_sum # If false, then problem is impossible
 
         # covers n == X and 6 * n == X cases 
@@ -44,11 +52,4 @@ class Solution:
         # mean = self.getMean(possible_values)
         # assert mean == 3.5
 
-        base_num, remainder = target_sum // n, (target_sum % n)
-        # print(f"{base_num=}, {remainder=}, {n=}")
-        # res = [base_num] * n
-        # for i in range(remainder):
-        #     res[i] += 1
         
-        res = ([base_num + 1] * remainder) + ([base_num] * (n - remainder))
-        return res
