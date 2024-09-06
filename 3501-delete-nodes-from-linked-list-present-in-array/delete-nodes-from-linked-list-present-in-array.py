@@ -13,7 +13,6 @@ class Solution:
         if not head:
             return None
         
-        # if head.val in self.nums_set:
         rest = self.modifiedList(nums, head.next)
         if head.val in self.nums_set:
             return rest
