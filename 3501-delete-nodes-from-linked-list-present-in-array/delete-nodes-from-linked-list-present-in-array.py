@@ -21,7 +21,6 @@ class Solution:
 
         while cur:
             # Delete cur node if it is invalid (i.e. cur.val is in nums_set)
-            next_node = cur.next
             if cur.val in nums_set:
                 # Delete cur
                 # FROM: prev -> cur -> next_node
@@ -31,7 +30,7 @@ class Solution:
                 # Loop Invariant
                 # prev = next_node
                 # cur = next_node.next
-                cur = next_node
+                cur = cur.next
             else:
                 # Loop Invariant
                 prev = cur
