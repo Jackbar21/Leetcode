@@ -13,8 +13,9 @@ class Solution:
             head = head.next
         
         # If head is None, no valid nums, hence return None
-        if not head:
-            return None
+        # Since this problem states that there MUST exist AT LEAST ONE
+        # valid num, we can assert that head MUST NOT BE None
+        assert head is not None
         
         prev = head
         assert prev is not None and prev.val not in nums_set # i.e. assert prev is valid node
