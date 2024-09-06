@@ -7,13 +7,14 @@ class Solution:
     def __init__(self):
         self.nums_set = None
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
-        if self.nums_set is None:
-            self.nums_set = set(nums)
+        self.nums_set = set(nums)
+        return self.modifiedListRec(head)
 
+    def modifiedListRec(self, head):
         if not head:
             return None
         
-        rest = self.modifiedList(nums, head.next)
+        rest = self.modifiedListRec(head.next)
         if head.val in self.nums_set:
             return rest
         
