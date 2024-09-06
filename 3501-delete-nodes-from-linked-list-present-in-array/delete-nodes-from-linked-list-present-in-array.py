@@ -8,25 +8,25 @@ class Solution:
         nums_set = set(nums)
 
         # Keep moving head until it is either None or a VALID number (i.e. not in nums)
-        # while head and head.val in nums_set:
-        #     head = head.next
+        while head and head.val in nums_set:
+            head = head.next
         
         # If head is None, no valid nums, hence return None
         if not head:
             return None
         
         prev = head
-        # assert prev is not None and prev.val not in nums_set # i.e. assert prev is valid node
+        assert prev is not None and prev.val not in nums_set # i.e. assert prev is valid node
         cur = head.next
 
         while cur:
-            # Delete cur if invalid (i.e. cur.val is in nums)
+            # Delete cur node if it is invalid (i.e. cur.val is in nums_set)
             next_node = cur.next
             if cur.val in nums_set:
                 # Delete cur
                 # FROM: prev -> cur -> next_node
                 # TO: prev -> next_node
-                prev.next = next_node
+                prev.next = cur.next
 
                 # Loop Invariant
                 # prev = next_node
@@ -37,6 +37,4 @@ class Solution:
                 prev = cur
                 cur = cur.next
 
-        if head.val in nums_set:
-            head = head.next
         return head
