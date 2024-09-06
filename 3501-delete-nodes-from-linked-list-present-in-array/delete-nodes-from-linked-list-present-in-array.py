@@ -9,7 +9,7 @@ class Solution:
         nums_set = set(nums)
 
         # Keep moving head until it is either None or a VALID number (i.e. not in nums)
-        while head and head.val in nums_set:
+        while head.val in nums_set:
             head = head.next
         
         # If head is None, no valid nums, hence return None
