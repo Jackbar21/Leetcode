@@ -4,20 +4,18 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def __init__(self):
-        self.nums_set = None
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
-        self.nums_set = set(nums)
-        return self.modifiedListRec(head)
+        nums_set = set(nums)
 
-    def modifiedListRec(self, head):
-        if not head:
-            return None
+        new_head = ListNode(-1) # dummy node
+        last_node = new_head
+
+        while head:
+            if head.val not in nums_set:
+                last_node.next = ListNode(head.val)
+                last_node = last_node.next
+
+            # Loop Invariant
+            head = head.next
         
-        rest = self.modifiedListRec(head.next)
-        if head.val in self.nums_set:
-            return rest
-        
-        head.next = rest
-        return head
-        
+        return new_head.next
