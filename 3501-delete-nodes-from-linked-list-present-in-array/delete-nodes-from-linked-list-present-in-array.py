@@ -5,8 +5,7 @@
 #         self.next = next
 class Solution:
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
-        # Convert nums into hash-set to allow for O(1) lookups 
-        # (instead of O(n), where n=len(nums))
+        # Convert nums into hash-set to allow for O(1) lookups
         nums_set = set(nums)
 
         # Keep moving head until it is either None or a VALID number (i.e. not in nums)
@@ -29,7 +28,7 @@ class Solution:
                 prev.next = cur.next
             else:
                 # Don't delete cur since it is valid...
-                # Just set prev = cur for next iteration :)
+                # Just update prev correctly for next iteration :)
                 prev = cur
             
             # Loop Invariant
