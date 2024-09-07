@@ -10,12 +10,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def __init__(self):
-        self.memo = {}
     def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:
-        if (head, root) in self.memo:
-            return self.memo[(head, root)]
-
         if not head:
             return True
         
@@ -26,14 +21,9 @@ class Solution:
             if (self.isDirectSubPath(head.next, root.left) or 
                 self.isDirectSubPath(head.next, root.right)
             ):
-                self.memo[(head, root)] = True
                 return True
         
-        self.memo[(head, root)] = (
-            self.isSubPath(head, root.left) or 
-            self.isSubPath(head, root.right)
-        )
-        return self.memo[(head, root)]
+        return self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
     
     def isDirectSubPath(self, head, root):
         if not head:
