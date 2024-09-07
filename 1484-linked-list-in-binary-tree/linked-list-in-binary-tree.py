@@ -13,8 +13,8 @@ class Solution:
     def __init__(self):
         self.memo = {}
     def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:
-        # if (head, root) in self.memo:
-        #     return self.memo[(head, root)]
+        if (head, root) in self.memo:
+            return self.memo[(head, root)]
 
         if not head:
             return True
