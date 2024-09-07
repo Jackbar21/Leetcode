@@ -17,11 +17,8 @@ class Solution:
         if not root:
             return False
         
-        if head.val == root.val:
-            if (self.isDirectSubPath(head.next, root.left) or 
-                self.isDirectSubPath(head.next, root.right)
-            ):
-                return True
+        if self.isDirectSubPath(head, root):
+            return True
         
         return self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
     
