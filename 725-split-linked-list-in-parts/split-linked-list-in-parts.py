@@ -16,12 +16,13 @@ class Solution:
         print(parts, remainder, length, k)
 
         res = [None for _ in range(k)]
-        for i in range(remainder):
-            new_ll, head = self.popFirstKNodesFromLinkedList(head, parts + 1)
+        for i in range(k):
+            extra_nodes = 1 if i < remainder else 0
+            new_ll, head = self.popFirstKNodesFromLinkedList(head, parts + extra_nodes)
             res[i] = (new_ll)
-        for i in range(remainder, k):
-            new_ll, head = self.popFirstKNodesFromLinkedList(head, parts)
-            res[i] = (new_ll)
+        # for i in range(remainder, k):
+        #     new_ll, head = self.popFirstKNodesFromLinkedList(head, parts)
+        #     res[i] = (new_ll)
         
 
         # if head:
