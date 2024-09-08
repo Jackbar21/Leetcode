@@ -35,10 +35,9 @@ class Solution:
             prev = cur
             assert cur is not None
             cur = cur.next
-        
-        prev.next = None
 
-        # head is now new linked list and trimmed off due to prev.next = None
+        # Head is now new linked list and trimmed off due to prev.next = None
         # cur is now the rest of the linked list
+        prev.next = None
         return (head, cur)
 
