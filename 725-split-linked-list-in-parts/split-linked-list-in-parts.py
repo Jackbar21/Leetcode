@@ -11,22 +11,15 @@ class Solution:
             cur = cur.next
             length += 1
         
-        parts = length // k
+        num_nodes = length // k
         remainder = length % k
-        # print(parts, remainder, length, k)
 
         res = []
         for i in range(k):
             extra_nodes = 1 if i < remainder else 0
-            new_ll, head = self.popFirstKNodesFromLinkedList(head, parts + extra_nodes)
+            new_ll, head = self.popFirstKNodesFromLinkedList(head, num_nodes + extra_nodes)
             res.append(new_ll)
-        # for i in range(remainder, k):
-        #     new_ll, head = self.popFirstKNodesFromLinkedList(head, parts)
-        #     res[i] = (new_ll)
         
-
-        # if head:
-        #     res[-1] = head
         return res
 
     def popFirstKNodesFromLinkedList(self, head, k):
