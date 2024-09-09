@@ -14,15 +14,6 @@ class Solution:
         self.head = head
         self.matrix = [[-1] * self.n for _ in range(self.m)]
 
-        # Only one column, so one entry per row!
-        if self.n == 1:
-            res = []
-            while head:
-                res.append([head.val])
-                head = head.next
-            return res
-        
-
 
         # Get initial corners
         top_left = (0,0)
@@ -75,7 +66,7 @@ class Solution:
             assert (top_left[ROW] == bottom_left[ROW]) and (top_right[ROW] == bottom_right[ROW])
             # Just one row, so go from top_left to top_right, until done
             x = top_left[ROW]
-            for y in range(top_left[COL], top_right[COL] + COL):
+            for y in range(top_left[COL], top_right[COL] + 1):
                 if not self.head:
                     return self.matrix
                 self.matrix[x][y] = self.head.val
@@ -86,7 +77,7 @@ class Solution:
             # print("CASE 3")
             assert (top_left[COL] == top_right[COL]) and (bottom_left[COL] == bottom_right[COL])
             y = top_left[COL]
-            for x in range(top_left[ROW], bottom_left[ROW]):
+            for x in range(top_left[ROW], bottom_left[ROW] + 1):
                 if not self.head:
                     return self.matrix
                 self.matrix[x][y] = self.head.val
