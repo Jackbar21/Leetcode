@@ -5,6 +5,35 @@
 #         self.next = next
 class Solution:
     def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # If linked list has <= 1 nodes, return immediately
+        if not head or not head.next:
+            return head
+        
+        prev = head     # 18
+        cur = head.next # 6
+        
+
+        while cur:
+            node = ListNode(math.gcd(prev.val, cur.val)) # 6'
+            prev.next = node
+            node.next = cur
+
+            # Loop invariant
+            prev = cur
+            cur = cur.next
+        
+        return head
+
+
+
+
+        # 18 -> 6 -> 10 -> 3
+        # 18 -> 6'
+        # 6' -> 6
+        # 18 -> 6' -> 6 -> 10 -> 3
+
+
+    def insertGreatestCommonDivisorsRec(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # Case 1: Zero nodes left
         if not head:
             return head
