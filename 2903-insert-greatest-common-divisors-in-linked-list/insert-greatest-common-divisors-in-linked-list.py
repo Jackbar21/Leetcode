@@ -6,8 +6,8 @@
 class Solution:
     def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # If linked list has <= 1 nodes, return immediately
-        # if not head or not head.next:
-        #     return head
+        if not head or not head.next:
+            return head
         
         prev = head
         cur = head.next
