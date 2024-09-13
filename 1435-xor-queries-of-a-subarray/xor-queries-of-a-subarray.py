@@ -20,16 +20,9 @@ class Solution:
                 # XOR is currently value from 0 to prev_left (not inclusive)
                 for i in range(prev_left, left):
                     XOR ^= arr[i]
-                # for key in cache:
-                #     cache[key] ^= XOR
-                #     if key < left:
-                #         del cache[key]
-                
-                # min_right = left
                 prev_left = left
             
             res[(left, right)] = cache[right] ^ XOR
-        
-        # print(cache)
-        # print(res)
+
+        # Return back query results in original queries order
         return [res[tuple(query)] for query in queries]
