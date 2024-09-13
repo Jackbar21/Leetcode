@@ -7,7 +7,6 @@ class Solution:
 
         res = {}
         sorted_queries = sorted(queries)
-
         prev_left = 1
         XOR = arr[0]
         for query in sorted_queries:
