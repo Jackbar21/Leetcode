@@ -11,6 +11,8 @@ class Solution:
         for shift, vowel in enumerate('aeiou'):
             d[vowel] = 1 << shift
         
+        # self.prefix_counts[i] represents bitmask for parity (even/odd) of
+        # every vowel in string s up to (and including) index i.
         self.prefix_counts = {-1: 0}
         for i in range(len(self.s)):
             letter = self.s[i]
