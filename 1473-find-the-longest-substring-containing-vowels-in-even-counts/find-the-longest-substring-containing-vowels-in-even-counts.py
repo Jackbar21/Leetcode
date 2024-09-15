@@ -21,7 +21,7 @@ class Solution:
         for i in range(len(self.s)):
             # for j in range(i, len(self.s)):
             for j in range(longest_count + i, len(self.s)):
-                if self.isValidSubstring(i, j):
+                if self.prefix_counts[j] ^ self.prefix_counts[i - 1] == 0:
                     longest_count = j - i + 1
 
         return longest_count
