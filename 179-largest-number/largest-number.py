@@ -39,15 +39,9 @@ class Solution:
         if i >= j:
             return [arr[i]] if i == j else []
 
-        # mid = len(arr)//2
-        mid = (i + j + 1) // 2
-        # left, right = arr[:mid], arr[mid:]
-        # left = self.magicSort(left)
-        # right = self.magicSort(right)
-        # print(i, j, mid)
-        left = self.magicSort(arr, i, mid - 1)
-        right = self.magicSort(arr, mid, j)
-        print(left, right)
+        mid = (i + j) // 2
+        left = self.magicSort(arr, i, mid)
+        right = self.magicSort(arr, mid + 1, j)
 
         # Idea: we now have "sorted" versions of left and right. We want to essentially
         # always pick the "better" element from either the beginning of left or right,
@@ -59,7 +53,6 @@ class Solution:
         res = []
         l, r = 0, 0
         while l < len(left) and r < len(right):
-            # print(r, j, right)
             bigger = self.bigger(left[l], right[r])
             if bigger == left[l]:
                 res.append(left[l])
@@ -74,5 +67,4 @@ class Solution:
         elif r < len(right):
             res.extend(right[r:])
         
-        print(res)
         return res
