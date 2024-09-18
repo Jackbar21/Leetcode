@@ -2,19 +2,12 @@ class Solution:
     def bigger(self, num_a: str, num_b: str):
         # e.g. num_a == 34, num_b == 30000
         # 3430000 > 3000034
-        
-        if num_a + num_b > num_b + num_a:
-            print(f"{num_a + num_b} > {num_b + num_a} --> {True}")
-            return num_a
-        
-        print(f"{num_a + num_b} > {num_b + num_a} --> {False}")
-        return num_b
+        return num_a if (num_a + num_b > num_b + num_a) else num_b
     def largestNumber(self, nums: List[int]) -> str:
         sorted_nums =  self.largestNumberHelper(nums)
-        print(f"END: {sorted_nums=}")
-        res = ''.join(str(num) for num in sorted_nums)
-        if res == "0" * len(res):
+        if sorted_nums[0] == "0":
             return "0"
+        res = ''.join(str(num) for num in sorted_nums)
         return res
     def largestNumberHelper(self, nums, depth = 0):
         groups = {digit: [] for digit in "0123456789"}
