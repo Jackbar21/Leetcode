@@ -1,31 +1,51 @@
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val="", nxt=None):
+        self.val = val
+        self.next = nxt
+
 class Solution:
+    # Linked List to list/array
+    def ll_to_list(self, head):
+        res = []
+        while head:
+            res.append(head.val)
+            head = head.next
+        return res
     def diffWaysToCompute(self, expression: str) -> List[int]:
         # Setup expression as array with entries either being number
         # or operator, to make problem easier. Since expression.length <= 20,
         # this is only constant time :)
-        exp = expression
-        stack = []
+        head = ListNode(-1)
+        cur = head
         i = 0
-        while i < len(exp):
+        while i < len(expression):
             l = i
-            while i < len(exp) and exp[i] not in "+-*":
+            while i < len(expression) and expression[i] not in "+-*":
                 i += 1
 
-            stack.append(exp[l:i])  # add number as string
-            if i < len(exp):
-                stack.append(exp[i])   # add operator
+            cur.next = ListNode(expression[l:i]) # add number as string
+            cur = cur.next
+            if i < len(expression):
+                cur.next = ListNode(expression[i])   # add operator
+                cur = cur.next
             i += 1
+        
+        # print(ll_to_list(head.next))
+        # return []
 
         # Idea: for each operator, consider the case where it goes first. Apply the
         # operator, recursively get all the remaining sub-cases, and consider that
         # as one subset of possible values. Combine all subsets, to get your result.
+        stack = self.ll_to_list(head.next)
         results_as_strings = self.allPossibleValues(stack)
+        # results_as_strings = self.allPossibleValues(head.next)
         results_as_values = map(eval, results_as_strings)
         return results_as_values
 
     def allPossibleValues(self, stack):
         # Stack must be odd in length, since X operators & (X + 1)  
-        # numbers ---> 2X + 1 ---> odd number of elements in stack
+        # numbers ---> 2X + 1 ---> odd number of elements in stac
         assert len(stack) % 2 == 1
 
         # Base Case #1: Only one operator choice left
@@ -51,4 +71,3 @@ class Solution:
         
         return res
         
-    
