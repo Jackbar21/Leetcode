@@ -41,12 +41,11 @@ class Solution:
         while len(match_copy) > len(cur):
             match_copy.pop()
         # while not self.isPrefix(cur, string_to_match):
-        while not self.isPrefix(cur, match_copy):
+        while cur != match_copy:
             letter = cur.popleft()
             # if letter == s[pivot_index] and self.isPrefix(cur, string_to_match):
             tmp = match_copy.pop()
-            if letter == s[pivot_index] and self.isPrefix(cur, match_copy):
-                #print("CASEEEE")
+            if letter == s[pivot_index] and cur == match_copy:
                 return ''.join(list(string_to_match)[::-1]) + letter*2 + ''.join(string_to_match)
             match_copy.append(tmp)
             # break
