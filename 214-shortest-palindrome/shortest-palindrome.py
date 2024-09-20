@@ -26,7 +26,7 @@ class Solution:
             letter = cur.popleft()
             tmp = match_copy.pop()
             if letter == s[pivot_index] and cur == match_copy:
-                return ''.join(list(string_to_match)[::-1]) + letter*2 + ''.join(string_to_match)
+                return ''.join(list(string_to_match)[::-1]) + letter * 2 + ''.join(string_to_match)
             match_copy.append(tmp)
 
             # Loop Invariant (in addition to cur.popleft())
@@ -34,7 +34,7 @@ class Solution:
             match_copy.appendleft(s[pivot_index])
             pivot_index -= 1
 
-            # mMke match_copy same in length as cur
+            # Make match_copy same in length as cur
             # they used to be same, we -1 in cur, +1 in match_copy,
             # so now just -2 in match_copy to make them even :)
             match_copy.pop()
