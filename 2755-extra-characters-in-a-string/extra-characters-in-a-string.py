@@ -8,8 +8,8 @@ class Solution:
         self.d = dictionary
         self.s = s
         # return 1
-        for i in range(len(s)):
-            self.memo[(i, i)] = 0 if s[i] in dictionary else 1
+        # for i in range(len(s)):
+        #     self.memo[(i, i)] = 0 if s[i] in dictionary else 1
         return self.minExtraCharDp(0, len(s) - 1)
 
         # 10^6
@@ -22,10 +22,10 @@ class Solution:
         if (i, j) in self.memo:
             return self.memo[(i, j)]
         
-        # assert i <= j
-        # if i == j:
-        #     return 0 if self.s[i] in self.d else 1
-        assert i < j
+        assert i <= j
+        if i == j:
+            return 0 if self.s[i] in self.d else 1
+        # assert i < j
             
         
         # O(n) time, where n = len(s)
@@ -36,6 +36,7 @@ class Solution:
         # Logic
         # Idea: Find the shortest i-->j k path (similar to Floyd-Warshall algorithm)
         res = j - i + 1
+        res = float("inf")
         # TODO: verify if do all correct k indices here
         for k in range(i + 1, j):
         # for k in range(i, j + 1):
