@@ -3,10 +3,8 @@ class Solution:
         self.trie1 = {}
         self.trie2 = {}
     def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
-        for i in range(len(arr1)):
-            arr1[i] = str(arr1[i])
-        for i in range(len(arr2)):
-            arr2[i] = str(arr2[i])
+        arr1 = [str(num) for num in arr1]
+        arr2 = [str(num) for num in arr2]
 
         # Idea: add every number to a trie, each number being at most 9 characters in length
         # and there are at most 2 * (5 * 10^4) == 10^5 elements. 9 * 10^5 < 10^6, which is
