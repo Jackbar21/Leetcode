@@ -1,42 +1,18 @@
-# class ListNode:
-#     def __init__(self, start, end):
-#         self.start = start
-#         self.end = end
-#         self.next = None
+START, END = 0, 1
 class MyCalendar:
     def __init__(self):
         self.calendar = []
-        # self.head = None
 
     def book(self, start: int, end: int) -> bool:
-        # [SOL1]
-        # self.insertNode(start, end)
-        # [SOL2]
-        # for (other_start, other_end) in self.calendar:
-        #     if start < other_end and other_start < end:
-        #         return False
-        # return True
-        # [SOL3]
-        # i = 0
-        # for (s, e) in self.calendar:
-        #     if start < e:
-        #         if s < end:
-        #             return False
-        #         else:
-        #             self.calendar.insert(i, (start, end))
-        #             return True
-        #     i += 1
-        START, END = 0, 1
-
         # List empty at start
         if len(self.calendar) == 0:
             self.calendar.append((start, end))
             return True
 
         # Add to start of array
-        if end <= self.calendar[0][START]:
-            self.calendar.insert(0, (start, end))
-            return True
+        # if end <= self.calendar[0][START]:
+        #     self.calendar.insert(0, (start, end))
+        #     return True
         
         # Add to end of array
         if self.calendar[-1][END] <= start:
@@ -53,10 +29,9 @@ class MyCalendar:
             return False
         self.calendar.insert(index, (start, end))
         return True
-        return self.bookSearch(start, end, 0, len(self.calendar) - 1)
 
     def leftmostBinarySearch(self, start, end):
-        START, END = 0, 1
+        
         l, r = 0, len(self.calendar)
         leftmost = len(self.calendar) - 1
 
@@ -75,7 +50,7 @@ class MyCalendar:
         # if e' comes before e, and e' < start < e, then have found right index
         # in which case return false if s < end, oterhwise append element
         # between e' and e representative intervals
-        START, END = 0, 1
+        
 
         if l >= r:
             if l > r:
@@ -122,7 +97,7 @@ class MyCalendar:
             return self.bookSearch(start, end, mid + 1, r)
         
     # def getInsertIndex(self, start, end):
-    #     START, END = 0, 1
+    #     
     #     l, r = 0, len(self.calendar)
     #     while l <= r:
     #         mid = (l + r) // 2
