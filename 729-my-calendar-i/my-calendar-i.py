@@ -5,14 +5,7 @@ class MyCalendar:
 
     def book(self, start: int, end: int) -> bool:
         for (other_start, other_end) in self.calendar:
-            # if not (
-            #     other_start <= other_end <= start <= end or
-            #     start <= end <= other_start <= other_end
-            # ):
-            if not (
-                other_end <= start or
-                end <= other_start
-            ):
+            if other_end > start and end > other_start:
                 return False
 
         self.calendar.append((start, end))
