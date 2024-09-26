@@ -4,11 +4,14 @@ class MyCalendar:
         self.calendar = []
 
     def book(self, start: int, end: int) -> bool:
-        s2, e2 = start, end
-        for (s1, e1) in self.calendar:
+        for (other_start, other_end) in self.calendar:
+            # if not (
+            #     other_start <= other_end <= start <= end or
+            #     start <= end <= other_start <= other_end
+            # ):
             if not (
-                s1 <= e1 <= s2 <= e2 or
-                s2 <= e2 <= s1 <= e1
+                other_end <= start or
+                end <= other_start
             ):
                 return False
 
@@ -22,7 +25,7 @@ class MyCalendar:
 
 # start1 <= start2 <= end1
 
-# s1,e1,s2,e2
-# s2,e2,s1,e1
-# s1,s2,e1,e2
-# s2,s1,e1,e2
+# s,e,start,end
+# start,end,s,e
+# s,start,e,end
+# start,s,e,end
