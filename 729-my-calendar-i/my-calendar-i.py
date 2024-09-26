@@ -17,17 +17,12 @@ class MyCalendar:
 
     def leftmostBinarySearch(self, start, end):
         l, r = 0, len(self.calendar) - 1
-        leftmost = r
-
         while l <= r:
             mid = (l + r) // 2
             if start < self.calendar[mid][1]:
-                # leftmost = min(leftmost, mid)
                 r = mid - 1
             else:
                 l = mid + 1
-
-        # return leftmost
         return l
 
 # Your MyCalendar object will be instantiated and called as such:
