@@ -5,14 +5,14 @@ class ListNode:
         self.next = None
 class MyCalendar:
     def __init__(self):
-        self.calendar = []
+        # self.calendar = []
         self.head = None
-    
-    def insertNode(self, start, end):
-        # DON'T WANT: s1 < e2 and s2 < e1
-        # i.e....     s1 < e2 < e1 < s2 or s1 < e2 < s2 < e1
-        # if not self.tree:
-        #     self.tree = TreeNode(start, end)
+
+    def book(self, start: int, end: int) -> bool:
+        # for (other_start, other_end) in self.calendar:
+        #     if start < other_end and other_start < end:
+        #         return False
+        # return True
         cur = self.head
         prev = None
         node = ListNode(start, end)
@@ -25,7 +25,6 @@ class MyCalendar:
         # (s1,e1),(s2,e2),...,(s,e), (s',e') s.t. (start < e)
         # now if s < end, then this is not bookable
         # otherwise, insert the node here in place?
-        
         while cur and start >= cur.end:
             # Loop Invariant
             prev = cur
@@ -51,19 +50,6 @@ class MyCalendar:
             prev.next = node
             node.next = cur
         return True
-        
-
-
-
-
-    def book(self, start: int, end: int) -> bool:
-        # for (other_start, other_end) in self.calendar:
-        #     if start < other_end and other_start < end:
-        #         return False
-
-        # self.calendar.append((start, end))
-        # return True
-        return self.insertNode(start, end)
 
 # Your MyCalendar object will be instantiated and called as such:
 # obj = MyCalendar()
