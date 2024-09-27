@@ -2,11 +2,6 @@ class MyCalendarTwo:
     def __init__(self):
         self.calendar = []
 
-    def overlaps(self, s1, e1, s2, e2):
-        # start, end = s1, e1
-        # s, e = s2, e2
-        # return start < e and end > s
-        return s1 < e2 and e1 > s2
     def book(self, start: int, end: int) -> bool:
         # start,end | s,e
         # start < e and end > s, then invalid
@@ -16,7 +11,7 @@ class MyCalendarTwo:
             if start < e and end > s:
                 # conflicts.append((s, e))
                 for (cs, ce) in conflicts:
-                    if self.overlaps(cs, ce, s, e):
+                    if cs < e and ce > s:
                         return False
                 # interval = (start, e)
                 # conflicts += 1
