@@ -1,7 +1,7 @@
 class MyCalendarTwo:
     def __init__(self):
-        self.calendar = [] # (start, end) sorted by increasing end times
-   
+        self.calendar = []
+
     def book(self, start: int, end: int) -> bool:
         conflicts = []
         for (s, e) in self.calendar:
