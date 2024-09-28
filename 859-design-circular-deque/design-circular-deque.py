@@ -5,7 +5,6 @@ class ListNode:
         self.prev = None
 
 class MyCircularDeque:
-
     def __init__(self, k: int):
         self.head = ListNode(-1)
         self.tail = ListNode(-1)
@@ -24,7 +23,6 @@ class MyCircularDeque:
             self.size += 1
             return True
 
-        
         node = ListNode(value)
         first_node = self.head.next
 
@@ -37,8 +35,6 @@ class MyCircularDeque:
         self.size += 1
         return True
         
-        
-
     def insertLast(self, value: int) -> bool:
         if self.isFull():
             return False
@@ -56,12 +52,6 @@ class MyCircularDeque:
 
         last_node.next = node
         node.prev = last_node
-
-        # node.next = first_node
-        # first_node.prev = node
-
-        # node.prev = self.head
-        # self.head.next = node
 
         node.next = self.tail
         self.tail.prev = node
@@ -100,13 +90,9 @@ class MyCircularDeque:
             self.size -= 1
             return True
         
-        # first_node = self.head.next
-        # second_node = first_node.next
         last_node = self.tail.prev
         second_last_node = last_node.prev
         
-        # self.head.next = second_node
-        # second_node.prev = self.head
         self.tail.prev = second_last_node
         second_last_node.next = self.tail
         
@@ -117,7 +103,6 @@ class MyCircularDeque:
         if self.isEmpty():
             return -1
         return self.head.next.val
-        
 
     def getRear(self) -> int:
         if self.isEmpty():
@@ -127,7 +112,6 @@ class MyCircularDeque:
     def isEmpty(self) -> bool:
         assert 0 <= self.size <= self.capacity
         return self.size == 0
-        
 
     def isFull(self) -> bool:
         assert 0 <= self.size <= self.capacity
@@ -136,8 +120,6 @@ class MyCircularDeque:
     def isSingle(self) -> bool:
         assert 0 <= self.size <= self.capacity
         return self.size == 1
-        
-
 
 # Your MyCircularDeque object will be instantiated and called as such:
 # obj = MyCircularDeque(k)
