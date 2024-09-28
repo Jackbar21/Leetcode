@@ -68,7 +68,7 @@ class MyCircularDeque:
             self.head.next = None
             self.tail.prev = None
             self.size -= 1
-            assert self.size == 0
+            assert self.isEmpty()
             return True
         
         first_node = self.head.next
@@ -89,7 +89,7 @@ class MyCircularDeque:
             self.head.next = None
             self.tail.prev = None
             self.size -= 1
-            assert self.size == 0
+            assert self.isEmpty()
             return True
         
         last_node = self.tail.prev
