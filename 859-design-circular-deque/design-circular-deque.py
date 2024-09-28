@@ -70,7 +70,7 @@ class MyCircularDeque:
             self.size -= 1
             assert self.isEmpty()
             return True
-        
+
         first_node = self.head.next
         second_node = first_node.next
 
