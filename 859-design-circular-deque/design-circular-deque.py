@@ -64,7 +64,7 @@ class MyCircularDeque:
             return False
         
         # Case 1: Only 1 Element
-        if self.size == 1:
+        if self.isSingle():
             self.head.next = None
             self.tail.prev = None
             self.size -= 1
@@ -84,7 +84,7 @@ class MyCircularDeque:
             return False
         
         # Case 1: Only 1 Element
-        if self.size == 1:
+        if self.isSingle():
             self.head.next = None
             self.tail.prev = None
             self.size -= 1
@@ -110,10 +110,16 @@ class MyCircularDeque:
         return self.tail.prev.val
 
     def isEmpty(self) -> bool:
+        assert 0 <= self.size <= self.capacity
         return self.size == 0
 
     def isFull(self) -> bool:
+        assert 0 <= self.size <= self.capacity
         return self.size == self.capacity
+    
+    def isSingle(self) -> bool:
+        assert 0 <= self.size <= self.capacity
+        return self.size == 1
 
 # Your MyCircularDeque object will be instantiated and called as such:
 # obj = MyCircularDeque(k)
