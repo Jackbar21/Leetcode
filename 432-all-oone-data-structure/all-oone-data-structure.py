@@ -158,3 +158,21 @@ class AllOne:
 # obj.dec(key)
 # param_3 = obj.getMaxKey()
 # param_4 = obj.getMinKey()
+
+# MLQ/MLFQS:
+# 64 []
+# 63 []
+# 62 []
+# 61 []
+# 60 [t1, t2]
+# ...
+# 4 []
+# 3 [t3, t4,t5,t6]
+# 2 [t7]
+# 1 []
+
+# All O` One:`
+# H <-> 21 <-> 33 <-> 34 <-> 35 <-> 60 <-> T
+
+# a b c
+# 1 2 3 
