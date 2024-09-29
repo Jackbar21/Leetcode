@@ -7,7 +7,7 @@ class AllOne:
     def inc(self, key: str) -> None:
         self.d[key] = self.d.get(key, 0) + 1
         heapq.heappush(self.min_heap, (self.d[key], key))
-        heapq.heappush(self.max_heap, (-self.d[key], key))   
+        heapq.heappush(self.max_heap, (-self.d[key], key))
 
     def dec(self, key: str) -> None:
         # assert key in self.d
