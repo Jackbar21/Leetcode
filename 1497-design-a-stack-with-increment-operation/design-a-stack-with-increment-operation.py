@@ -14,7 +14,7 @@ class CustomStack:
             self.stack.append(x)
 
     def pop(self) -> int:
-        print("pop", self.stack, self.d)
+        # print("pop", self.stack, self.d)
         # if len(self.stack) > 0:
         #     return self.stack.pop()
         # return -1
@@ -27,17 +27,17 @@ class CustomStack:
             val += self.d[k]
             # if k - 1 >= 0:
             self.d[k - 1] = self.d.get(k - 1, 0) + self.d[k]
-            del self.d[k]
-            # self.d[k] = 0
+            # del self.d[k]
+            self.d[k] = 0
         return val + self.stack.pop()
         
     def increment(self, k: int, val: int) -> None:
         # for i in range(min(k, len(self.stack))):
         #     self.stack[i] += val
-        print("inc", self.stack, self.d, k, val)
+
+        # Now O(1) time
         k = min(k, len(self.stack))
         self.d[k - 1] = self.d.get(k - 1, 0) + val
-        # print("inc", self.stack, self.d, k, val, "\n")
 
 # Your CustomStack object will be instantiated and called as such:
 # obj = CustomStack(maxSize)
