@@ -19,7 +19,6 @@ class CustomStack:
         # if len(self.stack) > 0:
         #     return self.stack.pop()
         # return -1
-
         if len(self.stack) == 0:
             return -1
         
