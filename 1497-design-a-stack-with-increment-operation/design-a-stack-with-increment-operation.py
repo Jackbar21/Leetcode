@@ -20,7 +20,6 @@ class CustomStack:
         #     return self.stack.pop()
         # return -1
 
-        # New solution (with O(1) increment function):
         if len(self.stack) == 0:
             return -1
         
