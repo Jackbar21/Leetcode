@@ -14,10 +14,13 @@ class CustomStack:
             self.stack.append(x)
 
     def pop(self) -> int:
+        # Old solution:
         # print("pop", self.stack, self.d)
         # if len(self.stack) > 0:
         #     return self.stack.pop()
         # return -1
+
+        # New solution (with O(1) increment function):
         if len(self.stack) == 0:
             return -1
         
@@ -25,12 +28,12 @@ class CustomStack:
         val = 0
         if k in self.d:
             val += self.d[k]
-            if k - 1 >= 0:
-                self.d[k - 1] = self.d.get(k - 1, 0) + self.d[k]
+            self.d[k - 1] = self.d.get(k - 1, 0) + self.d[k]
             del self.d[k]
         return val + self.stack.pop()
         
     def increment(self, k: int, val: int) -> None:
+        # Old Solution:
         # for i in range(min(k, len(self.stack))):
         #     self.stack[i] += val
 
