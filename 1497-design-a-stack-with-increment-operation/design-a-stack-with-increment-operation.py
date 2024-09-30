@@ -25,10 +25,9 @@ class CustomStack:
         val = 0
         if k in self.d:
             val += self.d[k]
-            # if k - 1 >= 0:
-            self.d[k - 1] = self.d.get(k - 1, 0) + self.d[k]
+            if k - 1 >= 0:
+                self.d[k - 1] = self.d.get(k - 1, 0) + self.d[k]
             del self.d[k]
-            # self.d[k] = 0
         return val + self.stack.pop()
         
     def increment(self, k: int, val: int) -> None:
