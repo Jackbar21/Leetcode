@@ -1,9 +1,22 @@
 class Solution:
     def canArrange(self, arr: List[int], k: int) -> bool:
+        # 1, 2, 3, ..., k-3,k-2,k-1
+        # 1,k-1 --> k
+        # 2,k-2 --> k
+        # 3,k-3 --> k
         d = {}
         for i in range(len(arr)):
-            # arr[i] %= k
             d[arr[i] % k] = d.get(arr[i] % k, 0) + 1
+        
+        # num1 = a1 + (k * b1), a1,b1 are integers, and 0 <= a1 < k
+        # num2 = a2 + (k * b2), a2,b2 are integers, and 0 <= a2 < k
+
+        # num1 + num2                        is divisible by k
+        # <--> a1 + (k * b1) + a2 + (k * b2) is divisible by k
+        # <--> a1 + a2 + k(b1) + k(b2)       is divisible by k
+        # <--> a1 + a2 + k(b1 + b2)          is divisible by k
+        # <--> a1 + a2                       is divisible by k
+
         
         # First step: check 0s (i.e. numbers who are direct multiples of k)
         if 0 in d:
@@ -19,28 +32,8 @@ class Solution:
         # given key1, want to find "key2" such that key2 == k - key1.
         # A key like key2 is available if and only if key2's value in d
         # is greater than 0.
-        # for key in d:
-        for key in range(1, k // 2 + 1):
-            if d.get(key, 0) != d.get(k - key, 0):
+        for key in d:
+            if d[key] != d.get(k - key, 0):
                 return False
         
         return True
-
-
-            
-
-
-        
-
-        # arr.sort()
-        print(d)
-        return False
-
-        # For all i, arr[i] == a + b * k, for some numbers a, b
-        # Since the b part doesn't matter, the only "unique" values
-        # that remain are for 0 <= a < k
-
-        # (a, b)
-        # (a, b, c, d)
-        # (a, b) --> solution no longer possible with rest of elements
-        # k=5, a=1, b=4, c=9, 
