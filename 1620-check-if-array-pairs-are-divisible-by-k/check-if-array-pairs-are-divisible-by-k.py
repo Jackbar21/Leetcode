@@ -19,12 +19,8 @@ class Solution:
         # given key1, want to find "key2" such that key2 == k - key1.
         # A key like key2 is available if and only if key2's value in d
         # is greater than 0.
-
         for key in d:
-            # val = d[key]
-            # key2 = k - key
-            # print(d, k, arr)
-            if d[key] != d.get(k - key, 0):
+            if d.get(key, 0) != d.get(k - key, 0):
                 return False
         
         return True
