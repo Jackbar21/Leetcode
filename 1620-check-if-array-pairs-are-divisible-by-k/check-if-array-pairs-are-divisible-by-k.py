@@ -19,7 +19,8 @@ class Solution:
         # given key1, want to find "key2" such that key2 == k - key1.
         # A key like key2 is available if and only if key2's value in d
         # is greater than 0.
-        for key in d:
+        # for key in d:
+        for key in range(1, k // 2 + 1):
             if d.get(key, 0) != d.get(k - key, 0):
                 return False
         
