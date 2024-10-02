@@ -3,14 +3,11 @@ class Solution:
         if len(arr) <= 0:
             return []
 
-        sorted_arr = sorted(arr)
-        d = {sorted_arr[0]: 1} 
+        d = {}
         rank = 1
-        for i in range(1, len(arr)):
-            if sorted_arr[i] != sorted_arr[i - 1]:
+        for num in sorted(arr):
+            if num not in d:
+                d[num] = rank
                 rank += 1
-    
-            num = sorted_arr[i]
-            d[num] = min(d.get(num, rank), rank)
-
+                
         return map(lambda num: d[num], arr)
