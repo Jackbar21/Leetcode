@@ -1,9 +1,4 @@
 class Solution:
-    def getProduct(self, arr):
-        base = 1
-        for num in arr:
-            base *= num
-        return base
     def dividePlayers(self, skill: List[int]) -> int:
         # Idea: we want the minimum and maximum numbers/skills to be matched together.
         # Reason is that if you don't pair them together, and n > 2, then there will
@@ -40,11 +35,3 @@ class Solution:
             l += 1
             r -= 1
         return res
-
-
-
-        # Step 2: compute chemistry sum
-        return self.getChemistrySum(pairs)
-    
-    def getChemistrySum(self, pairs):
-        return sum(pair[0] * pair[1] for pair in pairs)
