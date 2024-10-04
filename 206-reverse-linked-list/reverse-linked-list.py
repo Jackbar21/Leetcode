@@ -27,9 +27,6 @@ class Solution:
 
     
     def reverseListIterative(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # if not head:
-        #     return None
-
         prev = None
         cur = head
         while cur:
