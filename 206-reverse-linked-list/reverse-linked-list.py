@@ -14,8 +14,8 @@ class Solution:
     
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # return None
-        if not head:
-            return None
+        # if not head:
+        #     return None
         
         # a -> b -> c, for any arbitrary nodes a,b,c
         # WANT:
