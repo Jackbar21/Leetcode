@@ -4,31 +4,49 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList2(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # Follow up asks for recursive & iterative solution, so I've implemented both!
-        # return self.reverseListRec(head)
-        return self.reverseListIterative(head)
-    
-    def reverseListRec(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        return None
-    
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # return None
+        # Follow up asks for recursive & iterative solution, so I've implemented both!
+
+        # Iterative solution
+        # return self.reverseListIterative(head)
+
+        # Recursive solution
+        return self.reverseListRec(head, None)
+    
+    def reverseListRec(self, cur, prev) -> Optional[ListNode]:
+        if not cur:
+            return prev
+        
+        # a -> b -> ... -> z
+        # reverseListRec(a -> b -> ... -> z)
+        # == reverseListRec(b -> ... -> z) -> a
+        # None <- a <- [rest of reverse list]
+        
+        # Apply same idea of transforming
+        # THIS: prev -> cur -> next
+        # TO:   prev <- cur <- next
+        # rest = self.reverseListRec(head.next)
+        next_node = cur.next
+        cur.next = prev
+
+        # prev = cur
+        # cur = next_node
+        return self.reverseListRec(next_node, cur)
+        
+
+
+
+    
+    def reverseListIterative(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # if not head:
         #     return None
-        
-        # a -> b -> c, for any arbitrary nodes a,b,c
-        # WANT:
-        # a <- b <- c
 
-        # 1 -> 2 -> ... -> 5 -> None
-        # None <- 1 <- 2 <- ... <- 5
         prev = None
         cur = head
         while cur:
             next_node = cur.next
-            # HAVE: prev -> cur -> next_node
-            # WANT: prev <- cur <- next_node
+            # HAVE: prev -> cur
+            # WANT: prev <- cur
             cur.next = prev
 
             # Loop Invariant
