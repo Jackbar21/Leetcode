@@ -5,22 +5,35 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # Linked list already sorted if 0 or 1 total nodes
-        if not head or not head.next:
-            return head
+        # Follow up asks for recursive & iterative solution, so I've implemented both!
+        # return self.reverseListRec(head)
+        return self.reverseListIterative(head)
+    
+    def reverseListRec(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        return None
+    
+    def reverseListIterative(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # return None
+        if not head:
+            return None
         
-        prev, cur, nxt = None, head, head.next
+        # a -> b -> c, for any arbitrary nodes a,b,c
+        # WANT:
+        # a <- b <- c
 
+        # 1 -> 2 -> ... -> 5 -> None
+        # None <- 1 <- 2 <- ... <- 5
+        prev = None
+        cur = head
         while cur:
-            # prev -> cur -> next
-            # prev <- cur (<- next ... apply recursively)
-            nxt = cur.next
+            next_node = cur.next
+            # HAVE: prev -> cur -> next_node
+            # WANT: prev <- cur <- next_node
             cur.next = prev
 
-            # Loop invariant
+            # Loop Invariant
             prev = cur
-            cur = nxt
-        
+            cur = next_node
+
         return prev
 
-        
