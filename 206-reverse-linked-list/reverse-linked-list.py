@@ -8,7 +8,7 @@ class Solution:
         # Follow up asks for recursive & iterative solution, so I've implemented both!
 
         # Iterative solution
-        # return self.reverseListIterative(head)
+        return self.reverseListIterative(head)
 
         # Recursive solution
         return self.reverseListRec(head, None)
@@ -43,4 +43,3 @@ class Solution:
             cur = next_node
 
         return prev
-
