@@ -16,25 +16,14 @@ class Solution:
     def reverseListRec(self, cur, prev) -> Optional[ListNode]:
         if not cur:
             return prev
-        
-        # a -> b -> ... -> z
-        # reverseListRec(a -> b -> ... -> z)
-        # == reverseListRec(b -> ... -> z) -> a
-        # None <- a <- [rest of reverse list]
-        
-        # Apply same idea of transforming
-        # THIS: prev -> cur -> next
-        # TO:   prev <- cur <- next
-        # rest = self.reverseListRec(head.next)
+
         next_node = cur.next
         cur.next = prev
 
         # prev = cur
         # cur = next_node
+        # return self.reverseListRec(cur, prev)
         return self.reverseListRec(next_node, cur)
-        
-
-
 
     
     def reverseListIterative(self, head: Optional[ListNode]) -> Optional[ListNode]:
