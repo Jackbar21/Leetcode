@@ -1,11 +1,15 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        res = 0
-        cheapest_index = 0
-        for i in range(1, len(prices)):
-            if prices[i] < prices[cheapest_index]:
-                cheapest_index = i
+        # buy low, sell high
+        # up to the i'th day, keep track of the CHEAPEST found stock price so far.
+        # then, update your maximum profit to the larger between currently found
+        # maximum profit, and today's stock price - the cheapest stock price found so far.
+        max_profit = 0
+        cheapest_price = prices[0]
+        for price in prices:
+            if cheapest_price > price:
+                cheapest_price = price
             else:
-                res = max(res, prices[i] - prices[cheapest_index])
+                max_profit = max(max_profit, price - cheapest_price)
 
-        return res
+        return max_profit
