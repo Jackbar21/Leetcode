@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def reverseList2(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # Follow up asks for recursive & iterative solution, so I've implemented both!
         # return self.reverseListRec(head)
         return self.reverseListIterative(head)
@@ -12,7 +12,7 @@ class Solution:
     def reverseListRec(self, head: Optional[ListNode]) -> Optional[ListNode]:
         return None
     
-    def reverseListIterative(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # return None
         if not head:
             return None
