@@ -14,4 +14,4 @@ class Solution:
         
         left = self.maxDepthHelper(root.left, depth + 1)
         right = self.maxDepthHelper(root.right, depth + 1)
-        return max(left, right, depth + 1)
+        return max(left, right)
