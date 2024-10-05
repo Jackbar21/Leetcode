@@ -4,20 +4,14 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def llToList(self, head):
-        res = []
-        while head:
-            res.append(head.val)
-        return res
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         # O(n) time, O(1) space
-        # Base Cases
         if not list1:
             return list2
         if not list2:
             return list1
         
-        # Make list1 have first smaller value
+        # Make list1 have first smaller value for simplicity
         if list1.val > list2.val:
             return self.mergeTwoLists(list2, list1)
 
@@ -39,6 +33,7 @@ class Solution:
 
             list1_prev = list2_node
 
+        # Add rest of list2 to tail of list1
         if not list1:
             list1_prev.next = list2
 
