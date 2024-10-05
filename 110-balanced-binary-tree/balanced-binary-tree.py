@@ -21,7 +21,7 @@ class Solution:
         )
 
     def getHeightAndUpdateRes(self, root):
-        if not root:
+        if not root or self.res == False:
             return 0
         
         left_height = self.getHeightAndUpdateRes(root.left)
