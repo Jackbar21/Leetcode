@@ -15,7 +15,7 @@ class Solution:
     def getHeightAndUpdateRes(self, root):
         # If self.is_balanced is False, then end execution context
         # as quickly as possible since answer will be False no matter what.
-        if not root:
+        if not root or not self.is_balanced:
             return 0
         
         left_height = self.getHeightAndUpdateRes(root.left)
