@@ -27,6 +27,5 @@ class Solution:
 
             l += 1
             r += 1
-            # print(d)
         
         return d == dict_to_match
