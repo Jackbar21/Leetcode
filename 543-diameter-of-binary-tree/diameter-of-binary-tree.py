@@ -6,81 +6,42 @@
 #         self.right = right
 class Solution:
     def __init__(self):
-        self.node_to_depth = {}
-        self.node_to_max_depth = {None: 0}
+        self.node_to_max_depth = { None: 0 }
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        # self.populateDepths(root, 1)
-        self.getMaxDepth(root)
-        #print(self.node_to_max_depth)
-        # return 1
-        return self.diameterOfBinaryTreeHelper(root, 0)
-    
-    # def populateDepths(self, root, depth):
-    #     if not root or root in self.node_to_depth:
-    #         return
+        # Populate each node in tree with it's maximum depth.
+        self.populateMaxDepth(root)
         
-    #     # assert root not in node_to_depth
-    #     self.node_to_depth[root.val] = depth
-    #     self.populateDepths(root.left, depth + 1)
-    #     self.populateDepths(root.right, depth + 1)
-    #     return
+        # Solve actual problem, now given O(1)
+        # lookup time for max-depth for each node
+        if not root:
+            return 0
+        
+        # Case 1: Largest diameter passes through the root
+        left_max_depth = self.node_to_max_depth[root.left]
+        right_max_depth = self.node_to_max_depth[root.right]
+        case1 = left_max_depth + right_max_depth
 
-    def getMaxDepth(self, root):
+        # Case 2: Largest diameter in left subtree
+        case2 = self.diameterOfBinaryTree(root.left)
+
+        # Case 3: Largest diameter in right subtree
+        case3 = self.diameterOfBinaryTree(root.right)
+
+        # Return largest diameter from all three cases
+        return max(case1, case2, case3)
+
+    def populateMaxDepth(self, root):
+        # Already computed root's max depth, so return
         if root in self.node_to_max_depth:
             return
         
-        if root.left not in self.node_to_max_depth:
-            self.getMaxDepth(root.left)
-        if root.right not in self.node_to_max_depth:
-            self.getMaxDepth(root.right)
+        # Populate left and right subtree's max depths as needed
+        self.populateMaxDepth(root.left)
+        self.populateMaxDepth(root.right)
         
+        # Update root's max depth, which is 1 more than largest
+        # depth between left and right subtrees
         self.node_to_max_depth[root] = 1 + max(
             self.node_to_max_depth[root.left],
             self.node_to_max_depth[root.right]
         )
-        return
-        
-        #print(root in self.node_to_max_depth, root.val)
-        assert root not in self.node_to_max_depth
-        self.node_to_max_depth[root] = 1 + max(
-            self.getMaxDepth(root.left),
-            self.getMaxDepth(root.right)
-        )
-        return self.node_to_max_depth[root]
-
-
-    def diameterOfBinaryTreeHelper(self, root, depth):
-        if not root:
-            return 0
-        
-        if not root.left and not root.right:
-            return 0
-        
-        # Case 1: Go through the root
-        # left_depth = self.getMaxDepth(root.left)
-        # right_depth = self.getMaxDepth(root.right)
-        left_depth = self.node_to_max_depth[root.left]
-        right_depth = self.node_to_max_depth[root.right]
-        case1 = left_depth + right_depth
-        ##print(f"{left_depth=}, {right_depth=}, {case1=}")
-
-
-        # Case 2: only consider left subtree
-        case2 = self.diameterOfBinaryTree(root.left)
-        # Case 3: only consider right subtree
-        case3 = self.diameterOfBinaryTree(root.right)
-        ##print(f"{case2=}")
-        ##print(f"{case3=}")
-        ##print(f"{max(case1, case2, case3)=}")
-        return max(case1, case2, case3)
-        
-        # if not root.left:
-        #     assert root.right
-        #     return 1 + self.diameterOfBinaryTree(root.right)
-        
-        # if not root.right:
-        #     assert root.left
-        #     return 1 + self.diameterOfBinaryTree(root.left)
-        
-
-        
