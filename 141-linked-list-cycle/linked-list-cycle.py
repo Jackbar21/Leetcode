@@ -6,11 +6,9 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        if not head:
-            return None
         tortoise = head
-        hare = head.next
-
+        hare = head
+        
         while hare and hare.next:
             tortoise = tortoise.next
             hare = hare.next.next
