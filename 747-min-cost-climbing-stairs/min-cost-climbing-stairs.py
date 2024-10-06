@@ -1,23 +1,24 @@
 class Solution:
     def __init__(self):
         self.memo = {}
+        self.cost = None
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        return self.minCostPos(cost, 0)
-    def minCostPos(self, cost, pos):
-        if len(cost) <= 1:
+        self.cost = cost
+        return self.minCostClimbingStairsDp(len(cost))
+    
+    def minCostClimbingStairsDp(self, i):
+        if i in self.memo:
+            return self.memo[i]
+
+        if i <= 1:
             return 0
         
-        # Case 1: start at index 0
-        if (pos+1) not in self.memo:
-            self.memo[pos+1] = self.minCostPos(cost[1:], pos+1)
-        case1 = cost[0] + self.memo[pos+1]
+        # Case 1: Reach index i by climbing one step
+        case1 = self.minCostClimbingStairsDp(i - 1) + self.cost[i - 1]
 
-        # Case 2: start at index 1
-        if (pos+2) not in self.memo:
-            self.memo[pos+2] = self.minCostPos(cost[2:], pos+2)
-        case2 = cost[1] + self.memo[pos+2]
+        # Case 2: Reach index i by climbing two steps
+        case2 = self.minCostClimbingStairsDp(i - 2) + self.cost[i - 2]
 
-        return min(case1, case2)
-
-
-        
+        # Return the case with cheaper cost
+        self.memo[i] = min(case1, case2)
+        return self.memo[i]
