@@ -4,8 +4,8 @@ class KthLargest:
         self.heap = nums
         heapq.heapify(nums) # O(n)
 
-        while len(self.heap) > k:
-            heapq.heappop(self.heap)
+        # while len(self.heap) > k:
+        #     heapq.heappop(self.heap)
 
         # heap has n elements
         # and is a min_heap
