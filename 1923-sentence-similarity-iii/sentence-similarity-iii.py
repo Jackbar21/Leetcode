@@ -15,13 +15,13 @@ class Solution:
             if small[0] == big[0]:
                 small.popleft()
                 big.popleft()
-                continue
+                # continue
 
-            if small[-1] == big[-1]:
+            elif small[-1] == big[-1]:
                 small.pop()
                 big.pop()
-                continue
-            
-            break
+                # continue
+            else:
+                break
         
         return len(small) == 0
