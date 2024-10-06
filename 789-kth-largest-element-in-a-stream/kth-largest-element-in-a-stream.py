@@ -7,11 +7,6 @@ class KthLargest:
         while len(self.heap) > k:
             heapq.heappop(self.heap)
 
-        # heap has n elements
-        # and is a min_heap
-        # and we heappop n - k times...
-        # we are left with k elements, and necessarily, the LARGEST k elements
-
     def add(self, val: int) -> int:
         heapq.heappush(self.heap, val)
         if len(self.heap) > self.k:
