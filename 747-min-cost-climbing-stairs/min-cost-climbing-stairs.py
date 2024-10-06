@@ -2,6 +2,7 @@ class Solution:
     def __init__(self):
         self.memo = {}
         self.cost = None
+
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         self.cost = cost
         return self.minCostClimbingStairsDp(len(cost))
