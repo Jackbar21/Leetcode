@@ -1,16 +1,15 @@
 class Solution:
     def __init__(self):
-        self.memo = {}
+        self.memo = {1: 1, 2: 2}
     def climbStairs(self, n: int) -> int:
-        if n <= 3:
-            return n
+        return self.climbStairsDp(n)
+    
+    def climbStairsDp(self, i):
+        if i in self.memo:
+            return self.memo[i]
         
-        if n not in self.memo:
-            v1 = self.climbStairs(n - 1)
-            v2 = self.climbStairs(n - 2)
-            self.memo[n] = v1 + v2
+        self.memo[i] = self.climbStairsDp(i - 1) + self.climbStairsDp(i - 2)
+        return self.memo[i]
+        
 
-        return self.memo[n]
-        
-        
         
