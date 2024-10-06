@@ -1,6 +1,6 @@
 class Solution:
     def __init__(self):
-        self.memo = {}
+        self.memo = {0: 0, 1: 0}
         self.cost = None
 
     def minCostClimbingStairs(self, cost: List[int]) -> int:
@@ -10,9 +10,6 @@ class Solution:
     def minCostClimbingStairsDp(self, i):
         if i in self.memo:
             return self.memo[i]
-
-        if i <= 1:
-            return 0
         
         # Case 1: Reach index i by climbing one step
         case1 = self.minCostClimbingStairsDp(i - 1) + self.cost[i - 1]
