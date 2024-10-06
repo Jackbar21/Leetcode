@@ -16,12 +16,8 @@ class Solution:
                 small.popleft()
                 big.popleft()
             
-            elif small[-1] == big[-1]:
+            if len(small) > 0 and small[-1] == big[-1]:
                 small.pop()
                 big.pop()
         
         return len(small) == 0
-            
-
-
-        
