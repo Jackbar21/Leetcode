@@ -1,14 +1,15 @@
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        # Helper
-        def plusOneRec(digits, index):
-            if digits[index] < 9:
-                digits[index] += 1
-                return digits
-            
-            digits[index] = 0
-            if index == 0:
-                return [1] + digits
-            return plusOneRec(digits, index - 1)
+        if all(digit == 9 for digit in digits):
+            return [1] + [0] * len(digits)
         
-        return plusOneRec(digits, len(digits) - 1)
+        for i in range(len(digits) - 1, -1, -1):
+            digit = digits[i]
+            if digit == 9:
+                digits[i] = 0
+                continue
+            
+            digits[i] += 1
+            break
+        
+        return digits
