@@ -4,21 +4,23 @@ class Solution:
         arr = ['dummy']
 
         for char in s:
-            if char not in "BD":
+            if (char == "B" and arr[-1] == "A") or (char == "D" and arr[-1] == "C"):
+                arr.pop()
+            else:
                 arr.append(char)
-                continue
+            # if char == "B":
+            #     if arr[-1] == "A":
+            #         arr.pop()
+            #     else:
+            #         arr.append(char)
             
-            if char == "B":
-                if arr[-1] == "A":
-                    arr.pop()
-                else:
-                    arr.append(char)
+            # elif char == "D":
+            #     if arr[-1] == "C":
+            #         arr.pop()
+            #     else:
+            #         arr.append(char)
             
-            if char == "D":
-                if arr[-1] == "C":
-                    arr.pop()
-                else:
-                    arr.append(char)
+
         
         return len(arr) - 1
 
