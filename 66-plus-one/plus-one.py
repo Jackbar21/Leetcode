@@ -4,8 +4,7 @@ class Solution:
             return [1] + [0] * len(digits)
         
         for i in range(len(digits) - 1, -1, -1):
-            digit = digits[i]
-            if digit < 9:
+            if digits[i] < 9:
                 digits[i] += 1
                 break
             
