@@ -1,9 +1,10 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        visited = set(range(len(nums) + 1))
-        for num in nums:
-            assert num in visited
-            visited.remove(num)
+        xor_num = 0
+        for num in range(len(nums) + 1):
+            xor_num ^= num
         
-        assert len(visited) == 1
-        return visited.pop()
+        for num in nums:
+            xor_num ^= num
+        
+        return xor_num
