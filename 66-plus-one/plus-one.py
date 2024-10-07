@@ -5,13 +5,11 @@ class Solution:
         
         for i in range(len(digits) - 1, -1, -1):
             digit = digits[i]
-            if digit == 9:
-                digits[i] = 0
-                # if i == 0:
-                #     return [1] + digits
-                continue
+            if digit < 9:
+                digits[i] += 1
+                break
             
-            digits[i] += 1
-            break
+            # Carry the '1' over to the next (higher-significant) digit
+            digits[i] = 0
         
         return digits
