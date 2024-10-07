@@ -1,13 +1,11 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        seen = set()
-
-        num = n
-        while num not in seen:
-            seen.add(num)
-            num = sum(map(lambda x:x*x, [int(i) for i in str(num)]))
-            if num == 1:
+        str_n = str(n)
+        visited = set()
+        while str_n not in visited:
+            visited.add(str_n)
+            str_n = str(sum(pow(int(digit), 2) for digit in str_n))
+            if str_n == "1":
                 return True
         
-        # num found in seen, so infinite cycle detected
         return False
