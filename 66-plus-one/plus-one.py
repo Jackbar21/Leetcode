@@ -4,11 +4,11 @@ class Solution:
             return [1] + [0] * len(digits)
         
         for i in range(len(digits) - 1, -1, -1):
-            if digits[i] < 9:
-                digits[i] += 1
-                break
+            if digits[i] == 9:
+                digits[i] = 0
+                continue
             
-            # Carry the '1' over to the next (higher-significant) digit
-            digits[i] = 0
+            digits[i] += 1
+            break
         
         return digits
