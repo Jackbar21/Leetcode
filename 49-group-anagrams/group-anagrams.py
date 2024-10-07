@@ -2,7 +2,8 @@ class Solution:
     def wordToTuple(self, word):
         res = [0] * 26
         for letter in word:
-            res[ord(letter) - ord('a')] += 1
+            # ord('a') == 97
+            res[ord(letter) - 97] += 1
         return tuple(res)
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         d = {}
