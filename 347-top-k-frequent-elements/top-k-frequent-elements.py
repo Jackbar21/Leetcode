@@ -14,32 +14,28 @@ class Solution:
                 freq_dict[freq - 1].remove(num)
             assert num not in freq_dict[freq]
             freq_dict[freq].add(num)
-            # freq = num_to_freq[num]
             
         assert len(freq_dict[0]) == 0
         res = []
         for freq in range(len(nums), 0, -1):
-            while k > 0 and len(freq_dict[freq]) > 0:
+            # Done with problem
+            if k <= 0:
+                break
+            
+            # Add whole values at frequency freq
+            # if enough space to add them all
+            if k >= len(freq_dict[freq]):
+                res.extend(freq_dict[freq])
+                k -= len(freq_dict[freq])
+                continue
+
+            # k is smaller than list of values at freq_dict[freq]
+            # so pop one by one until reach end
+            while k > 0:
                 res.append(freq_dict[freq].pop())
                 k -= 1
-            if k == 0:
-                return res
+            assert k == 0
+            return res
         
         assert k == 0
-        return res
-
-
-
-
-        
-        # return sorted(set(nums), key=lambda num: d[num])[-k:]
-        max_heap = []
-        for num in d:
-            heapq.heappush(max_heap, (-d[num], num))
-        
-        # O(klogn), k <= n
-        heapq.heapify(max_heap) # O(n)
-        res = []
-        for _ in range(k): # O(k)
-            res.append(heapq.heappop(max_heap)[1]) # O(logn)
         return res
