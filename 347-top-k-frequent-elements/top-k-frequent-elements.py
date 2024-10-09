@@ -19,7 +19,7 @@ class Solution:
         res = []
         for freq in range(len(nums), 0, -1):
             # Done with problem
-            if len(res) >= k:
+            if len(res) == k:
                 break
             
             # Add whole values at frequency freq
