@@ -301,15 +301,16 @@ class Solution:
         return rightmost_index
     def minGroups(self, intervals: List[List[int]]) -> int:
         START, END = 0, 1
-        freqs = [0] * (max(map(lambda interval: interval[END], intervals)) + 2)
+        # freqs = [0] * (max(map(lambda interval: interval[END], intervals)) + 2)
+        freqs = {}
         for start, end in intervals:
-            freqs[start] += 1
-            freqs[end + 1] -= 1
+            freqs[start] = freqs.get(start, 0) + 1
+            freqs[end + 1] = freqs.get(end + 1, 0) - 1
         
         res = 0
         cur = 0
-        for val in freqs:
-            cur += val
+        for key in sorted(freqs):
+            cur += freqs[key]
             res = max(res, cur)
         return res
 
