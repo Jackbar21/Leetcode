@@ -1,8 +1,11 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # answer[i] = prefix_mults[i-1] * suffix_mults[i+1]
+        # answer[i + 1] = prefix_mults[i] * suffix_mults[i+2]
+
         # Idea (Constant Space):
-        # prefix = nums[0]
-        # suffix = nums[-1]
+        #   prefix = nums[0], i = 0
+        #   suffix = nums[-1], i = len(nums) - 1
         # Start off with answer = [1,1,1,1,1,...,1]
         # We know that we want to multiply answer[i] with prefix_mults[i - 1]
         # as well as suffix_mults[i + 1]. So as we build up our prefix value,
@@ -42,7 +45,7 @@ class Solution:
         # prefix_mults[i] = nums[0] * nums[1] * ... * nums[i]
         # suffix_mults[i] = nums[i] * nums[i+1] * ... * nums[len(nums) - 1]
         # answer[i] = prefix_mults[i-1] * suffix_mults[i+1]
-        
+
         # Step 1: build prefix_mults
         base = 1
         prefix_mults = []
