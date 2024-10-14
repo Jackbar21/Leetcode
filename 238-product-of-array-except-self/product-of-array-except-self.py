@@ -1,10 +1,5 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        # Idea (Linear Space):
-        # prefix_mults[i] = nums[0] * nums[1] * ... * nums[i]
-        # suffix_mults[i] = nums[i] * nums[i+1] * ... * nums[len(nums) - 1]
-        # answer[i] = prefix_mults[i-1] * suffix_mults[i+1]
-
         # Idea (Constant Space):
         # prefix = nums[0]
         # suffix = nums[-1]
@@ -17,13 +12,12 @@ class Solution:
         # prefix = nums[0] * ... * nums[i] to answer[i+1], and then after i
         # iterations, suffix = nums[len(nums) - 1] * ... * nums[i] to answer[i - 1].
 
-        # Step 1: initialize answer array
+        # Step 1: Initialize answer array
         answer = [1] * len(nums)
 
-        # TODO: Handle answer[0] and answer[-1] separately if need be
+        # Step 2: Prefix multiplications
         i = 0
-        prefix = nums[0]
-        # while i < len(nums):
+        prefix = nums[i]
         while i + 1 < len(nums):
             answer[i + 1] *= prefix
 
@@ -31,9 +25,10 @@ class Solution:
             i += 1
             prefix *= nums[i]
         
+        # Step 3: Suffix multiplications
         i = len(nums) - 1
-        suffix = nums[-1]
-        while i  - 1 >= 0:
+        suffix = nums[i]
+        while i - 1 >= 0:
             answer[i - 1] *= suffix
 
             # Loop Invariant
@@ -43,8 +38,11 @@ class Solution:
         return answer
 
 
-
-
+        # Idea (Linear Space):
+        # prefix_mults[i] = nums[0] * nums[1] * ... * nums[i]
+        # suffix_mults[i] = nums[i] * nums[i+1] * ... * nums[len(nums) - 1]
+        # answer[i] = prefix_mults[i-1] * suffix_mults[i+1]
+        
         # Step 1: build prefix_mults
         base = 1
         prefix_mults = []
