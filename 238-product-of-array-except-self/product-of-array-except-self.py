@@ -14,18 +14,14 @@ class Solution:
         
         # Step 2: build suffix_mults
         base = 1
-        suffix_mults = []
+        suffix_mults = collections.deque([])
         for i in range(len(nums) - 1, -1, -1):
             base *= nums[i]
-            suffix_mults.append(base)
+            suffix_mults.appendleft(base)
 
         # Step 3: build answer
-        answer = [suffix_mults[-2]]
+        answer = [suffix_mults[1]]
         for i in range(1, len(nums) - 1):
-            answer.append(
-                prefix_mults[i - 1] * suffix_mults[(len(nums) - 1) - (i + 1)]
-            )
-        
+            answer.append(prefix_mults[i - 1] * suffix_mults[i + 1])
         answer.append(prefix_mults[-2])
-
         return answer
