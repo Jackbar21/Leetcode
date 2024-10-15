@@ -3,7 +3,7 @@ class Solution:
         BLACK, WHITE = '1', '0'
 
         # Step 1: count number of white balls, call this number NUM_WHITE_BALLS
-        num_white_balls = s.count(WHITE)
+        # num_white_balls = s.count(WHITE)
         # num_black_balls = len(s) - num_white_balls
 
         # Idea: put leftmost white ball, to leftmost index (i.e. index == 0). 
@@ -14,7 +14,8 @@ class Solution:
         num_swaps = 0 # Result to return
 
         ball_index = 0
-        while num_seen < num_white_balls:
+        # while num_seen < num_white_balls:
+        while ball_index < len(s):
             # assert ball_index < len(s)
             ball = s[ball_index]
 
@@ -34,3 +35,4 @@ class Solution:
             ball_index += 1
 
         return num_swaps
+
