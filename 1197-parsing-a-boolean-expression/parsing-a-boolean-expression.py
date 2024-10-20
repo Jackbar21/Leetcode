@@ -48,17 +48,13 @@ class Solution:
             return self.logical_and(left, right)
 
         # Case 4: Logical Or - |(...)
-        assert logical_symbol == "|"
+        # assert logical_symbol == "|"
         return self.logical_or(left, right)
     
     def logical_and(self, l, r):
-        # # assert l < len(self.expression)
-        # assert l <= r < len(self.expression)
-        
-        # Base Case: end of string
+        # Base Case: End of string
         if l >= r:
-            # assert l == r # might be better to do l = min(l, r) in case I overshoot due to ','
-            # assert self.expression[l] in ["f", "t", ")"]
+            # assert l == r and self.expression[l] in ["f", "t", ")"]
             return self.expression[l] != "f"
         
         # Case 1: Just boolean value (must be ONLY one index!)
@@ -87,13 +83,11 @@ class Solution:
             if expr == False:
                 return False
         
-        elif logical_symbol == "|":
+        else:
+            assert logical_symbol == "|"
             expr = self.logical_or(left, right)
             if expr == False:
                 return False
-
-        else:
-            raise Exception("Unreachable Code")
 
         # Expression was valid, so update l (and be careful not to overshoot!), 
         # then compute rest of logical_and operation :)
