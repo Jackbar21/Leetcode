@@ -7,9 +7,9 @@ class Solution:
         # i'th open parenthese index matches with -(i+1)'th closed_parenthese index
         self.parenthese_index = -1
     def getClosingParentheseIndex(self, open_parenthese_index):
-        assert open_parenthese_index < len(self.expression)
-        assert self.expression[open_parenthese_index] == "("
-        assert open_parenthese_index in self.open_to_close
+        # assert open_parenthese_index < len(self.expression)
+        # assert self.expression[open_parenthese_index] == "("
+        # assert open_parenthese_index in self.open_to_close
         return self.open_to_close[open_parenthese_index]
 
     def parseBoolExpr(self, expression: str) -> bool:
@@ -23,7 +23,7 @@ class Solution:
         #         open_parentheses.append(i)
         #     elif char == ")":
         #         closed_parentheses.append(i)
-        # assert len(open_parentheses) == len(closed_parentheses)
+        # # assert len(open_parentheses) == len(closed_parentheses)
         # for i in range(len(open_parentheses)):
         #     open_parenthese_index = open_parentheses[i]
         #     closed_parenthese_index = closed_parentheses[-1 - i]
@@ -35,49 +35,49 @@ class Solution:
                 stack.append(i)
             
             elif char == ")":
-                assert len(stack) > 0
+                # assert len(stack) > 0
                 open_parenthese_index = stack.pop()
-                assert open_parenthese_index not in self.open_to_close
+                # assert open_parenthese_index not in self.open_to_close
                 self.open_to_close[open_parenthese_index] = i
             
         
-        print(self.open_to_close)
+        # print(self.open_to_close)
         # return True
         
         self.expression = expression
         return self.parseBoolExprHelper(0, len(expression) - 1)
     
     def parseBoolExprHelper(self, l, r):
-        assert l < len(self.expression)
+        # assert l < len(self.expression)
 
         # Case 1: Just boolean value (must be ONLY one index!)
-        print(f"parseBoolExprHelper({l}, {r})={self.expression[l : r + 1]}")
+        # print(f"parseBoolExprHelper({l}, {r})={self.expression[l : r + 1]}")
         if l >= r or self.expression[l] in ["f", "t"]:
-            print("CULPRIT", self.expression[l : r + 1], l, r)
-            assert l == r and self.expression[l] in ["f", "t"]
+            # print("CULPRIT", self.expression[l : r + 1], l, r)
+            # assert l == r and self.expression[l] in ["f", "t"]
             return self.expression[l] == "t"
 
         # not &(!(t),&(f),|(f))
         # not of ALL[!(t), &(f), |(f)]
 
-        # assert l < len(self.expression)
+        # # assert l < len(self.expression)
         logical_symbol = self.expression[l]
-        assert logical_symbol in ["!", "&", "|"]
+        # assert logical_symbol in ["!", "&", "|"]
         # Since will have form X(...) where X is either '!', '&', or '|',
         # we shift l and r to contain the "meat", i.e. 
         # l += 2
         # r -= 1
-        # assert l <= r
+        # # assert l <= r
         open_parenthese_index = l + 1
-        # print(f"{self.expression[open_parenthese_index]=}")
-        assert open_parenthese_index < len(self.expression)
-        assert self.expression[open_parenthese_index] == "("
+        # # print(f"{self.expression[open_parenthese_index]=}")
+        # assert open_parenthese_index < len(self.expression)
+        # assert self.expression[open_parenthese_index] == "("
         closed_parenthese_index = self.getClosingParentheseIndex(open_parenthese_index)
-        assert closed_parenthese_index < len(self.expression)
-        assert self.expression[closed_parenthese_index] == ")"
-        # print(f"{self.expression[closed_parenthese_index]=}")
+        # assert closed_parenthese_index < len(self.expression)
+        # assert self.expression[closed_parenthese_index] == ")"
+        # # print(f"{self.expression[closed_parenthese_index]=}")
         left, right = open_parenthese_index + 1, closed_parenthese_index - 1
-        assert left <= right < len(self.expression)
+        # assert left <= right < len(self.expression)
 
         # Case 2: Negation - !(...)
         if logical_symbol == "!":
@@ -94,13 +94,13 @@ class Solution:
         raise Exception("Unreachable Code")
     
     def logical_and(self, l, r):
-        # assert l < len(self.expression)
-        assert l <= r < len(self.expression)
+        # # assert l < len(self.expression)
+        # assert l <= r < len(self.expression)
         
         # Base Case: end of string
         if l >= r:
-            assert l == r # might be better to do l = min(l, r) in case I overshoot due to ','
-            assert self.expression[l] in ["f", "t", ")"]
+            # assert l == r # might be better to do l = min(l, r) in case I overshoot due to ','
+            # assert self.expression[l] in ["f", "t", ")"]
             return self.expression[l] != "f"
         
         # Case 1: Just boolean value (must be ONLY one index!)
@@ -108,12 +108,12 @@ class Solution:
             if self.expression[l] == "f":
                 return False
             
-            assert l + 2 <= r
+            # assert l + 2 <= r
             return self.logical_and(l + 2, r)
         
         # Case 2: Logical Operation
         logical_symbol = self.expression[l]
-        assert logical_symbol in ["!", "&", "|"]
+        # assert logical_symbol in ["!", "&", "|"]
         open_parenthese_index = l + 1
         closed_parenthese_index = self.getClosingParentheseIndex(open_parenthese_index)
         left, right = open_parenthese_index + 1, closed_parenthese_index - 1
@@ -144,12 +144,12 @@ class Solution:
 
         # # Base Case: 
         # if l >= r or self.expression[l] in ["f", "t"]:
-        #     assert l == r and self.expression[l] in ["f", "t"]
+        #     # assert l == r and self.expression[l] in ["f", "t"]
         #     if self.expression[l] == "f":
         #         return False
 
         # logical_symbol = self.expression[l]
-        # assert logical_symbol in ["!", "&", "|"]
+        # # assert logical_symbol in ["!", "&", "|"]
 
         # # Regardless of what logical_symbol is, we must find where the closing parenthese is
         # # We can do this by keeping track of a stack of open parentheses (and popping whenever
@@ -157,7 +157,7 @@ class Solution:
         # stack = ["("]
         # index = l + 2 # since l + 1 is index of opening parenthese
         # while len(stack) > 0:
-        #     assert index < len(self.expression)
+        #     # assert index < len(self.expression)
         #     if self.expression[index] == "(":
         #         stack.append("(")
         #     elif self.expression[index] == ")":
@@ -169,7 +169,7 @@ class Solution:
 
         # # l += 2
         # # r -= 1
-        # assert l <= r
+        # # assert l <= r
         # # Case 2: Negation - !(...)
         # # if logical_symbol == "!":
 
@@ -185,17 +185,17 @@ class Solution:
         # # f,f,t,|(f,f,t),t,f
     
     def logical_or(self, l, r):
-        assert l <= r < len(self.expression)
+        # assert l <= r < len(self.expression)
 
-        print(self.expression[l:r + 1])
+        # print(self.expression[l:r + 1])
         
         # Base Case: end of string
         if l >= r:
-            assert l == r # might be better to do l = min(l, r) in case I overshoot due to ','
-            assert self.expression[l] in ["f", "t", ")"]
-            if self.expression[l] == ")":
-                print("GIGA ALERT MODE!!!")
-            print("ALERT", self.expression[l])
+            # assert l == r # might be better to do l = min(l, r) in case I overshoot due to ','
+            # assert self.expression[l] in ["f", "t", ")"]
+            # if self.expression[l] == ")":
+                # print("GIGA ALERT MODE!!!")
+            # print("ALERT", self.expression[l])
             # return self.expression[l] != "f" # TODO: might need to double check this...
             return self.expression[l] == "t"
         
@@ -204,12 +204,12 @@ class Solution:
             if self.expression[l] == "t":
                 return True
             
-            assert l + 2 <= r
+            # assert l + 2 <= r
             return self.logical_or(l + 2, r)
         
         # Case 2: Logical Operation
         logical_symbol = self.expression[l]
-        assert logical_symbol in ["!", "&", "|"]
+        # assert logical_symbol in ["!", "&", "|"]
         open_parenthese_index = l + 1
         closed_parenthese_index = self.getClosingParentheseIndex(open_parenthese_index)
         left, right = open_parenthese_index + 1, closed_parenthese_index - 1
