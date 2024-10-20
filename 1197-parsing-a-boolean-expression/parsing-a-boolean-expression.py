@@ -1,10 +1,7 @@
 class Solution:
     def __init__(self):
         self.expression = None
-        # self.open_parentheses = []   # indices
-        self.open_to_close = {} # mappings of (open parenthese) - (closed parenthese) index pairs
-        # self.closed_parentheses = [] # indices
-        # i'th open parenthese index matches with -(i+1)'th closed_parenthese index
+        self.open_to_close = {} # mappings of open-to-closed parenthese index pairs
         self.parenthese_index = -1
     def getClosingParentheseIndex(self, open_parenthese_index):
         # assert open_parenthese_index < len(self.expression)
@@ -13,69 +10,32 @@ class Solution:
         return self.open_to_close[open_parenthese_index]
 
     def parseBoolExpr(self, expression: str) -> bool:
-        # Populate all open-to-closed parenthese index pairs.
+        # Pre-Populate all open-to-closed parenthese index pairs.
         # This is done in O(n) time, and allows for quick O(1)
         # lookup of open parenthese to matching closing parenthese pairs.
-        # open_parentheses = []
-        # closed_parentheses = []
-        # for i, char in enumerate(expression):
-        #     if char == "(":
-        #         open_parentheses.append(i)
-        #     elif char == ")":
-        #         closed_parentheses.append(i)
-        # # assert len(open_parentheses) == len(closed_parentheses)
-        # for i in range(len(open_parentheses)):
-        #     open_parenthese_index = open_parentheses[i]
-        #     closed_parenthese_index = closed_parentheses[-1 - i]
-        #     self.open_to_close[open_parenthese_index] = closed_parenthese_index
         stack = [] # indices of open parenthese characters
         for i, char in enumerate(expression):
             if char == "(":
-                # stack.append("(")
                 stack.append(i)
-            
             elif char == ")":
                 # assert len(stack) > 0
                 open_parenthese_index = stack.pop()
                 # assert open_parenthese_index not in self.open_to_close
                 self.open_to_close[open_parenthese_index] = i
-            
-        
-        # print(self.open_to_close)
-        # return True
         
         self.expression = expression
         return self.parseBoolExprHelper(0, len(expression) - 1)
     
     def parseBoolExprHelper(self, l, r):
-        # assert l < len(self.expression)
-
         # Case 1: Just boolean value (must be ONLY one index!)
-        # print(f"parseBoolExprHelper({l}, {r})={self.expression[l : r + 1]}")
         if l >= r or self.expression[l] in ["f", "t"]:
-            # print("CULPRIT", self.expression[l : r + 1], l, r)
             # assert l == r and self.expression[l] in ["f", "t"]
             return self.expression[l] == "t"
 
-        # not &(!(t),&(f),|(f))
-        # not of ALL[!(t), &(f), |(f)]
-
-        # # assert l < len(self.expression)
         logical_symbol = self.expression[l]
         # assert logical_symbol in ["!", "&", "|"]
-        # Since will have form X(...) where X is either '!', '&', or '|',
-        # we shift l and r to contain the "meat", i.e. 
-        # l += 2
-        # r -= 1
-        # # assert l <= r
         open_parenthese_index = l + 1
-        # # print(f"{self.expression[open_parenthese_index]=}")
-        # assert open_parenthese_index < len(self.expression)
-        # assert self.expression[open_parenthese_index] == "("
         closed_parenthese_index = self.getClosingParentheseIndex(open_parenthese_index)
-        # assert closed_parenthese_index < len(self.expression)
-        # assert self.expression[closed_parenthese_index] == ")"
-        # # print(f"{self.expression[closed_parenthese_index]=}")
         left, right = open_parenthese_index + 1, closed_parenthese_index - 1
         # assert left <= right < len(self.expression)
 
@@ -88,10 +48,8 @@ class Solution:
             return self.logical_and(left, right)
 
         # Case 4: Logical Or - |(...)
-        if logical_symbol == "|":
-            return self.logical_or(left, right)
-
-        raise Exception("Unreachable Code")
+        assert logical_symbol == "|"
+        return self.logical_or(left, right)
     
     def logical_and(self, l, r):
         # # assert l < len(self.expression)
@@ -117,6 +75,7 @@ class Solution:
         open_parenthese_index = l + 1
         closed_parenthese_index = self.getClosingParentheseIndex(open_parenthese_index)
         left, right = open_parenthese_index + 1, closed_parenthese_index - 1
+        # assert left <= right < len(self.expression)
 
         if logical_symbol == "!":
             expr = not self.parseBoolExprHelper(left, right)
@@ -213,6 +172,7 @@ class Solution:
         open_parenthese_index = l + 1
         closed_parenthese_index = self.getClosingParentheseIndex(open_parenthese_index)
         left, right = open_parenthese_index + 1, closed_parenthese_index - 1
+        # assert left <= right < len(self.expression)
 
         if logical_symbol == "!":
             expr = not self.parseBoolExprHelper(left, right)
