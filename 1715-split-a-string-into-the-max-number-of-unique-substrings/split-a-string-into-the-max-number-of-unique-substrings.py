@@ -16,7 +16,6 @@ class Solution:
 
 
         # Case 2: Add a 'False', representing you will NOT split the string at len(bool_arr) index
-        # print(bool_arr)
         assert bool_arr.pop() == True
         bool_arr.append(False)
         case2 = self.maxUniqueDp(bool_arr.copy())
@@ -44,8 +43,8 @@ class Solution:
         
         # Valid, so return len(arr) [or count of "True" inside boolean array] as answer
         if len(arr) == len(set(arr)):
-        #     return len(arr)
-            return bool_arr.count(True)
+            return len(arr)
+            # return bool_arr.count(True)
         
         # Invalid, so return 0
         return 0
