@@ -2,6 +2,7 @@ class Solution:
     def __init__(self):
         self.s = None
         self.substrings = {} # (i,j) --> s[i : j + 1]
+        self.memo = {}
     def maxUniqueSplit(self, s: str) -> int:
         self.s = s
         return self.maxUniqueDp([])
@@ -9,6 +10,9 @@ class Solution:
     def maxUniqueDp(self, bool_arr):
         if len(bool_arr) == len(self.s):
             return self.solver(bool_arr)
+        
+        if tuple(bool_arr) in self.memo:
+            return self.memo[tuple(bool_arr)]
 
         # Case 1: Add a 'True', representing that you will split the string at len(bool_arr) index
         bool_arr.append(True)
@@ -22,6 +26,7 @@ class Solution:
         case2 = self.maxUniqueDp(bool_arr)
 
         # return case1 + case2
+        self.memo[tuple(bool_arr)] = max(case1, case2)
         return max(case1, case2)
 
     def solver(self, bool_arr):
