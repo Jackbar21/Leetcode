@@ -1,6 +1,7 @@
 class Solution:
     def __init__(self):
         self.s = None
+        self.substrings = {} # (i,j) --> s[i : j + 1]
     def maxUniqueSplit(self, s: str) -> int:
         # num_splits = [False] * (len(s) - 1)
         self.s = s
@@ -36,16 +37,21 @@ class Solution:
                 r += 1
                 continue
             
-            arr.append(self.s[l : r + 1])
+            substring = None
+            if (l, r) in self.substrings:
+                substring = self.substrings[(l, r)]
+            else:
+                substring = self.s[l : r + 1]
+                self.substrings[(l, r)] = substring
+
+            arr.append(substring)
             r += 1
             l = r
-            # l = r + 1
-        
+
         # Valid, so return len(arr) [or count of "True" inside boolean array] as answer
         if len(arr) == len(set(arr)):
             return len(arr)
-            # return bool_arr.count(True)
-        
+
         # Invalid, so return 0
         return 0
 
