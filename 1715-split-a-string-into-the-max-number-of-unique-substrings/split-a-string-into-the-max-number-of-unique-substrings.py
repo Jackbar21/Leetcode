@@ -121,8 +121,7 @@ class Solution:
                 hset.add(substring)
             return len(hset)
 
-        # Case 1: Don't split s at index r
-        case1 = self.maxUniqueSplitDp(hset.copy(), l, r + 1)
+        
 
         # Case 2: Split s at index r
         # case2 = self.maxUniqueSplitDp(hset, )
@@ -132,9 +131,14 @@ class Solution:
         if substring not in hset:
             # hset_copy = hset.copy()
             hset.add(substring)
-            l = r + 1
-            r += 1
-            case2 = self.maxUniqueSplitDp(hset, l, r)
+            # l = r + 1
+            # r += 1
+            # case2 = self.maxUniqueSplitDp(hset, l, r)
+            case2 = self.maxUniqueSplitDp(hset, r + 1, r + 1)
+            hset.remove(substring)
+        
+        # Case 1: Don't split s at index r
+        case1 = self.maxUniqueSplitDp(hset.copy(), l, r + 1)
         
         return max(case1, case2)
 
