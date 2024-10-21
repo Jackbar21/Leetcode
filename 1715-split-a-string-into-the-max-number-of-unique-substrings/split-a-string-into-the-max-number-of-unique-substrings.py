@@ -41,8 +41,10 @@ class Solution:
             #     substring = self.s[l : r + 1]
             #     self.substrings[(l, r)] = substring
             # substring = self.s[l : r + 1]
-            substring = self.substrings.get((l, r), self.s[l : r + 1])
-            self.substrings[(l, r)] = substring
+
+            # substring = self.substrings.get((l, r), self.s[l : r + 1])
+            # self.substrings[(l, r)] = substring
+            substring = self.s[l : r + 1]
 
             # Invalid, so return 0
             if substring in arr:
