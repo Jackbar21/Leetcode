@@ -24,8 +24,8 @@ class Solution:
         # Base Case: r >= len(self.s)
         if r >= len(self.s):
             assert r == len(self.s)
-            # substring = self.s[l : r + 1]
-            substring = self.getSubstring(l, r)
+            substring = self.s[l : r + 1]
+            # substring = self.getSubstring(l, r)
             # print(f"{substring=}")
             if substring in hset:
                 return 0
@@ -38,8 +38,8 @@ class Solution:
 
         # Case 2: Split s at index r
         # case2 = self.maxUniqueSplitDp(hset, )
-        # substring = self.s[l : r + 1]
-        substring = self.getSubstring(l, r)
+        substring = self.s[l : r + 1]
+        # substring = self.getSubstring(l, r)
         case2 = 0
         if substring not in hset:
             hset_copy = hset.copy()
