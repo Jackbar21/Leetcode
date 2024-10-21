@@ -23,7 +23,7 @@ class Solution:
         # assert bool_arr.pop() == True
         bool_arr.pop()
         bool_arr.append(False)
-        case2 = self.maxUniqueDp(bool_arr)
+        case2 = self.maxUniqueDp(bool_arr.copy())
 
         # return case1 + case2
         # self.memo[tuple(bool_arr)] = max(case1, case2)
