@@ -42,11 +42,11 @@ class Solution:
         # substring = self.getSubstring(l, r)
         case2 = 0
         if substring not in hset:
-            hset_copy = hset.copy()
-            hset_copy.add(substring)
+            # hset_copy = hset.copy()
+            hset.add(substring)
             l = r + 1
             r += 1
-            case2 = self.maxUniqueSplitDp(hset_copy, l, r)
+            case2 = self.maxUniqueSplitDp(hset, l, r)
         
         return max(case1, case2)
 
