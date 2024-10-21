@@ -17,9 +17,10 @@ class Solution:
 
 
         # Case 2: Add a 'False', representing you will NOT split the string at len(bool_arr) index
-        assert bool_arr.pop() == True
+        # assert bool_arr.pop() == True
+        bool_arr.pop()
         bool_arr.append(False)
-        case2 = self.maxUniqueDp(bool_arr.copy())
+        case2 = self.maxUniqueDp(bool_arr)
 
         # return case1 + case2
         return max(case1, case2)
@@ -30,7 +31,7 @@ class Solution:
         l = 0
         r = 0
 
-        arr = []
+        arr = set()
 
         for split_bool in bool_arr:
             if not split_bool:
@@ -44,15 +45,17 @@ class Solution:
             #     substring = self.s[l : r + 1]
             #     self.substrings[(l, r)] = substring
             substring = self.s[l : r + 1]
-
-            arr.append(substring)
+            if substring in arr:
+                return 0 # Invalid!
+            arr.add(substring)
             r += 1
             l = r
 
         # Valid, so return len(arr) [or count of "True" inside boolean array] as answer
-        if len(arr) == len(set(arr)):
-            return len(arr)
+        return len(arr)
+        # if len(arr) == len(set(arr)):
+        #     return len(arr)
 
-        # Invalid, so return 0
-        return 0
+        # # Invalid, so return 0
+        # return 0
 
