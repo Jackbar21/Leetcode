@@ -3,7 +3,6 @@ class Solution:
         self.s = None
         self.substrings = {} # (i,j) --> s[i : j + 1]
     def maxUniqueSplit(self, s: str) -> int:
-        # num_splits = [False] * (len(s) - 1)
         self.s = s
         return self.maxUniqueDp([])
     
@@ -26,13 +25,10 @@ class Solution:
         return max(case1, case2)
 
     def solver(self, bool_arr):
-        assert len(bool_arr) == len(self.s)
-
-        l = 0
-        r = 0
-
+        l, r = 0, 0
         arr = set()
-
+        assert len(bool_arr) == len(self.s)
+        
         for split_bool in bool_arr:
             if not split_bool:
                 r += 1
@@ -44,18 +40,18 @@ class Solution:
             # else:
             #     substring = self.s[l : r + 1]
             #     self.substrings[(l, r)] = substring
-            substring = self.s[l : r + 1]
+            # substring = self.s[l : r + 1]
+            substring = self.substrings.get((l, r), self.s[l : r + 1])
+            self.substrings[(l, r)] = substring
+
+            # Invalid, so return 0
             if substring in arr:
                 return 0 # Invalid!
+
             arr.add(substring)
             r += 1
             l = r
 
         # Valid, so return len(arr) [or count of "True" inside boolean array] as answer
         return len(arr)
-        # if len(arr) == len(set(arr)):
-        #     return len(arr)
-
-        # # Invalid, so return 0
-        # return 0
 
