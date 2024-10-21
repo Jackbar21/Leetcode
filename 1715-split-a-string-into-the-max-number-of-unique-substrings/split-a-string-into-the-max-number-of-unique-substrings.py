@@ -5,7 +5,43 @@ class Solution:
         self.memo = {}
     def maxUniqueSplit(self, s: str) -> int:
         self.s = s
-        return self.maxUniqueDp([])
+        # return self.maxUniqueDp([])
+        l, r = 0, 0
+        return self.maxUniqueSplitDp(set(), l, r)
+    
+    def maxUniqueSplitDp(self, hset, l, r):
+        # if (hset, l, r) in self.memo:
+        #     return self.memo[(hset, l, r)]
+
+        # Base Case: r >= len(self.s)
+        if r >= len(self.s):
+            assert r == len(self.s)
+            substring = self.s[l : r + 1]
+            # print(f"{substring=}")
+            if substring in hset:
+                return 0
+            if len(substring) > 0:
+                hset.add(substring)
+            return len(hset)
+
+        # Case 1: Don't split s at index r
+        case1 = self.maxUniqueSplitDp(hset.copy(), l, r + 1)
+
+        # Case 2: Split s at index r
+        # case2 = self.maxUniqueSplitDp(hset, )
+        substring = self.s[l : r + 1]
+        case2 = 0
+        if substring not in hset:
+            hset_copy = hset.copy()
+            hset_copy.add(substring)
+            l = r + 1
+            r += 1
+            case2 = self.maxUniqueSplitDp(hset_copy, l, r)
+        
+        return max(case1, case2)
+
+        
+
     
     def maxUniqueDp(self, bool_arr):
         if len(bool_arr) == len(self.s):
@@ -23,7 +59,7 @@ class Solution:
         # assert bool_arr.pop() == True
         bool_arr.pop()
         bool_arr.append(False)
-        case2 = self.maxUniqueDp(bool_arr.copy())
+        case2 = self.maxUniqueDp(bool_arr)
 
         # return case1 + case2
         # self.memo[tuple(bool_arr)] = max(case1, case2)
