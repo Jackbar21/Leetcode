@@ -11,8 +11,8 @@ class Solution:
         if len(bool_arr) == len(self.s):
             return self.solver(bool_arr)
         
-        if tuple(bool_arr) in self.memo:
-            return self.memo[tuple(bool_arr)]
+        # if tuple(bool_arr) in self.memo:
+        #     return self.memo[tuple(bool_arr)]
 
         # Case 1: Add a 'True', representing that you will split the string at len(bool_arr) index
         bool_arr.append(True)
@@ -26,7 +26,7 @@ class Solution:
         case2 = self.maxUniqueDp(bool_arr)
 
         # return case1 + case2
-        self.memo[tuple(bool_arr)] = max(case1, case2)
+        # self.memo[tuple(bool_arr)] = max(case1, case2)
         return max(case1, case2)
 
     def solver(self, bool_arr):
