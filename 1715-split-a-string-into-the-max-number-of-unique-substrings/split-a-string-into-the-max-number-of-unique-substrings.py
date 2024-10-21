@@ -111,17 +111,21 @@ class Solution:
 
         # Base Case: r >= len(self.s)
         if r >= len(self.s):
+            # return 0
             assert r == len(self.s)
             substring = self.s[l : r + 1]
             # substring = self.getSubstring(l, r)
             # print(f"{substring=}")
             if substring in hset:
                 return 0
-            if len(substring) > 0:
-                hset.add(substring)
-            return len(hset)
+            # if len(substring) > 0:
+            #     hset.add(substring)
+            # return len(hset)
+            return len(hset) + (len(substring) > 0)
 
-        
+        # Case 1: Don't split s at index r
+        case1 = self.maxUniqueSplitDp(hset.copy(), l, r + 1)
+        # case1 = 0
 
         # Case 2: Split s at index r
         # case2 = self.maxUniqueSplitDp(hset, )
@@ -135,10 +139,7 @@ class Solution:
             # r += 1
             # case2 = self.maxUniqueSplitDp(hset, l, r)
             case2 = self.maxUniqueSplitDp(hset, r + 1, r + 1)
-            hset.remove(substring)
-        
-        # Case 1: Don't split s at index r
-        case1 = self.maxUniqueSplitDp(hset.copy(), l, r + 1)
+            # hset.remove(substring)
         
         return max(case1, case2)
 
