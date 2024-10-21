@@ -20,7 +20,7 @@ class Solution:
             return len(hset) + (len(substring) > 0)
 
         # Case 1: Don't split s at index r
-        case1 = self.maxUniqueSplitDp(hset.copy(), l, r + 1)
+        case1 = self.maxUniqueSplitDp(hset, l, r + 1)
 
         # Case 2: Split s at index r
         substring = self.s[l : r + 1]
