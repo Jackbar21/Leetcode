@@ -37,12 +37,13 @@ class Solution:
                 r += 1
                 continue
             
-            substring = None
-            if (l, r) in self.substrings:
-                substring = self.substrings[(l, r)]
-            else:
-                substring = self.s[l : r + 1]
-                self.substrings[(l, r)] = substring
+            # substring = None
+            # if (l, r) in self.substrings:
+            #     substring = self.substrings[(l, r)]
+            # else:
+            #     substring = self.s[l : r + 1]
+            #     self.substrings[(l, r)] = substring
+            substring = self.s[l : r + 1]
 
             arr.append(substring)
             r += 1
