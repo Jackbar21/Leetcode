@@ -3,11 +3,99 @@ class Solution:
         self.s = None
         self.substrings = {} # (i,j) --> s[i : j + 1]
         self.memo = {}
+        self.sols = [(set(), 0)]
     def maxUniqueSplit(self, s: str) -> int:
         self.s = s
         # return self.maxUniqueDp([])
         l, r = 0, 0
         return self.maxUniqueSplitDp(set(), l, r)
+
+        # res = self.solve(r)
+        # print(sorted(self.sols, key = lambda pair: pair[1], reverse=False))
+        # return max(pair[1] for pair in self.sols)
+        # hset = self.dp(0, len(self.s) - 1)
+        # print(hset)
+        # return len(hset)
+    
+    def dp(self, l, r):
+        # Try cutting s at every valid position, i.e. l, l + 1, ..., r
+        # including the case where NO CUTS are performed. If not cuts are performed,
+        # result is 1, and hence that can be used as base case result value :)
+        if (l, r) in self.memo:
+            return self.memo[(l, r)]
+
+        # (s[0:1], s[1:])
+        # (s[1:2], s[2:])
+        # ...
+        # (s[1:len(s)], s[len(s):])
+        
+        # Case where optimal is just to not split l and r anywhere.
+        # res = [self.s[l : r + 1]]
+        # res = []
+        # if l >= r:
+        #     return hset
+        # hset = set()
+        hset = set([self.s[l : r + 1]])
+        flag = self.s[l : r + 1] == "bab"
+
+        for split_index in range(l, r):
+            left_hset = self.dp(l, split_index)
+            right_hset = self.dp(split_index + 1, r)
+            if flag:
+                print(f"{left_hset=}")
+                print(f"{right_hset=}")
+            # left = self.dp(l, split_index)
+            # left_hset = set(left)
+            # if len(left) != len(left_hset):
+            #     # print(left, left_hset, "LEFT")
+            #     continue
+
+            # right = self.dp(split_index + 1, r)
+            # right_hset = set(right)
+            # if len(right) != len(right_hset):
+            #     # print(right, right_hset, "RIGHT")
+            #     continue
+
+            union = left_hset.union(right_hset)
+            if len(union) == len(left_hset) + len(right_hset):
+                # All substrings unique in left and right, so valid solution!
+                # res = max(res, len(union))
+                # if len(union) > len(res):
+                if len(union) > len(hset):
+                    hset = union
+                    # res = list(union)
+        
+        assert len(hset) >= 1
+        self.memo[(l, r)] = hset
+        return hset
+        # assert len(res) >= 1
+        self.memo[(l, r)] = res
+        return res
+                
+
+    
+    def solve(self, r):
+        if r >= len(self.s):
+            return
+
+        new_sols = []
+        for hset, l in self.sols:
+            substring = self.s[l : r + 1]
+            if substring in hset:
+                continue
+            
+            new_sols.append((hset, l))
+            hset_copy = hset.copy()
+            hset_copy.add(substring)
+            new_sols.append((hset_copy, r + 1))
+
+        # for el in new_sols:
+        #     self.sols.append(el) 
+        self.sols = new_sols
+        self.solve(r + 1)
+        
+        # self.sols = new_sols
+
     
     def getSubstring(self, l, r):
         # Returns self.s[l : r + 1]
