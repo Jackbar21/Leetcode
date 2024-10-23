@@ -15,21 +15,7 @@ class Solution:
         # All we need for each node, is it's depth and parent.
         # We also need to know level sums.
         self.populateDepthsAndParents(root, 0, None)
-        # for node in self.node_to_depth:
-        #     depth = self.node_to_depth[node]
-        #     print(f"{node.val=}, {depth=}")
-        # print("DELIMITER")
-        # # print(self.node_to_parent)
-        # for node in self.node_to_parent:
-        #     parent = self.node_to_parent[node]
-        #     print(f"{node.val=}, parent.val={parent.val if parent else -1}")
-        # print("DELIMITER")
-        # print(self.depth_sums)
         self.generateReplacementValues(root)
-        # for node in self.node_to_replacement_value:
-        #     replacement_value = self.node_to_replacement_value[node]
-        #     print(f"{node.val=}, {replacement_value=}")
-        # return None
         return self.updateTree(root)
     
     def populateDepthsAndParents(self, root, depth, parent):
@@ -50,8 +36,10 @@ class Solution:
 
         if root.left:
             self.generateReplacementValuesHelper(root.left)
+
         if root.right:
             self.generateReplacementValuesHelper(root.right)
+
         return
     
     def generateReplacementValuesHelper(self, root):
@@ -81,3 +69,11 @@ class Solution:
         root.left = self.updateTree(root.left)
         root.right = self.updateTree(root.right)
         return root
+
+"""
+       Z
+   X       Y
+ A   B   C   D
+1 2 3 4 5 6 7 8  --> sum == 36
+"""
+
