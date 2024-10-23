@@ -69,11 +69,3 @@ class Solution:
         root.left = self.updateTree(root.left)
         root.right = self.updateTree(root.right)
         return root
-
-"""
-       Z
-   X       Y
- A   B   C   D
-1 2 3 4 5 6 7 8  --> sum == 36
-"""
-
