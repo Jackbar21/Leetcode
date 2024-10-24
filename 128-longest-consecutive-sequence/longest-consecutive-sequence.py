@@ -3,6 +3,7 @@ class Solution:
         if len(nums) == 0:
             return 0
 
+        # O(nlogn)
         sorted_nums = sorted(set(nums))
         
         longest = 0
