@@ -29,17 +29,13 @@ class Solution:
     
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         # Step 1: Check all the rows (9 rows in total!)
-        # for row_index in range(9):
-        #     if not self.isValidRow(board, row_index):
-        #         return False
+        for row_index in range(9):
+            if not self.isValidRow(board, row_index):
+                return False
 
         # # Step 2: Check all the columns (9 columns in total!)
-        # for col_index in range(9):
-        #     if not self.isValidColumn(board, col_index):
-        #         return False
-
-        for index in range(9):
-            if not self.isValidRow(board, index) or not self.isValidColumn(board, index):
+        for col_index in range(9):
+            if not self.isValidColumn(board, col_index):
                 return False
 
         # Step 3: Check all the 3 x 3 sub-boxes (9 boxes in total!)
