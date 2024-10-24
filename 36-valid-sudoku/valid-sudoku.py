@@ -43,8 +43,8 @@ class Solution:
                 return False
 
         # Step 3: Check all the 3 x 3 sub-boxes (9 boxes in total!)
-        for row_index in [0, 3, 6]:
-            for col_index in [0, 3, 6]:
+        for row_index in range(0, 9, 3):
+            for col_index in range(0, 9, 3):
                 if not self.isValidBox(board, row_index, col_index):
                     return False
 
