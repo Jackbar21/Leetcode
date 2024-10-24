@@ -1,32 +1,47 @@
 class Solution:
-    def isValidArr(self, arr):
-        s = set()
-        for num in arr:
-            if num != "." and num in s:
+    def isValidRow(self, board, row_index):
+        row = board[row_index]
+        seen = set()
+        for num in row:
+            if num != "." and num in seen:
                 return False
-            s.add(num)
+            seen.add(num)
         return True
-    def isValidSquare(self, board, i, j, n=3):
-        res = []
-        for k1 in range(n):
-            for k2 in range(n):
-                res.append(board[i+k1][j+k2])
-        return self.isValidArr(res)
-    def isValidSudoku(self, board: List[List[str]]) -> bool:
+    
+    def isValidColumn(self, board, col_index):
+        seen = set()
         for row in board:
-            if not self.isValidArr(row):
+            num = row[col_index]
+            if num != "." and num in seen:
                 return False
-        
-        for col in zip(*board):
-            if not self.isValidArr(col):
+            seen.add(num)
+        return True
+
+    def isValidBox(self, board, row_index, col_index):
+        seen = set()
+        for dr in range(3):
+            for dc in range(3):
+                num = board[row_index + dr][col_index + dc]
+                if num != "." and num in seen:
+                    return False
+                seen.add(num)
+        return True
+    
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        # Step 1: Check all the rows (9 rows in total!)
+        for row_index in range(9):
+            if not self.isValidRow(board, row_index):
                 return False
 
-        for i in range(0, 9, 3):
-            for j in range(0, 9, 3):
-                if not self.isValidSquare(board, i, j):
+        # Step 2: Check all the columns (9 columns in total!)
+        for col_index in range(9):
+            if not self.isValidColumn(board, col_index):
+                return False
+
+        # Step 3: Check all the 3 x 3 sub-boxes (9 boxes in total!)
+        for row_index in [0, 3, 6]:
+            for col_index in [0, 3, 6]:
+                if not self.isValidBox(board, row_index, col_index):
                     return False
-        
+
         return True
-        
-        
-                
