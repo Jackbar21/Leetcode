@@ -41,20 +41,3 @@ class Solution:
             self.getChainLength(unique_num)
             for unique_num in self.nums
         )
-
-        # 2 -> 3 -> 4
-        # 1 -> 2 -> 3 -> 4
-
-        
-        
-        longest = 0
-        cur = 1
-
-        for i in range(1, len(sorted_nums)):
-            if sorted_nums[i] == sorted_nums[i - 1] + 1:
-                cur += 1
-            else:
-                longest = max(longest, cur)
-                cur = 1
-        
-        return max(longest, cur)
