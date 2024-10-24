@@ -21,9 +21,9 @@ class Solution:
             return True
 
         # Case 2: Swap root1's children
-        root1.left, root1.right = root1.right, root1.left
+        # root1.left, root1.right = root1.right, root1.left
 
-        case2 = self.flipEquiv(root1.left, root2.left) and self.flipEquiv(root1.right, root2.right)
+        case2 = self.flipEquiv(root1.right, root2.left) and self.flipEquiv(root1.left, root2.right)
         if case2:
             return True
         
