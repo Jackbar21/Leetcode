@@ -33,7 +33,7 @@ class Solution:
             if not self.isValidRow(board, row_index):
                 return False
 
-        # # Step 2: Check all the columns (9 columns in total!)
+        # Step 2: Check all the columns (9 columns in total!)
         for col_index in range(9):
             if not self.isValidColumn(board, col_index):
                 return False
