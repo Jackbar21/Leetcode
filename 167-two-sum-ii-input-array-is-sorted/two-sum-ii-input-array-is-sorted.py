@@ -3,14 +3,20 @@ class Solution:
         l, r = 0, len(numbers) - 1
 
         while l < r:
-            num1, num2 = numbers[l], numbers[r]
+            small_num, big_num = numbers[l], numbers[r]
 
-            if num1 + num2 < target:
+            if small_num + big_num < target:
                 l += 1
-            elif num1 + num2 > target:
+            elif small_num + big_num > target:
                 r -= 1
             else:
-                # assert num1 + num2 == target
+                # assert small_num + big_num == target
                 return [l + 1, r + 1]
         
         raise Exception("Unreachable Code")
+
+        #       l     r
+        # [-1,0,2,3,4,7,11,15]
+
+        # 2 + 7 == 9
+        # target = 9
