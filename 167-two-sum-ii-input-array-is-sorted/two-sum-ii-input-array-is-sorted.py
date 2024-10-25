@@ -14,9 +14,3 @@ class Solution:
                 return [l + 1, r + 1]
         
         raise Exception("Unreachable Code")
-
-        #       l     r
-        # [-1,0,2,3,4,7,11,15]
-
-        # 2 + 7 == 9
-        # target = 9
