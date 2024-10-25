@@ -10,7 +10,8 @@ class Solution:
                     is_subfolder = True
                     break
             
-            if is_subfolder == False:
+            # Valid folder if and only if it's NOT a subfolder.
+            if not is_subfolder:
                 res.append(folder)
         
         return res
