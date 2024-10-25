@@ -10,7 +10,7 @@ class Solution:
             elif num1 + num2 > target:
                 r -= 1
             else:
-                assert num1 + num2 == target
+                # assert num1 + num2 == target
                 return [l + 1, r + 1]
         
         raise Exception("Unreachable Code")
