@@ -30,14 +30,15 @@ class Solution:
         answer = []
         for val in queries:
             depth = self.num_to_depth[val]
-            max_heap = self.depths[depth]
+            min_heap = self.depths[depth]
+            assert len(min_heap) <= 2
 
-            if len(max_heap) == 1:
+            if len(min_heap) == 1:
                 # depth - 1 is now maximum depth, and hence also new height of root
                 answer.append(depth - 1)
                 continue
 
-            if max_heap[0][VAL] != val:
+            if min_heap[1][VAL] != val:
                 # Answer is unchanged
                 answer.append(self.height[root.val])
                 continue
@@ -45,10 +46,10 @@ class Solution:
             # We're deleting node with maximal height at this depth
             # So get second highest height at this depth, since new root height
             # will simply be this second highest height + its depth away from root node
-            tmp = heapq.heappop(max_heap)
-            height = -max_heap[0][HEIGHT] # negative since simulating max-heap via min-heap
+            # tmp = heapq.heappop(max_heap)
+            height = min_heap[0][HEIGHT] # index 0, since only two elements! (index 1 is smallest)
             answer.append(height + depth)
-            heapq.heappush(max_heap, tmp)
+            # heapq.heappush(max_heap, tmp)
 
         return answer
     
@@ -68,6 +69,9 @@ class Solution:
         height = max(left_height, right_height) + 1
         self.height[root.val] = height
 
+    # def updateMaxHeightsAtDepth(self, depth, new_height):
+    #     max_height, second_max_height = 
+
     def populateDepths(self, root):
         stack = [(root, 0)] # (node, depth) pairs
 
@@ -77,10 +81,18 @@ class Solution:
 
             # Update depths metadata
             self.num_to_depth[node.val] = depth
+            # if depth not in self.depths:
+            #     self.depths[depth] = [(-height, node.val)]
+            # else:
+            #     heapq.heappush(self.depths[depth], (-height, node.val))
             if depth not in self.depths:
-                self.depths[depth] = [(-height, node.val)]
-            else:
-                heapq.heappush(self.depths[depth], (-height, node.val))
+                self.depths[depth] = []
+            
+            min_heap = self.depths[depth]
+            heapq.heappush(min_heap, (height, node.val))
+            while len(min_heap) > 2: # TODO: change to if statement!
+                heapq.heappop(min_heap)
+            
             
             # Loop Invariant
             if node.left:
