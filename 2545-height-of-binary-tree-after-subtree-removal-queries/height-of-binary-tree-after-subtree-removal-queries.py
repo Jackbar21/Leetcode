@@ -63,14 +63,14 @@ class Solution:
             height = self.height[node]
             max_heap = self.depths[depth]
             if len(max_heap) == 1:
-                assert max_heap[0] == (-height, val)
+                # assert max_heap[0] == (-height, val)
                 answer.append(depth - 1)
                 continue
             
             # Otherwise, if this is not max element, height is unchanged,
             # or if it IS max element, pop from heap, get newest max-height
             # at depth, append answer, push back to heap, continue
-            # assert (-height, val) in max_heap # TODO: REMOVE since O(n)!!!
+            # # assert (-height, val) in max_heap # TODO: REMOVE since O(n)!!!
 
             if max_heap[0] != (-height, val):
                 # Answer is unchanged
@@ -89,12 +89,12 @@ class Solution:
         return answer
     
     def getNodeFromVal(self, val):
-        assert val in self.num_to_node
+        # assert val in self.num_to_node
         return self.num_to_node[val]
     
    
     def getParent(self, node):
-        assert node in self.parent
+        # assert node in self.parent
         return self.parent[node]
     
     def populateHeights(self, root):
@@ -116,7 +116,7 @@ class Solution:
         # (This breaks S in SOLID, please don't murder me Rawad...)
         self.num_to_node[root.val] = root
         
-        assert root not in self.parent
+        # assert root not in self.parent
         # self.parent[root.val] = parent.val if parent else -1
         self.parent[root] = parent
 
