@@ -6,8 +6,8 @@
 #         self.right = right
 class Solution:
     def __init__(self):
-        self.parent = {} # node to parent node (None for root)
-        self.height = {None: -1} # That way leaf node height == max(-1, -1) + 1 == 0, as wanted
+        # self.parent = {} # node to parent node (None for root)
+        self.height = {}
         self.num_to_node = {}
         self.left_nodes = set() # Contains only nodes that are inside root.left subtree
         self.deleted = set()
@@ -28,13 +28,16 @@ class Solution:
         
         if depth not in self.depths:
             self.depths[depth] = []
-        height = self.height[root]
+        height = self.getHeight(root.val)
         heapq.heappush(self.depths[depth], (-height, root.val))
 
         self.populateDepths(root.left, depth + 1)
         self.populateDepths(root.right, depth + 1)
 
         return
+    
+    def getHeight(self, val):        
+        return self.height[val]
 
     def treeQueries(self, root: Optional[TreeNode], queries: List[int]) -> List[int]:
         # Idea: for each node, keep track of heights of both nodes below (can do so
@@ -45,7 +48,7 @@ class Solution:
         
         # self.root = root
         # self.root_val = root.val
-        self.populateParents(root, None)
+        # self.populateParents(root, None)
         self.populateHeights(root) # Populates all the heights (via memoization)
         # self.populateLeftNodes(root.left) # Only includes nodes in root.left subtree
         self.populateDepths(root)
@@ -58,9 +61,9 @@ class Solution:
         
         answer = []
         for val in queries:
-            node = self.num_to_node[val]
+            # node = self.num_to_node[val]
             depth = self.num_to_depth[val]
-            height = self.height[node]
+            height = self.getHeight(val)
             max_heap = self.depths[depth]
             if len(max_heap) == 1:
                 # assert max_heap[0] == (-height, val)
@@ -74,7 +77,7 @@ class Solution:
 
             if max_heap[0] != (-height, val):
                 # Answer is unchanged
-                answer.append(self.height[root])
+                answer.append(self.getHeight(root.val))
                 continue
             
             # REMEMBER TO ADD ITEM BACK!!!
@@ -87,25 +90,20 @@ class Solution:
             heapq.heappush(max_heap, item)
 
         return answer
-    
-    def getNodeFromVal(self, val):
-        # assert val in self.num_to_node
-        return self.num_to_node[val]
-    
-   
-    def getParent(self, node):
-        # assert node in self.parent
-        return self.parent[node]
-    
+
     def populateHeights(self, root):
-        if root in self.height:
-            return self.height[root]
+        if not root:
+            # That way leaf node height == max(-1, -1) + 1 == 0, as wanted
+            return -1
+
+        if root.val in self.height:
+            return self.height[root.val]
         
         left_height = self.populateHeights(root.left)
         right_height = self.populateHeights(root.right)
 
         height = max(left_height, right_height) + 1
-        self.height[root] = height
+        self.height[root.val] = height
         return height
         
     def populateParents(self, root, parent):
