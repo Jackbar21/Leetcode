@@ -28,16 +28,13 @@ class Solution:
         
         if depth not in self.depths:
             self.depths[depth] = []
-        height = self.getHeight(root.val)
+        height = self.height[root.val]
         heapq.heappush(self.depths[depth], (-height, root.val))
 
         self.populateDepths(root.left, depth + 1)
         self.populateDepths(root.right, depth + 1)
 
         return
-    
-    def getHeight(self, val):        
-        return self.height[val]
 
     def treeQueries(self, root: Optional[TreeNode], queries: List[int]) -> List[int]:
         # Idea: for each node, keep track of heights of both nodes below (can do so
@@ -49,7 +46,7 @@ class Solution:
         # self.root = root
         # self.root_val = root.val
         # self.populateParents(root, None)
-        self.populateHeights(root) # Populates all the heights (via memoization)
+        self.getHeight(root) # Populates all the heights (via memoization)
         # self.populateLeftNodes(root.left) # Only includes nodes in root.left subtree
         self.populateDepths(root)
 
@@ -63,7 +60,7 @@ class Solution:
         for val in queries:
             # node = self.num_to_node[val]
             depth = self.num_to_depth[val]
-            height = self.getHeight(val)
+            height = self.height[val]
             max_heap = self.depths[depth]
             if len(max_heap) == 1:
                 # assert max_heap[0] == (-height, val)
@@ -77,7 +74,7 @@ class Solution:
 
             if max_heap[0] != (-height, val):
                 # Answer is unchanged
-                answer.append(self.getHeight(root.val))
+                answer.append(self.height[root.val])
                 continue
             
             # REMEMBER TO ADD ITEM BACK!!!
@@ -91,7 +88,7 @@ class Solution:
 
         return answer
 
-    def populateHeights(self, root):
+    def getHeight(self, root):
         if not root:
             # That way leaf node height == max(-1, -1) + 1 == 0, as wanted
             return -1
@@ -99,8 +96,8 @@ class Solution:
         if root.val in self.height:
             return self.height[root.val]
         
-        left_height = self.populateHeights(root.left)
-        right_height = self.populateHeights(root.right)
+        left_height = self.getHeight(root.left)
+        right_height = self.getHeight(root.right)
 
         height = max(left_height, right_height) + 1
         self.height[root.val] = height
