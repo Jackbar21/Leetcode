@@ -11,13 +11,8 @@ class Solution:
         self.num_to_depth = {}
 
     def treeQueries(self, root: Optional[TreeNode], queries: List[int]) -> List[int]:
-        # Idea: for each node, keep track of heights of both nodes below (can do so
-        # using a hash-map/dictionary). Then write a getHeight function, which first
-        # queries if a child has been deleted (whose effective height is then 0), to
-        # calculate height as either 0 or the height stored inside of the hash-map in case
-        # child is still alive
-        
-   
+        # Precompute needed heights & depths metadata for each node, as well as
+        # first & second biggest heights at each depth (needed for queries later!)
         self.populateHeights(root)
         self.populateDepths(root)
 
@@ -25,13 +20,11 @@ class Solution:
         #   (1) value to height O(1) lookups
         #   (2) value to depth  O(1) lookups
         #   (3) depth to max_heap of each (-height, val) pair for each node at depth
-        
-        HEIGHT, VAL = 0, 1
         answer = []
         for val in queries:
             depth = self.num_to_depth[val]
             min_heap = self.depths[depth]
-            assert 1 <= len(min_heap) <= 2
+            # assert 1 <= len(min_heap) <= 2
 
             if len(min_heap) == 1:
                 # depth - 1 is now maximum depth, and hence also new height of root
@@ -44,16 +37,15 @@ class Solution:
             max_height, max_height_val = min_heap[1]
             second_max_height, _ = min_heap[0]
 
-            if val != max_height_val:
-                # Answer is unchanged
+            if val == max_height_val:
+                # Since val is the value with max height at current depth, it means
+                # we're deleting the node with maximal height at this depth.
+                # So we grab the second highest height at this depth, since new root height
+                # will simply be this second highest height + its depth away from root node.
+                answer.append(second_max_height + depth)
+            else:
+                # Answer is unchanged, since max height at depth remains intact :)
                 answer.append(self.height[root.val])
-                continue
-            
-            # Since val is the value with max height at current depth, it means
-            # we're deleting the node with maximal height at this depth.
-            # So we grab the second highest height at this depth, since new root height
-            # will simply be this second highest height + its depth away from root node.
-            answer.append(second_max_height + depth)
 
         return answer
     
@@ -73,9 +65,6 @@ class Solution:
         height = max(left_height, right_height) + 1
         self.height[root.val] = height
 
-    # def updateMaxHeightsAtDepth(self, depth, new_height):
-    #     max_height, second_max_height = 
-
     def populateDepths(self, root):
         stack = [(root, 0)] # (node, depth) pairs
 
@@ -85,27 +74,16 @@ class Solution:
 
             # Update depths metadata
             self.num_to_depth[node.val] = depth
-            # if depth not in self.depths:
-            #     self.depths[depth] = [(-height, node.val)]
-            # else:
-            #     heapq.heappush(self.depths[depth], (-height, node.val))
+
             if depth not in self.depths:
-                self.depths[depth] = []
-            
+                self.depths[depth] = []            
             min_heap = self.depths[depth]
             heapq.heappush(min_heap, (height, node.val))
-            while len(min_heap) > 2: # TODO: change to if statement!
+            if len(min_heap) > 2:
                 heapq.heappop(min_heap)
-            
             
             # Loop Invariant
             if node.left:
                 stack.append((node.left, depth + 1))
             if node.right:
                 stack.append((node.right, depth + 1))
-            
-
-#                   4
-#          1                H=4
-#      5        8           H=3
-# H=40     H=90   H=21      H=2
