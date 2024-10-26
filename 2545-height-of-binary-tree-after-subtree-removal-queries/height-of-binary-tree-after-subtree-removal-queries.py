@@ -11,7 +11,6 @@ class Solution:
         self.num_to_depth = {}
     
     def populateDepthsIteratively(self, root):
-        # queue = collections.deque()
         stack = [(root, 0)] # (node, depth) pairs
 
         while len(stack) > 0:
@@ -58,7 +57,8 @@ class Solution:
         # self.root = root
         # self.root_val = root.val
         # self.populateParents(root, None)
-        self.getHeight(root) # Populates all the heights (via memoization)
+        # self.populateHeights(root) # Populates all the heights (via memoization)
+        self.populateHeightsIteratively(root)
         # self.populateLeftNodes(root.left) # Only includes nodes in root.left subtree
         self.populateDepthsIteratively(root)
 
@@ -99,8 +99,25 @@ class Solution:
             heapq.heappush(max_heap, item)
 
         return answer
+    
+    def populateHeightsIteratively(self, root):
+        if not root:
+            return
+        
+        # Important to do POSTORDER traversal, that way ALWAYS
+        # have access to left and right children's heights FIRST!
+        self.populateHeightsIteratively(root.left)
+        self.populateHeightsIteratively(root.right)
 
-    def getHeight(self, root):
+        # NOW, we have access to left and right childrens heights :)
+        left_height = -1 if not root.left else self.height[root.left.val]
+        right_height = -1 if not root.right else self.height[root.right.val]
+
+        height = max(left_height, right_height) + 1
+        self.height[root.val] = height
+        
+
+    def populateHeights(self, root):
         if not root:
             # That way leaf node height == max(-1, -1) + 1 == 0, as wanted
             return -1
@@ -108,8 +125,8 @@ class Solution:
         if root.val in self.height:
             return self.height[root.val]
         
-        left_height = self.getHeight(root.left)
-        right_height = self.getHeight(root.right)
+        left_height = self.populateHeights(root.left)
+        right_height = self.populateHeights(root.right)
 
         height = max(left_height, right_height) + 1
         self.height[root.val] = height
