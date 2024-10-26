@@ -139,7 +139,7 @@ class Solution:
             # Otherwise, if this is not max element, height is unchanged,
             # or if it IS max element, pop from heap, get newest max-height
             # at depth, append answer, push back to heap, continue
-            assert (-height, val) in max_heap # TODO: REMOVE since O(n)!!!
+            # assert (-height, val) in max_heap # TODO: REMOVE since O(n)!!!
             if max_heap[0] != (-height, val):
                 # Answer is unchanged
                 answer.append(self.height[root])
@@ -153,10 +153,6 @@ class Solution:
             answer.append(h + depth)
 
             heapq.heappush(max_heap, item)
-
-
-
-
 
         return answer
 
