@@ -9,6 +9,28 @@ class Solution:
         self.height = {}
         self.depths = {}
         self.num_to_depth = {}
+    
+    def populateDepthsIteratively(self, root):
+        # queue = collections.deque()
+        stack = [(root, 0)] # (node, depth) pairs
+
+        while len(stack) > 0:
+            node, depth = stack.pop()
+            height = self.height[node.val]
+
+            # Update depths metadata
+            self.num_to_depth[node.val] = depth
+            if depth not in self.depths:
+                self.depths[depth] = [(-height, node.val)]
+            else:
+                heapq.heappush(self.depths[depth], (-height, node.val))
+            
+            # Loop Invariant
+            if node.left:
+                stack.append((node.left, depth + 1))
+            if node.right:
+                stack.append((node.right, depth + 1))
+            
 
     def populateDepths(self, root, depth = 0):
         if not root:
@@ -38,7 +60,7 @@ class Solution:
         # self.populateParents(root, None)
         self.getHeight(root) # Populates all the heights (via memoization)
         # self.populateLeftNodes(root.left) # Only includes nodes in root.left subtree
-        self.populateDepths(root)
+        self.populateDepthsIteratively(root)
 
         # At this point, we now have access to O(1) lookups of:
         #   (1) node to height
@@ -92,7 +114,6 @@ class Solution:
         height = max(left_height, right_height) + 1
         self.height[root.val] = height
         return height
-        
 
 #                   4
 #          1                H=4
