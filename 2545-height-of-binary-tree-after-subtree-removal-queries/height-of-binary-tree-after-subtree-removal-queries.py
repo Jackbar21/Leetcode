@@ -6,20 +6,10 @@
 #         self.right = right
 class Solution:
     def __init__(self):
-        # self.parent = {} # node to parent node (None for root)
         self.height = {}
-        self.num_to_node = {}
-        self.left_nodes = set() # Contains only nodes that are inside root.left subtree
-        self.deleted = set()
-        self.tmp_height = {None: -1}
-        self.ans = {} # answer to queries[i] for each i, where 1 <= i <= n
-        self.root_val = None
-        self.root = None
         self.depths = {}
         self.num_to_depth = {}
 
-        # self.answer = []
-    
     def populateDepths(self, root, depth = 0):
         if not root:
             return
@@ -103,25 +93,6 @@ class Solution:
         self.height[root.val] = height
         return height
         
-    def populateParents(self, root, parent):
-        if not root:
-            return
-        
-        # Map root.val to root for easy query-lookups later on :)
-        # (This breaks S in SOLID, please don't murder me Rawad...)
-        self.num_to_node[root.val] = root
-        
-        # assert root not in self.parent
-        # self.parent[root.val] = parent.val if parent else -1
-        self.parent[root] = parent
-
-        self.populateParents(root.left, root)
-        self.populateParents(root.right, root)
-
-        
-
-        return
-
 
 #                   4
 #          1                H=4
