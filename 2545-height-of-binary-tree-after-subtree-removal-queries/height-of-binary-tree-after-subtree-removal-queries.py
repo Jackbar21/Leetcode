@@ -31,25 +31,29 @@ class Solution:
         for val in queries:
             depth = self.num_to_depth[val]
             min_heap = self.depths[depth]
-            assert len(min_heap) <= 2
+            assert 1 <= len(min_heap) <= 2
 
             if len(min_heap) == 1:
                 # depth - 1 is now maximum depth, and hence also new height of root
                 answer.append(depth - 1)
                 continue
 
-            if min_heap[1][VAL] != val:
+            # In this case, min_heap is of length 2. Since this is a min-heap, 
+            # the node with SMALLER height will be at index 0, and the one with
+            # BIGGER (or equal) height will be at index 1.
+            max_height, max_height_val = min_heap[1]
+            second_max_height, _ = min_heap[0]
+
+            if val != max_height_val:
                 # Answer is unchanged
                 answer.append(self.height[root.val])
                 continue
             
-            # We're deleting node with maximal height at this depth
-            # So get second highest height at this depth, since new root height
-            # will simply be this second highest height + its depth away from root node
-            # tmp = heapq.heappop(max_heap)
-            height = min_heap[0][HEIGHT] # index 0, since only two elements! (index 1 is smallest)
-            answer.append(height + depth)
-            # heapq.heappush(max_heap, tmp)
+            # Since val is the value with max height at current depth, it means
+            # we're deleting the node with maximal height at this depth.
+            # So we grab the second highest height at this depth, since new root height
+            # will simply be this second highest height + its depth away from root node.
+            answer.append(second_max_height + depth)
 
         return answer
     
