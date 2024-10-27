@@ -22,8 +22,8 @@ class Solution:
                             is_square = False
                             break
 
-                    if not is_square:
-                        break
+                    # if not is_square:
+                    #     break
 
                     for index in range(offset):
                         if matrix[i + offset][j + index] == 0:
