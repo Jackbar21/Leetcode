@@ -18,22 +18,14 @@ class Solution:
                     offset = dimension - 1
                     is_square = True
                     for index in range(offset + 1):
-                        if matrix[i + index][j + offset] == 0:
-                            is_square = False
-                            break
-
-                    # if not is_square:
-                    #     break
-
-                    for index in range(offset):
-                        if matrix[i + offset][j + index] == 0:
+                        if (matrix[i + index][j + offset] == 0
+                            or matrix[i + offset][j + index] == 0
+                        ):
                             is_square = False
                             break
                         
-                    # count += is_square
-                    if is_square:
-                        count += 1
-                    else:
+                    count += is_square
+                    if not is_square:
                         # if n x n square fails, then (n + k) x (n + k)
                         # squares starting from same top-left index, for all k >= 1,
                         # will also be guaranteed to fail. Hence, exit early.
