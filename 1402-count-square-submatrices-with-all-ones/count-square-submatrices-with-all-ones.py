@@ -5,16 +5,16 @@ class Solution:
             for j in range(len(matrix[i])):
                 if matrix[i][j] == 0:
                     continue
-                
-                
+
+                # matrix[i][j] == 1, so side 1 (i.e. dimension == 1) square valid here!
+                count += 1
                 max_dimension = min(
                     len(matrix) - i,
                     len(matrix[i]) - j
                 )
 
-                # count += 1 # matrix[i][j] == 1, so side 1 square valid here!
-                # # Already handled case where dimension == 1
-                for dimension in range(1, max_dimension + 1):
+                # Already handled case where dimension == 1
+                for dimension in range(2, max_dimension + 1):
                     offset = dimension - 1
                     is_square = True
                     for index in range(offset + 1):
