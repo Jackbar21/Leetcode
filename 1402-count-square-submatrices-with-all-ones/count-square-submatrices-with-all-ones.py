@@ -12,9 +12,9 @@ class Solution:
                     len(matrix[i]) - j
                 )
 
-                count += 1 # matrix[i][j] == 1, so side 1 square valid here!
-                # Already handled case where dimension == 1
-                for dimension in range(2, max_dimension + 1):
+                # count += 1 # matrix[i][j] == 1, so side 1 square valid here!
+                # # Already handled case where dimension == 1
+                for dimension in range(1, max_dimension + 1):
                     offset = dimension - 1
                     is_square = True
                     for index in range(offset + 1):
