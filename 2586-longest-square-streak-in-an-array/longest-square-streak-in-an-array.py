@@ -19,10 +19,6 @@ class Solution:
             return self.memo[num]
         
         next_square = pow(num, 2)
-        if next_square not in self.nums:
-            # self.memo[num] = 1
-            return 1
-        
-        res = 1 + self.getSquareStreakFromNum(next_square)
+        res = 1 + self.getSquareStreakFromNum(next_square) if next_square in self.nums else 1
         self.memo[num] = res
         return res
