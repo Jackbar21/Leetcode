@@ -20,7 +20,7 @@ class Solution:
         
         next_square = pow(num, 2)
         if next_square not in self.nums:
-            self.memo[num] = 1
+            # self.memo[num] = 1
             return 1
         
         res = 1 + self.getSquareStreakFromNum(next_square)
