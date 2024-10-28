@@ -2,17 +2,18 @@ class Solution:
     def __init__(self):
         self.nums = None # hashset of nums!
         self.memo = {}
+        self.streak_exists = False
     def longestSquareStreak(self, nums: List[int]) -> int:
         self.nums = set(nums)
 
         # Do initial parse to check that there exists at least ONE square streak
-        square_streak_exists = False
-        for num in nums:
-            if pow(num, 2) in self.nums:
-                square_streak_exists = True
-                break
-        if not square_streak_exists:
-            return -1
+        # square_streak_exists = False
+        # for num in nums:
+        #     if pow(num, 2) in self.nums:
+        #         square_streak_exists = True
+        #         break
+        # if not square_streak_exists:
+        #     return -1
         
         # We now know there exists at least one square streak, so max value is AT LEAST 1
         max_streak = 1
@@ -21,7 +22,7 @@ class Solution:
             streak = self.getSquareStreakFromNum(num)
             max_streak = max(max_streak, streak)
         
-        return max_streak
+        return max_streak if self.streak_exists else -1
     
     def getSquareStreakFromNum(self, num):
         if num in self.memo:
@@ -32,6 +33,7 @@ class Solution:
             self.memo[num] = 1
             return 1
         
+        self.streak_exists = True
         res = 1 + self.getSquareStreakFromNum(next_square)
         self.memo[num] = res
         return res
