@@ -15,10 +15,10 @@ class Solution:
         return max_streak if max_streak > 1 else -1
     
     def getSquareStreakFromNum(self, num):
-        if num in self.memo:
-            return self.memo[num]
+        # if num in self.memo:
+        #     return self.memo[num]
         
         next_square = pow(num, 2)
         res = 1 + self.getSquareStreakFromNum(next_square) if next_square in self.nums else 1
-        self.memo[num] = res
+        # self.memo[num] = res
         return res
