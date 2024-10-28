@@ -2,7 +2,6 @@ class Solution:
     def __init__(self):
         self.nums = None # hashset of nums!
         self.memo = {}
-        self.streak_exists = False
     def longestSquareStreak(self, nums: List[int]) -> int:
         self.nums = set(nums)
 
@@ -33,7 +32,6 @@ class Solution:
             self.memo[num] = 1
             return 1
         
-        self.streak_exists = True
         res = 1 + self.getSquareStreakFromNum(next_square)
         self.memo[num] = res
         return res
