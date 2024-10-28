@@ -5,15 +5,6 @@ class Solution:
     def longestSquareStreak(self, nums: List[int]) -> int:
         self.nums = set(nums)
 
-        # Do initial parse to check that there exists at least ONE square streak
-        # square_streak_exists = False
-        # for num in nums:
-        #     if pow(num, 2) in self.nums:
-        #         square_streak_exists = True
-        #         break
-        # if not square_streak_exists:
-        #     return -1
-        
         # We now know there exists at least one square streak, so max value is AT LEAST 1
         max_streak = 1
 
