@@ -22,7 +22,7 @@ class Solution:
             streak = self.getSquareStreakFromNum(num)
             max_streak = max(max_streak, streak)
         
-        return max_streak if self.streak_exists else -1
+        return max_streak if max_streak > 1 else -1
     
     def getSquareStreakFromNum(self, num):
         if num in self.memo:
