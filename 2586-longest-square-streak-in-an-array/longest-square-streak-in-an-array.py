@@ -24,14 +24,14 @@ class Solution:
         return max_streak
     
     def getSquareStreakFromNum(self, num):
-        if num in self.memo:
-            return self.memo[num]
+        # if num in self.memo:
+        #     return self.memo[num]
         
         next_square = pow(num, 2)
         if next_square not in self.nums:
-            self.memo[num] = 1
+            # self.memo[num] = 1
             return 1
         
         res = 1 + self.getSquareStreakFromNum(next_square)
-        self.memo[num] = res
+        # self.memo[num] = res
         return res
