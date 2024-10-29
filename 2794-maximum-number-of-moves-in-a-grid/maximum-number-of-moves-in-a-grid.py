@@ -9,8 +9,6 @@ class Solution:
 
     def maxMoves(self, grid: List[List[int]]) -> int:
         self.grid = grid
-        self.MAX_ROW = len(grid) - 1
-        self.MAX_COL = len(grid[0]) - 1
 
         max_moves = 0
         for row_index in range(len(grid)):
@@ -33,10 +31,12 @@ class Solution:
         res = 0
 
         # Only consider VALID cases
-        for dr, dc in [(-1, 1), (0, 1), (1, 1)]:
-            x, y = (r + dr), (c + dc)
+        # for dr, dc in [(-1, 1), (0, 1), (1, 1)]:
+        for dr in range(-1, 2):
+            x, y = (r + dr), (c + 1)
             if self.inBounds(x, y) and self.grid[r][c] < self.grid[x][y]:
-                res = max(res, 1 + self.maxMovesFromPos(x, y))
+                case = 1 + self.maxMovesFromPos(x, y)
+                res = max(res, case)
         
         self.memo[(r, c)] = res
         return res
