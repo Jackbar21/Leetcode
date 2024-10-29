@@ -3,10 +3,6 @@ class Solution:
         self.grid = None
         self.memo = {}
 
-        # Max row & col indices
-        self.MAX_ROW = None
-        self.MAX_COL = None
-
     def maxMoves(self, grid: List[List[int]]) -> int:
         self.grid = grid
 
@@ -14,33 +10,22 @@ class Solution:
         for row_index in range(len(grid)):
             max_moves = max(max_moves, self.maxMovesFromPos(row_index, 0))
         
-        # return max(0, max_moves - 1)
         return max_moves
     
     def inBounds(self, r, c):
         return 0 <= r < len(self.grid) and 0 <= c < len(self.grid[0])
     
-    def maxMovesFromPos(self, r, c):
-        if (r, c) in self.memo:
-            return self.memo[(r, c)]
-        
-        # Out of bounds
-        # if not self.inBounds(r, c):
-        #     return 0
+    def maxMovesFromPos(self, row, col):
+        if (row, col) in self.memo:
+            return self.memo[(row, col)]
         
         res = 0
 
         # Only consider VALID cases
-        # for dr, dc in [(-1, 1), (0, 1), (1, 1)]:
-        for dr in range(-1, 2):
-            x, y = (r + dr), (c + 1)
-            if self.inBounds(x, y) and self.grid[r][c] < self.grid[x][y]:
+        for x, y in [(row - 1, col + 1), (row, col + 1), (row + 1, col + 1)]:
+            if self.inBounds(x, y) and self.grid[row][col] < self.grid[x][y]:
                 case = 1 + self.maxMovesFromPos(x, y)
                 res = max(res, case)
         
-        self.memo[(r, c)] = res
+        self.memo[(row, col)] = res
         return res
-        
-
-
-
