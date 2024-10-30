@@ -1,51 +1,13 @@
 class Solution:
     def __init__(self):
-        # self.nums = None
         self.memo = {}
 
     def minimumMountainRemovals(self, nums: List[int]) -> int:
-        # print(f"LEN OF NUMS={len(nums)}, MAX DIGIT NUM = len({sorted(nums, key=lambda num: len(str(num)), reverse=True)[0]})={len(str(sorted(nums, key=lambda num: len(str(num)), reverse=True)[0]))}")
-        # No matter what, all duplicates must be removed. Hence, first
-        # perform a one-way sweep of nums to get rid of all duplicates
-        # seen = set()
-        # unique_nums = []
-        # min_moves = 0
-        # for num in nums:
-        #     if num not in seen:
-        #         unique_nums.append(num)
-        #         min_moves += 1
-        #     seen.add(num)
-        # self.nums = unique_nums
-        # nums = unique_nums
-        # self.nums = nums
-        # reverse_nums = nums[::-1]
-
-        # res = 0
-        # for i in range(1, len(arr) - 1):
-        #     left = self.minMovesToMakeArraySorted(i, None)
-        #     right = self.minMovesToMakeArraySorted()
-
-        # Return 0 if already not mountain array
-        # if len(nums) < 3:
-        #     return 0
-        
-        # arr1 = [self.minMovesToMakeArraySorted(i, -1, i + 1) for i in range(len(nums))]
-        # arr1 = [self.minDeletesToMakeArraySorted(nums, i, float("inf"), i + 1) for i in range(len(nums))]
-        # arr1 = [self.minDeletes(nums, 0, i) for i in range(len(nums))]
-        # flag = False # False if want 1D, True if want 2D
-        # arr1 = []
-        # if not flag:
-        #     arr1 = [self.minDeletes1D(nums, i, float("inf")) for i in range(len(nums))]
-        # else:
-        #     arr1 = [self.minDeletes2D(nums, 0, i) for i in range(len(nums))]
-        
         self.memo = {}
-        # arr1 = [self.minDeletesLIS(nums, i) for i in range(len(nums))]
         arr1 = [
             self.getNumDeletesFromLIS(i, self.longestIncreasingSubsequence(nums, i))
             for i in range(len(nums))
         ]
-        print(self.memo)
 
 
         # self.nums = self.nums[::-1]
@@ -70,9 +32,9 @@ class Solution:
         ]
         # self.nums = self.nums[::-1]
 
-        print(arr1)
+        # print(arr1)
         # arr2 = arr2[::-1]
-        print(arr2[::-1])
+        # print(arr2[::-1])
         
 
         res = float("inf")
@@ -81,7 +43,7 @@ class Solution:
             # if arr1[i] < i and arr2[len(nums) - 1 - i] < len(nums) - 1 - i:
             # if arr1[i] < i and arr2[len(nums) - 1 - i] < len(nums) - 1 - i:
             if arr1[i] < i and arr2[len(nums) - 1 - i] < len(nums) - 1 - i:
-                # print(i)
+                # # print(i)
                 # res = min(res, arr1[i] + arr2[i])
                 res = min(res, arr1[i] + arr2[len(nums) - 1 - i])
             # res1, num_left1 = arr1[i]
