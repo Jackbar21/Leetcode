@@ -19,7 +19,7 @@ class Solution:
     def twoSumIISolver(self, nums, i):
         num_i = nums[i]
         target = -num_i
-        res = set()
+        res = []
 
         l, r = i + 1, len(nums) - 1
         while l < r:
@@ -32,9 +32,14 @@ class Solution:
                 # a valid solution, but if we increment & decrement both l & r, respectively,
                 # we see there is another solution. So we update BOTH pointer values, searching
                 # for MORE solutions if any left exist...
-                res.add((num_i, num_j, num_k))
-                l += 1
-                r -= 1
+                res.append((num_i, num_j, num_k))
+
+                # Make sure not to include duplicate solutions!
+                while l < r and nums[l] == num_j:
+                    l += 1
+                while l < r and nums[r] == num_k:
+                    r -= 1
+                
 
             elif num_j + num_k < target:
                 # Value is too small, so increment left pointer
@@ -45,7 +50,7 @@ class Solution:
                 # Value is too big, so increment right pointer
                 r -= 1
         
-        return list(res)
+        return res
             
     
     def twoSumSolver(self, nums, start_index, target):
