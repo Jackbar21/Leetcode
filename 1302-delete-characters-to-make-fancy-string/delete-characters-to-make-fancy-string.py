@@ -2,10 +2,16 @@ class Solution:
     def makeFancyString(self, s: str) -> str:
         if len(s) < 3:
             return s
-
-        letters = [s[0], s[1]]
+        
+        second_prev, prev = s[0], s[1]
+        letters = [second_prev, prev]
         for i in range(2, len(s)):
-            if s[i] != s[i - 1] or s[i] != s[i - 2]:
-                letters.append(s[i])
+            letter = s[i]
+            if letter != second_prev or letter != prev:
+                letters.append(letter)
+            
+            # Loop Invariant
+            second_prev = prev
+            prev = letter
         
         return ''.join(letters)
