@@ -1,15 +1,18 @@
 class Solution:
     def isCircularSentence(self, sentence: str) -> bool:
-        arr = sentence.split(" ")
+        # print(f"{sentence=}")
+        words = sentence.split(" ")
+        # print(f"{words=}")
         FIRST, LAST = 0, -1
 
         # Handle last case first (i.e. check first and last words)
-        if arr[FIRST][FIRST] != arr[LAST][LAST]:
-            return False
+        # if words[FIRST][FIRST] != words[LAST][LAST]:
+        #     return False
+        words.append(words[FIRST])
         
         # Now check for remaining elements (except last!)
-        for i in range(len(arr) - 1):
-            word, next_word = arr[i], arr[i + 1]
+        for i in range(len(words) - 1):
+            word, next_word = words[i], words[i + 1]
             if word[LAST] != next_word[FIRST]:
                 return False
         
