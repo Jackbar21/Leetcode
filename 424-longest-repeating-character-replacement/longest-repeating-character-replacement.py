@@ -4,16 +4,23 @@ class Solution:
         
         d = defaultdict(int)
         l = 0
+        max_letter = 0
         for r in range(len(s)):
             letter = s[r]
             d[letter] += 1
+            max_letter = max(max_letter, d[letter])
+            flag = False
 
-            max_letter = max(d.values())
+            # max_letter = max(d.values())
             while r - l - max_letter >= k:
                 d[s[l]] -= 1
                 l += 1
                 # if s[l] == max_letter:
                 #     max_letter = max(d.values())
+                flag = True
+            
+            if flag:
+                max_letter = max(d.values())
             
             res = max(res, r - l + 1)
         
