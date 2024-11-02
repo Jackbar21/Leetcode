@@ -13,8 +13,10 @@ class Solution:
             letter = s[r]
             d[letter] = d.get(letter, 0) + 1
 
-            while sum(d.values()) - max(d.values()) > k:
+            count = sum(d.values())
+            while count - max(d.values()) > k:
                 d[s[l]] -= 1
+                count -= 1
                 l += 1
             
             res = max(res, r - l + 1)
