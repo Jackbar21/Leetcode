@@ -4,12 +4,14 @@ class Solution:
         
         d = defaultdict(int)
         l = 0
-        max_letter = 0
+        max_letter_val = 0
+        max_letter = None
         for r in range(len(s)):
             letter = s[r]
             d[letter] += 1
-            max_letter = max(max_letter, d[letter])
-            flag = False
+            if d[letter] > max_letter_val:
+                max_letter_val = d[letter]
+                max_letter = d[letter]
 
             # max_letter = max(d.values())
             while r - l - max_letter >= k:
@@ -17,10 +19,8 @@ class Solution:
                 l += 1
                 # if s[l] == max_letter:
                 #     max_letter = max(d.values())
-                flag = True
-            
-            if flag:
-                max_letter = max(d.values())
+                if s[l] == max_letter:
+                    max_letter_val -= 1
             
             res = max(res, r - l + 1)
         
