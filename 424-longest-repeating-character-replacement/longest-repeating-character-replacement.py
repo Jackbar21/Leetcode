@@ -14,8 +14,8 @@ class Solution:
                 d[s[l]] -= 1
                 count -= 1
                 l += 1
-                if s[l] == max_letter:
-                    max_letter = max(d.values())
+                # if s[l] == max_letter:
+                #     max_letter = max(d.values())
             
             res = max(res, r - l + 1)
         
