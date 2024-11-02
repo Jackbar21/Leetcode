@@ -2,12 +2,11 @@ class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
         res = 0
         
-        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        d = {}
+        d = defaultdict(int)
         l = 0
         for r in range(len(s)):
             letter = s[r]
-            d[letter] = d.get(letter, 0) + 1
+            d[letter] += 1
 
             count = sum(d.values())
             while count - max(d.values()) > k:
