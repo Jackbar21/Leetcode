@@ -21,7 +21,7 @@ class Solution:
             # <==> while r - l + 1 - max_letter > k
             # <==> while r - l - max_letter >= k
 
-            while r - l - max_letter >= k:
+            while r - l + 1 - max_letter > k:
                 d[s[l]] -= 1
                 l += 1
 
