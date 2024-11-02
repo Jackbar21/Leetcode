@@ -1,9 +1,9 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        # alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         res = 0
-        for letter in alphabet:
+        for letter in set(s):
             res = max(res, self.charReplacementSolver(s, k, letter))
         
         return res
