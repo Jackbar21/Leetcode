@@ -8,7 +8,7 @@ class Solution:
             cur_water = (r - l) * min(height_l, height_r)
             max_water = max(max_water, cur_water)
 
-            if height_l < height_r:
+            if height_l <= height_r:
                 while l < r and height[l] <= height_l:
                     l += 1
             else:
