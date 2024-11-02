@@ -11,16 +11,16 @@ class Solution:
             d[letter] += 1
             if d[letter] > max_letter_val:
                 max_letter_val = d[letter]
-                max_letter = d[letter]
+                # max_letter = d[letter]
 
             # max_letter = max(d.values())
-            while r - l - max_letter >= k:
+            while r - l - max_letter_val >= k:
                 d[s[l]] -= 1
                 l += 1
                 # if s[l] == max_letter:
                 #     max_letter = max(d.values())
-                if s[l] == max_letter:
-                    max_letter_val -= 1
+                # if s[l] == max_letter:
+                #     max_letter_val -= 1
             
             res = max(res, r - l + 1)
         
