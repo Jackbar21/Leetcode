@@ -8,12 +8,8 @@ class Solution:
             letter = s[r]
             d[letter] += 1
 
-            # count = sum(d.values())
-            # max_letter = max(d.values())
-            count, max_letter = 0, 0
-            for val in d.values():
-                count += val
-                max_letter = max(max_letter, val)
+            count = sum(d.values())
+            max_letter = max(d.values())
             while count - max_letter > k:
                 d[s[l]] -= 1
                 count -= 1
