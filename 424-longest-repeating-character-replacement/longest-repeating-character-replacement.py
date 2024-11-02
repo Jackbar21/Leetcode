@@ -4,7 +4,6 @@ class Solution:
 
         res = 0
         for letter in alphabet:
-            print(letter, self.charReplacementSolver(s, k, letter))
             res = max(res, self.charReplacementSolver(s, k, letter))
         
         return res
