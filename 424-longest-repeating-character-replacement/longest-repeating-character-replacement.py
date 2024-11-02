@@ -1,27 +1,30 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        res = 0
-        
         d = defaultdict(int)
-        l = 0
-        max_letter_val = 0
-        max_letter = None
+        l, res, max_letter = 0, 0, 0
+
         for r in range(len(s)):
             letter = s[r]
             d[letter] += 1
-            if d[letter] > max_letter_val:
-                max_letter_val = d[letter]
-                # max_letter = d[letter]
+            max_letter = max(max_letter, d[letter])
 
-            # max_letter = max(d.values())
-            while r - l - max_letter_val >= k:
+            # Length of the window (# letters in total):    r - l + 1
+            # Frequency of letter with highest frequency:   max_letter
+            # Number of letters we can replace in window:   k
+            # Count of non-highest-frequency letters:       (r - l + 1) - max_letter
+
+            # WANT: (r - l + 1) - max_letter <= k
+            # Hence, WHILE it is NOT TRUE that (r - l + 1) - max_letter <= k:
+            #           keep deleting leftmost-letter
+            # <==> while not (r - l + 1) - max_letter <= k
+            # <==> while (r - l + 1) - max_letter > k
+            # <==> while r - l + 1 - max_letter > k
+            # <==> while r - l - max_letter >= k
+
+            while r - l - max_letter >= k:
                 d[s[l]] -= 1
                 l += 1
-                # if s[l] == max_letter:
-                #     max_letter = max(d.values())
-                # if s[l] == max_letter:
-                #     max_letter_val -= 1
-            
+
             res = max(res, r - l + 1)
         
         return res
