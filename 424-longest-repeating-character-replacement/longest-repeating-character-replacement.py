@@ -9,10 +9,13 @@ class Solution:
             d[letter] += 1
 
             count = sum(d.values())
-            while count - max(d.values()) > k:
+            max_letter = max(d.values())
+            while count - max_letter > k:
                 d[s[l]] -= 1
                 count -= 1
                 l += 1
+                if s[l] == max_letter:
+                    max_letter = max(d.values())
             
             res = max(res, r - l + 1)
         
