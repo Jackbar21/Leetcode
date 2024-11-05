@@ -3,7 +3,7 @@ class Solution:
         # One line solution:
         # return sum(s[i] != s[i + 1] for i in range(0, len(s), 2))
 
-        count = 0
+        num_changes = 0
         for i in range(0, len(s), 2):
-            count += s[i] != s[i + 1]
-        return count
+            num_changes += s[i] != s[i + 1]
+        return num_changes
