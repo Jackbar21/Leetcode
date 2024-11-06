@@ -8,10 +8,10 @@ class Solution:
         index_dict = {} # index to desired index mappings
         
         # #print(d)
-        sorted_nums = sorted(((num, d[num], index) for index, num in enumerate(nums)), key=lambda x: x[0])
+        INDEX, NUM = 0, 1
+        sorted_nums = sorted(enumerate(nums), key=lambda x: x[NUM])
         for desired_index in range(len(sorted_nums)):
-            num, _, at_index = sorted_nums[desired_index]
-            # index_dict = {at_index: desired_index}
+            at_index = sorted_nums[desired_index][INDEX]
             index_dict[at_index] = desired_index
         
         for at_index in index_dict:
