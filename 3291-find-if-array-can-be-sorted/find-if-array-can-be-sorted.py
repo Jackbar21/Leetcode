@@ -30,6 +30,12 @@ class Solution:
                 tmp = d[nums[at_index]]
                 d[nums[at_index]] = d[nums[next_index]]
                 d[nums[next_index]] = tmp
+                tmp = nums[at_index]
+                nums[at_index] = nums[next_index]
+                nums[next_index] = tmp
+
                 at_index = next_index
+
+
 
         return True
