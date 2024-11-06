@@ -23,6 +23,13 @@ class Solution:
                     return False
                 
                 # Loop Invariant
+                # at_index = next_index
+
+                # We JUST swapped at_index with next_index.
+                # Want to make sure we UPDATE this in our dictionary
+                tmp = d[nums[at_index]]
+                d[nums[at_index]] = d[nums[next_index]]
+                d[nums[next_index]] = tmp
                 at_index = next_index
 
         return True
