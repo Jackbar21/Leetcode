@@ -1,6 +1,7 @@
 class Solution:
     def largestCombination(self, candidates: List[int]) -> int:
-        max_num_bits = len(bin(max(candidates))) - 2
+        # max_num_bits = len(bin(max(candidates))) - 2
+        max_num_bits = 24
         
         res = 0
         for i in range(max_num_bits):
