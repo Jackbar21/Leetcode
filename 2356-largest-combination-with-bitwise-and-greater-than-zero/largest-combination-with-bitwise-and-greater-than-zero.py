@@ -3,10 +3,11 @@ class Solution:
         self.num_to_bin = {}
 
     def isBitSet(self, num, bit_index):
-        if num not in self.num_to_bin:
-            self.num_to_bin[num] = bin(num)
+        # if num not in self.num_to_bin:
+        #     self.num_to_bin[num] = bin(num)
         
-        bin_num = self.num_to_bin[num]
+        # bin_num = self.num_to_bin[num]
+        bin_num = bin(num)
         return -bit_index <= len(bin_num) and bin_num[bit_index] == '1'
 
     
