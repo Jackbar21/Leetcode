@@ -17,7 +17,7 @@ class Solution:
             print(xor)
 
             # k = int(''.join('0' if c == '1' else '1' for c in bin(xor)[-maximumBit:]), 2)
-            k = int(''.join('0' if c == '1' else '1' for c in ('0' * maximumBit + bin(xor))[-maximumBit:]), 2)
+            k = int(''.join('0' if c == '1' else '1' for c in ('G' * maximumBit + bin(xor))[-maximumBit:]), 2)
 
 
             answer.append(k)
