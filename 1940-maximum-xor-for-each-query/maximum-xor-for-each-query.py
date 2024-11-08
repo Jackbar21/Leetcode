@@ -28,8 +28,8 @@ class Solution:
             #     '0' if c == '1' else '1' for c in bin_xor[-num_to_take:]
             # )
 
-            k = int('1' * padding_len, 2) << num_to_take if padding_len > 0 else 0
-            k += int(''.join(
+            # k = int(, 2) << num_to_take if padding_len > 0 else 0
+            k = int('1' * padding_len + ''.join(
                 '0' if c == '1' else '1' for c in bin_xor[-num_to_take:]
             ), 2)
 
