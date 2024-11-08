@@ -5,6 +5,14 @@ class Solution:
         # X ^ X == 0
         # X ^ Y == Y ^ X
 
+        # want to maximize xor ^ k
+        # so want k to be INVERSE IN BITS of xor
+
+        # xor = 1110101010101010101
+        #  k =  0001010101010101010
+        #       ___________________
+        #       1111111111111111111
+
         xor = 0
         for num in nums:
             xor ^= num
@@ -14,7 +22,7 @@ class Solution:
 
         answer = []
         for i in range(len(nums) - 1, -1, -1):
-            print(xor)
+            # print(xor)
 
             # k = int(''.join('0' if c == '1' else '1' for c in bin(xor)[-maximumBit:]), 2)
             k = int(''.join('0' if c == '1' else '1' for c in ('G' * maximumBit + bin(xor))[-maximumBit:]), 2)
@@ -26,11 +34,3 @@ class Solution:
             xor ^= nums[i]
 
         return answer
-        # want to maximize xor ^ k
-        # so want k to be INVERSE IN BITS of xor
-
-        # xor = 1110101010101010101
-        #  k =  0001010101010101010
-        #       ___________________
-        #       1111111111111111111
-
