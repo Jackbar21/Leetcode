@@ -33,3 +33,20 @@ class Solution:
             xor ^= nums[i]
 
         return answer
+
+# xor = num1 ^ num2 ^ num3 ^ ...
+#     =                00101
+# k   = 00000000000000 11010
+#       ___________________
+#       00000000000000 11111
+#                     ^
+#                     Maximum bit = 5
+
+# XOR
+# 0 ^ 0 = 0
+# 0 ^ 1 = 1
+# 1 ^ 0 = 1
+# 1 ^ 1 = 0
+
+# If have a 1, want a 0
+# If have a 0, want a 1
