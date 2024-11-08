@@ -24,16 +24,11 @@ class Solution:
             num_to_take = min(maximumBit, length)
             padding_len = max(0, maximumBit - num_to_take)
 
-            # bin_k = '1' * padding_len + ''.join(
-            #     '0' if c == '1' else '1' for c in bin_xor[-num_to_take:]
-            # )
+            bin_k = '1' * padding_len + ''.join(
+                '1' if c == '0' else '0' for c in bin_xor[-num_to_take:]
+            )
 
-            # k = int(, 2) << num_to_take if padding_len > 0 else 0
-            k = int('1' * padding_len + ''.join(
-                '0' if c == '1' else '1' for c in bin_xor[-num_to_take:]
-            ), 2)
-
-            # k = int(bin_k, 2)
+            k = int(bin_k, 2)
             answer.append(k)
 
             # Loop Invariant - "Delete" last number in nums
