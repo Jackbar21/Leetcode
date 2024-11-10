@@ -1,5 +1,21 @@
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+
+        # Flatten matrix to an m * n row, and apply regular binary search!
+        arr = [matrix[i][j] for i in range(len(matrix)) for j in range(len(matrix[i]))]
+        # print(arr)
+        # return False
+        l, r = 0, len(arr) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if arr[mid] < target:
+                l = mid + 1
+            elif arr[mid] > target:
+                r = mid - 1
+            else:
+                return True
+        return False
+
         # Want to find LEFTMOST index i such that matrix[i][0] > target,
         # and from there -- row we want is at index i - 1
         l, r = 0, len(matrix) - 1
