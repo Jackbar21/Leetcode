@@ -37,8 +37,8 @@ class Solution:
         # assert leftmost_index == l
         print(leftmost_index - 1, l, "DSA")
         # 
-        if l == 0:
-            return False
+        # if l == 0:
+        #     return False
         rightmost_index = l - 1
     
         
