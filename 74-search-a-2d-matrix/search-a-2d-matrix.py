@@ -2,8 +2,6 @@ class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         # If target less than smallest value or larger than largest value,
         # then we already know that there is NO solution.
-        if target <= matrix[0][0] or target >= matrix[-1][-1]:
-            return target == matrix[0][0] or target == matrix[-1][-1]
         
 
         
@@ -38,6 +36,7 @@ class Solution:
         
         # assert leftmost_index == l
         print(leftmost_index - 1, l, "DSA")
+        # 
         if l == 0:
             return False
         rightmost_index = l - 1
