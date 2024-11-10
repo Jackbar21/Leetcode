@@ -9,8 +9,9 @@ class Solution:
         #     return self.car_to_moves[car_index]
         
         POSITION, SPEED = 0, 1
-        car_pos = self.pos_speed[car_index][POSITION]
-        car_speed = self.pos_speed[car_index][SPEED]
+        # car_pos = self.pos_speed[car_index][POSITION]
+        # car_speed = self.pos_speed[car_index][SPEED]
+        car_pos, car_speed = self.pos_speed[car_index]
 
         # res = math.ceil((self.target - car_pos) / car_speed)
         res = (self.target - car_pos) / car_speed
