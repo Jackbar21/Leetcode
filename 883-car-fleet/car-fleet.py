@@ -5,16 +5,16 @@ class Solution:
         self.car_to_moves = {} # number of moves it takes for car to reach target
     
     def getNumMoves(self, car_index):
-        if car_index in self.car_to_moves:
-            return self.car_to_moves[car_index]
+        # if car_index in self.car_to_moves:
+        #     return self.car_to_moves[car_index]
         
         POSITION, SPEED = 0, 1
         car_pos = self.pos_speed[car_index][POSITION]
         car_speed = self.pos_speed[car_index][SPEED]
 
         # res = math.ceil((self.target - car_pos) / car_speed)
-        res = ((self.target - car_pos) / car_speed)
-        self.car_to_moves[car_index] = res
+        res = (self.target - car_pos) / car_speed
+        # self.car_to_moves[car_index] = res
         return res
 
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
