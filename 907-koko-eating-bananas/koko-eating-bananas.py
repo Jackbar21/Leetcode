@@ -3,6 +3,8 @@ class Solution:
         smallest_k = 1
         largest_k = max(piles)
 
+        best_k = largest_k
+
         while smallest_k <= largest_k:
             k = (smallest_k + largest_k) // 2
 
@@ -12,8 +14,9 @@ class Solution:
             # it it <= h (which is when the guards come back)
             num_hours = sum(math.ceil(banana_pile / k) for banana_pile in piles)
             if num_hours <= h:
+                best_k = min(best_k, k)
                 largest_k = k - 1
             else:
                 smallest_k = k + 1
         
-        return smallest_k
+        return best_k
