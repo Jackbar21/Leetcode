@@ -35,6 +35,8 @@ class Solution:
             d = self.addNum(d, nums[r])
             while l <= r and self.getNum(d) >= k:
                 res = min(res, r - l + 1)
+                if l == r:
+                    return 1
                 
                 # Loop Invariant
                 d = self.delNum(d, nums[l])
