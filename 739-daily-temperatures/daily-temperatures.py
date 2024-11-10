@@ -11,6 +11,5 @@ class Solution:
 
             # Loop Invariant
             stack.append((index, temperature))
-        
-        # assert all([val != -1 for val in answer])
+
         return answer
