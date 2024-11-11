@@ -1,17 +1,14 @@
 class Solution:
-    def __init__(self):
-        self.sieve = None
-
-    def findLargestValidPrime(self, n):
+    def findLargestValidPrime(self, sieve, n):
         # Want to find LARGEST prime number p that is STRICTLY less than n
         # We can use the sieve built at beginning of problems as our range
         # of primes to search from
 
-        l, r = 0, len(self.sieve) - 1
+        l, r = 0, len(sieve) - 1
         res = 0
         while l <= r:
             mid = (l + r) // 2
-            prime = self.sieve[mid]
+            prime = sieve[mid]
 
             if prime < n:
                 res = max(res, prime)
@@ -33,13 +30,13 @@ class Solution:
                 if base in primes:
                     primes.remove(base)
                 base += power
-        self.sieve = list(primes)
+        sieve = list(primes)
 
         # Thanks to Python, set will not lose ordering, so no need to
         # sort the numbers in primes (already the case for you!)
         # assert self.sieve == sorted(self.sieve)
 
-        nums[0] -= self.findLargestValidPrime(nums[0])
+        nums[0] -= self.findLargestValidPrime(sieve, nums[0])
         for i in range(1, len(nums) - 1):
             # Want to find LARGEST prime number p such that:
             #   (1) p < nums[i]
@@ -48,7 +45,7 @@ class Solution:
             # So really, ONLY want to find LARGEST prime number p such that:
             #   (1) p < nums[i] - nums[i - 1]
             # Since it's special for i == 0, that case is handled separately first above
-            nums[i] -= self.findLargestValidPrime(nums[i] - nums[i - 1])
+            nums[i] -= self.findLargestValidPrime(sieve, nums[i] - nums[i - 1])
 
             # Ensure array is always strictly increasing
             if nums[i - 1] >= nums[i]:
