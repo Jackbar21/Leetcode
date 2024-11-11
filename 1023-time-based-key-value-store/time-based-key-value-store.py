@@ -1,5 +1,4 @@
 class TimeMap:
-
     def __init__(self):
         self.d = {} # key to array mappings
 
