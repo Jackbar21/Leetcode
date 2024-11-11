@@ -40,7 +40,7 @@ class Solution:
         # assert self.sieve == sorted(self.sieve)
 
         nums[0] -= self.findLargestValidPrime(nums[0])
-        for i in range(1, len(nums)):
+        for i in range(1, len(nums) - 1):
             # Want to find LARGEST prime number p such that:
             #   (1) p < nums[i]
             #   (2) nums[i - 1] < nums[i] - p (unless i == 0)
@@ -53,6 +53,7 @@ class Solution:
             # Ensure array is always strictly increasing
             if nums[i - 1] >= nums[i]:
                 return False
-    
-        return True
+
+        # Handle last case, since skipped last number in for loop!
+        return len(nums) <= 1 or nums[-2] < nums[-1]
         
