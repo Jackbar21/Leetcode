@@ -2,20 +2,6 @@ class Solution:
     def __init__(self):
         self.sieve = None
 
-    @cache
-    def sieveOfErastocrenes(self, n):
-        primes = set([i for i in range(2, n + 1)])
-        # base = 1
-        # for power in range(2, int(math.sqrt(n)) - 1):
-        # TODO: make it sqrt instead for speed!!
-        for power in range(2, math.ceil(math.sqrt(n))):
-            base = power + power
-            while base <= n:
-                if base in primes:
-                    primes.remove(base)
-                base += power
-        return list(primes)
-
     def findLargestValidPrime(self, n):
         # Want to find LARGEST prime number p that is STRICTLY less than n
         # We can use the sieve built at beginning of problems as our range
@@ -37,15 +23,21 @@ class Solution:
         # by 0 has absolutely no effect anyways :)
         return res
 
-
-
     def primeSubOperation(self, nums: List[int]) -> bool:
-        max_num = max(nums)
-        sieve = self.sieveOfErastocrenes(max_num)
-        self.sieve = sieve
+        # Step 1: Build sieve of erastocrenes
+        n = max(nums)
+        primes = set([i for i in range(2, n + 1)])
+        for power in range(2, math.ceil(math.sqrt(n))):
+            base = power + power
+            while base <= n:
+                if base in primes:
+                    primes.remove(base)
+                base += power
+        self.sieve = list(primes)
 
-        # TODO: Remove assert, since it is EXPENSIVE!
-        # assert sieve == sorted(sieve)
+        # Thanks to Python, set will not lose ordering, so no need to
+        # sort the numbers in primes (already the case for you!)
+        # assert self.sieve == sorted(self.sieve)
 
         nums[0] -= self.findLargestValidPrime(nums[0])
         for i in range(1, len(nums)):
