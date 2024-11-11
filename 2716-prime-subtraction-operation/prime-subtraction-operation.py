@@ -7,7 +7,7 @@ class Solution:
         # base = 1
         # for power in range(2, int(math.sqrt(n)) - 1):
         # TODO: make it sqrt instead for speed!!
-        for power in range(2, int(math.sqrt(n)) + 1):
+        for power in range(2, math.ceil(math.sqrt(n))):
             base = power + power
             while base <= n:
                 if base in primes:
