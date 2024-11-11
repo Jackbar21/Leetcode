@@ -37,7 +37,7 @@ class Solution:
         # assert self.sieve == sorted(self.sieve)
 
         nums[0] -= self.findLargestValidPrime(sieve, nums[0])
-        for i in range(1, len(nums) - 1):
+        for i in range(1, len(nums)):
             # Want to find LARGEST prime number p such that:
             #   (1) p < nums[i]
             #   (2) nums[i - 1] < nums[i] - p (unless i == 0)
@@ -45,13 +45,11 @@ class Solution:
             # So really, ONLY want to find LARGEST prime number p such that:
             #   (1) p < nums[i] - nums[i - 1]
             # Since it's special for i == 0, that case is handled separately first above
-            prev_num = nums[i - 1]
-            nums[i] -= self.findLargestValidPrime(sieve, nums[i] - prev_num)
+            nums[i] -= self.findLargestValidPrime(sieve, nums[i] - nums[i - 1])
 
             # Ensure array is always strictly increasing
-            if prev_num >= nums[i]:
+            if nums[i - 1] >= nums[i]:
                 return False
 
-        # Handle last case, since skipped last number in for loop!
-        return len(nums) <= 1 or nums[-2] < nums[-1]
+        return True
         
