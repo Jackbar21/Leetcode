@@ -45,10 +45,11 @@ class Solution:
             # So really, ONLY want to find LARGEST prime number p such that:
             #   (1) p < nums[i] - nums[i - 1]
             # Since it's special for i == 0, that case is handled separately first above
-            nums[i] -= self.findLargestValidPrime(sieve, nums[i] - nums[i - 1])
+            prev_num = nums[i - 1]
+            nums[i] -= self.findLargestValidPrime(sieve, nums[i] - prev_num)
 
             # Ensure array is always strictly increasing
-            if nums[i - 1] >= nums[i]:
+            if prev_num >= nums[i]:
                 return False
 
         # Handle last case, since skipped last number in for loop!
