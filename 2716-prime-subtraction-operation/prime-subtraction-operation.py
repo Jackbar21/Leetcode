@@ -2,6 +2,7 @@ class Solution:
     def __init__(self):
         self.sieve = None
 
+    @cache
     def sieveOfErastocrenes(self, n):
         primes = set([i for i in range(2, n + 1)])
         # base = 1
