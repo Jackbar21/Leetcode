@@ -7,7 +7,7 @@ class Solution:
         # base = 1
         # for power in range(2, int(math.sqrt(n)) - 1):
         # TODO: make it sqrt instead for speed!!
-        for power in range(2, n + 1):
+        for power in range(2, int(math.sqrt(n)) + 1):
             base = power + power
             while base <= n:
                 if base in primes:
@@ -40,8 +40,6 @@ class Solution:
 
     def primeSubOperation(self, nums: List[int]) -> bool:
         max_num = max(nums)
-        # max_num = 23
-        # print(max_num)
         sieve = self.sieveOfErastocrenes(max_num)
         self.sieve = sieve
 
