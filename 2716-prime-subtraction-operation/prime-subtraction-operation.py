@@ -46,7 +46,7 @@ class Solution:
         self.sieve = sieve
 
         # TODO: Remove assert, since it is EXPENSIVE!
-        assert sieve == sorted(sieve)
+        # assert sieve == sorted(sieve)
 
         nums[0] -= self.findLargestValidPrime(nums[0])
         for i in range(1, len(nums)):
@@ -59,8 +59,9 @@ class Solution:
             # Since it's special for i == 0, that case is handled separately first above
             nums[i] -= self.findLargestValidPrime(nums[i] - nums[i - 1])
 
+            # Ensure array is always strictly increasing
             if nums[i - 1] >= nums[i]:
                 return False
-        print(nums)
+    
         return True
         
