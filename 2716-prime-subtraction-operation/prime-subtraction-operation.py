@@ -24,12 +24,12 @@ class Solution:
         # Step 1: Build sieve of erastocrenes
         n = max(nums)
         primes = set([i for i in range(2, n + 1)])
-        for power in range(2, math.ceil(math.sqrt(n))):
-            base = power + power
-            while base <= n:
-                if base in primes:
-                    primes.remove(base)
-                base += power
+        for base in range(2, math.ceil(math.sqrt(n))):
+            multiple = 2 * base
+            while multiple <= n:
+                if multiple in primes:
+                    primes.remove(multiple)
+                multiple += base
         sieve = list(primes)
 
         # Thanks to Python, set will not lose ordering, so no need to
