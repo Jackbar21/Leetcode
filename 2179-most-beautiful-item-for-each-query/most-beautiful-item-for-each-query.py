@@ -19,7 +19,7 @@ class Solution:
                 mid = (l + r) // 2
                 if items[mid][PRICE] <= price:
                     # Valid price, update ans, and search for even better ones!
-                    ans = max(ans, prefix_beauties[mid])
+                    ans = prefix_beauties[mid]
                     l = mid + 1
                 else:
                     r = mid - 1
