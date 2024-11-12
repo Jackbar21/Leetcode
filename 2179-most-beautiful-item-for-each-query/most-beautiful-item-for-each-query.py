@@ -5,13 +5,12 @@ class Solution:
 
         prefix_beauties = []
         max_beauty = float("-inf")
-
         for (_, beauty) in items:
             max_beauty = max(max_beauty, beauty)
             prefix_beauties.append(max_beauty)
         
-        answer = []
-        for price in queries:
+        answer = [0] * len(queries)
+        for i, price in enumerate(queries):
             # Rightmost binary search on prices
             l, r = 0, len(items) - 1
             ans = 0
@@ -19,10 +18,9 @@ class Solution:
                 mid = (l + r) // 2
                 if items[mid][PRICE] <= price:
                     # Valid price, update ans, and search for even better ones!
-                    ans = prefix_beauties[mid]
+                    answer[i] = prefix_beauties[mid]
                     l = mid + 1
                 else:
                     r = mid - 1
-            answer.append(ans)
 
         return answer
