@@ -9,7 +9,7 @@ class Solution:
             max_beauty = max(max_beauty, beauty)
             prefix_beauties.append(max_beauty)
         
-        answer = [0] * len(queries)
+        answer = []
         for i, price in enumerate(queries):
             # Rightmost binary search on prices
             l, r = 0, len(items) - 1
@@ -22,5 +22,7 @@ class Solution:
                     l = mid + 1
                 else:
                     r = mid - 1
-            answer[i] = ans
+
+            answer.append(ans)
+
         return answer
