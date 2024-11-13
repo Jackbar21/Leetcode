@@ -28,14 +28,13 @@ class Solution:
             # change, is that we make nums[i] + nums[k] SO SMALL that it is NO LONGER >= lower.
             # Hence, find SMALLEST index k, such that i < k <= j, lower <= nums[i] + nums[k].
             # We can do this via leftmost binary search, for which then we know number of
-            # valid pairs will be len([(i,i+1), (i,i+2), ..., (i,k)]) == k - i.
-            assert lower <= nums[i] + nums[j] <= upper
+            # valid pairs will be len([(i,k), (i,k+1), (i,k+2), ..., (i,j)]) == j - k + 1.
             l, r = i + 1, j
             k = j
             while l <= r:
                 mid = (l + r) // 2
                 if lower <= nums[i] + nums[mid]:
-                    k = min(k, mid)
+                    k = mid
                     r = mid - 1
                 else:
                     l = mid + 1
