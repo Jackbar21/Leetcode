@@ -5,13 +5,13 @@ class Solution:
 
         i, j = 0, len(nums) - 1
         while i < j:
-            num = nums[i] + nums[j]
             # Number too small, so increase left pointer
-            if lower > num:
+            if lower > nums[i] + nums[j]:
                 i += 1
                 continue
+            
             # Number too large, so decrease right pointer
-            elif num > upper:
+            elif nums[i] + nums[j] > upper:
                 j -= 1
                 continue
 
@@ -31,10 +31,9 @@ class Solution:
             # valid pairs will be len([(i,k), (i,k+1), (i,k+2), ..., (i,j)]) == j - k + 1.
             l, r = i + 1, j
             k = j
-            bound = lower - nums[i]
             while l <= r:
                 mid = (l + r) // 2
-                if bound <= nums[mid]:
+                if lower <= nums[i] + nums[mid]:
                     k = mid
                     r = mid - 1
                 else:
