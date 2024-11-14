@@ -16,7 +16,8 @@ class Solution:
         x = r
         while l <= r:
             mid = (l + r) // 2
-            if sum(math.ceil(quantity / mid) for quantity in quantities) <= n:
+            needed_stores = sum(math.ceil(quantity / mid) for quantity in quantities)
+            if needed_stores <= n:
                 x = mid
                 # Since this is valid, we don't care about anything bigger
                 # than mid! Hence, we decrease search-space to left subhalf :)
