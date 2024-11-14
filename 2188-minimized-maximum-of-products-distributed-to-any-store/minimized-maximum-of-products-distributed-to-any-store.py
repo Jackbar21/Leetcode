@@ -9,19 +9,13 @@ class Solution:
         # certain i or x works by trying to evenly distribute each quantity
         # in batches of x (with last one being between 1 & x), and checking
         # if by doing so we need MORE than n specialty retail stores or not :)
-        quantities.sort(reverse=True) # sorting, since algo O(mlogm) anyways!
-        l, r = 1, quantities[0]
+        l, r = 1, max(quantities)
         # We know that since m <= n, there is always a solution at x == max(quantites)
         # since that would mean we can put each product type into a singular specialty
         # retail store, of which there are at least m many :)
         x = r
         while l <= r:
             mid = (l + r) // 2
-
-           
-            # Want to check if works
-            is_valid = True
-
             if sum(math.ceil(quantity / mid) for quantity in quantities) <= n:
                 x = mid
                 # Since this is valid, we don't care about anything bigger
