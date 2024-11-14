@@ -4,62 +4,28 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverse_ll(self, head):
-        if not head or not head.next:
-            return head
-        
-        prev, cur, nxt = None, head, head.next
-
-        while cur:
-            nxt = cur.next
-            cur.next = prev
-
-            # Loop invariant
-            prev = cur
-            cur = nxt
-        
-        return prev
-
     def reorderList(self, head: Optional[ListNode]) -> None:
         """
         Do not return anything, modify head in-place instead.
         """
 
-        # find length of ll
-        length = 0
-        cur = head
-        while cur:
-            length += 1
-            cur = cur.next
+        # Step 1: Add all nodes (in order) to array
+        arr = collections.deque()
+        while head:
+            arr.append(head)
+            head = head.next
         
-        # find middle node, i.e. at half ll length
-        mid = ((length + 1) // 2) - 1 # -1 so i can make this node.next = None
-        mid_node = head
-        for i in range(mid):
-            # print(mid_node, mid_node.next)
-            # print()
-            mid_node = mid_node.next
-        
-        # this is why we did -1 to mid_node: so we can split
-        # ll into two halves that we then merge together
-        tmp = mid_node.next
-        mid_node.next = None
-        mid_node = tmp
+        # Step 2: Add elements to new array in re-ordered fashion
+        reordered_arr = []
+        left_next = True
+        while len(arr) > 0:
+            next_node = arr.popleft() if left_next else arr.pop()
+            reordered_arr.append(next_node)
+            left_next = not left_next
 
-        # reverse linked list from mid_node
-        l2 = self.reverse_ll(mid_node)
-        l1 = head
-        res = head
+        reordered_arr.append(None)
+        for i in range(len(reordered_arr) - 1):
+            reordered_arr[i].next = reordered_arr[i + 1]
         
-        while l2:
-            assert l1
-            tmp = l1.next
-            l2_next = l2.next
-            l1.next = l2
-            l2.next = tmp
-            l1, l2 = tmp, l2_next
-            # l1.next.next = tmp
-            # l1 = l1.next.next
-            # l2 = l2.next
+        # return arr[0]
         
-        return head
