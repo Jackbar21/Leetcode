@@ -16,7 +16,7 @@ class Solution:
             tmp_next = head.next
             head.next = None
             head = tmp_next
-        
+
         # Step 2: Set nodes' next values respective to needed reordering :)
         l, r = 0, len(arr) - 1
         while l < r - 1:
@@ -30,6 +30,7 @@ class Solution:
             l += 1
             r -= 1
 
+        # Handle last case, where end of linked list must be None!
         if l < r:
             cur_head = arr[l]
             cur_tail = arr[r]
