@@ -20,13 +20,9 @@ class Solution:
 
            
             # Want to check if works
-            needed_specialty_stores = 0
-            for quantity in quantities:
-                needed_specialty_stores += math.ceil(quantity / mid) 
-                if needed_specialty_stores > n:
-                    break
+            is_valid = True
 
-            if needed_specialty_stores <= n:
+            if sum(math.ceil(quantity / mid) for quantity in quantities) <= n:
                 x = mid
                 # Since this is valid, we don't care about anything bigger
                 # than mid! Hence, we decrease search-space to left subhalf :)
