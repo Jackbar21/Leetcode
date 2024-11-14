@@ -17,17 +17,24 @@ class Solution:
             head.next = None
             head = tmp_next
         
-        # print(arr)
+        # Step 2: Set nodes' next values respective to needed reordering :)
         l, r = 0, len(arr) - 1
-        while l <= r:
+        while l < r - 1:
             cur_head = arr[l]
             cur_tail = arr[r]
 
             cur_head.next = cur_tail
-            cur_tail.next = arr[l + 1] if l + 1 < r else None
+            cur_tail.next = arr[l + 1]
 
             # Loop Invariant
             l += 1
             r -= 1
+
+        if l < r:
+            cur_head = arr[l]
+            cur_tail = arr[r]
+
+            cur_head.next = cur_tail
+            cur_tail.next = None
 
         return
