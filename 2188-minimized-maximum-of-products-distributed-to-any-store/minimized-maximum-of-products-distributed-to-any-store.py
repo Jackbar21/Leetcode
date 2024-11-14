@@ -19,7 +19,7 @@ class Solution:
 
             # Want to check if works
             if self.isValidX(quantities, n, mid):
-                x = min(x, mid)
+                x = mid
                 # Since this is valid, we don't care about anything bigger
                 # than mid! Hence, we decrease search-space to left subhalf :)
                 r = mid - 1
