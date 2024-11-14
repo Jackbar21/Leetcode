@@ -18,7 +18,7 @@ class Solution:
             mid = (l + r) // 2
 
             # Want to check if works
-            if self.isValidX(quantities, n, mid):
+            if sum(math.ceil(quantity / mid) for quantity in quantities) <= n:
                 x = mid
                 # Since this is valid, we don't care about anything bigger
                 # than mid! Hence, we decrease search-space to left subhalf :)
@@ -32,6 +32,3 @@ class Solution:
                 l = mid + 1
         
         return x
-    
-    def isValidX(self, quantities, n, x):
-        return sum(math.ceil(quantity / x) for quantity in quantities) <= n
