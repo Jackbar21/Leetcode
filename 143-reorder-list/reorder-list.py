@@ -10,18 +10,29 @@ class Solution:
         """
 
         # Step 1: Add all nodes (in order) to array
-        arr = collections.deque()
+        arr = []
         while head:
             arr.append(head)
             head = head.next
         
+        # l, r = 0, len(arr) - 1
+        # while l < r:
+    
+            
+        
         # Step 2: Add elements to new array in re-ordered fashion
         reordered_arr = []
-        left_next = True
-        while len(arr) > 0:
-            next_node = arr.popleft() if left_next else arr.pop()
-            reordered_arr.append(next_node)
-            left_next = not left_next
+        # left_next = True
+        l, r = 0, len(arr) - 1
+        while l <= r:
+            # next_node = arr.popleft() if left_next else arr.pop()
+            # reordered_arr.append(next_node)
+            # left_next = not left_next
+            reordered_arr.append(arr[l])
+            l += 1
+            if l < r:
+                reordered_arr.append(arr[r])
+                r -= 1
 
         reordered_arr.append(None)
         for i in range(len(reordered_arr) - 1):
