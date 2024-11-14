@@ -18,7 +18,7 @@ class Solution:
 
         # Step 2: Set nodes' next values respective to needed reordering :)
         l, r = 0, len(arr) - 1
-        while l < r - 1:
+        while l + 1 < r:
             cur_head = arr[l]
             cur_tail = arr[r]
 
