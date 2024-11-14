@@ -13,9 +13,8 @@ class Solution:
         arr = []
         while head:
             arr.append(head)
-            tmp_next = head.next
-            head.next = None
-            head = tmp_next
+            head = head.next
+            arr[-1].next = None
 
         # Step 2: Set nodes' next values respective to needed reordering :)
         l, r = 0, len(arr) - 1
