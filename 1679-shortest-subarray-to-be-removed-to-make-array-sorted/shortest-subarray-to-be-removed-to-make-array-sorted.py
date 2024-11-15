@@ -28,6 +28,21 @@ class Solution:
         # Initialze res to better of these two cases!
         res = len(arr) - max(length_left, length_right)
 
+        l, r = 0, i
+        while l <= j and r < len(arr):
+            if arr[l] <= arr[r]:
+                # Valid case!
+                res = min(res, r - l + 1 - 2)
+                # The more we increase, furthermore the WORSE results we will
+                # achieve for l. So here, increment l!
+                l += 1
+            else:
+                # Value on the right is not large enough, so need to increase it!
+                r += 1
+        
+        return res
+
+
         for index in range(j + 1):
             l, r = i, len(arr) - 1
             k = float("inf")
