@@ -51,9 +51,10 @@ class Solution:
             res = min(res, k - index + 1 - 2)
 
         # Length of left subhalf
-        length_left = len(arr[:j+1])
+        # length_left = len(arr[:j+1])
+        length_left = j + 1
         
-        length_right = len(arr[i:])
+        length_right = len(arr) - i
         # print(f"{i=}")
         return min(
             res,
