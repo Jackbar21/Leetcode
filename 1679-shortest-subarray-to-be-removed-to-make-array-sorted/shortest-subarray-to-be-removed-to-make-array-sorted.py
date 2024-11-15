@@ -20,9 +20,13 @@ class Solution:
         if j >= i:
             # assert j == len(arr) - 1 and i == 0
             return 0
-
-        # Worst case, delete all but one element!
-        res = len(arr) - 1 
+        
+        # Case 1: Check if removing all elements except left sorted part yields better results
+        length_left = j + 1
+        # Case 2: Check if removing all elements except right sorted part yields better results
+        length_right = len(arr) - i
+        # Initialze res to better of these two cases!
+        res = len(arr) - max(length_left, length_right)
 
         for index in range(j + 1):
             l, r = i, len(arr) - 1
@@ -38,14 +42,5 @@ class Solution:
             
             res = min(res, k - index - 1) # (k-index+1) - 2 since don't wanna include ends!
 
-        # Case 1: Check if removing all elements except left sorted part yields better results
-        length_left = j + 1
-        res = min(res, len(arr) - length_left)
-        
-        # Case 2: Check if removing all elements except right sorted part yields better results
-        length_right = len(arr) - i
-        res = min(res, len(arr) - length_right)
-        
-        # Optimal result!
         return res
         
