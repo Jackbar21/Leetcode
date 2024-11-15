@@ -32,7 +32,7 @@ class Solution:
         while l <= j and r < len(arr):
             if arr[l] <= arr[r]:
                 # Valid case!
-                res = min(res, r - l + 1 - 2)
+                res = min(res, r - l - 1) # (r-l+1) - 2 since don't wanna include ends!
                 # The more we increase, furthermore the WORSE results we will
                 # achieve for l. So here, increment l!
                 l += 1
@@ -41,21 +41,3 @@ class Solution:
                 r += 1
         
         return res
-
-
-        for index in range(j + 1):
-            l, r = i, len(arr) - 1
-            k = float("inf")
-            while l <= r:
-                mid = (l + r) // 2
-                if arr[index] <= arr[mid]:
-                    # Found a valid index! Search for one even smaller :)
-                    k = min(k, mid)
-                    r = mid - 1
-                else:
-                    l = mid + 1
-            
-            res = min(res, k - index - 1) # (k-index+1) - 2 since don't wanna include ends!
-
-        return res
-        
