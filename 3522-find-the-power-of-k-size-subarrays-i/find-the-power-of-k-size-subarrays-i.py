@@ -1,6 +1,8 @@
 class Solution:
-    @cache
     def getPowerArrayLengthFromIndex(self, i):
+        if i in self.memo:
+            return self.memo[i]
+
         nums = self.nums
         if i >= len(nums) - 1:
             return 1
@@ -9,11 +11,13 @@ class Solution:
         if nums[i] == nums[i + 1] - 1:
             res += self.getPowerArrayLengthFromIndex(i + 1)
         
+        self.memo[i] = res
         return res
         
         
     def resultsArray(self, nums: List[int], k: int) -> List[int]:
         self.nums = nums
+        self.memo = {}
         # Idea: from each index, store the length of the LONGEST consecutive & sorted
         # sequence of elements STARTING at that index. Then from that point on, for each
         # index, we check if there is a sorted array of length AT LEAST k (and add its
