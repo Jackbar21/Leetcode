@@ -12,11 +12,10 @@ class Solution:
         # Change of plans: Make array that stores index of where current longest chain started
         
         cur_length = 1
-        for i in range(1, k - 1):
-            cur_length += 1
+        for i in range(k - 2, 0, -1):
             if nums[i - 1] != nums[i] - 1:
-                cur_length = 1
-
+                break
+            cur_length += 1
 
         answer = []
         for i in range(k - 1, len(nums)):
