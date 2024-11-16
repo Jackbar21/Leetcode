@@ -11,14 +11,16 @@ class Solution:
 
         # Change of plans: Make array that stores index of where current longest chain started
         
-
-        answer = []
         prev = 0
-        for i in range(1, len(nums)):
+        for i in range(1, k - 1):
             if nums[i - 1] != nums[i] - 1:
                 prev = i
 
-            if i >= k - 1:
-                answer.append(nums[i] if (i - prev + 1) >= k else -1)
+        answer = []
+        for i in range(k - 1, len(nums)):
+            if nums[i - 1] != nums[i] - 1:
+                prev = i
+
+            answer.append(nums[i] if (i - prev + 1) >= k else -1)
         
         return answer
