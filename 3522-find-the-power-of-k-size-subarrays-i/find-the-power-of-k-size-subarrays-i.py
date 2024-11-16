@@ -14,7 +14,7 @@ class Solution:
             arr.append(prev)
 
         return [
-            nums[i] if i - arr[i] > k - 2 else -1
+            nums[i] if (i - arr[i] + 1) >= k else -1
             for i in range(k - 1, len(nums))
         ]
         
