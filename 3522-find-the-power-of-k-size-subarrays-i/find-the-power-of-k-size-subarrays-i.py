@@ -31,7 +31,7 @@ class Solution:
                 prev = i
             arr.append(prev)
         # return arr
-        print(arr)
+        # print(arr)
 
         return [
             nums[i]
