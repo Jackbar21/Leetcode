@@ -4,6 +4,9 @@ class Solution:
         self.memo = {}
 
     def getPowerArrayLengthFromIndex(self, i):
+        if i in self.memo:
+            return self.memo[i]
+
         nums = self.nums
 
         if i >= len(nums) - 1:
