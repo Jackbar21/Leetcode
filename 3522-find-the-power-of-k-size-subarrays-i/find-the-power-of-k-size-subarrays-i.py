@@ -24,3 +24,5 @@ class Solution:
             answer.append(nums[i] if (i - prev + 1) >= k else -1)
         
         return answer
+
+        return 
