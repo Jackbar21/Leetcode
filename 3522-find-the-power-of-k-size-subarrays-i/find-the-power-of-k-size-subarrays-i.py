@@ -13,16 +13,15 @@ class Solution:
         
         cur_length = 1
         for i in range(1, k - 1):
-            if nums[i - 1] == nums[i] - 1:
-                cur_length += 1
-            else:
+            cur_length += 1
+            if nums[i - 1] != nums[i] - 1:
                 cur_length = 1
+
 
         answer = []
         for i in range(k - 1, len(nums)):
-            if nums[i - 1] == nums[i] - 1:
-                cur_length += 1
-            else:
+            cur_length += 1
+            if nums[i - 1] != nums[i] - 1:
                 cur_length = 1
 
             answer.append(nums[i] if cur_length >= k else -1)
