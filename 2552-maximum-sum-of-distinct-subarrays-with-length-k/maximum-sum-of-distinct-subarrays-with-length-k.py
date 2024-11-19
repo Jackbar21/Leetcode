@@ -1,14 +1,4 @@
 class Solution:
-    # Get the sum of nums[i..j] in O(1) time
-    def getSubarraySum(self, i, j):
-        assert 0 <= i < len(self.nums)
-        assert 0 <= j < len(self.nums)
-        assert i <= j
-
-        if i == 0:
-            return self.prefix_sums[j]
-        
-        return self.prefix_sums[j] - self.prefix_sums[i - 1]
     def maximumSubarraySum(self, nums: List[int], k: int) -> int:
         # Step 1: Populate prefix sums [in O(n) time] to later on be 
         # able to efficiently query the sum of any subarray in O(1) time!
@@ -16,38 +6,39 @@ class Solution:
         for i in range(1, len(nums)):
             prefix_sums.append(prefix_sums[-1] + nums[i])
         self.prefix_sums = prefix_sums
-        self.nums = nums
 
-        # d = {}
+        # Initialize hash-map to store elements & frequency of first k values in nums
         d = defaultdict(int)
-
-        res = 0
-
         for i in range(k):
             num = nums[i]
-            # d[num] = d.get(num, 0) + 1
             d[num] += 1
 
-        l = 0
-        r = k - 1
-        # for r in range(k - 1, len(nums)):
+        l, r = 0, k - 1
+        res = 0
         while True:
-            # Check if current window is valid, and if so, update
-            # result as need be
-            all_elements_distinct = len(d) == k
-            if all_elements_distinct:
-                res = max(res, self.getSubarraySum(l, r))
+            # Since using a hash-map to store current values in sliding window of length
+            # k at all times, can simply check the total number of distinct keys to
+            # verify the current number of distinct elements inside each subarray of length k :)
+            if len(d) == k:
+                # Get the sum of nums[l..r] in O(1) time
+                subarray_sum = prefix_sums[r] - (self.prefix_sums[l - 1] if l > 0 else 0)
+                res = max(res, subarray_sum)
             
             # Loop Invariant
-            d[nums[l]] -= 1
-            if d[nums[l]] <= 0:
-                assert d[nums[l]] == 0
+
+            ## (1) Handle left pointer
+            if d[nums[l]] > 1:
+                d[nums[l]] -= 1
+            else:
+                # No more occurences of this element in current window!
                 del d[nums[l]]
             l += 1
 
+            ## (2) Handle right pointer
             r += 1
             if r >= len(nums):
-                break # Termination condition!
+                # Termination condition!
+                break 
             d[nums[r]] += 1
         
         return res
