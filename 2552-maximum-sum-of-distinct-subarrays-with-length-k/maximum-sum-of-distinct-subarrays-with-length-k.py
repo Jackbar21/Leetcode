@@ -1,11 +1,5 @@
 class Solution:
     def maximumSubarraySum(self, nums: List[int], k: int) -> int:
-        # Step 1: Populate prefix sums [in O(n) time] to later on be 
-        # able to efficiently query the sum of any subarray in O(1) time!
-        # prefix_sums = [nums[0]]
-        # for i in range(1, len(nums)):
-        #     prefix_sums.append(prefix_sums[-1] + nums[i])
-
         # Initialize hash-map to store elements & frequency of first k values in nums
         d = defaultdict(int)
         cur_sum = 0
