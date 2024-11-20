@@ -74,18 +74,16 @@ class Solution:
         # Hence, we can run rightmost-binary search to find the valid pair (i, j) with maximal
         # value j, to obtain the largest valid subarray starting from index i!
         # res = float("-inf")
-        l, r = i, len(self.s) - 1 # i + 2 since already checked k == 0 case!
+        l, r = i, len(self.s) - 1
         rightmost_index = -1
         while l <= r:
             mid = (l + r) // 2
             if self.isValidSubstring(i, mid):
-                rightmost_index = max(rightmost_index, mid)
+                rightmost_index = mid
                 l = mid + 1
             else:
                 r = mid - 1
         
-        res = -1
-        if rightmost_index != -1:
-            res = (rightmost_index - i + 1)
+        res = -1 if (rightmost_index == -1) else (rightmost_index - i + 1)
         self.memo[i] = res
         return res
