@@ -24,14 +24,17 @@ class Solution:
 
         d = {letter: 0 for letter in 'abc'}
         prefix = []
-
+        max_a, max_b, max_c = -k, -k, -k
         for letter in s:
             d[letter] += 1
             prefix.append(d.copy())
+            max_a += (letter == 'a')
+            max_b += (letter == 'b')
+            max_c += (letter == 'c')
         
-        max_a = s.count('a') - k
-        max_b = s.count('b') - k
-        max_c = s.count('c') - k
+        # max_a = s.count('a') - k
+        # max_b = s.count('b') - k
+        # max_c = s.count('c') - k
         if max_a < 0 or max_b < 0 or max_c < 0:
             # No possible solution!
             return -1
