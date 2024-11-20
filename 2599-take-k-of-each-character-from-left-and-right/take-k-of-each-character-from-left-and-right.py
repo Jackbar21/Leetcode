@@ -59,8 +59,8 @@ class Solution:
     
     # Largest valid subarray starting at index i
     def dp(self, i):
-        if i in self.memo:
-            return self.memo[i]
+        # if i in self.memo:
+        #     return self.memo[i]
         
         # if not 0 <= i < len(self.s):
         #     raise Exception("Impossible case!")
