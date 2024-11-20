@@ -85,5 +85,5 @@ class Solution:
                 r = mid - 1
         
         res = -1 if (rightmost_index == -1) else (rightmost_index - i + 1)
-        self.memo[i] = res
+        # self.memo[i] = res
         return res
