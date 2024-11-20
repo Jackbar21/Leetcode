@@ -47,7 +47,7 @@ class Solution:
         # "remove smallest size subarray from length and right such that sum of each
         # letter is at least k" to "obtain largest subarray from middle such that sum
         # of each letter doesn't exceed its total count - k" :)
-        self.memo = {}
+        # self.memo = {}
         self.s = s
         self.prefix = prefix
        
@@ -58,6 +58,7 @@ class Solution:
         return len(s) - largest_valid_subarray_length
     
     # Largest valid subarray starting at index i
+    # (Technically only called once for each index i, so no need for memoization!)
     def dp(self, i):
         # if i in self.memo:
         #     return self.memo[i]
