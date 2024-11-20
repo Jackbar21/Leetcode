@@ -24,25 +24,20 @@ class Solution:
 
         d = {letter: 0 for letter in 'abc'}
         prefix = []
-        max_a, max_b, max_c = -k, -k, -k
+
         for letter in s:
             d[letter] += 1
             prefix.append(d.copy())
-            max_a += (letter == 'a')
-            max_b += (letter == 'b')
-            max_c += (letter == 'c')
         
-        # max_a = s.count('a') - k
-        # max_b = s.count('b') - k
-        # max_c = s.count('c') - k
+        max_a = s.count('a') - k
+        max_b = s.count('b') - k
+        max_c = s.count('c') - k
         if max_a < 0 or max_b < 0 or max_c < 0:
             # No possible solution!
             return -1
-        
         if max_a == max_b == max_c == 0:
             # Only possible solution is to take the entire string s!
             return len(s)
-
         self.max_a, self.max_b, self.max_c = max_a, max_b, max_c
 
         # We want essentially largest subarray sum (where sum is defined as
@@ -60,7 +55,6 @@ class Solution:
             self.dp(i)
             for i in range(len(s))
         )
-        print(self.memo)
         return len(s) - largest_valid_subarray_length
     
     # Largest valid subarray starting at index i
