@@ -43,6 +43,7 @@ class Solution:
 
         # VALID denotes unguarded, GUARDED denotes guarded.
         # OBSTACLE denotes obstacle, e.g. wall or guard.
+        self.finished = set()
         VALID, GUARDED, OBSTACLE = 0, 1, 2
         grid = [[VALID] * n for _ in range(m)]
 
@@ -52,27 +53,40 @@ class Solution:
         for wall_x, wall_y in walls:
             grid[wall_x][wall_y] = OBSTACLE
         
+        LEFT, RIGHT, UP, DOWN = 0, 1, 2, 3
         for guard_x, guard_y in guards:
             # Left
             for index in range(guard_y - 1, -1, -1):
+                if (guard_x, index, LEFT) in self.finished:
+                    break
+                self.finished.add((index, LEFT))
                 if grid[guard_x][index] == OBSTACLE:
                     break
                 grid[guard_x][index] = GUARDED
 
             # Right
             for index in range(guard_y + 1, n):
+                if (guard_x, index, RIGHT) in self.finished:
+                    break
+                self.finished.add((index, RIGHT))
                 if grid[guard_x][index] == OBSTACLE:
                     break
                 grid[guard_x][index] = GUARDED
 
             # Up
             for index in range(guard_x - 1, -1, -1):
+                if (index, guard_y, UP) in self.finished:
+                    break
+                self.finished.add((index, UP))
                 if grid[index][guard_y] == OBSTACLE:
                     break
                 grid[index][guard_y] = GUARDED
 
             # Down
             for index in range(guard_x + 1, m):
+                if (index, guard_y, DOWN) in self.finished:
+                    break
+                self.finished.add((index, DOWN))
                 if grid[index][guard_y] == OBSTACLE:
                     break
                 grid[index][guard_y] = GUARDED
