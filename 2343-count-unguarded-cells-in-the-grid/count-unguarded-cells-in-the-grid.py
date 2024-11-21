@@ -1,9 +1,10 @@
 class Solution:
     def isValidPosition(self, x, y):
-        return 0 <= x < self.m and 0 <= y < self.n and (x, y) not in self.walls_set
+        return 0 <= x < self.m and 0 <= y < self.n and (x, y) not in self.walls_set and (x, y) not in self.guards_set
     def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
         guards_set = set((row, col) for row, col in guards)
         walls_set = set((row, col) for row, col in walls)
+        self.guards_set = guards_set
         self.walls_set = walls_set
         self.m, self.n = m, n
         self.finished_moves = set()
