@@ -54,10 +54,10 @@ class Solution:
         
         for guard_x, guard_y in guards:
             directions = [
-                (0, 1),
-                (0, -1),
-                (1, 0),
-                (-1, 0)
+                (0, -1), # LEFT
+                (0, 1),  # RIGHT
+                (-1, 0), # UP
+                (1, 0)   # DOWN
             ]
             for direction in directions:
                 dx, dy = direction
@@ -67,28 +67,4 @@ class Solution:
                     x += dx
                     y += dy
 
-            # Left
-            # for index in range(guard_y - 1, -1, -1):
-            #     if grid[guard_x][index] == OBSTACLE:
-            #         break
-            #     grid[guard_x][index] = GUARDED
-
-            # # Right
-            # for index in range(guard_y + 1, n):
-            #     if grid[guard_x][index] == OBSTACLE:
-            #         break
-            #     grid[guard_x][index] = GUARDED
-
-            # # Up
-            # for index in range(guard_x - 1, -1, -1):
-            #     if grid[index][guard_y] == OBSTACLE:
-            #         break
-            #     grid[index][guard_y] = GUARDED
-
-            # # Down
-            # for index in range(guard_x + 1, m):
-            #     if grid[index][guard_y] == OBSTACLE:
-            #         break
-            #     grid[index][guard_y] = GUARDED
-        
         return sum(row.count(VALID) for row in grid)
