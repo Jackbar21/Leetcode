@@ -53,28 +53,42 @@ class Solution:
             grid[wall_x][wall_y] = OBSTACLE
         
         for guard_x, guard_y in guards:
+            directions = [
+                (0, 1),
+                (0, -1),
+                (1, 0),
+                (-1, 0)
+            ]
+            for direction in directions:
+                dx, dy = direction
+                x, y = guard_x + dx, guard_y + dy
+                while 0 <= x < m and 0 <= y < n and grid[x][y] != OBSTACLE:
+                    grid[x][y] = GUARDED
+                    x += dx
+                    y += dy
+
             # Left
-            for index in range(guard_y - 1, -1, -1):
-                if grid[guard_x][index] == OBSTACLE:
-                    break
-                grid[guard_x][index] = GUARDED
+            # for index in range(guard_y - 1, -1, -1):
+            #     if grid[guard_x][index] == OBSTACLE:
+            #         break
+            #     grid[guard_x][index] = GUARDED
 
-            # Right
-            for index in range(guard_y + 1, n):
-                if grid[guard_x][index] == OBSTACLE:
-                    break
-                grid[guard_x][index] = GUARDED
+            # # Right
+            # for index in range(guard_y + 1, n):
+            #     if grid[guard_x][index] == OBSTACLE:
+            #         break
+            #     grid[guard_x][index] = GUARDED
 
-            # Up
-            for index in range(guard_x - 1, -1, -1):
-                if grid[index][guard_y] == OBSTACLE:
-                    break
-                grid[index][guard_y] = GUARDED
+            # # Up
+            # for index in range(guard_x - 1, -1, -1):
+            #     if grid[index][guard_y] == OBSTACLE:
+            #         break
+            #     grid[index][guard_y] = GUARDED
 
-            # Down
-            for index in range(guard_x + 1, m):
-                if grid[index][guard_y] == OBSTACLE:
-                    break
-                grid[index][guard_y] = GUARDED
+            # # Down
+            # for index in range(guard_x + 1, m):
+            #     if grid[index][guard_y] == OBSTACLE:
+            #         break
+            #     grid[index][guard_y] = GUARDED
         
         return sum(row.count(VALID) for row in grid)
