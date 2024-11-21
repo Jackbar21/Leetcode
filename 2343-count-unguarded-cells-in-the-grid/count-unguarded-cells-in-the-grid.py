@@ -1,7 +1,7 @@
 class Solution:
     def isValidPosition(self, x, y):
         return 0 <= x < self.m and 0 <= y < self.n and (x, y) not in self.walls_set and (x, y) not in self.guards_set
-    def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
+    def countUnguardedSets(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
         guards_set = set((row, col) for row, col in guards)
         walls_set = set((row, col) for row, col in walls)
         self.guards_set = guards_set
@@ -36,3 +36,45 @@ class Solution:
                     y += dy
         
         return len(valid_positions)
+
+    def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
+        # Solution using sets
+        # return self.countUnguardedSets(m, n, guards, walls)
+
+        # VALID denotes unguarded, GUARDED denotes guarded.
+        # OBSTACLE denotes obstacle, e.g. wall or guard.
+        VALID, GUARDED, OBSTACLE = 0, 1, 2
+        grid = [[VALID] * n for _ in range(m)]
+
+        for guard_x, guard_y in guards:
+            grid[guard_x][guard_y] = OBSTACLE
+
+        for wall_x, wall_y in walls:
+            grid[wall_x][wall_y] = OBSTACLE
+        
+        for guard_x, guard_y in guards:
+            # Left
+            for index in range(guard_y - 1, -1, -1):
+                if grid[guard_x][index] == OBSTACLE:
+                    break
+                grid[guard_x][index] = GUARDED
+
+            # Right
+            for index in range(guard_y + 1, n):
+                if grid[guard_x][index] == OBSTACLE:
+                    break
+                grid[guard_x][index] = GUARDED
+
+            # Up
+            for index in range(guard_x - 1, -1, -1):
+                if grid[index][guard_y] == OBSTACLE:
+                    break
+                grid[index][guard_y] = GUARDED
+
+            # Down
+            for index in range(guard_x + 1, m):
+                if grid[index][guard_y] == OBSTACLE:
+                    break
+                grid[index][guard_y] = GUARDED
+        
+        return sum(row.count(VALID) for row in grid)
