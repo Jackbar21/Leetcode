@@ -5,7 +5,7 @@ class Solution:
         res = 1
         for row in matrix:
             binary = (
-                tuple(digit for digit in row)
+                tuple(row)
                 if row[0] == 1
                 else tuple(digit ^ 1 for digit in row)
             )
