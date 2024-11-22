@@ -12,15 +12,15 @@ class Solution:
         # 1 1 0 |
 
         # Always choose key where first digit/char is a '1'
-        d = defaultdict(int)
+        d = {}
 
         for row in matrix:
             binary = (
-                tuple((digit) for digit in row)
+                tuple(digit for digit in row)
                 if row[0] == 1
-                else tuple((digit ^ 1) for digit in row)
+                else tuple(digit ^ 1 for digit in row)
             )
-            d[binary] += 1
+            d[binary] = d.get(binary, 0) + 1
         
         return max(d.values())
 
