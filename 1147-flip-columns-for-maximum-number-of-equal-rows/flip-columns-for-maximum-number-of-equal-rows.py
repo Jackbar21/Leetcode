@@ -1,29 +1,16 @@
 class Solution:
     def maxEqualRowsAfterFlips(self, matrix: List[List[int]]) -> int:
-        # 0 ^ 1 == 1
-        # 1 ^ 1 == 0
-
-        # For each row, store:
-        # (1) its indices with value 0
-        # (2) its indices with value 1
-
-        # 0 0 0 |
-        # 0 0 1 |
-        # 1 1 0 |
-
         # Always choose key where first digit/char is a '1'
         d = {}
-
+        res = 1
         for row in matrix:
             binary = (
                 tuple(digit for digit in row)
                 if row[0] == 1
                 else tuple(digit ^ 1 for digit in row)
             )
-            d[binary] = d.get(binary, 0) + 1
+            new_val = d.get(binary, 0) + 1
+            res = max(res, new_val)
+            d[binary] = new_val
         
-        return max(d.values())
-
-
-
-
+        return res
