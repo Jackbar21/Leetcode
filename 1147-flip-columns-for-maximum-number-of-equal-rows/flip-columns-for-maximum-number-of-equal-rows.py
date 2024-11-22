@@ -16,9 +16,9 @@ class Solution:
 
         for row in matrix:
             binary = (
-                ''.join(str(digit) for digit in row)
+                tuple((digit) for digit in row)
                 if row[0] == 1
-                else ''.join(str(digit ^ 1) for digit in row)
+                else tuple((digit ^ 1) for digit in row)
             )
             d[binary] += 1
         
