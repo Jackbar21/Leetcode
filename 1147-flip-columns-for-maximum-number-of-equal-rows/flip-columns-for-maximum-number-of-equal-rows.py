@@ -10,7 +10,7 @@ class Solution:
                 else tuple(digit ^ 1 for digit in row)
             )
             new_val = d.get(binary, 0) + 1
-            res = max(res, new_val)
             d[binary] = new_val
+            res = max(res, new_val)
         
         return res
