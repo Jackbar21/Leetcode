@@ -4,34 +4,6 @@ class Solution:
             self.applyHorizontalGravity(row)
             for row in box
         ][::-1])
-        res = [
-            self.applyHorizontalGravity(row)
-            for row in box
-        ]
-        # return zip(*res)
-
-        for row in res:
-            print(row)
-            
-        # Step 1: Transpose res
-        m, n = len(res), len(res[0])
-        new_res = [[-1] * m for _ in range(n)]
-        for i in range(len(res)):
-            for j in range(len(res[i])):
-                # res[i][j], res[j][i] = res[j][i], res[i][j]
-                new_res[j][i] = res[i][j]
-            
-        print("APPLY TRANSPOSE...")
-        for row in new_res:
-            print(row)
-
-        # Step 2: Reverse rows of res
-        # return res
-        return [
-            row[::-1]
-            for row in new_res
-        ]
-
     
     def applyHorizontalGravity(self, row):
         queue = collections.deque()
@@ -46,7 +18,8 @@ class Solution:
             
             assert item in [STONE, OBSTACLE]
             if item == OBSTACLE:
-                queue.clear() # TODO: check if re-initialization is faster
+                # queue.clear() # TODO: check if re-initialization is faster
+                queue = collections.deque()
                 continue
             
             assert item == STONE
