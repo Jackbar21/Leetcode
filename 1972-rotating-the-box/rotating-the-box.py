@@ -1,9 +1,9 @@
 class Solution:
     def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
-        # return zip(*[
-        #     self.applyHorizontalGravity(row)
-        #     for row in box
-        # ][::-1])
+        return zip(*[
+            self.applyHorizontalGravity(row)
+            for row in box
+        ][::-1])
         res = [
             self.applyHorizontalGravity(row)
             for row in box
