@@ -7,7 +7,7 @@ class Solution:
         res = [
             self.applyHorizontalGravity(row)
             for row in box
-        ][::-1]
+        ]
         # return zip(*res)
 
         for row in res:
@@ -27,7 +27,10 @@ class Solution:
 
         # Step 2: Reverse rows of res
         # return res
-        return new_res
+        return [
+            row[::-1]
+            for row in new_res
+        ]
 
     
     def applyHorizontalGravity(self, row):
