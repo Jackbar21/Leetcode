@@ -18,8 +18,8 @@ class Solution:
             
             assert item in [STONE, OBSTACLE]
             if item == OBSTACLE:
-                # queue.clear() # TODO: check if re-initialization is faster
-                queue = collections.deque()
+                queue.clear() # TODO: check if re-initialization is faster
+                # queue = collections.deque()
                 continue
             
             assert item == STONE
