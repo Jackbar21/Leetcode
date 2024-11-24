@@ -20,8 +20,6 @@ class Solution:
             return head.next
 
         node = d[index - 1 - n]
-        node.next = d.get(index - 1 - n + 2, None)
+        node.next = d.get(index + 1 - n, None)
 
-        # print(d)
-        # print(index)
         return head
