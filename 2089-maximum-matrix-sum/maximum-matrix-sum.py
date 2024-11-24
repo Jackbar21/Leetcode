@@ -1,28 +1,23 @@
 class Solution:
     def maxMatrixSum(self, matrix: List[List[int]]) -> int:
-        n = len(matrix)
-        assert n >= 2
-
         odd_neg = 0 # 0 means False/even, 1 means True/odd
         zeroes = 0 # True iff at least one zero in matrix
         smallest_magnitude = float("inf") # (i.e. smallest number when absolute value'd)
 
         res = 0
-        for i in range(n):
-            for j in range(n):
-                num = matrix[i][j]
-                smallest_magnitude = min(smallest_magnitude, abs(num))
+        for row in matrix:
+            for num in row:
+                magnitude = abs(num)
+                if smallest_magnitude > magnitude:
+                    smallest_magnitude = magnitude
+
                 if num <= 0:
-                    odd_neg ^= 1 # Flip the bit!
+                    odd_neg ^= 1
                     zeroes |= (num == 0)
-                    res -= num
-                else:
-                    res += num
+                
+                res += magnitude
                     
-        
         if not zeroes and odd_neg:
-            # res += largest_neg
-            # res += largest_neg
             res -= 2 * smallest_magnitude
         
         return res
