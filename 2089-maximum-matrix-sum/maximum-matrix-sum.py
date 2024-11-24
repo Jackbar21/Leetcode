@@ -1,6 +1,6 @@
 class Solution:
     def maxMatrixSum(self, matrix: List[List[int]]) -> int:
-        odd_neg = 0 # 0 means False/even, 1 means True/odd
+        odd_neg = False # 0 means False/even, 1 means True/odd
         smallest_magnitude = float("inf") # (i.e. smallest number when absolute value'd)
 
         res = 0
@@ -11,7 +11,7 @@ class Solution:
                     smallest_magnitude = magnitude
 
                 if num < 0:
-                    odd_neg ^= 1
+                    odd_neg = not odd_neg
                 
                 res += magnitude
                     
