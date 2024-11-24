@@ -10,7 +10,7 @@ class Solution:
                 if smallest_magnitude > magnitude:
                     smallest_magnitude = magnitude
 
-                if num <= 0:
+                if num < 0:
                     odd_neg ^= 1
                 
                 res += magnitude
