@@ -69,4 +69,3 @@ class Solution:
             node.random = arr[random_index]
         
         return arr[0]
-
