@@ -27,8 +27,7 @@ class Solution:
             [
                 (tl, tm, br, bl, bm, tr),
                 (tl, tm, tr, bl, br, bm)
-            ] if br == 0 else
-            [] # Should not be possible!!!
+            ] # br == 0 case!
         )
         
     def slidingPuzzle(self, board: List[List[int]]) -> int:
