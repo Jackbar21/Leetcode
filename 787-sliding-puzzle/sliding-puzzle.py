@@ -52,15 +52,15 @@ class Solution:
         self.GOAL_STATE = (1, 2, 3, 4, 5, 0)
 
         # fringe is queue since using BFS!
-        # fringe = [(0, self.START_STATE)] # (cost, state)
-        # fringe = collections.deque(fringe)
+        fringe = [(0, self.START_STATE)] # (cost, state)
+        fringe = collections.deque(fringe)
 
         # fringe is heap, since using UCS!
-        fringe = [(0, self.START_STATE)] # (cost, state)
+        # fringe = [(0, self.START_STATE)] # (cost, state)
         self.visited = set()
         while len(fringe) > 0:
-            # state, cost = queue.popleft()
-            cost, state = heapq.heappop(fringe)
+            cost, state = fringe.popleft()
+            # cost, state = heapq.heappop(fringe)
             if state == self.GOAL_STATE:
                 return cost
             
@@ -71,8 +71,8 @@ class Solution:
             next_states = self.getNextStates(state)
             new_cost = cost + 1
             for next_state in next_states:
-                heapq.heappush(
-                    fringe,
+                # heapq.heappush(
+                fringe.append(
                     (cost + 1, next_state)
                 )
         
