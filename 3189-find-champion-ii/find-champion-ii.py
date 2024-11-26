@@ -5,18 +5,16 @@ class Solution:
         for _, v in edges:
             team_to_indegree[v] += 1
         
-        best_team = None
-        best_indegree = float("inf")
+        best_team = n
         for team, indegree in team_to_indegree.items():
             if indegree != 0:
                 continue
             
-            if best_indegree == 0:
+            if best_team < n:
                 # Two teams are both undefeatable, hence
                 # no unique champion, so return -1
                 return -1
             
-            best_indegree = 0
             best_team = team
     
-        return best_team if best_indegree == 0 else -1
+        return best_team if best_team < n else -1
