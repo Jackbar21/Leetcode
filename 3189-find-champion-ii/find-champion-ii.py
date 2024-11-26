@@ -13,7 +13,7 @@ class Solution:
                 # no unique champion and return -1
                 return -1
     
-            if indegree == 0:
+            if best_indegree > indegree:
                 best_indegree = indegree
                 best_team = team
         
