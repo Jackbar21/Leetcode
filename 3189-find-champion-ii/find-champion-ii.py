@@ -1,20 +1,22 @@
 class Solution:
     def findChampion(self, n: int, edges: List[List[int]]) -> int:
-        indegrees = {node: 0 for node in range(n)}
+        team_to_indegree = {team: 0 for team in range(n)}
 
         for _, v in edges:
-            indegrees[v] += 1
+            team_to_indegree[v] += 1
         
         best_team = None
-        best_val = float("inf")
-        for team, val in indegrees.items():
-            if val == 0 and best_val == 0:
+        best_indegree = float("inf")
+        for team, indegree in team_to_indegree.items():
+            if indegree != 0:
+                continue
+            
+            if best_indegree == 0:
                 # Two teams are both undefeatable, hence
-                # no unique champion and return -1
+                # no unique champion, so return -1
                 return -1
+            
+            best_indegree = 0
+            best_team = team
     
-            if best_val > val:
-                best_val = val
-                best_team = team
-        
-        return best_team if best_val == 0 else -1
+        return best_team if best_indegree == 0 else -1
