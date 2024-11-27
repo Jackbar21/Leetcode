@@ -27,5 +27,10 @@ class Solution:
                     if neighbor not in visited:
                         visited.add(neighbor)
                         queue.append((neighbor, cost + 1))
+            
+            # 1 is shortest possible path, so all remaining paths will
+            # have same best-possible-cost of 1 :)
+            if answer[-1] == 1:
+                return answer + [1] * (len(queries) - len(answer))
         
         return answer
