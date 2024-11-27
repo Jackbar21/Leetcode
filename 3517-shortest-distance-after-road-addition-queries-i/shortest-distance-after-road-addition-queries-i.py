@@ -22,6 +22,8 @@ class Solution:
             adj_list[u].append(v)
             # adj_list[v].add(u)
             answer.append(self.getShortestPath(adj_list, 0, n - 1))
+            if answer[-1] == 1:
+                return answer + [1] * (len(queries) - len(answer)) 
         
         # print(adj_list)
         return answer
