@@ -17,7 +17,7 @@ class Solution:
             # BFS
             queue = collections.deque([(SOURCE, 0)]) # (node, cost)
             visited = set([SOURCE])
-            while len(queue) > 0:
+            while True:
                 node, cost = queue.popleft()
                 if node == DEST:
                     answer.append(cost)
