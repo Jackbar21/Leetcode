@@ -1,8 +1,8 @@
 class Solution:
-    def __init__(self):
-        self.shortest_paths = {} # (s,t): cost
-    def getShortestPath(self, s, t):
-        return self.shortest_paths.get((s, t), t - s)
+    # def __init__(self):
+    #     self.shortest_paths = {} # (s,t): cost
+    # def getShortestPath(self, s, t):
+    #     return self.shortest_paths.get((s, t), t - s)
     def shortestDistanceAfterQueries(self, n: int, queries: List[List[int]]) -> List[int]:
         # Idea: get shortest path from 0 to s for every s, 1 <= s <= n - 1.
         # Whenever a new edge from u to v gets added, take the current cost from 0 to u,
@@ -28,10 +28,10 @@ class Solution:
         
     
     def getShortestPath(self, adj_list, s, t):
-        queue = collections.deque([(s, 0, "0")]) # (node, cost, path)
+        queue = collections.deque([(s, 0)]) # (node, cost, path)
         visited = set([s])
         while len(queue) > 0:
-            node, cost, path = queue.popleft()
+            node, cost = queue.popleft()
             if node == t:
                 # print(f"{path=}")
                 return cost
@@ -39,7 +39,7 @@ class Solution:
             for neighbor in adj_list[node]:
                 if neighbor not in visited:
                     visited.add(neighbor)
-                    queue.append((neighbor, cost + 1, f"{path} -> {neighbor}"))
+                    queue.append((neighbor, cost + 1))
         
         return float("inf")
             
