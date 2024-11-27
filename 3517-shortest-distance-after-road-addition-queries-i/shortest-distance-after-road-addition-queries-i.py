@@ -11,19 +11,19 @@ class Solution:
 
         # For now, let's code up the trivial way to do this problem (call bfs from 0
         # after each query)
-        adj_list = {i: set() for i in range(n)}
+        adj_list = {i: [] for i in range(n)}
         for i in range(n - 1):
             u, v = i, i + 1
-            adj_list[u].add(v)
+            adj_list[u].append(v)
             # adj_list[v].add(u)
         
         answer = []
         for (u, v) in queries:
-            adj_list[u].add(v)
+            adj_list[u].append(v)
             # adj_list[v].add(u)
             answer.append(self.getShortestPath(adj_list, 0, n - 1))
         
-        print(adj_list)
+        # print(adj_list)
         return answer
         
     
@@ -33,7 +33,7 @@ class Solution:
         while len(queue) > 0:
             node, cost, path = queue.popleft()
             if node == t:
-                print(f"{path=}")
+                # print(f"{path=}")
                 return cost
 
             for neighbor in adj_list[node]:
