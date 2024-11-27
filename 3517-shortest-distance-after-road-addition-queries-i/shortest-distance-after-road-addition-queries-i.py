@@ -5,14 +5,14 @@ class Solution:
         # query add a new edge into adjacency list, and call BFS from 0 to n - 1 every single
         # time to get the new shortest path. It's pretty brute force, but it works just fine :)
         SOURCE, DEST = 0, n - 1
-        adj_list = {i: set() for i in range(n)}
+        adj_list = {i: [] for i in range(n)}
         for i in range(n - 1):
             u, v = i, i + 1
-            adj_list[u].add(v)
+            adj_list[u].append(v)
 
         answer = []
         for (u, v) in queries:
-            adj_list[u].add(v)
+            adj_list[u].append(v)
             
             # BFS
             queue = collections.deque([(SOURCE, 0)]) # (node, cost)
