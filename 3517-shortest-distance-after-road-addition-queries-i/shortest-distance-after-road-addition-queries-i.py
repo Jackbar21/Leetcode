@@ -1,8 +1,8 @@
 class Solution:
-    # def __init__(self):
-    #     self.shortest_paths = {} # (s,t): cost
-    # def getShortestPath(self, s, t):
-    #     return self.shortest_paths.get((s, t), t - s)
+    def __init__(self):
+        self.shortest_paths = {} # (s, t): cost
+    def getShortestPath(self, s, t):
+        return self.shortest_paths.get((s, t), t - s)
     def shortestDistanceAfterQueries(self, n: int, queries: List[List[int]]) -> List[int]:
         # Idea: get shortest path from 0 to s for every s, 1 <= s <= n - 1.
         # Whenever a new edge from u to v gets added, take the current cost from 0 to u,
