@@ -1,22 +1,18 @@
 class Solution:
     def minimumObstacles(self, grid: List[List[int]]) -> int:
-        # WALL_COST = len(grid) * len(grid[0]) + 1
+        # O(m * n * log(m * n))
         m, n = len(grid), len(grid[0])
         GOAL_STATE = (m - 1, n - 1)
         EMPTY, OBSTACLE = 0, 1
-        DIRECTIONS = [
-            (-1, 0),
-            (1, 0),
-            (0, -1),
-            (0, 1)
-        ]
+        DIRECTIONS = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
-        # O(m * n * log(m * n))
-        fringe = [(0, (0, 0))] # min heap, (cost, (new_x, new_y))
-        visited = set([(0, 0)]) # TODO: notbalding tip of the day: use boolean array
+        # min heap / priority queue, (cost, (new_x, new_y))
+        fringe = [(0, (0, 0))]
+        # Shoutout to Mr. 'notbalding' on YouTube for suggesting to use an array of
+        # booleans (instead of a hashset) for keeping track of visited/unvisited nodes :)
         visited = [[False] * n for _ in range(m)]
-
-        while True: # TODO: Change to 'while True' since always sol'n!
+        visited[0][0] = True
+        while True:
             cost, (x, y) = heapq.heappop(fringe)
             if (x, y) == GOAL_STATE:
                 return cost
@@ -31,4 +27,4 @@ class Solution:
                     is_obstacle = grid[new_x][new_y] == OBSTACLE
                     heapq.heappush(fringe, (cost + is_obstacle, pos))
 
-        raise Exception("Unreachable Code")
+        # raise Exception("Unreachable Code")
