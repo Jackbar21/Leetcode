@@ -21,15 +21,13 @@ class Solution:
                 return cost
 
             for dx, dy in DIRECTIONS:
-                new_x, new_y = (x + dx, y + dy)
+                pos = (x + dx, y + dy)
+                new_x, new_y = pos
                 if (0 <= new_x < m and 0 <= new_y < n 
-                    and (new_x, new_y) not in visited
+                    and pos not in visited
                 ):
-                    visited.add((new_x, new_y))
-                    new_x, new_y = (new_x, new_y)
+                    visited.add(pos)
                     is_obstacle = grid[new_x][new_y] == OBSTACLE
-                    heapq.heappush(fringe, (cost + is_obstacle, (new_x, new_y)))
+                    heapq.heappush(fringe, (cost + is_obstacle, pos))
 
-
-            
         raise Exception("Unreachable Code")
