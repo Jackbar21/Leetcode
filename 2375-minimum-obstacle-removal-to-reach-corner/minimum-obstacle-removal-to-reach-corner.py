@@ -15,7 +15,7 @@ class Solution:
         fringe = [(0, (0, 0))] # min heap, (cost, (new_x, new_y))
         visited = set([(0, 0)]) # TODO: notbalding tip of the day: use boolean array
 
-        while len(fringe) > 0: # TODO: Change to 'while True' since always sol'n!
+        while True: # TODO: Change to 'while True' since always sol'n!
             cost, (x, y) = heapq.heappop(fringe)
             if (x, y) == GOAL_STATE:
                 return cost
