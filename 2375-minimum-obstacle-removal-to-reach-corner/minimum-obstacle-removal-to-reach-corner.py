@@ -1,5 +1,8 @@
 class Solution:
     def minimumObstacles(self, grid: List[List[int]]) -> int:
+        return self.minimumObstaclesUCS(grid)
+    
+    def minimumObstaclesUCS(self, grid: List[List[int]]) -> int:
         # O(m * n * log(m * n))
         m, n = len(grid), len(grid[0])
         GOAL_STATE = (m - 1, n - 1)
@@ -28,3 +31,6 @@ class Solution:
                     heapq.heappush(fringe, (cost + is_obstacle, pos))
 
         # raise Exception("Unreachable Code")
+    
+    def minimumObstaclesDijskstra(self, grid):
+        return None
