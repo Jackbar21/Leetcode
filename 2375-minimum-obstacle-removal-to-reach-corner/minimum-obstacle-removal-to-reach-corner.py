@@ -14,6 +14,7 @@ class Solution:
         # O(m * n * log(m * n))
         fringe = [(0, (0, 0))] # min heap, (cost, (new_x, new_y))
         visited = set([(0, 0)]) # TODO: notbalding tip of the day: use boolean array
+        visited = [[False] * n for _ in range(m)]
 
         while True: # TODO: Change to 'while True' since always sol'n!
             cost, (x, y) = heapq.heappop(fringe)
@@ -24,9 +25,9 @@ class Solution:
                 pos = (x + dx, y + dy)
                 new_x, new_y = pos
                 if (0 <= new_x < m and 0 <= new_y < n 
-                    and pos not in visited
+                    and not visited[new_x][new_y]
                 ):
-                    visited.add(pos)
+                    visited[new_x][new_y] = True
                     is_obstacle = grid[new_x][new_y] == OBSTACLE
                     heapq.heappush(fringe, (cost + is_obstacle, pos))
 
