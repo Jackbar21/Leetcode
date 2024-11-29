@@ -15,12 +15,17 @@ class Solution:
         DIRECTIONS = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
         fringe = [(0, START_POSITION)] # (time, pos)
-        visited = set([START_POSITION])
+        # visited = set([START_POSITION])
+        visited = set()
 
         while True:
             cur_time, (x, y) = heapq.heappop(fringe)
             if (x, y) == GOAL_STATE:
                 return cur_time
+            
+            if (x, y) in visited:
+                continue
+            visited.add((x, y))
             
             for dx, dy in DIRECTIONS:
                 r, c = (x + dx, y + dy)
@@ -30,8 +35,8 @@ class Solution:
                     continue
                 
                 # Check if already visited
-                if (r, c) in visited:
-                    continue
+                # if (r, c) in visited:
+                #     continue
                 
                 # If I can't "pay" to go to a cell UP FRONT, I can zig-zap
                 # between the previous position and my current position, OVER AND OVER
@@ -45,4 +50,10 @@ class Solution:
                     time += diff + (diff % 2)
 
                 heapq.heappush(fringe, (time, (r, c)))
-                visited.add((r, c))    
+                # visited.add((r, c))
+
+# BFS / DFS -- 
+
+# BFS: fringe = queue
+# DFS: fringe = stack
+# UCS: fringe = min-heap / priority-queue
