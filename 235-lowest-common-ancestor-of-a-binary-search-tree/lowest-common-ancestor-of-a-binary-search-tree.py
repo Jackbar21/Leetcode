@@ -12,12 +12,12 @@ class Solution:
             small, big = big, small
         return self.LCA(root, small, big)
     
+
     def LCA(self, root, small, big):
-        if big < root.val:
+        if root.val < small:
+            return self.LCA(root.right, small, big)
+
+        if root.val > big:
             return self.LCA(root.left, small, big)
         
-        if small > root.val:
-            return self.LCA(root.right, small, big)
-        
-        assert big >= root.val >= small
         return root
