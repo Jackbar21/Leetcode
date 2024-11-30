@@ -6,44 +6,33 @@ class Solution:
         # is absoluetly perfect for this use case (i.e. with Hierholzer's algorithm) :)
         # As for why Hierholzer's algorithm works, please do not ask me, I have no idea xD
 
-        # nodes = set()
         adj_list = defaultdict(list)
-        indegree = defaultdict(int)
-        outdegree = defaultdict(int)
+        indegree, outdegree = defaultdict(int), defaultdict(int)
         for start, end in pairs:
-            # nodes.add(start)
-            # nodes.add(end)
-            # if start not in adj_list:
-            #     adj_list[start] = []
-            # if end not in adj_list:
-            #     adj_list[end] = []
             adj_list[start].append(end)
             indegree[end] += 1
             indegree[start] += 0 # to make sure indegree contains every node!
-
             outdegree[start] += 1
-            outdegree[end] += 0
+            # outdegree[end] += 0
         
-        print(f"{indegree=}")
-        print(f"{outdegree=}")
-
-        
-
-        
-        # self.nodes = nodes
-        print(f"{adj_list=}")
         # For this problem, the node we start with is important... we should feed the
-        # one with smallest indegree!
+        # one with smallest indegree, then tie break to one with largest outdegree. Additionally,
+        # only nodes with EVEN degrees should be considered (degree = indegree + outdegree)!
         start_node = None
-        min_degree = float("inf")
-        for node, degree in indegree.items():
-            if degree < min_degree:
-                min_degree = degree
+        min_value = (True, float("inf"), float("-inf")) # (is-even-degree, indegree, outdegree)
+        for node in indegree:
+            value = (
+                (indegree[node] + outdegree[node]) % 2 == 0, 
+                indegree[node], 
+                -outdegree[node]
+            )
+            if value < min_value:
+                min_value = value
                 start_node = node
 
-        sorted_arr = sorted(indegree.keys(), key=lambda node: ((indegree[node] + outdegree[node]) % 2 == 0, indegree[node], -outdegree[node]))
-        print(f"{sorted_arr=}")
-        start_node = sorted_arr[0]
+        # sorted_arr = sorted(indegree.keys(), key=lambda node: ((indegree[node] + outdegree[node]) % 2 == 0, indegree[node], -outdegree[node]))
+        # print(f"{sorted_arr=}")
+        # start_node = sorted_arr[0]
         res = self.getCircuit(adj_list, start_node)
         print(f"{res=}")
         print(f"{adj_list=}")
