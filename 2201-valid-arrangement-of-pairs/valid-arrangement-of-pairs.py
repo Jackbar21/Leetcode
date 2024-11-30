@@ -30,22 +30,11 @@ class Solution:
                 min_value = value
                 start_node = node
 
-        # sorted_arr = sorted(indegree.keys(), key=lambda node: ((indegree[node] + outdegree[node]) % 2 == 0, indegree[node], -outdegree[node]))
-        # print(f"{sorted_arr=}")
-        # start_node = sorted_arr[0]
         res = self.getCircuit(adj_list, start_node)
-        print(f"{res=}")
-        print(f"{adj_list=}")
-        # return []
         return [
             [res[i - 1], res[i]]
             for i in range(1, len(res))
         ]
-        
-
-
-
-
 
     #######################################
     ### ONLY GEEKS-FOR-GEEKS CODE BELOW ###
@@ -90,10 +79,5 @@ class Solution:
                 # put it in the circuit
                 circuit.append(curr_path.pop())
     
-        # we've got the circuit, now print it in reverse
-        for i in range(len(circuit) - 1, -1, -1):
-            print(circuit[i], end = "")
-            if i:
-                print(" -> ", end = "")
-        print()
+        # we've got the circuit, so now return it (but in reverse!) :)
         return circuit[::-1]
