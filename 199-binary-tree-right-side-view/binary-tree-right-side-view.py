@@ -26,10 +26,11 @@ class Solution:
             # we see such a node (i.e. such as right now!), we will append the
             # value at key=level inside level_to_value dict with node's value :)
             level_to_value[level] = node.val
-            if max_level < level:
-                max_level = level
+            # if max_level < level:
+            #     max_level = level
 
-        return [
-            level_to_value[level]
-            for level in range(max_level + 1)
-        ]
+        # return [
+        #     level_to_value[level]
+        #     for level in range(max_level + 1)
+        # ]
+        return list(level_to_value.values())
