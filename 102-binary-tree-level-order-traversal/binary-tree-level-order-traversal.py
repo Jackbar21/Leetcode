@@ -5,21 +5,26 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def __init__(self):
-        self.d = {}
-        self.maxDepth = -1
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        self.generateArr(root, depth=0)
-        res = []
-        for i in range(self.maxDepth + 1):
-            res.append(self.d[i])
-        return res
-    
-    def generateArr(self, root, depth):
         if not root:
-            return
-        self.maxDepth = max(self.maxDepth, depth)
-        
-        self.d[depth] = self.d.get(depth, []) + [root.val]
-        self.generateArr(root.left, depth+1)
-        self.generateArr(root.right, depth+1)
+            return []
+
+        level_to_values = defaultdict(list) # level: [nodes at level]
+        max_level = 0
+
+        queue = collections.deque([(root, 0)]) # (node, level)
+        while len(queue) > 0:
+            node, level = queue.popleft()
+            level_to_values[level].append(node.val)
+            if max_level < level:
+                max_level = level
+            if node.left:
+                queue.append((node.left, level + 1))
+            if node.right:
+                queue.append((node.right, level + 1))
+
+
+        return [
+            level_to_values[level]
+            for level in range(max_level + 1)
+        ]
