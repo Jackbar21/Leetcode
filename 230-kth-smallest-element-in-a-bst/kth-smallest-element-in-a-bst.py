@@ -6,25 +6,36 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        # Recursive Solution
-        self.last_node_val = None
-        self.visited_count = 0
-        self.k = k
-        self.kthSmallestRec(root)
-        return self.last_node_val
-    
-    def kthSmallestRec(self, root):
-        if not root:
-            return
+        # Idea: Simply do an inorder traversal from root, and return the k'th visited node's value!
+        # CHALLENGE: I'm gonna force myself to do this iteratively >:)
+
+        stack = [root]
+        visited_count = 0
+        # sorted_arr = []
+        while len(stack) > 0:
+            node = stack.pop()
+            left_node = node.left
+            if left_node:
+                # To allow for termination! 
+                # Another way to do this without modifying the tree
+                # would be by using a hash-set for one-time lookups :)
+                node.left = None 
         
-        # Inorder Traversal!
-        self.kthSmallestRec(root.left)
-        if self.visited_count >= self.k:
-            return
-        self.visited_count += 1
-        self.last_node_val = root.val
-        # self.sorted_arr.append(root.val)
-        # if len(self.sorted_arr) >= self.k:
-        #     return
-        self.kthSmallestRec(root.right)
+                stack.append(node)
+                stack.append(left_node)
+                continue
+
+            # Inorder traversal!
+            assert not left_node
+
+            visited_count += 1
+            if visited_count == k:
+                return node.val
+            #     pass
+            # sorted_arr.append(node.val)
+            
+            if node.right:
+                stack.append(node.right)
         
+        # print(f"{sorted_arr=}")
+        return -1
