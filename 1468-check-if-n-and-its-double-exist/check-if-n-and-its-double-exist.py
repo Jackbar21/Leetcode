@@ -8,7 +8,7 @@ class Solution:
 
         for num in arr:
             double = 2 * num
-            if double in seen and (double != 0 or count_zeroes > 1):
+            if double in seen and not (double == 0 and count_zeroes <= 1):
                 return True
         
         return False
