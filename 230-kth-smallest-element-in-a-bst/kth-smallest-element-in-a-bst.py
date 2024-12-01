@@ -10,8 +10,7 @@ class Solution:
         # CHALLENGE: I'm gonna force myself to do this iteratively >:)
 
         stack = [root]
-        visited_count = 0
-        # sorted_arr = []
+        nodes_visited = 0
         while len(stack) > 0:
             node = stack.pop()
             left_node = node.left
@@ -28,14 +27,11 @@ class Solution:
             # Inorder traversal!
             assert not left_node
 
-            visited_count += 1
-            if visited_count == k:
+            nodes_visited += 1
+            if nodes_visited == k:
                 return node.val
-            #     pass
-            # sorted_arr.append(node.val)
             
             if node.right:
                 stack.append(node.right)
         
-        # print(f"{sorted_arr=}")
         return -1
