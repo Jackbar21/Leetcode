@@ -19,4 +19,6 @@ class Solution:
         # Inorder Traversal!
         self.inorder(root.left)
         self.sorted_arr.append(root.val)
+        if len(self.sorted_arr) >= self.k:
+            return
         self.inorder(root.right)
