@@ -10,7 +10,6 @@ class Solution:
         self.nodes_visited = 0
         self.result = None
         self.inorder(root)
-        # print(f"{self.sorted_arr=}")
         return self.result
 
     def inorder(self, root):
