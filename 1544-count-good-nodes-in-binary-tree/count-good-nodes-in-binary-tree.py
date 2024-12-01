@@ -12,12 +12,11 @@ class Solution:
         if not root:
             return 0
         
-        res = int(root.val >= largest)
+        is_good_node = root.val >= largest
         if largest < root.val:
             largest = root.val
         
-        # Recursive calls...
-        res += self.goodNodesRec(root.left, largest)
-        res += self.goodNodesRec(root.right, largest)
-
-        return res
+        return (is_good_node
+            + self.goodNodesRec(root.left, largest)
+            + self.goodNodesRec(root.right, largest)
+        )
