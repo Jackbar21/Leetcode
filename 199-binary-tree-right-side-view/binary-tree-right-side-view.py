@@ -29,8 +29,7 @@ class Solution:
             # if max_level < level:
             #     max_level = level
 
-        # return [
-        #     level_to_value[level]
-        #     for level in range(max_level + 1)
-        # ]
-        return list(level_to_value.values())
+        return [
+            level_to_value[level]
+            for level in level_to_value
+        ]
