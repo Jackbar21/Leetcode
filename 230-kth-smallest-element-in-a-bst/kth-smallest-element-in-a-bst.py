@@ -8,6 +8,7 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         # Recursive Solution
         self.sorted_arr = []
+        self.k = k
         self.kthSmallestRec(root)
         return self.sorted_arr[k - 1]
     
@@ -18,5 +19,7 @@ class Solution:
         # Inorder Traversal!
         self.kthSmallestRec(root.left)
         self.sorted_arr.append(root.val)
+        if len(self.sorted_arr) >= self.k:
+            return
         self.kthSmallestRec(root.right)
         
