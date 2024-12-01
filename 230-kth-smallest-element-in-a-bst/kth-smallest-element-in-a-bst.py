@@ -7,10 +7,11 @@
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         # Recursive Solution
-        self.sorted_arr = []
+        self.last_node_val = None
+        self.visited_count = 0
         self.k = k
         self.kthSmallestRec(root)
-        return self.sorted_arr[k - 1]
+        return self.last_node_val
     
     def kthSmallestRec(self, root):
         if not root:
@@ -18,8 +19,12 @@ class Solution:
         
         # Inorder Traversal!
         self.kthSmallestRec(root.left)
-        self.sorted_arr.append(root.val)
-        if len(self.sorted_arr) >= self.k:
+        if self.visited_count >= self.k:
             return
+        self.visited_count += 1
+        self.last_node_val = root.val
+        # self.sorted_arr.append(root.val)
+        # if len(self.sorted_arr) >= self.k:
+        #     return
         self.kthSmallestRec(root.right)
         
