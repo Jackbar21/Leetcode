@@ -6,17 +6,17 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        value, num_seen = -1, 0
-        stack = []
-
-        while root or stack:
-            if root:
-                stack.append(root)
-                root = root.left
-            else:
-                root = stack.pop()
-                value = root.val
-                num_seen += 1
-                if num_seen == k:
-                    return value
-                root = root.right
+        # Recursive Solution
+        self.sorted_arr = []
+        self.kthSmallestRec(root)
+        return self.sorted_arr[k - 1]
+    
+    def kthSmallestRec(self, root):
+        if not root:
+            return
+        
+        # Inorder Traversal!
+        self.kthSmallestRec(root.left)
+        self.sorted_arr.append(root.val)
+        self.kthSmallestRec(root.right)
+        
