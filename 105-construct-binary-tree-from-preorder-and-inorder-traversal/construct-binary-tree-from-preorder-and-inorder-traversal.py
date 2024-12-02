@@ -19,12 +19,13 @@ class Solution:
         node = TreeNode(preorder_val)
         
         # Find index of 'preorder_val' inside inorder from index 'l' to 'r' inclusive...
-        index = -1
-        for i in range(l, r + 1):
-            if self.inorder[i] == preorder_val:
-                index = i
-                break
+        # index = -1
+        # for i in range(l, r + 1):
+        #     if self.inorder[i] == preorder_val:
+        #         index = i
+        #         break
         # assert index != -1
+        index = l + self.inorder[l:r+1].index(preorder_val)
         
         node.left = self.buildTreeHelper(l, index - 1)
         node.right = self.buildTreeHelper(index + 1, r)
