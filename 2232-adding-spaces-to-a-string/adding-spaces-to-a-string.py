@@ -5,9 +5,12 @@ class Solution:
         cur_len = 0
 
         for i, char in enumerate(s):
-            if len(spaces) > 0 and spaces[0] == i:
+            if spaces[0] == i:
                 spaces.popleft()
                 chars.append(" ")
+                # Finish the problem early if no spaces left!
+                if len(spaces) == 0:
+                    return ''.join(chars) + s[i:]
             
             chars.append(char)
         
