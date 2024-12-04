@@ -8,7 +8,16 @@ class Solution:
             letter = alphabet[i]
             d[letter] = alphabet[i + 1]
         d['z'] = 'a'
-        self.d = d
+        # self.d = d
+
+        str1_index, str2_index = 0, 0
+        for letter in str1:
+            if str2[str2_index] in [letter, d[letter]]:
+                str2_index += 1
+                if str2_index >= len(str2):
+                    return True
+        return False
+
 
         self.str1, self.str2 = str1, str2
 
