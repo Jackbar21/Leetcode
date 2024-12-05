@@ -20,8 +20,7 @@ class Solution:
             need_index, need_piece = need[0]
             index, piece = available[0]
             if (
-                (piece == need_piece and index == need_index) # Same pos!
-                or (piece == need_piece == "R" and index <= need_index) # Move Right!
+                (piece == need_piece == "R" and index <= need_index) # Move Right!
                 or (piece == need_piece == "L" and need_index <= index) # Move Left!
             ):
                 available.popleft()
@@ -32,8 +31,7 @@ class Solution:
             need_index, need_piece = need[-1]
             index, piece = available[-1]
             if (
-                (piece == need_piece and index == need_index) # Same pos!
-                or (piece == need_piece == "R" and index <= need_index) # Move Right!
+                (piece == need_piece == "R" and index <= need_index) # Move Right!
                 or (piece == need_piece == "L" and need_index <= index) # Move Left!
             ):
                 available.pop()
