@@ -10,8 +10,8 @@ class Solution:
         # for i in range(n):
         #     if start[i] == target[i]:
         #         continue
-        print(f"{available=}")
-        print(f"{need=}")
+        # # print(f"{available=}")
+        # # print(f"{need=}")
 
         INDEX, PIECE = 0, 1
         while len(need) > 0:
@@ -26,7 +26,6 @@ class Solution:
                 available.popleft()
                 need.popleft()
                 continue
-                # elif need_piece == "R" and index <= need_index:
             
             need_index, need_piece = need[-1]
             index, piece = available[-1]
