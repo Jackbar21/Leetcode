@@ -7,12 +7,8 @@ class Solution:
             if num > maxSum:
                 break
             if num not in banned_set:
-                if num > maxSum:
-                    return count
                 maxSum -= num
                 count += 1
-                # if maxSum == 0:
-                #     return count
 
         return count
         
