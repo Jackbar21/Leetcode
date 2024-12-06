@@ -6,7 +6,7 @@ class Solution:
         for num in range(1, n + 1):
             if num not in banned_set:
                 if num > maxSum:
-                    break
+                    return count
                 maxSum -= num
                 count += 1
 
