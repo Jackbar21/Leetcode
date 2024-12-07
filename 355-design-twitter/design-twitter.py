@@ -74,8 +74,8 @@ class Twitter:
             return
 
         # Update following status
-        self.following[followerId].discard(followeeId)
-        self.followed_by[followeeId].discard(followerId)
+        self.following[followerId].remove(followeeId)
+        self.followed_by[followeeId].remove(followerId)
 
         # Update news feed -- follwerId is NO LONGER interested in followeeId's content!
         # for tweet_data in self.user_to_tweet_data[followeeId]:
