@@ -23,15 +23,11 @@ class Solution:
                 if d[task] == 0:
                     del d[task]
                     if len(d) == 0:
-                        break
+                        return res
                 else:
                     new_tasks.append((1 - count, task)) # -(count - 1) == 1 - count :)
                     # heapq.heappush(min_heap, (1 - count, task))
             for item in new_tasks:
                 heapq.heappush(min_heap, item)
         
-        # return len(res)
         return res
-
-
-
