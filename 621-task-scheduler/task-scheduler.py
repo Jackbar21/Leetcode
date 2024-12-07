@@ -13,9 +13,6 @@ class Solution:
             new_tasks = []
             for _ in range(n + 1):
                 if len(min_heap) == 0:
-                    if len(d) == 0:
-                        break
-                    # res.append("idle")
                     res += 1
                     continue
                 count, task = heapq.heappop(min_heap)
@@ -25,8 +22,10 @@ class Solution:
                 d[task] -= 1
                 if d[task] == 0:
                     del d[task]
+                    if len(d) == 0:
+                        break
                 else:
-                    new_tasks.append((1 - count, task)) 
+                    new_tasks.append((1 - count, task)) # -(count - 1) == 1 - count :)
                     # heapq.heappush(min_heap, (1 - count, task))
             for item in new_tasks:
                 heapq.heappush(min_heap, item)
