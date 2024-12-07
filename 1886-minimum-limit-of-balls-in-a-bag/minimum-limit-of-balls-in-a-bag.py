@@ -24,8 +24,5 @@ class Solution:
     def getNumOperationsToReachPenalty(self, nums, max_penalty):
         # Want to compute how many times we'd need to split the bag to make it such that
         # the HIGHEST penalty in the bag is 'penalty' (the input).
-        res = 0
-        for num in nums:
-            res += math.ceil((num - max_penalty) / max_penalty)
-        return res
+        return sum(math.ceil((num - max_penalty) / max_penalty) for num in nums)
         
