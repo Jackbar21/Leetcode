@@ -26,23 +26,3 @@ class Solution:
         for num in nums:
             res += math.ceil((num - max_penalty) / max_penalty)
         return res
-
-# [9], biggest = 9
-# --> [5, 4], biggest = 5
-# --> [2, 3, 4], biggest = 4
-
-# [9] --> [3, 6] --> [3, 3, 3]
-
-
-# max_penalty = 6
-# 20 --> 6, 14 --> 6, 6, 8 --> 6, 6, 6, 2 --> 4 OPERATIONS
-
-# 20 - 6 - 6 - 6 - 6
-
-# x / y == how many times can i subtract y from x until I reach 0?
-
-# how many times can i subtract 6 from 20 until I reach 6 (or less?)
-
-# (20 - 6) / 6
-
-# 
