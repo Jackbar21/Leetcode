@@ -9,10 +9,11 @@ class Solution:
 
         # res = []
         res = 0
-        while len(d) > 0:
+        while True:
             new_tasks = []
             for _ in range(n + 1):
                 if len(max_heap) == 0:
+                    # res.append("idle")
                     res += 1
                     continue
                 count, task = heapq.heappop(max_heap)
@@ -30,4 +31,4 @@ class Solution:
             for item in new_tasks:
                 heapq.heappush(max_heap, item)
         
-        return res
+        raise Exception("Unreachable Code!")
