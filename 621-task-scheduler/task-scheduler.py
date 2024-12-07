@@ -9,8 +9,6 @@ class Solution:
 
         res = []
         while len(d) > 0:
-            print(f"{d=}")
-            print(f"{min_heap=}")
             new_tasks = []
             for _ in range(n + 1):
                 if len(min_heap) == 0:
