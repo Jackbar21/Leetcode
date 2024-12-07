@@ -7,27 +7,32 @@ class Solution:
         min_heap = [(-d[task], task) for task in d]
         heapq.heapify(min_heap)
 
-        res = []
+        # res = []
+        res = 0
         while len(d) > 0:
             new_tasks = []
             for _ in range(n + 1):
                 if len(min_heap) == 0:
                     if len(d) == 0:
                         break
-                    res.append("idle")
+                    # res.append("idle")
+                    res += 1
                     continue
                 count, task = heapq.heappop(min_heap)
                 count = -count
-                res.append(task)
+                # res.append(task)
+                res += 1
                 d[task] -= 1
                 if d[task] == 0:
                     del d[task]
                 else:
                     new_tasks.append((1 - count, task)) 
+                    # heapq.heappush(min_heap, (1 - count, task))
             for item in new_tasks:
                 heapq.heappush(min_heap, item)
         
-        return len(res)
+        # return len(res)
+        return res
 
 
 
