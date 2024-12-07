@@ -29,7 +29,6 @@ class Solution:
             for item in new_tasks:
                 heapq.heappush(min_heap, item)
         
-        print(f"{res=}")
         return len(res)
 
 
