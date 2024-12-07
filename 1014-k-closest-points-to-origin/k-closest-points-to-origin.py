@@ -8,5 +8,5 @@ class Solution:
             )
             for point in points
         ]
-        heapq.heapify(min_heap)
+        heapq.heapify(min_heap) # O(n)
         return list(heapq.heappop(min_heap)[1] for _ in range(k))
