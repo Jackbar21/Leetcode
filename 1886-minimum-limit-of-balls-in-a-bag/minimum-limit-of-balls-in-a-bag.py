@@ -6,18 +6,17 @@ class Solution:
         # larger the penalty, the less operations are needed and vice versa, we can simply 
         # binary search for the result :)
         l, r = 1, max(nums)
-        # res = r # since 0 operations guaranteed to be <= maxOperations!
         while l < r:
-            mid = (l + r) // 2 # mid = penalty value itself!
-            needed_operations = self.getNumOperationsToReachPenalty(nums, mid)
+            mid_penalty = (l + r) // 2
+            needed_operations = self.getNumOperationsToReachPenalty(nums, mid_penalty)
             if needed_operations <= maxOperations:
                 # Then we CAN indeed reach this penalty, so update our
                 # result, and now only search for potentially BETTER (i.e. smaller)
                 # penalties that might ALSO be valid!
                 # res = mid
-                r = mid
+                r = mid_penalty
             else:
-                l = mid + 1
+                l = mid_penalty + 1
 
         return r
     
