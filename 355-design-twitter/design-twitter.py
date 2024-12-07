@@ -2,8 +2,7 @@ class Twitter:
 
     def __init__(self):
         self.following = defaultdict(set) # userId: set of userIds
-        self.tweet_to_user = {} # tweetId: userId that posted tweet
-        self.user_to_tweets = defaultdict(set) # user: set of tweetIds
+        self.user_to_tweet_data = defaultdict(set) # user: set of tweet data (time, userId, tweetId)
         self.cur_time = 0
 
         # self.max_heap = [] # (time, userId, tweetId), where time is always unique!
@@ -18,8 +17,7 @@ class Twitter:
     def postTweet(self, userId: int, tweetId: int) -> None:
         # self.tweet_to_user[tweetId] = userId
         data = (-self.cur_time, userId, tweetId)
-        self.user_to_tweets[userId].add(data)
-        
+        self.user_to_tweet_data[userId].add(data)
         self.cur_time += 1
 
         # Update the news feed for every user (including userId itself!)
@@ -35,20 +33,13 @@ class Twitter:
         juicy_tweets = []
         popped_tweets = []
 
-        
         max_heap = self.news_feed[userId]
-        # print(f"{userId=}, {self.news_feed=}")
-        # # print(f"before: {max_heap=}")
+        while len(max_heap) > 0:
+            data = heapq.heappop(max_heap)
+            _, user_id, tweetId = data
 
-
-
-        num_items_to_pop = min(10, len(self.news_feed[userId]))
-        # for _ in range(num_items_to_pop):
-        while len(self.news_feed[userId]) > 0:
-            data = heapq.heappop(self.news_feed[userId])
-            cur_time, user_id, tweetId = data
+            # If no longer following, this news_feed data is irrelevant!
             if user_id != userId and user_id not in self.following[userId]:
-                # If no longer following, this news_feed data is irrelevant!
                 continue
 
             popped_tweets.append(data)
@@ -58,30 +49,8 @@ class Twitter:
         
         # Append popped data back into the heap!
         for data in popped_tweets:
-            heapq.heappush(self.news_feed[userId], data)
-
-        # # print(f"after: {max_heap=}")
-        return juicy_tweets
-
-        max_heap = self.news_feed[userId]
-        while len(max_heap) > 0:
-            cur_time, user_id, tweet_id = heapq.heappop(max_heap)
-            popped_tweets.append((cur_time, user_id, tweet_id))
-            # Check if tweet belongs to user's new's feed! This 
-            # is the case if user_id == userId, or if tweet_id
-            # was made by a user that userId follows!
-            if user_id == userId or self.tweet_to_user[tweet_id] in self.following[userId]:
-                juicy_tweets.append(tweet_id)
-                if len(juicy_tweets) == 10:
-                    # Add back all the "garbage" tweets back into the heap,
-                    # and return these mega JUUUUUUUICY tweets! We have to do
-                    # this at the end of the function anyways, so just break here :)
-                    break
-        
-        # Add back all the "garbage" tweets back into the heap!
-        for data in popped_tweets:
             heapq.heappush(max_heap, data)
-        
+
         return juicy_tweets
         
 
@@ -90,11 +59,12 @@ class Twitter:
         if followeeId in self.following[followerId]:
             return
 
+        # Update following status
         self.following[followerId].add(followeeId)
         self.followed_by[followeeId].add(followerId)
 
         # Update news feed -- follwerId is now interested in followeeId's content!
-        for tweet_data in self.user_to_tweets[followeeId]:
+        for tweet_data in self.user_to_tweet_data[followeeId]:
             heapq.heappush(self.news_feed[followerId], tweet_data)
         
 
@@ -103,12 +73,15 @@ class Twitter:
         if followeeId not in self.following[followerId]:
             return
 
+        # Update following status
         self.following[followerId].discard(followeeId)
         self.followed_by[followeeId].discard(followerId)
 
         # Update news feed -- follwerId is NO LONGER interested in followeeId's content!
-        # for tweet_data in self.user_to_tweets[followeeId]:
+        # for tweet_data in self.user_to_tweet_data[followeeId]:
         #     heapq.heappush(self.news_feed[followerId], tweet_data)
+        # EDIT: Too slow to edit heap here, so instead ignore popped items that don't belong
+        # in news feed later on :)
         
 
 
