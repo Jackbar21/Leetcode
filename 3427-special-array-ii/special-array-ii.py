@@ -15,7 +15,7 @@ class Solution:
         return expected == actual
 
     def isDifferentParity(self, num1, num2):
-        return (num1 % 2) ^ (num2 % 2)
+        return (num1 % 2) != (num2 % 2)
 
     def isArraySpecial(self, nums: List[int], queries: List[List[int]]) -> List[bool]:
         if len(nums) == 1:
@@ -38,6 +38,7 @@ class Solution:
         is_special.append(self.isDifferentParity(nums[-2], nums[-1]))
 
         # Now, do prefix sums but based on these True/False values (as 1 and 0, respectively!)
+        # O(n)
         prefix_sums = [] 
         cur_sum = 0
         for boolean in is_special:
@@ -47,7 +48,7 @@ class Solution:
 
         FROM, TO = 0, 1
         answer = [
-            self.isSpecial(query[FROM], query[TO])
+            self.isSpecial(query[FROM], query[TO]) # O(1)
             for query in queries
         ]
         return answer
