@@ -5,17 +5,12 @@ class Solution:
         # Two       3-lenghts
         # Three     2-lenghts
         # Four      1-length
-
-        # "aaazzzzaaabaaa"
-
-        # [] (char (i.e. 'z'), length, count)
         d = defaultdict(int) # (char, length): count
-
         cur_letter = s[0]
         l = 0
-        for r in range(len(s) + 1):
-            if r < len(s) and s[r] == cur_letter:
-                continue # keep incrementing r (if not at the end, i.e. if possible!)
+        for r in range(len(s)):
+            if s[r] == cur_letter:
+                continue # keep incrementing r!
             
             # Otherwise, the letters no longer match
             # So, s[l..r-1] is of same letter, so we have
@@ -33,27 +28,24 @@ class Solution:
                 length -= 1
                 count += 1
                 l += 1
-            
+
             # Update cur_letter to new letter!
-            if r < len(s):
-                cur_letter = s[r]
+            cur_letter = s[r]
         
         # Need to cleanup with one last iteration, in case for loop above exited with last
-        # character still being the same as TODO: Might need one last iteration of l w/ r=len(nums)-1 here (in case of continue@end)
-        # r = len(s) - 1
-        # length = r - l + 1
-        # count = 1
-        # while l <= r: # <= here since last character counts!
-        #     d[(cur_letter, length)] += count
-
-        #     # Loop Invariant
-        #     length -= 1
-        #     count += 1
-        #     l += 1
+        # character still being the same as char at position/index l!
+        r = len(s)
+        length = r - l
+        count = 1
+        while l < r:
+            d[(cur_letter, length)] += count
+            # Loop Invariant
+            length -= 1
+            count += 1
+            l += 1
         
         res = -1
         for (_, length), value in d.items():
             if value >= 3 and length > res:
                 res = length
         return res
-
