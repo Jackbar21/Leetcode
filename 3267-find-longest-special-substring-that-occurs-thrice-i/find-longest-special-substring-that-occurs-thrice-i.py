@@ -13,8 +13,8 @@ class Solution:
 
         cur_letter = s[0]
         l = 0
-        for r in range(len(s)):
-            if s[r] == cur_letter:
+        for r in range(len(s) + 1):
+            if r < len(s) and s[r] == cur_letter:
                 continue # keep incrementing r (if not at the end, i.e. if possible!)
             
             # Otherwise, the letters no longer match
@@ -35,21 +35,21 @@ class Solution:
                 l += 1
             
             # Update cur_letter to new letter!
-            cur_letter = s[r]
+            if r < len(s):
+                cur_letter = s[r]
         
-        # print(f"{l=}")
-        # print(f"{d=}")
-        # TODO: Might need one last iteration of l w/ r=len(nums)-1 here (in case of continue@end)
-        r = len(s) - 1
-        length = r - l + 1
-        count = 1
-        while l <= r: # <= here since last character counts!
-            d[(cur_letter, length)] += count
+        # Need to cleanup with one last iteration, in case for loop above exited with last
+        # character still being the same as TODO: Might need one last iteration of l w/ r=len(nums)-1 here (in case of continue@end)
+        # r = len(s) - 1
+        # length = r - l + 1
+        # count = 1
+        # while l <= r: # <= here since last character counts!
+        #     d[(cur_letter, length)] += count
 
-            # Loop Invariant
-            length -= 1
-            count += 1
-            l += 1
+        #     # Loop Invariant
+        #     length -= 1
+        #     count += 1
+        #     l += 1
         
         res = -1
         for (_, length), value in d.items():
