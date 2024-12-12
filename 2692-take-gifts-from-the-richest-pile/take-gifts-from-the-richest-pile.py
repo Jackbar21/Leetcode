@@ -1,6 +1,6 @@
 class Solution:
     def pickGifts(self, gifts: List[int], k: int) -> int:
-        max_heap = list(map(lambda num: -num, gifts)) # max heap!
+        max_heap = [-gift_pile for gift_pile in gifts] # max heap!
         heapq.heapify(max_heap) 
         res = 0
         for _ in range(k):
