@@ -4,18 +4,16 @@ class Solution:
         min_heap = [(num, i) for i, num in enumerate(nums)]
         heapq.heapify(min_heap)
         score = 0
-        while len(marked) < len(nums):
+        while len(min_heap) > 0:
             num, i = heapq.heappop(min_heap)
             if i in marked:
                 continue
             score += num
-            marked.add(i)
-            if i != 0:
-                # unmarked.discard(i - 1)
-                marked.add(i - 1)
-            if i != len(nums) - 1:
-                marked.add(i + 1)
-            # unmarked.discard(i + 1)
+            for index in range(i - 1, i + 2):
+                marked.add(index)
+            # marked.add(i)
+            # marked.add(i - 1)
+            # marked.add(i + 1)
             
         return score
 
