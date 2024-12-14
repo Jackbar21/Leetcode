@@ -17,11 +17,10 @@ class Solution:
 
         l = 0
         for r, num in enumerate(nums):
-            # # print(f"{d=}, {self.isValidDict(d)=}")
             d[num] += 1
             if self.isValidDict(d):
                 continue
-            
+
             # nums[l..r] is invalid, but nums[l..r-1] is valid! Therefore, it must be that
             # EVERY non-empty subarray within nums[l..r-1] is ALSO valid! We know the length
             # of this array is (r-1)-l+1 == r-l, and so total number of subarrays will be
@@ -36,11 +35,10 @@ class Solution:
                 else:
                     del d[l_num] # Would become 0!
                 
+                count += r - l
                 l += 1
-                count += r - l + 1
                 # assert length >= 0
 
-        
         n = len(nums) - l
         return count + n * (n + 1) // 2
         
