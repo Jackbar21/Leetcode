@@ -28,22 +28,19 @@ class Solution:
             # r-l subarrays of length 1 + r-l-1 subarrays of length 2 + ... + 1 subarray of
             # length r - l == r-l + r-l-1 + ... + 1 == (r-l)(r-l+1)/2, by math :)
             # However, to avoid double counting, only append to count as we augment l!
-            length = r - l
             while not self.isValidDict(d):
                 l_num = nums[l]
-                d[l_num] -= 1
-                # assert d[l_num] >= 0
-                if d[l_num] == 0:
-                    del d[l_num]
+                # assert d[l_num] >= 1
+                if d[l_num] > 1:
+                    d[l_num] -= 1
+                else:
+                    del d[l_num] # Would become 0!
+                
                 l += 1
-                count += length
-                length -= 1
+                count += r - l + 1
                 # assert length >= 0
 
-            continue
         
         n = len(nums) - l
-        # print(f"FINALL: {d=}, {count=}, {l=}, {n * (n + 1) // 2}, {double_count=}")
         return count + n * (n + 1) // 2
-
         
