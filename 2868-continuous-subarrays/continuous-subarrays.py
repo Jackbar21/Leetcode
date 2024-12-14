@@ -20,7 +20,7 @@ class Solution:
 
         l = 0
         for r, num in enumerate(nums):
-            # print(f"{d=}, {self.isValidDict(d)=}")
+            # # print(f"{d=}, {self.isValidDict(d)=}")
             d[num] += 1
             if self.isValidDict(d):
                 continue
@@ -48,12 +48,12 @@ class Solution:
             continue
         
         n = len(nums) - l
-        print(f"FINALL: {d=}, {count=}, {l=}, {n * (n + 1) // 2}, {double_count=}")
+        # print(f"FINALL: {d=}, {count=}, {l=}, {n * (n + 1) // 2}, {double_count=}")
         return count + n * (n + 1) // 2
 
-        #     # print(d)
+        #     # # print(d)
         #     # dict_changed = False
-        #     print(f"{d=}, {self.isValidDict(d)=}")
+        #     # print(f"{d=}, {self.isValidDict(d)=}")
         #     if not self.isValidDict(d):
         #         double_count += 1
         #         # current subarray represents nums[l..r], and introducing
@@ -69,9 +69,9 @@ class Solution:
         #         # of length 1, (r - l - 1) valid subarrays of length 2, ..., 1 valid subarray
         #         # of length (r - l)
         #         assert l <= r - 1
-        #         print(f"{count=}, {r - l=}, {l=}, {r=}")
+        #         # print(f"{count=}, {r - l=}, {l=}, {r=}")
         #         n = (r - l)
-        #         print(f"{count=}, {(n * (n + 1)) // 2=}")
+        #         # print(f"{count=}, {(n * (n + 1)) // 2=}")
         #         count += (n * (n + 1)) // 2 
 
         #         while not self.isValidDict(d):
@@ -83,12 +83,12 @@ class Solution:
         #                 del d[l_num]
         #             l += 1
         #         assert l <= r and self.isValidDict(d) # Strong statement!
-        #         print(f"POST COUNT: {l=}")
+        #         # print(f"POST COUNT: {l=}")
         #         # count += r - l + 1
         #     # else:
         #     #     count += 1
-        #     # print(f"{d=}, {self.isValidDict(d)=}")
-        #     # print("\n")
+        #     # # print(f"{d=}, {self.isValidDict(d)=}")
+        #     # # print("\n")
 
         #     # if dict_changed:
         #     #     # (r - l + 1) + (r - l) + (r - l - 1) + ... + 1
@@ -97,7 +97,7 @@ class Solution:
         #     # else:
         #     #     count += 1
         
-        # # print(f"{d=}, {self.isValidDict(d)=}")
+        # # # print(f"{d=}, {self.isValidDict(d)=}")
         # # if len(d) > 0 and self.isValidDict(d):
         # #     count += len(d) + 1
         # # r = len(nums)
@@ -111,7 +111,7 @@ class Solution:
         # #     # For counting, we know that nums[l..l] is valid, nums[l..l+1] is valid,
         # #     # nums[l..l+2] is valid, ..., nums[l..r-1] is valid. Hence in total, there
         # #     # are (r-1)-l+1 == r - l valid subarrays!
-        # #     print(f"{count=}, {r - l=}")
+        # #     # print(f"{count=}, {r - l=}")
         # #     # count += r - l
         # #     count += ((r - l) * (r - l + 1)) // 2
 
@@ -125,8 +125,8 @@ class Solution:
         # #     # count += ((r - l) * (r - l + 1)) // 2
         
         # n = len(nums) - l
-        # print(f"FINAL: {count=}, {(n * (n + 1)) // 2=}")
-        # print(f"{count}, {(len(nums) - l + 1 - 1 - 1) * (len(nums) - l + 2 - 1 - 1) // 2}, {double_count=}")
+        # # print(f"FINAL: {count=}, {(n * (n + 1)) // 2=}")
+        # # print(f"{count}, {(len(nums) - l + 1 - 1 - 1) * (len(nums) - l + 2 - 1 - 1) // 2}, {double_count=}")
         # return count + ((n * (n + 1)) // 2) - 0
 
 
