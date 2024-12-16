@@ -5,7 +5,7 @@ class Solution:
 
         for _ in range(k):
             num, index = heapq.heappop(min_heap)
+            nums[index] *= multiplier
             heapq.heappush(min_heap, (num * multiplier, index))
         
-        min_heap.sort(key = lambda tup: tup[1])
-        return [tup[0] for tup in min_heap]
+        return nums
