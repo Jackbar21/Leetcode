@@ -5,7 +5,8 @@ class Solution:
 
         for _ in range(k):
             num, index = heapq.heappop(min_heap)
-            nums[index] *= multiplier
-            heapq.heappush(min_heap, (num * multiplier, index))
+            num *= multiplier
+            nums[index] = num
+            heapq.heappush(min_heap, (num, index))
         
         return nums
