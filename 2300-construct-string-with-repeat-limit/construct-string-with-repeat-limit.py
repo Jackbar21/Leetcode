@@ -1,8 +1,5 @@
 class Solution:
     def repeatLimitedString(self, s: str, repeatLimit: int) -> str:
-        # d = defaultdict(int)
-        # for char in s:
-        #     d[char] += 1
         alphabet = "abcdefghijklmnopqrstuvwxyz"
         alphabet_backwards = alphabet[::-1]
         d = defaultdict(int)
@@ -23,11 +20,11 @@ class Solution:
 
         res = ['']
         cur_streak = 0
-
-        while sum(d.values()) > 0:
+        while True:
             if cur_streak < repeatLimit:
                 letter, count = getLargestNonEqualLetter(None) # None since no constraint :)
-                assert letter is not None and count > 0
+                if letter is None:
+                    break
                 # if letter is None or count == 0:
                 #     assert letter is None and count == 0
                 #     break
@@ -46,8 +43,7 @@ class Solution:
             
             assert cur_streak == repeatLimit
             letter, count = getLargestNonEqualLetter(res[-1])
-            if letter is None or count == 0:
-                assert letter is None and count == 0
+            if letter is None:
                 break
             res.append(letter)
             d[letter] -= 1
