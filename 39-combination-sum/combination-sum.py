@@ -2,16 +2,16 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         self.candidates = candidates
         self.target = target
-        self.res = set()
+        self.res = []
         self.backtrack(0, 0, [])
-        return list(self.res)
+        return self.res
 
     def backtrack(self, i, cur_sum, cur_sol):
         if i >= len(self.candidates) or cur_sum > self.target:
             return
 
         if cur_sum == self.target:
-            self.res.add(tuple(cur_sol))
+            self.res.append(tuple(cur_sol))
             return
 
         # Case 1: Add the same number (potentially again!)
