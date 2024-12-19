@@ -22,4 +22,3 @@ class Solution:
 
         # Case 2: Finally choose to go beyond this number (at index i)!
         case2 = self.backtrack(i + 1, cur_sum, cur_sol)
-
