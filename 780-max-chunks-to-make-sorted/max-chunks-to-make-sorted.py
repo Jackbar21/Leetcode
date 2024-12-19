@@ -9,28 +9,21 @@ class Solution:
         
         suffix_min = collections.deque()
         min_num = float("inf")
-        for num in reversed(arr): # probably uses yielding == efficient
+        for num in reversed(arr): # probably uses yielding, hence efficient!
             min_num = min(min_num, num)
             suffix_min.appendleft(min_num)
         
-        # print(f"{prefix_max=}")
-        # print(f"{suffix_min=}")
-        # return 0
         # self.prefix_max = prefix_max # Needed for DP!
         self.suffix_min = suffix_min
         # max_splits = self.dp(0, len(arr) - 1)
         # max_chunks = max_splits + 1
         # return max_chunks
-        # return self.greedy(0)
 
         # Greedy approach even better than DP!
         res = 1 # Base case is just array itself as 1 and only chunk!
         cur_max = float("-inf")
-        for i, num in enumerate(arr):
-            if i == len(arr) - 1:
-                continue
-
-            cur_max = max(cur_max, num)
+        for i in range(len(arr) - 1):
+            cur_max = max(cur_max, arr[i])
             if cur_max <= suffix_min[i + 1]:
                 res += 1
                 cur_max = float("-inf")
