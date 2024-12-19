@@ -4,7 +4,7 @@ class Solution:
         self.backtrack([], collections.deque(nums))
         return self.res
     
-    def backtrack(self, permutation: list, remaining_nums: set) -> list:
+    def backtrack(self, permutation, remaining_nums):
         if len(remaining_nums) == 0:
             self.res.append(permutation.copy())
             return
