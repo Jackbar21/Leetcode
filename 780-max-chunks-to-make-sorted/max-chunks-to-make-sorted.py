@@ -18,7 +18,17 @@ class Solution:
         self.prefix_max = prefix_max
         self.suffix_min = suffix_min
         self.nums = arr
-        return self.dp(0, len(arr) - 1) + 1
+        max_splits = self.dp(0, len(arr) - 1)
+        max_chunks = max_splits + 1
+        return max_chunks
+        return self.greedy(0)
+    
+    def greedy(i, cur_max = float("-inf")):
+        if i >= len(self.nums):
+            return 0
+    
+        if self.prefix_max[i] <= self.suffix_min[i + 1]:
+            pass
     
     @cache
     def dp(self, i, j):
@@ -27,10 +37,6 @@ class Solution:
             if self.prefix_max[k] <= self.suffix_min[k + 1]:
                 valid_case = 1 + self.dp(i, k) + self.dp(k + 1, j)
                 res = max(res, valid_case)
+                return res
         
         return res
-
-
-        # arr[i..j]
-
-        # arr[i..k], arr[k+1..j]
