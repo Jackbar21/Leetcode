@@ -2,10 +2,10 @@ class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         self.candidates = sorted(candidates)
         self.target = target
-        self.res = set()
+        self.res = []
         self.memo = set()
         self.backtrack(0, 0, [])
-        return list(self.res)
+        return list(set(self.res))
     
     def backtrack(self, i: int, cur_sum: int, res: list, prev_num = None) -> None:        
         # tuple_res = tuple(res)
@@ -13,7 +13,7 @@ class Solution:
         #     return
 
         if cur_sum == self.target:
-            self.res.add(tuple((res)))
+            self.res.append(tuple(res))
             return
         
         # No more possible solutions!
@@ -33,13 +33,3 @@ class Solution:
 
         # Since we've covered this solution before, remember this for next time!
         # self.memo.add(tuple_res)
-
-# [1]
-# --> [1,1], [1]
-# --> [1,1,1], [1,1], [1], [1,1]
-# --> [1,1,1,1], [1,1,1], [1,1,1], [1,1], [1,1], [1], [1,1,1], [1,1]
-
-# [1], prev_num = 1
-# [1,1],
-# [1,1,1]
-# [1,1,1,2]
