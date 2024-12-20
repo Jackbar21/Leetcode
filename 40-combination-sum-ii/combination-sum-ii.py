@@ -16,7 +16,6 @@ class Solution:
         candidate = self.candidates[i]
         new_sum = cur_sum + candidate
         if new_sum <= self.target:
-            # assert candidate not in used
             used[candidate] += 1
             res.append(candidate)
             self.backtrack(i + 1, cur_sum + candidate, res, used)
@@ -25,11 +24,8 @@ class Solution:
 
         # Case 2: Don't include num at index i. If candidate is same as prev_num,
         # then do NOT consider this case, as it is unnecessary repeated work!!!
-        assert used[candidate] >= 0
         if used[candidate] == 0:
-            # used[candidate] += 1
             self.backtrack(i + 1, cur_sum, res, used)
-            # used[candidate] -= 1
 
 # [a,b,...,z,1] --> [a,b,...,z,1], [a,b,...,z,1,1]
 # 
