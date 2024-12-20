@@ -20,4 +20,3 @@ class Solution:
 
         # Case 2: Don't include num
         self.backtrack(i + 1, res)
-
