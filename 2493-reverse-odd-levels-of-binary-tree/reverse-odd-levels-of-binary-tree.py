@@ -13,9 +13,7 @@ class Solution:
         queue = collections.deque([(root, 0)]) # (node, level)
         while len(queue) > 0:
             node, level = queue.popleft()
-            if level % 2 == 0:
-                depths[level].append(node.val)
-            else:
+            if level % 2:
                 depths[level].appendleft(node.val)
             
             if node.left:
