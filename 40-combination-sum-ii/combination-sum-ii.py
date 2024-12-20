@@ -14,9 +14,11 @@ class Solution:
 
         # Case 1: Include num at index i (CAN ONLY DO THIS ONCE!)
         candidate = self.candidates[i]
-        res.append(candidate)
-        self.backtrack(i + 1, cur_sum + candidate, res, candidate)
-        res.pop()
+        new_sum = cur_sum + candidate
+        if new_sum <= self.target:
+            res.append(candidate)
+            self.backtrack(i + 1, cur_sum + candidate, res, candidate)
+            res.pop()
 
         # Case 2: Don't include num at index i. If candidate is same as prev_num,
         # then do NOT consider this case, as it is unnecessary repeated work!!!
