@@ -13,8 +13,7 @@ class Solution:
 
         # Either choose to include num at index i or not :)
         # Case 1: Include num
-        num = self.nums[i]
-        res.append(num)
+        res.append(self.nums[i])
         self.backtrack(i + 1, res)
         res.pop()
 
