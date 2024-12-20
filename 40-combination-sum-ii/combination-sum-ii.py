@@ -3,10 +3,10 @@ class Solution:
         self.candidates = sorted(candidates)
         self.target = target
         self.res = collections.deque()
-        self.backtrack(0, 0, [], defaultdict(int))
+        self.backtrack(0, 0, [], None)
         return list(set(self.res))
     
-    def backtrack(self, i: int, cur_sum: int, res: list, used: dict) -> None:        
+    def backtrack(self, i: int, cur_sum: int, res: list, prev_num = int | None) -> None:        
         if cur_sum >= self.target or i >= len(self.candidates):
             if cur_sum == self.target:
                 self.res.append(tuple(res))
@@ -16,11 +16,9 @@ class Solution:
         candidate = self.candidates[i]
         new_sum = cur_sum + candidate
         if new_sum < self.target:
-            used[candidate] += 1
             res.append(candidate)
-            self.backtrack(i + 1, cur_sum + candidate, res, used)
+            self.backtrack(i + 1, cur_sum + candidate, res, candidate)
             res.pop()
-            used[candidate] -= 1
         elif new_sum == self.target:
             res.append(candidate)
             self.res.append(tuple(res))
@@ -29,5 +27,5 @@ class Solution:
 
         # Case 2: Don't include num at index i. If candidate is same as prev_num,
         # then do NOT consider this case, as it is unnecessary repeated work!!!
-        if used[candidate] == 0:
-            self.backtrack(i + 1, cur_sum, res, used)
+        if prev_num != candidate:
+            self.backtrack(i + 1, cur_sum, res, prev_num)
