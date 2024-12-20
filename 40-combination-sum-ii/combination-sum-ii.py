@@ -31,6 +31,3 @@ class Solution:
         # then do NOT consider this case, as it is unnecessary repeated work!!!
         if used[candidate] == 0:
             self.backtrack(i + 1, cur_sum, res, used)
-
-# [a,b,...,z,1] --> [a,b,...,z,1], [a,b,...,z,1,1]
-# 
