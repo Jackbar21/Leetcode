@@ -15,12 +15,17 @@ class Solution:
         # Case 1: Include num at index i (CAN ONLY DO THIS ONCE!)
         candidate = self.candidates[i]
         new_sum = cur_sum + candidate
-        if new_sum <= self.target:
+        if new_sum < self.target:
             used[candidate] += 1
             res.append(candidate)
             self.backtrack(i + 1, cur_sum + candidate, res, used)
             res.pop()
             used[candidate] -= 1
+        elif new_sum == self.target:
+            res.append(candidate)
+            self.res.append(tuple(res))
+            res.pop()
+            return
 
         # Case 2: Don't include num at index i. If candidate is same as prev_num,
         # then do NOT consider this case, as it is unnecessary repeated work!!!
