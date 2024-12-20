@@ -6,39 +6,39 @@
 #         self.right = right
 class Solution:
     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        # Populate hash-map of level to node-value(s) mappings
-        levels = defaultdict(collections.deque) # level: [node-values...]
+        # Populate hash-map of level-to-nodes mappings
+        d = defaultdict(collections.deque) # level: [nodes...]
 
-        # odd_values = collections.deque()
         queue = collections.deque() # (node, level)
         if root.left:
             queue.append((root.left, 1))
-            # odd_values.appendleft(root.left.val)
         if root.right:
             queue.append((root.right, 1))
-            # odd_values.appendleft(root.right.val)
         
         while len(queue) > 0:
-            # assert len(queue) == len(odd_values)
             node, level = queue.popleft()
-            levels[level].append(node.val)
-            # node.val = odd_values.popleft()
+            d[level].append(node)
 
             if node.left:
                 if node.left.left:
                     queue.append((node.left.left, level + 2))
-                    # odd_values.appendleft(node.left.left.val)
                 if node.left.right:
                     queue.append((node.left.right, level + 2))
-                    # odd_values.appendleft(node.left.right.val)
             
             if node.right:
                 if node.right.left:
                     queue.append((node.right.left, level + 2))
-                    # odd_values.appendleft(node.right.left.val)
                 if node.right.right:
                     queue.append((node.right.right, level + 2))
-                    # odd_values.appendleft(node.right.right.val)
+        
+        for nodes in d.values():
+            while len(nodes) > 0:
+                left, right = nodes.popleft(), nodes.pop()
+                left.val, right.val = right.val, left.val # Python supports swapping like this :)
+                # tmp = right.val
+                # right.val = left.val
+                # left.val = tmp
+        return root
         
         # Now that we have the value of all the nodes at every odd level,
         # we can reassign their values as desired :)
@@ -55,7 +55,7 @@ class Solution:
             # assert len(queue) == len(odd_values)
             node, level = queue.popleft()
             # depths[level].append(node.val)
-            node.val = levels[level].pop()
+            node.val = d[level].pop()
             # node.val = odd_values.popleft()
 
             if node.left:
@@ -80,12 +80,12 @@ class Solution:
 
         
 
-        # Append for even levels, append-left for odd levels (to reverse!)
+        # Append for even d, append-left for odd d (to reverse!)
         # queue = collections.deque([(root, 0)]) # (node, level)
         # while len(queue) > 0:
         #     node, level = queue.popleft()
         #     if level % 2:
-        #         levels[level].append(node.val)
+        #         d[level].append(node.val)
             
         #     if node.left:
         #         queue.append((node.left, level + 1))
@@ -98,7 +98,7 @@ class Solution:
         # while len(queue) > 0:
         #     node, level = queue.popleft()
         #     if level % 2:
-        #         node.val = levels[level].pop()
+        #         node.val = d[level].pop()
         #     if node.left:
         #         queue.append((node.left, level + 1))
         #     if node.right:
