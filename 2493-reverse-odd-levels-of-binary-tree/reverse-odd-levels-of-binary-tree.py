@@ -9,27 +9,30 @@ class Solution:
         # Populate hash-map of level-to-nodes mappings
         d = defaultdict(collections.deque) # level: [nodes...]
 
-        queue = collections.deque() # (node, level)
-        if root.left:
-            queue.append((root.left, 1))
-        if root.right:
-            queue.append((root.right, 1))
+        queue = collections.deque() # (node, level_id)
+        left_node, right_node = root.left, root.right
+        if left_node:
+            queue.append((left_node, 0))
+        if right_node:
+            queue.append((right_node, 0))
         
         while len(queue) > 0:
             node, level = queue.popleft()
             d[level].append(node)
 
-            if node.left:
-                if node.left.left:
-                    queue.append((node.left.left, level + 2))
-                if node.left.right:
-                    queue.append((node.left.right, level + 2))
+            left_node = node.left
+            if left_node:
+                if left_node.left:
+                    queue.append((left_node.left, level + 1))
+                if left_node.right:
+                    queue.append((left_node.right, level + 1))
             
-            if node.right:
-                if node.right.left:
-                    queue.append((node.right.left, level + 2))
-                if node.right.right:
-                    queue.append((node.right.right, level + 2))
+            right_node = node.right
+            if right_node:
+                if right_node.left:
+                    queue.append((right_node.left, level + 1))
+                if right_node.right:
+                    queue.append((right_node.right, level + 1))
         
         for nodes in d.values():
             while len(nodes) > 0:
