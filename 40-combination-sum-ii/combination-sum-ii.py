@@ -9,7 +9,7 @@ class Solution:
     
     def backtrack(self, i: int, cur_sum: int, res: list) -> None:        
         tuple_res = tuple(res)
-        if (tuple_res, cur_sum) in self.memo:
+        if tuple_res in self.memo:
             return
         if cur_sum == self.target:
             self.res.add(tuple(sorted(res)))
@@ -28,4 +28,5 @@ class Solution:
         # Case 2: Don't include num at index i
         self.backtrack(i + 1, cur_sum, res)
 
-        self.memo.add((tuple_res, cur_sum))
+        # Since we've covered this solution before, 
+        self.memo.add(tuple_res)
