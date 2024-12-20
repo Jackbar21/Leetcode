@@ -17,29 +17,27 @@ class Solution:
             queue.append((right_node, 0))
         
         while len(queue) > 0:
-            node, level = queue.popleft()
-            d[level].append(node)
+            node, level_id = queue.popleft()
+            d[level_id].append(node)
 
             left_node = node.left
             if left_node:
                 if left_node.left:
-                    queue.append((left_node.left, level + 1))
+                    queue.append((left_node.left, level_id + 1))
                 if left_node.right:
-                    queue.append((left_node.right, level + 1))
+                    queue.append((left_node.right, level_id + 1))
             
             right_node = node.right
             if right_node:
                 if right_node.left:
-                    queue.append((right_node.left, level + 1))
+                    queue.append((right_node.left, level_id + 1))
                 if right_node.right:
-                    queue.append((right_node.right, level + 1))
+                    queue.append((right_node.right, level_id + 1))
         
         for nodes in d.values():
             while len(nodes) > 0:
                 left, right = nodes.popleft(), nodes.pop()
-                # left.val, right.val = right.val, left.val # Python supports swapping like this :)
-                tmp = right.val
-                right.val = left.val
-                left.val = tmp
+                left.val, right.val = right.val, left.val # Python supports swapping like this :)
+
         return root
         
