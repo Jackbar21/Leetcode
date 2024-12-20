@@ -7,14 +7,14 @@
 class Solution:
     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         # Populate hash-map of level to node-value(s) mappings
-        depths = defaultdict(collections.deque)
+        depths = defaultdict(list)
 
         # Append for even levels, append-left for odd levels (to reverse!)
         queue = collections.deque([(root, 0)]) # (node, level)
         while len(queue) > 0:
             node, level = queue.popleft()
             if level % 2:
-                depths[level].appendleft(node.val)
+                depths[level].append(node.val)
             
             if node.left:
                 queue.append((node.left, level + 1))
@@ -27,7 +27,7 @@ class Solution:
         while len(queue) > 0:
             node, level = queue.popleft()
             if level % 2:
-                node.val = depths[level].popleft()
+                node.val = depths[level].pop()
             if node.left:
                 queue.append((node.left, level + 1))
             if node.right:
