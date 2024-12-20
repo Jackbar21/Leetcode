@@ -7,7 +7,7 @@
 class Solution:
     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         # Populate hash-map of level to node-value(s) mappings
-        depths = defaultdict(list)
+        depths = defaultdict(collections.deque)
 
         # Append for even levels, append-left for odd levels (to reverse!)
         queue = collections.deque([(root, 0)]) # (node, level)
