@@ -19,20 +19,21 @@ class Solution:
         while len(queue) > 0:
             node, level_id = queue.popleft()
             d[level_id].append(node)
+            level_id += 1
 
             left_node = node.left
             if left_node:
                 if left_node.left:
-                    queue.append((left_node.left, level_id + 1))
+                    queue.append((left_node.left, level_id))
                 if left_node.right:
-                    queue.append((left_node.right, level_id + 1))
+                    queue.append((left_node.right, level_id))
             
             right_node = node.right
             if right_node:
                 if right_node.left:
-                    queue.append((right_node.left, level_id + 1))
+                    queue.append((right_node.left, level_id))
                 if right_node.right:
-                    queue.append((right_node.right, level_id + 1))
+                    queue.append((right_node.right, level_id))
         
         for nodes in d.values():
             while len(nodes) > 0:
