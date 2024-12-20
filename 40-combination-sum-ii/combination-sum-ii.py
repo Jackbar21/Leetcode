@@ -2,8 +2,8 @@ class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         self.candidates = sorted(candidates)
         self.target = target
-        self.res = []
-        self.memo = set()
+        self.res = collections.deque()
+        # self.memo = set()
         self.backtrack(0, 0, [])
         return list(set(self.res))
     
