@@ -7,10 +7,10 @@ class Solution:
         self.backtrack(0, 0, [])
         return list(self.res)
     
-    def backtrack(self, i: int, cur_sum: int, res: list) -> None:        
-        tuple_res = tuple(res)
-        if tuple_res in self.memo:
-            return
+    def backtrack(self, i: int, cur_sum: int, res: list, prev_num = None) -> None:        
+        # tuple_res = tuple(res)
+        # if tuple_res in self.memo:
+        #     return
 
         if cur_sum == self.target:
             self.res.add(tuple(sorted(res)))
@@ -23,11 +23,12 @@ class Solution:
         # Case 1: Include num at index i (CAN ONLY DO THIS ONCE!)
         candidate = self.candidates[i]
         res.append(candidate)
-        self.backtrack(i + 1, cur_sum + candidate, res)
+        self.backtrack(i + 1, cur_sum + candidate, res, candidate)
         res.pop()
 
         # Case 2: Don't include num at index i
-        self.backtrack(i + 1, cur_sum, res)
+        if prev_num != candidate:
+            self.backtrack(i + 1, cur_sum, res, prev_num)
 
         # Since we've covered this solution before, remember this for next time!
-        self.memo.add(tuple_res)
+        # self.memo.add(tuple_res)
