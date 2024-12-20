@@ -3,10 +3,10 @@ class Solution:
         self.candidates = sorted(candidates)
         self.target = target
         self.res = collections.deque()
-        self.backtrack(0, 0, [])
+        self.backtrack(0, 0, [], None)
         return list(set(self.res))
     
-    def backtrack(self, i: int, cur_sum: int, res: list, prev_num = None) -> None:        
+    def backtrack(self, i: int, cur_sum: int, res: list, prev_num: int | None) -> None:        
         if cur_sum >= self.target or i >= len(self.candidates):
             if cur_sum == self.target:
                 self.res.append(tuple(res))
