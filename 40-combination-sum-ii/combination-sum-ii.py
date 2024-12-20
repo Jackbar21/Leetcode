@@ -1,6 +1,6 @@
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        self.candidates = candidates
+        self.candidates = sorted(candidates)
         self.target = target
         self.res = set()
         self.memo = set()
@@ -13,7 +13,7 @@ class Solution:
         #     return
 
         if cur_sum == self.target:
-            self.res.add(tuple(sorted(res)))
+            self.res.add(tuple((res)))
             return
         
         # No more possible solutions!
@@ -26,9 +26,20 @@ class Solution:
         self.backtrack(i + 1, cur_sum + candidate, res, candidate)
         res.pop()
 
-        # Case 2: Don't include num at index i
+        # Case 2: Don't include num at index i. If candidate is same as prev_num,
+        # then do NOT consider this case, as it is unnecessary repeated work!!!
         if prev_num != candidate:
             self.backtrack(i + 1, cur_sum, res, prev_num)
 
         # Since we've covered this solution before, remember this for next time!
         # self.memo.add(tuple_res)
+
+# [1]
+# --> [1,1], [1]
+# --> [1,1,1], [1,1], [1], [1,1]
+# --> [1,1,1,1], [1,1,1], [1,1,1], [1,1], [1,1], [1], [1,1,1], [1,1]
+
+# [1], prev_num = 1
+# [1,1],
+# [1,1,1]
+# [1,1,1,2]
