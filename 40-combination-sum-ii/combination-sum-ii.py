@@ -3,23 +3,15 @@ class Solution:
         self.candidates = sorted(candidates)
         self.target = target
         self.res = collections.deque()
-        # self.memo = set()
         self.backtrack(0, 0, [])
         return list(set(self.res))
     
     def backtrack(self, i: int, cur_sum: int, res: list, prev_num = None) -> None:        
-        # tuple_res = tuple(res)
-        # if tuple_res in self.memo:
-        #     return
+        if cur_sum >= self.target or i >= len(self.candidates):
+            if cur_sum == self.target:
+                self.res.append(tuple(res))
+            return
 
-        if cur_sum == self.target:
-            self.res.append(tuple(res))
-            return
-        
-        # No more possible solutions!
-        if cur_sum > self.target or i >= len(self.candidates):
-            return
-        
         # Case 1: Include num at index i (CAN ONLY DO THIS ONCE!)
         candidate = self.candidates[i]
         res.append(candidate)
@@ -30,6 +22,3 @@ class Solution:
         # then do NOT consider this case, as it is unnecessary repeated work!!!
         if prev_num != candidate:
             self.backtrack(i + 1, cur_sum, res, prev_num)
-
-        # Since we've covered this solution before, remember this for next time!
-        # self.memo.add(tuple_res)
