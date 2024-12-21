@@ -1,6 +1,6 @@
 class TreeNode:
     def __init__(self, label, val):
-        # self.label = label
+        self.label = label
         self.val = val
         self.children = set()
         self.parent = None
@@ -52,26 +52,7 @@ class Solution:
                 node.children.add(child)
             continue
 
-        # Level-order tree traversal
-        # depths = defaultdict(list)
-        # queue = collections.deque([(root, 0)]) # (node, depth)
-        # while len(queue) > 0:
-        #     node, depth = queue.popleft()
-        #     depths[depth].append(node.label)
-        #     for child in node.children:
-        #         queue.append((child, depth + 1))
-        # print(f"{depths=}")
-        # for depth in depths:
-        #     print(f"level {depth}: {depths[depth]}")
-
-            #       6
-            #   1      5
-
-        
-        # Let's try an inorder traversal!
-
         self.res = 0
-        self.cur_sum = 0
         self.postorder(root)
         return self.res
     
@@ -79,13 +60,12 @@ class Solution:
         if not root:
             return
         
-        # self.inorder(root.left)
         for child in root.children:
             self.postorder(child)
+
         if (root.val % self.k) == 0:
             self.res += 1
-        else:
-            parent = root.parent
-            assert parent is not None
-            parent.val += root.val
-        return
+            return
+
+        # Transfer val to parent, since can't cut at node yet!
+        root.parent.val += root.val
