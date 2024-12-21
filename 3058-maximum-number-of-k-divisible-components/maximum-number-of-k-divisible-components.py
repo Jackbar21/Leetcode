@@ -1,6 +1,6 @@
 class TreeNode:
     def __init__(self, label, val):
-        self.label = label
+        # self.label = label
         self.val = val
         self.children = set()
         self.parent = None
@@ -74,10 +74,6 @@ class Solution:
         self.cur_sum = 0
         self.postorder(root)
         return self.res
-
-        # print(f"{indegrees=}")
-        assert root != -1
-        return root_label
     
     def postorder(self, root):
         if not root:
@@ -93,28 +89,3 @@ class Solution:
             assert parent is not None
             parent.val += root.val
         return
-        # print(f"{self.cur_sum=}, {root.val=}, {root.label=}")
-        # if root.val % self.k == 0:
-        #     self.res += (root.val > 0 or self.k == 1)
-        # else:
-        #     self.cur_sum += root.val
-        #     if self.cur_sum % self.k == 0:
-        #         self.res += (root.val > 0 or self.k == 1)
-        # if root.val % self.k == 0:
-        #     self.res += 1
-        # else:
-        #     parent = root.parent
-        #     if parent:
-        #         parent.val += root.val
-        # self.inorder(root.right)
-        # return
-    
-    @cache
-    def sumTree(self, root) -> int:
-        if not root:
-            return 0
-        return root.val + self.sumTree(root.left) + self.sumTree(root.right)
-
-    # @cache
-    # def dp(self, root):
-    #     # Case 1: Delete no edges
