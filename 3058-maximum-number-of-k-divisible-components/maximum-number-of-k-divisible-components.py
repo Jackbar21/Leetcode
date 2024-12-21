@@ -13,19 +13,19 @@ class Solution:
         self.n = n
         self.k = k
         # First, find the node that has an indegree of 0, as that will be our root node!
-        # indegrees = [0] * n
-        # for a, b in edges:
-        #     indegrees[a] += 1
-        #     indegrees[b] += 1
+        indegrees = [0] * n
+        for a, b in edges:
+            indegrees[a] += 1
+            indegrees[b] += 1
         
-        # min_val = float("inf")
-        # root_label = -1
-        # for i, indegree in enumerate(indegrees):
-        #     if indegree < min_val:
-        #         min_val = indegree
-        #         root_label = i
-        # assert root_label != None
-        root_label = 0 # Hint 1
+        min_val = float("inf")
+        root_label = -1
+        for i, indegree in enumerate(indegrees):
+            if indegree < min_val:
+                min_val = indegree
+                root_label = i
+        assert root_label != None
+        # root_label = 0 # Hint 1
 
         # Dictionary -- label (i.e. 0 to n - 1): TreeNode
         tree = {i: TreeNode(i, values[i]) for i in range(n)}
