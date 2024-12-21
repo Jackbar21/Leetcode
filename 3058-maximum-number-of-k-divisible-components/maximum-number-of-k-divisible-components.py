@@ -2,7 +2,7 @@ class TreeNode:
     def __init__(self, label, val):
         self.label = label
         self.val = val
-        self.children = set()
+        self.children = []
         self.parent = None
     
     def __str__(self):
@@ -29,10 +29,10 @@ class Solution:
         tree = {i: TreeNode(i, values[i]) for i in range(n)}
         root = tree[root_label]
         
-        adj_list = defaultdict(set)
+        adj_list = defaultdict(list)
         for a, b in edges:
-            adj_list[tree[a]].add(tree[b])
-            adj_list[tree[b]].add(tree[a])
+            adj_list[tree[a]].append(tree[b])
+            adj_list[tree[b]].append(tree[a])
         
         # Now, populate the tree!
         queue = collections.deque()
@@ -42,15 +42,12 @@ class Solution:
         while len(queue) > 0:
             node, parent = queue.popleft()
             node.parent = parent
-            # if node in visited:
-            #     continue
-            # visited.add(node)
 
-            children = adj_list[node] - visited
+            children = adj_list[node]
             for child in children:
                 if child not in visited:
                     queue.append((child, node))
-                    node.children.add(child)
+                    node.children.append(child)
                     visited.add(child)
             continue
 
