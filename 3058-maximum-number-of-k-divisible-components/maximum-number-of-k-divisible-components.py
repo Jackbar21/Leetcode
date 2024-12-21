@@ -38,18 +38,20 @@ class Solution:
         queue = collections.deque()
         queue.append((root, None)) # (node, parent)
         visited = set()
-        # visited.add(root)
+        visited.add(root)
         while len(queue) > 0:
             node, parent = queue.popleft()
             node.parent = parent
-            if node in visited:
-                continue
-            visited.add(node)
+            # if node in visited:
+            #     continue
+            # visited.add(node)
 
             children = adj_list[node] - visited
             for child in children:
-                queue.append((child, node))
-                node.children.add(child)
+                if child not in visited:
+                    queue.append((child, node))
+                    node.children.add(child)
+                    visited.add(child)
             continue
 
         self.res = 0
