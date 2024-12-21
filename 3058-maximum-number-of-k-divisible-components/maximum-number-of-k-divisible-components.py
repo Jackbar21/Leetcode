@@ -12,34 +12,27 @@ class Solution:
     def maxKDivisibleComponents(self, n: int, edges: List[List[int]], values: List[int], k: int) -> int:
         self.n = n
         self.k = k
-        # First, find the node that has an indegree of 0, as that will be our root node!
-        # indegrees = [0] * n
-        # for a, b in edges:
-        #     indegrees[a] += 1
-        #     indegrees[b] += 1
-        
-        # min_val = float("inf")
-        # root_label = -1
-        # for i, indegree in enumerate(indegrees):
-        #     if indegree < min_val:
-        #         min_val = indegree
-        #         root_label = i
-        # assert root_label != None
-        root_label = random.randint(0, n - 1)
-        # root_label = 0 # Hint 1
+        # First, find the node that has smallest indegree, as that will be our root node!
+        indegrees = [0] * n
+        for a, b in edges:
+            indegrees[a] += 1
+            indegrees[b] += 1
+        min_val = float("inf")
+        root_label = -1
+        for i, indegree in enumerate(indegrees):
+            if indegree < min_val:
+                min_val = indegree
+                root_label = i
+        assert root_label != None
 
         # Dictionary -- label (i.e. 0 to n - 1): TreeNode
         tree = {i: TreeNode(i, values[i]) for i in range(n)}
-        # for key in tree:
-        #     print(f"{str(tree[key])=}")
         root = tree[root_label]
         
         adj_list = defaultdict(set)
         for a, b in edges:
             adj_list[tree[a]].add(tree[b])
             adj_list[tree[b]].add(tree[a])
-        # for key in adj_list:
-        #     print(f"key={key.label}, val={[node.label for node in adj_list[key]]}")
         
         # Now, populate the tree!
         queue = collections.deque()
@@ -48,7 +41,6 @@ class Solution:
         # visited.add(root)
         while len(queue) > 0:
             node, parent = queue.popleft()
-            # print(f"node={node.label},parent={parent.label if parent else None}")
             node.parent = parent
             if node in visited:
                 continue
@@ -59,39 +51,18 @@ class Solution:
                 queue.append((child, node))
                 node.children.add(child)
             continue
-            # print(f"{adj_list[node.val]=}, {visited=}")
-            assert len(neighbors) <= 2 # Since tree!
-
-            # print(f"{neighbors=}, {node.label=}, {node.left=}, {node.right=}")
-            num_available = (node.left is None) + (node.right is None)
-            assert num_available >= len(neighbors)
-
-            for neighbor in neighbors:
-                # neighbor = tree[neigh_label]
-                queue.append((neighbor, node))
-                if node.left is None:
-                    node.left = neighbor
-                    # queue.append((neighbor, node))
-                    continue
-                assert node.left is not None and node.right is None
-                # queue.append((neighbor, node))
-                node.right = neighbor
 
         # Level-order tree traversal
-        depths = defaultdict(list)
-        queue = collections.deque([(root, 0)]) # (node, depth)
-        while len(queue) > 0:
-            node, depth = queue.popleft()
-            depths[depth].append(node.label)
-            for child in node.children:
-                queue.append((child, depth + 1))
-            # if node.left:
-            #     queue.append((node.left, depth + 1))
-            # if node.right:
-            #     queue.append((node.right, depth + 1))
+        # depths = defaultdict(list)
+        # queue = collections.deque([(root, 0)]) # (node, depth)
+        # while len(queue) > 0:
+        #     node, depth = queue.popleft()
+        #     depths[depth].append(node.label)
+        #     for child in node.children:
+        #         queue.append((child, depth + 1))
         # print(f"{depths=}")
-        for depth in depths:
-            print(f"level {depth}: {depths[depth]}")
+        # for depth in depths:
+        #     print(f"level {depth}: {depths[depth]}")
 
             #       6
             #   1      5
