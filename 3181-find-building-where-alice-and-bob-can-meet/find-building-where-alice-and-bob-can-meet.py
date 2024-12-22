@@ -26,12 +26,12 @@ class Solution:
         # for a, b in queries:
         @cache
         def querySolver(min_index, max_index):
-            if min_index == -1 or max_index == -1:
-                return -1
-    
+            if max_index == -1:
+                return max_index
+
             if min_index > max_index:
                 return querySolver(max_index, min_index)
-
+            
             if min_index == max_index:
                 return max_index
             
