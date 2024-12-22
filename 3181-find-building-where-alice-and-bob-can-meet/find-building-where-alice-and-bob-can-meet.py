@@ -15,8 +15,13 @@ class Solution:
         # first j such that height[j] > max(heights[a_i], heights[b_i])
         @cache
         def querySolver(min_idx, max_idx):
-            if max_idx == -1 or min_idx == max_idx or heights[min_idx] < heights[max_idx]:
+            if max_idx == -1 or heights[min_idx] < heights[max_idx]:
                 return max_idx
             return querySolver(min_idx, prefix_heights[max_idx])
         
-        return [querySolver(a, b) if a < b else querySolver(b, a) for (a, b) in queries]
+        return [
+            b if a == b 
+            else querySolver(a, b) if a < b 
+            else querySolver(b, a) 
+            for (a, b) in queries
+        ]
