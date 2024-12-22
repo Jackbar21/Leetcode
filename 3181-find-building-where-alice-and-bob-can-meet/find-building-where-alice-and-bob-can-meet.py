@@ -19,5 +19,4 @@ class Solution:
                 return max_idx
             return querySolver(min_idx, prefix_heights[max_idx])
         
-        ordered_queries = map(lambda pair: sorted(pair), queries)
-        return [querySolver(a, b) for (a, b) in ordered_queries]
+        return [querySolver(a, b) if a < b else querySolver(b, a) for (a, b) in queries]
