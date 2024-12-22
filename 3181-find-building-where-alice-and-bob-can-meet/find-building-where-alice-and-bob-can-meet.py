@@ -20,8 +20,8 @@ class Solution:
             return querySolver(min_idx, prefix_heights[max_idx])
         
         return [
-            b if a == b 
-            else querySolver(a, b) if a < b 
-            else querySolver(b, a) 
+            querySolver(a, b) if a < b 
+            else querySolver(b, a) if a > b
+            else b # They're the same index, so don't move!
             for (a, b) in queries
         ]
