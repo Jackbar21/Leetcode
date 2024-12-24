@@ -88,19 +88,11 @@ class Solution:
 
         # Step 1: Build an adjacency list, and get the degrees of each node.
         # REMEMBER... this is an UNDIRECTED graph!
-        adj_list, degrees = defaultdict(set), defaultdict(int)
+        adj_list = defaultdict(list)
         for u, v in edges:
-            adj_list[u].add(v)
-            adj_list[v].add(u)
-            degrees[u] += 1
-            degrees[v] += 1
+            adj_list[u].append(v)
+            adj_list[v].append(u)
         
-        # Get node with smallest degree -- make that the root node!
-        root_val, smallest_degree = None, float("inf")
-        for node_val, degree in degrees.items():
-            if degree <= smallest_degree:
-                smallest_degree = degree
-                root_val = node_val
         root_val = 0
         root = TreeNode(root_val)
         # print(f"{root_val=}")
