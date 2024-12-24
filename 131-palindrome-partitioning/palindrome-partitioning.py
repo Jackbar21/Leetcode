@@ -1,19 +1,20 @@
 class Solution:
-    def isPalindrome(self, s: str) -> bool:
-        l, r = 0, len(s) - 1
-        while l < r:
-            if s[l] != s[r]:
-                return False
-            l += 1
-            r -= 1
-        return True
     def partition(self, s: str) -> List[List[str]]:
+        def isPalindrome(s: str) -> bool:
+            l, r = 0, len(s) - 1
+            while l < r:
+                if s[l] != s[r]:
+                    return False
+                l += 1
+                r -= 1
+            return True
+
         def backtrack(i, partitions = []):
             # Base Case: If i >= len(s), then we want to check if every partition
             # is a palindrome!
             if i >= len(s):
                 strings = ["".join(partition) for partition in partitions]
-                if all(self.isPalindrome(string) for string in strings):
+                if all(isPalindrome(string) for string in strings):
                     yield strings
                 return
 
