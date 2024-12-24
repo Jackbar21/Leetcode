@@ -10,6 +10,7 @@ class Solution:
                 r -= 1
             return True
 
+        @cache
         def checkAllPalindromes(strings: List[str]) -> bool:
             for string in strings:
                 if not isPalindrome(string):
@@ -22,7 +23,7 @@ class Solution:
             # Base Case: If i >= len(s), then we want to check if every partition
             # is a palindrome!
             if i >= len(s):
-                strings = ["".join(partition) for partition in partitions]
+                strings = tuple("".join(partition) for partition in partitions)
                 if checkAllPalindromes(strings):
                     res.append(strings)
                 return
