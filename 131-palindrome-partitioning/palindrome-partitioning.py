@@ -1,8 +1,7 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         @cache
-        def isPalindrome(s: str) -> bool:
-            l, r = 0, len(s) - 1
+        def isPalindrome(l: int, r: int) -> bool:
             while l < r:
                 if s[l] != s[r]:
                     return False
@@ -10,9 +9,9 @@ class Solution:
                 r -= 1
             return True
         
-        def checkAllPalindromes(strings: List[str]) -> bool:
-            for string in strings:
-                if not isPalindrome(string):
+        def checkAllPalindromes(pairs) -> bool:
+            for l, r in pairs:
+                if not isPalindrome(l, r):
                     return False
             return True
 
@@ -22,19 +21,21 @@ class Solution:
             # Base Case: If i >= len(s), then we want to check if every partition
             # is a palindrome!
             if i >= len(s):
-                strings = []
+                string_pairs = []
                 l = 0
                 for r in partitions:
-                    strings.append(s[l:r + 1])
+                    string_pairs.append((l, r))
                     l = r + 1
-                last_string = s[l:]
-                if last_string != "":
-                    strings.append(last_string)
+                # last_string = s[l:]
+                # if last_string != "":
+                #     strings.append(last_string)
+                if l < len(s):
+                    string_pairs.append((l, len(s) - 1))
                 # pairs.append(l, len(s) - 1)
 
                 # strings = ["".join(partition) for partition in partitions]
-                if checkAllPalindromes(strings):
-                    res.add(tuple(strings))
+                if checkAllPalindromes(string_pairs):
+                    res.add(tuple(string_pairs))
                 return
 
             letter = s[i]
@@ -62,4 +63,4 @@ class Solution:
             partitions.pop()
         
         backtrack(0)
-        return list(res)
+        return list([[s[i:j+1] for i,j in pairs] for pairs in res])
