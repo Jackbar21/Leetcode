@@ -1,8 +1,7 @@
 class TreeNode:
     def __init__(self, val):
         self.val = val
-        self.parent = None
-        self.children = set()
+        self.children = list()
 
 class Solution:
     def minimumDiameterAfterMerge(self, edges1: List[List[int]], edges2: List[List[int]]) -> int:
@@ -15,21 +14,11 @@ class Solution:
 
         max_diam1 = self.getMaxDiameterInTree(root1)
         max_diam2 = self.getMaxDiameterInTree(root2)
-        # print(f"{max_diam1=}, {max_diam2=}")
-        # return -1
-        res = math.ceil(max_diam1/2) + math.ceil(max_diam2/2) + 1
-        res = max(res, max_diam1)
-        res = max(res, max_diam2)
+        res = math.ceil(max_diam1 / 2) + math.ceil(max_diam2 / 2) + 1
+        res = max(res, max_diam1, max_diam2)
         return res
 
-        # Idea: We want min diameter in each tree. We should compute the max diameter that goes
-        # through a node, for every node in a tree... and then take the smallest of these in
-        # the end!
     
-    # def getDiameter(self, root):
-
-    
-    # WORKING FUNCTION!!!
     def getMaxDiameterInTree(self, root):
         res = self.getDiameterFromNode(root)
         for child in root.children:
@@ -37,16 +26,7 @@ class Solution:
         return res
     
 
-    # WORKING FUNCTION!!!
     def getDiameterFromNode(self, node):
-        # return max(self.getDepth(node), self.getHeight(node))
-        # res = self.getDepth(node)
-        # for child in node.children:
-        #     res = max(res, )
-
-        # case2 = max([1 + self.getHeight(child) for child in node.children], default = 0)
-        # return max(case1, case2)
-
         # The diameter of a node will be the sum of the heights of the two children
         # with the largest heights. If there are less than two children, it's easy:
         # 0 Children <==> Diameter of 1,
@@ -55,11 +35,10 @@ class Solution:
             return 0
         
         if len(node.children) == 1:
-            return 1 + self.getHeight(list(node.children)[0])
+            return 1 + self.getHeight(node.children[0])
         
         # Otherwise, need to grab two largest heights! We can do this via two O(n)
         # parsings, instead of sorting which takes O(nlogn) :P
-        return 2 + sum(sorted(self.getHeight(child) for child in node.children)[-2:])
         max_child, max_height = None, float("-inf")
         for child in node.children:
             child_height = self.getHeight(child)
@@ -90,7 +69,7 @@ class Solution:
             adj_list[u].append(v)
             adj_list[v].append(u)
         
-        root_val = random.randint(0, len(edges)) # Pick any node as root!
+        root_val = 0 # Pick any node as root!
         root = TreeNode(root_val)
 
         # Now, this will be the root node, so we will make the relationships NO LONGER
@@ -108,7 +87,7 @@ class Solution:
                 visited_vals.add(neighbor_val)
                 neighbor_node = TreeNode(neighbor_val)
                 queue.append(neighbor_node)
-                node.children.add(neighbor_node)
+                node.children.append(neighbor_node)
 
         return root
             
@@ -125,3 +104,7 @@ class Solution:
 # 8->0->2->7->6->3->5
 #  \
 #   9
+
+
+#                    u                                     
+# <----------------- n ----------------------->
