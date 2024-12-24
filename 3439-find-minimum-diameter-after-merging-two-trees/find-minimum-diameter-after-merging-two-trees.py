@@ -17,9 +17,9 @@ class Solution:
         # self.dfs(root2, 1, self.d2)
         # # print(f"{self.d2=}")
         # return -1
-        diam1 = self.getSmallestLengthInTree(root1)
+        # diam1 = self.getSmallestLengthInTree(root1)
         # print("SEPARATOR!")
-        diam2 = self.getSmallestLengthInTree(root2) 
+        # diam2 = self.getSmallestLengthInTree(root2) 
         # print(f"{diam1=}, {diam2=}")
         # res = diam1 + diam2 + 1
         
