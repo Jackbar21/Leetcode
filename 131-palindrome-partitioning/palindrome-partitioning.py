@@ -10,13 +10,15 @@ class Solution:
             return True
 
         partitions = []
+        res = []
         def backtrack(i):
             # Base Case: If i >= len(s), then we want to check if every partition
             # is a palindrome!
             if i >= len(s):
                 strings = ["".join(partition) for partition in partitions]
                 if all(isPalindrome(string) for string in strings):
-                    yield strings
+                    # yield strings
+                    res.append(strings)
                 return
 
             letter = s[i]
@@ -25,12 +27,14 @@ class Solution:
             # (Can only do this if I have at least one partition in the first place!)
             if len(partitions) > 0:
                 partitions[-1].append(letter)
-                yield from backtrack(i + 1)
+                backtrack(i + 1)
                 partitions[-1].pop()
 
             # Case 2: add letter at index i into new partition
             partitions.append([letter])
-            yield from backtrack(i + 1)
+            backtrack(i + 1)
             partitions.pop()
         
-        return list(backtrack(0))
+        # return list(backtrack(0))
+        backtrack(0)
+        return res
