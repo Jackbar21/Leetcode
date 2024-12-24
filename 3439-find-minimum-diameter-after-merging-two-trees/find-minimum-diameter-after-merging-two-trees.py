@@ -59,6 +59,7 @@ class Solution:
         
         # Otherwise, need to grab two largest heights! We can do this via two O(n)
         # parsings, instead of sorting which takes O(nlogn) :P
+        return 2 + sum(sorted(self.getHeight(child) for child in node.children)[-2:])
         max_child, max_height = None, float("-inf")
         for child in node.children:
             child_height = self.getHeight(child)
@@ -74,8 +75,6 @@ class Solution:
         
         return 2 + max_height + second_max_height
 
-
-    
     @cache
     def getHeight(self, node):
         if len(node.children) == 0:
@@ -84,8 +83,6 @@ class Solution:
 
     
     def buildTree(self, edges):
-        N = len(edges) + 1 # Number of nodes!
-
         # Step 1: Build an adjacency list, and get the degrees of each node.
         # REMEMBER... this is an UNDIRECTED graph!
         adj_list = defaultdict(list)
@@ -93,10 +90,9 @@ class Solution:
             adj_list[u].append(v)
             adj_list[v].append(u)
         
-        root_val = 0
+        root_val = random.randint(0, len(edges)) # Pick any node as root!
         root = TreeNode(root_val)
-        # print(f"{root_val=}")
-        
+
         # Now, this will be the root node, so we will make the relationships NO LONGER
         # UNDIRECTED!!! I.e., we need to give each node direct children, and differentiate
         # their old bi-directional relationships into direct parent-to-child relationships!
@@ -113,8 +109,7 @@ class Solution:
                 neighbor_node = TreeNode(neighbor_val)
                 queue.append(neighbor_node)
                 node.children.add(neighbor_node)
-                neighbor_node.parent = node
-        
+
         return root
             
 
