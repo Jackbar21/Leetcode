@@ -9,6 +9,12 @@ class Solution:
                 r -= 1
             return True
 
+        def checkAllPalindromes(strings: List[str]) -> bool:
+            for string in strings:
+                if not isPalindrome(string):
+                    return False
+            return True
+
         partitions = []
         res = []
         def backtrack(i):
@@ -16,8 +22,7 @@ class Solution:
             # is a palindrome!
             if i >= len(s):
                 strings = ["".join(partition) for partition in partitions]
-                if all(isPalindrome(string) for string in strings):
-                    # yield strings
+                if checkAllPalindromes(strings):
                     res.append(strings)
                 return
 
@@ -35,6 +40,5 @@ class Solution:
             backtrack(i + 1)
             partitions.pop()
         
-        # return list(backtrack(0))
         backtrack(0)
         return res
