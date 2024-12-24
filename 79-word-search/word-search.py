@@ -53,7 +53,7 @@ class Solution:
         for di, dj in self.DIRECTIONS:
             x, y = i + di, j + dj
             if ((x, y) not in visited and self.inBounds(x, y)
-                # and self.board[x][y] == self.word[word_index + 1]
+                and self.board[x][y] == self.word[word_index + 1]
             ):
                 visited.add((x, y))
                 if self.backtrack(x, y, word_index + 1, visited):
@@ -70,7 +70,7 @@ class Solution:
         self.board, self.word = board, word
         for i in range(self.M):
             for j in range(self.N):
-                if self.backtrack(i, j, 0, set([(i, j)])):
+                if board[i][j] == word[0] and self.backtrack(i, j, 0, set([(i, j)])):
                     return True
         return False
 
