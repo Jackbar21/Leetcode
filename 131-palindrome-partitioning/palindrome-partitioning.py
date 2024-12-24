@@ -32,7 +32,4 @@ class Solution:
             yield from backtrack(i + 1, partitions)
             partitions.pop()
         
-        def backtrackEnumerator():
-            yield from backtrack(0)
-        
-        return list(backtrackEnumerator())
+        return list(backtrack(0))
