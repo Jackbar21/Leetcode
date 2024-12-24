@@ -12,17 +12,7 @@ class Solution:
         # two diameters, and +1 for the edge connected in between :)
         root1 = self.buildTree(edges1)
         root2 = self.buildTree(edges2)
-        # # print(f"{root1.val=}, {[node.val for node in root1.children]}")
-        # self.d2 = defaultdict(set)
-        # self.dfs(root2, 1, self.d2)
-        # # print(f"{self.d2=}")
-        # return -1
-        # diam1 = self.getSmallestLengthInTree(root1)
-        # print("SEPARATOR!")
-        # diam2 = self.getSmallestLengthInTree(root2) 
-        # print(f"{diam1=}, {diam2=}")
-        # res = diam1 + diam2 + 1
-        
+
         max_diam1 = self.getMaxDiameterInTree(root1)
         max_diam2 = self.getMaxDiameterInTree(root2)
         # print(f"{max_diam1=}, {max_diam2=}")
@@ -46,47 +36,7 @@ class Solution:
             res = max(res, self.getMaxDiameterInTree(child))
         return res
     
-    # def 
-    
-    def getSmallestLengthInTree(self, root):
-        # res = self.getDiameterFromNode(root)
-        # for child in root.children:
-        #     res = min(res, 1 + self.getSmallestLengthInTree(child))
-        # return res
 
-        res = float("inf")
-        queue = collections.deque([root])
-        while len(queue) > 0:
-            node = queue.popleft()
-            # max_path_len = max(self.getDepth(node), self.getHeight(node), self.getHeight(node.parent) if node.parent else 0)
-            max_path_len = self.getHeight(node) + self.getDepth(node)
-            # print(f"{node.val=}, {max_path_len=}, {self.getHeight(node)=}, {self.getDepth(node)=}")
-            res = min(res, max_path_len)
-            # for child in node.children:
-            #     queue.append(child)
-            queue.extend(node.children)
-        return res
-
-        # diameter = self.getDiameter(root)
-        # for child in root.children:
-        #     diameter = min(diameter, 1 + self.getSmallestDiameterFromRoot(child))
-        # return diameter 
-        # height = self.getHeight(root)
-        length = self.getLength(root)
-        for child in root.children:
-            length = min(length, self.getSmallestLengthInTree(child))
-        return length
-
-        return 1 + min([self.getDiameterFromNode(child) for child in root.children], default=0)
-
-        if not root.children:
-            return 1
-
-        # return 1 + min()
-        for child in root.children:
-            height = min(height, 1 + self.getSmallestDiameterFromRoot(child))
-        return height
-    
     # WORKING FUNCTION!!!
     def getDiameterFromNode(self, node):
         # return max(self.getDepth(node), self.getHeight(node))
@@ -126,27 +76,11 @@ class Solution:
 
 
     
-    def dfs(self, root, depth, d):
-        d[depth].add(root.val)
-        for child in root.children:
-            self.dfs(child, depth + 1, d)
-    
     @cache
     def getHeight(self, node):
         if len(node.children) == 0:
             return 0
         return 1 + max(self.getHeight(child) for child in node.children)
-    
-    @cache
-    def getDepth(self, node):
-        # if node == None:
-        #     return -1
-        if node.parent == None:
-            return 0
-        return 1 + self.getDepth(node.parent)
-    
-    def getLength(self, node):
-        return self.getHeight(node) + self.getDepth(node)
 
     
     def buildTree(self, edges):
@@ -167,6 +101,7 @@ class Solution:
             if degree <= smallest_degree:
                 smallest_degree = degree
                 root_val = node_val
+        root_val = 0
         root = TreeNode(root_val)
         # print(f"{root_val=}")
         
