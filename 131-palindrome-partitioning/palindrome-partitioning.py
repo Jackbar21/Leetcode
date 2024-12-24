@@ -1,7 +1,8 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         @cache
-        def isPalindrome(l: int, r: int) -> bool:
+        def isPalindrome(s: str) -> bool:
+            l, r = 0, len(s) - 1
             while l < r:
                 if s[l] != s[r]:
                     return False
@@ -9,46 +10,24 @@ class Solution:
                 r -= 1
             return True
         
-        def checkAllPalindromes(pairs) -> bool:
-            for l, r in pairs:
-                if not isPalindrome(l, r):
+        def checkAllPalindromes(strings: List[str]) -> bool:
+            for string in strings:
+                if not isPalindrome(string):
                     return False
             return True
 
         partitions = []
-        res = set()
+        res = []
         def backtrack(i):
             # Base Case: If i >= len(s), then we want to check if every partition
             # is a palindrome!
             if i >= len(s):
-                string_pairs = []
-                l = 0
-                for r in partitions:
-                    string_pairs.append((l, r))
-                    l = r + 1
-                # last_string = s[l:]
-                # if last_string != "":
-                #     strings.append(last_string)
-                if l < len(s):
-                    string_pairs.append((l, len(s) - 1))
-                # pairs.append(l, len(s) - 1)
-
-                # strings = ["".join(partition) for partition in partitions]
-                if checkAllPalindromes(string_pairs):
-                    res.add(tuple(string_pairs))
+                strings = ["".join(partition) for partition in partitions]
+                if checkAllPalindromes(strings):
+                    res.append(strings)
                 return
 
             letter = s[i]
-
-            # Case 1: make a partition at index i
-            partitions.append(i)
-            backtrack(i + 1)
-            partitions.pop()
-
-            # Case 2: Don't make a partition at index i
-            backtrack(i + 1)
-
-            return
 
             # Case 1: add letter at index i into last partition
             # (Can only do this if I have at least one partition in the first place!)
@@ -63,4 +42,4 @@ class Solution:
             partitions.pop()
         
         backtrack(0)
-        return list([[s[i:j+1] for i,j in pairs] for pairs in res])
+        return res
