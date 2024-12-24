@@ -23,7 +23,7 @@ class Solution:
             # is a palindrome!
             if i >= len(s):
                 strings = ["".join(partition) for partition in partitions]
-                if checkAllPalindromes(strings):
+                if isPalindrome(strings[-1]):
                     res.append(strings)
                 return
 
@@ -37,9 +37,11 @@ class Solution:
                 partitions[-1].pop()
 
             # Case 2: add letter at index i into new partition
-            partitions.append([letter])
-            backtrack(i + 1)
-            partitions.pop()
+            # Can ONLY do this if previous partition (if any) forms a VALID palindrome!
+            if len(partitions) == 0 or isPalindrome("".join(partitions[-1])):
+                partitions.append([letter])
+                backtrack(i + 1)
+                partitions.pop()
         
         backtrack(0)
         return res
