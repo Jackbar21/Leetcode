@@ -1,5 +1,6 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
+        @cache
         def isPalindrome(s: str) -> bool:
             l, r = 0, len(s) - 1
             while l < r:
