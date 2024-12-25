@@ -14,8 +14,7 @@ class Solution:
         max_level = 0
         while len(queue) > 0:
             node, level = queue.popleft()
-            if level > max_level:
-                max_level = level
+            max_level = max(max_level, level)
             levels[level] = max(node.val, levels.get(level, float("-inf")))
             if node.left:
                 queue.append((node.left, level + 1))
