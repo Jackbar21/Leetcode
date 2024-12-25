@@ -15,8 +15,8 @@ class Solution:
             node, level = queue.popleft()
             if level == len(levels):
                 levels.append(node.val)
-            else:
-                levels[level] = max(node.val, levels[level])
+            elif node.val > levels[level]:
+                levels[level] = node.val
 
             if node.left:
                 queue.append((node.left, level + 1))
