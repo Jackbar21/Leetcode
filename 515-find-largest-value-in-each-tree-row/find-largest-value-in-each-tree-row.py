@@ -13,16 +13,14 @@ class Solution:
         queue = collections.deque([(root, 0)]) # (node, level)
         while len(queue) > 0:
             node, level = queue.popleft()
-            # levels[level] = max(node.val, levels.get(level, float("-inf")))
             if level == len(levels):
                 levels.append(node.val)
             else:
-                levels[-1] = max(node.val, levels[-1])
+                levels[level] = max(node.val, levels[level])
+
             if node.left:
                 queue.append((node.left, level + 1))
             if node.right:
                 queue.append((node.right, level + 1))
         
         return levels
-
-
