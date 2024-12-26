@@ -8,7 +8,7 @@ class Trie:
             if letter not in trie:
                 trie[letter] = {}
             trie = trie[letter]
-        trie["is_word"] = True 
+        trie["."] = True 
 
     def search(self, word: str) -> bool:
         trie = self.trie
@@ -16,7 +16,7 @@ class Trie:
             if letter not in trie:
                 return False
             trie = trie[letter]
-        return "is_word" in trie
+        return "." in trie
 
     def startsWith(self, prefix: str) -> bool:
         trie = self.trie
