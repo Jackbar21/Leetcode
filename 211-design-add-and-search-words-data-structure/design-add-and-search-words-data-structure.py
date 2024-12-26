@@ -8,7 +8,7 @@ class WordDictionary:
             if letter not in trie:
                 trie[letter] = {}
             trie = trie[letter]
-        trie["is_word"] = True
+        trie[","] = () # INTENTIONALLY EMPTY!!!
         
     def search(self, word: str) -> bool:
         return self.searchWord(word, 0, self.trie)
@@ -16,7 +16,7 @@ class WordDictionary:
     def searchWord(self, word, i, trie):
         if i >= len(word):
             assert i == len(word)
-            return "is_word" in trie
+            return "," in trie
         
         letter = word[i]
         if letter != ".":
@@ -26,8 +26,6 @@ class WordDictionary:
         
         assert letter == "."
         for key in trie:
-            if key == "is_word":
-                continue
             if self.searchWord(word, i + 1, trie[key]):
                 return True
         return False
