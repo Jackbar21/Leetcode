@@ -7,7 +7,7 @@ class Solution:
     @cache
     def dp(self, i, cur_sum):
         if i >= len(self.nums):
-            return int(cur_sum == self.target)
+            return cur_sum == self.target
         
         num = self.nums[i]
 
