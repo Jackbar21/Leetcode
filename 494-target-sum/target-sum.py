@@ -1,31 +1,20 @@
 class Solution:
-    def __init__(self):
-        self.memo = {} # (i, target), representing nums[:i+1]
-        self.nums = None
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         self.nums = nums
-        return self.findTargetDp(len(nums)-1, target)
+        self.target = target
+        return self.dp(0, 0)
+    
+    @cache
+    def dp(self, i, cur_sum):
+        if i >= len(self.nums):
+            return int(cur_sum == self.target)
         
-    def findTargetDp(self, i, target):
-        # i == 0 <==> len(nums) == 1
-        if i <= 0:
-            # '-' or '+' in front of 0 doesn't affect value!
-            if self.nums[0] == target == 0:
-                return 2
-            return 1 if abs(self.nums[0]) == abs(target) else 0
-        if (i, target) in self.memo:
-            return self.memo[(i, target)]
-        # Number of ways for nums[:i+1]
-        # is just two cases for slapping a
-        # '+' or '-' for nums[i], and using
-        # nums[:i] result recursively (with memoization)
-        res = 0
+        num = self.nums[i]
 
-        # Case 1: Slap a '+' for nums[i]
-        res += self.findTargetDp(i - 1, target - self.nums[i])
+        # Case 1: Add a '+' before num
+        case1 = self.dp(i + 1, cur_sum + num)
 
-        # Case 2: Slap a '-' for nums[i]
-        res += self.findTargetDp(i - 1, target + self.nums[i])
+        # Case 2: Add a '-' before num
+        case2 = self.dp(i + 1, cur_sum - num)
 
-        self.memo[(i, target)] = res
-        return res
+        return case1 + case2
