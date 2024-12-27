@@ -16,25 +16,11 @@ class Solution:
             suffix_max.appendleft(cur_max)
 
         suffix_max.popleft()
-        print(f"{suffix_max=}")
+        # print(f"{suffix_max=}")
         # return 0
 
         res = float("-inf")
         for i in range(len(values)):
             res = max(res, values[i] + i + suffix_max[i])
-            print(f"{res=}")
+            # print(f"{res=}")
         return res
-
-        max_val = float("-inf")
-        l, r = 0, len(values) - 1
-        while l < r:
-            max_val = max()
-    
-    # def dp(self, i, j):
-    #     if (i, j) in self.memo:
-    #         return self.memo[(i, j)]
-        
-
-        
-
-        return self.memo[(i, j)]
