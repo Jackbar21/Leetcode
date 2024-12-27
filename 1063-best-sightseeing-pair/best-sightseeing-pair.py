@@ -8,9 +8,10 @@ class Solution:
                 cur_max = new_val
             suffix_max.appendleft(cur_max)
         suffix_max.popleft()
+        print(f"{suffix_max=}")
 
         res = float("-inf")
-        for i in range(len(values)):
+        for i in range(len(values) - 1):
             new_val = values[i] + i + suffix_max[i]
             if new_val > res:
                 res = new_val
