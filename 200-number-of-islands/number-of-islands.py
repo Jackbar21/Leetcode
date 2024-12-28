@@ -1,6 +1,6 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        WATER, LAND = 0, "1"
+        WATER, LAND = "0", "1"
         M, N = len(grid), len(grid[0])
         DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
@@ -8,7 +8,7 @@ class Solution:
         num_islands = 0
         for i in range(M):
             for j in range(N):
-                if grid[i][j] != LAND: # or (i, j) in visited:
+                if grid[i][j] == WATER: # or (i, j) in visited:
                     continue
                 
                 # Here, we have at least one unvisited Land Cell, so we must
