@@ -19,10 +19,10 @@ class Solution:
                 # every adjacent/reachable island-cell from this current position
                 # as visited (since they are all part of the SAME island)
                 num_islands += 1
-                queue = collections.deque([(i, j)])
+                fringe = [(i, j)] # dfs
                 visited.add((i, j))
-                while len(queue) > 0:
-                    x, y = queue.popleft()
+                while len(fringe) > 0:
+                    x, y = fringe.pop()
 
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
@@ -32,6 +32,6 @@ class Solution:
                             grid[neigh_x][neigh_y] == LAND
                         ):
                             visited.add((neigh_x, neigh_y))
-                            queue.append((neigh_x, neigh_y))
+                            fringe.append((neigh_x, neigh_y))
 
         return num_islands
