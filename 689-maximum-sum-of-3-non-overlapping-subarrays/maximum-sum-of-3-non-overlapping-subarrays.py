@@ -22,46 +22,36 @@ class Solution:
         # assert len(indices) == 3
         return sum(self.prefix_sums[index] for index in indices)
     
+    @cache
     def fastDp(self, i, indices_left):
         assert indices_left >= 0
         if indices_left == 0:
-            return ()
+            return []
 
-        if (i, indices_left) in self.memo:
-            return self.memo[(i, indices_left)]
-        
         if i > len(self.nums) - self.k:
             return float("-inf") # since indices_left > 3
-            # return ()
         
         # Case 1: Choose index i
         case1 = self.fastDp(i + self.k, indices_left - 1)
+        case1_sum = case1
         if case1 != float("-inf"):
-            case1 = tuple([i] + list(case1))
-        print(f"{case1=}")
-        case1_sum = case1 if case1 == float("-inf") else self.getSumFromIndices(case1)
-        
+            case1 = [i] + case1
+            case1_sum = self.getSumFromIndices(case1)
 
         # Case 2: Skip index i
-        case2 = (self.fastDp(i + 1, indices_left))
-        if case2 != float("-inf"):
-            case2 = tuple(case2)
-        print(f"{case2=}")
+        case2 = self.fastDp(i + 1, indices_left)
         case2_sum = case2 if case2 == float("-inf") else self.getSumFromIndices(case2)
 
         if case1_sum > case2_sum:
-            self.memo[(i, indices_left)] = case1
-            return tuple(case1)
+            # self.memo[(i, indices_left)] = case1
+            # return tuple(case1)
+            return case1
         elif case2_sum > case1_sum:
-            self.memo[(i, indices_left)] = case2
-            return tuple(case2)
+            # self.memo[(i, indices_left)] = case2
+            return case2
         
         # Otherwise, since they are equal, we must return the lexicographically smallest one
-        # self.memo[i] = case1 if case1 < case2 else case2
-        # return self.memo[i]
-
-        self.memo[(i, indices_left)] = (case1) if case1 < case2 else (case2)
-        return self.memo[(i, indices_left)]
+        return case1 if case1 < case2 else case2
 
     
     def dp(self, i, indices):
