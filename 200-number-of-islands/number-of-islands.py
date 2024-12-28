@@ -4,9 +4,6 @@ class Solution:
         M, N = len(grid), len(grid[0])
         DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-        def inBounds(x, y):
-            return 0 <= x < M and 0 <= y < N
-
         visited = set()
         num_islands = 0
         for i in range(M):
@@ -27,9 +24,9 @@ class Solution:
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
 
-                        if ((neigh_x, neigh_y) not in visited and
-                            inBounds(neigh_x, neigh_y) and
-                            grid[neigh_x][neigh_y] == LAND
+                        if (0 <= neigh_x < M and 0 <= neigh_y < N and
+                            grid[neigh_x][neigh_y] == LAND and
+                            (neigh_x, neigh_y) not in visited
                         ):
                             visited.add((neigh_x, neigh_y))
                             fringe.append((neigh_x, neigh_y))
