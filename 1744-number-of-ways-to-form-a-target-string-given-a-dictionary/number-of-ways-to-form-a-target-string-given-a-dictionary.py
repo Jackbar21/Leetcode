@@ -13,6 +13,7 @@ class Solution:
                 if i not in index_to_freq_dict:
                     index_to_freq_dict[i] = defaultdict(int)
                 index_to_freq_dict[i][letter] += 1
+        print(index_to_freq_dict)
         self.index_to_freq_dict = index_to_freq_dict
         self.memo = {}
         return self.dp(0, 0)
