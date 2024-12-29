@@ -4,6 +4,9 @@ class Solution:
         M, N = len(grid), len(grid[0])
         DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
+        def inBounds(x, y):
+            return 0 <= x < M and 0 <= y < N
+
         visited = set()
         num_islands = 0
         for i in range(M):
@@ -16,7 +19,7 @@ class Solution:
                 # every adjacent/reachable island-cell from this current position
                 # as visited (since they are all part of the SAME island)
                 num_islands += 1
-                queue = collections.deque([(i, j)])
+                queue = collections.deque([(i, j)]) # bfs
                 visited.add((i, j))
                 while len(queue) > 0:
                     x, y = queue.popleft()
@@ -24,7 +27,7 @@ class Solution:
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
 
-                        if (0 <= neigh_x < M and 0 <= neigh_y < N and
+                        if (inBounds(neigh_x, neigh_y) and
                             grid[neigh_x][neigh_y] == LAND and
                             (neigh_x, neigh_y) not in visited
                         ):
