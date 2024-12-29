@@ -16,10 +16,10 @@ class Solution:
                 # every adjacent/reachable island-cell from this current position
                 # as visited (since they are all part of the SAME island)
                 num_islands += 1
-                stack = [(i, j)] # dfs instead of bfs!
+                queue = collections.deque([(i, j)])
                 visited.add((i, j))
-                while len(stack) > 0:
-                    x, y = stack.pop()
+                while len(queue) > 0:
+                    x, y = queue.popleft()
 
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
@@ -29,6 +29,6 @@ class Solution:
                             (neigh_x, neigh_y) not in visited
                         ):
                             visited.add((neigh_x, neigh_y))
-                            stack.append((neigh_x, neigh_y))
+                            queue.append((neigh_x, neigh_y))
 
         return num_islands
