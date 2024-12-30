@@ -13,7 +13,7 @@ class Solution:
         if cur_len in self.memo:
             return self.memo[cur_len]
         
-        is_valid = self.low <= cur_len <= self.high
+        is_valid = self.low <= cur_len
         
         # Case 1: Append '0' zero times
         case1 = self.dp(cur_len + self.zero)
