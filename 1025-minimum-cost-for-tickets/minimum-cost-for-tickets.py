@@ -5,10 +5,9 @@ class Solution:
         self.memo = {}
         return self.dp(0)
     
-    @cache
     def dp(self, i):
-        # if i in self.memo:
-        #     return self.memo[i]
+        if i in self.memo:
+            return self.memo[i]
 
         # I can safely assume that I'm currently at the day of days[i] - 1.
         # Now, choosing the one/seven/thirty day pass might allow me to move the index i
@@ -38,5 +37,5 @@ class Solution:
         case3 = self.thirty + self.dp(new_index)
 
         res = min(case1, case2, case3)
-        # self.memo[i] = res
+        self.memo[i] = res
         return res
