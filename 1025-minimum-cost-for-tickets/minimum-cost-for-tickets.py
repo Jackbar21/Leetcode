@@ -33,6 +33,7 @@ class Solution:
 
         # Case 3: Buy 30-day pass
         new_day = cur_day + 30 # new_day itself IS covered!
+        # Want the leftmost index j such that days[j] > new_day
         while j < DAYS_LEN and days[j] <= new_day:
             j += 1
         case3 = self.thirty + self.dp(j)
