@@ -5,10 +5,10 @@ class Solution:
         self.memo = {}
         return self.dp(0)
     
-    def leftmostBinarySearch(self, i, new_day):
+    def leftmostBinarySearch(self, i, j, new_day):
         # Returns leftmost index j such that days[j] > new_day
         days = self.days
-        l, r = i + 1, len(days) - 1
+        l, r = i + 1, min(j, len(days) - 1)
         while l <= r:
             mid = (l + r) // 2
             if days[mid] > new_day:
@@ -39,12 +39,12 @@ class Solution:
         # Case 2: Buy 7-day pass
         new_day = cur_day + 7 # new_day itself IS covered!
         # Want the leftmost index j such that days[j] > new_day
-        new_index = self.leftmostBinarySearch(i, new_day)
+        new_index = self.leftmostBinarySearch(i, i + 6, new_day)
         case2 = self.seven + self.dp(new_index)
 
         # Case 3: Buy 30-day pass
         new_day = cur_day + 30 # new_day itself IS covered!
-        new_index = self.leftmostBinarySearch(new_index, new_day)
+        new_index = self.leftmostBinarySearch(new_index, new_index + 29, new_day)
         case3 = self.thirty + self.dp(new_index)
 
         res = min(case1, case2, case3)
