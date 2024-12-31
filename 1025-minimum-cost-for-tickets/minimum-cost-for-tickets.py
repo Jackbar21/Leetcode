@@ -39,12 +39,12 @@ class Solution:
         # Case 2: Buy 7-day pass
         new_day = cur_day + 7 # new_day itself IS covered!
         # Want the leftmost index j such that days[j] > new_day
-        new_index = self.leftmostBinarySearch(i, i + 6, new_day)
+        new_index = self.leftmostBinarySearch(i, i + 7 - 1, new_day)
         case2 = self.seven + self.dp(new_index)
 
         # Case 3: Buy 30-day pass
         new_day = cur_day + 30 # new_day itself IS covered!
-        new_index = self.leftmostBinarySearch(new_index, new_index + 18, new_day)
+        new_index = self.leftmostBinarySearch(new_index, new_index + 30 - 1, new_day)
         case3 = self.thirty + self.dp(new_index)
 
         res = min(case1, case2, case3)
