@@ -14,8 +14,8 @@ class Solution:
         # more than others! For each case, I will recursively compute its cost (memoizing
         # the cost for each index i to turn the complexity from exponential down to polynomial).
         days = self.days
-        DAY_LEN = len(days)
-        if i >= DAY_LEN:
+        DAYS_LEN = len(days)
+        if i >= DAYS_LEN:
             return 0
 
         cur_day = days[i] - 1
@@ -27,13 +27,13 @@ class Solution:
         new_day = cur_day + 7 # new_day itself IS covered!
         # Want the leftmost index j such that days[j] > new_day
         j = i + 1
-        while j < DAY_LEN and days[j] <= new_day:
+        while j < DAYS_LEN and days[j] <= new_day:
             j += 1
         case2 = self.seven + self.dp(j)
 
         # Case 3: Buy 30-day pass
         new_day = cur_day + 30 # new_day itself IS covered!
-        while j < DAY_LEN and days[j] <= new_day:
+        while j < DAYS_LEN and days[j] <= new_day:
             j += 1
         case3 = self.thirty + self.dp(j)
 
