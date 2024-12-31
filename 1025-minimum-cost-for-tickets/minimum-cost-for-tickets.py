@@ -6,12 +6,12 @@ class Solution:
         return self.dp(0)
     
     def leftmostBinarySearch(self, i, j, new_day):
-        # Returns leftmost index j such that days[j] > new_day
+        # Returns leftmost index j such that days[j] >= new_day
         days = self.days
         l, r = i + 1, min(j, len(days) - 1)
         while l <= r:
             mid = (l + r) // 2
-            if days[mid] > new_day:
+            if days[mid] >= new_day:
                 # Valid solution, look for even more leftmost solutions!
                 r = mid - 1
             else:
@@ -31,7 +31,7 @@ class Solution:
         if i >= len(days):
             return 0
 
-        cur_day = days[i] - 1
+        cur_day = days[i]
 
         # Case 1: Buy 1-day pass
         case1 = self.one + self.dp(i + 1)
