@@ -44,7 +44,7 @@ class Solution:
 
         # Case 3: Buy 30-day pass
         new_day = cur_day + 30 # new_day itself IS covered!
-        new_index = self.leftmostBinarySearch(new_index, new_index + 20, new_day)
+        new_index = self.leftmostBinarySearch(new_index, new_index + 18, new_day)
         case3 = self.thirty + self.dp(new_index)
 
         res = min(case1, case2, case3)
