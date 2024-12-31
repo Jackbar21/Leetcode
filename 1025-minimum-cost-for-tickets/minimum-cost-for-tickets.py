@@ -49,7 +49,7 @@ class Solution:
         # new_index = i + 1
         # while new_index < DAYS_LEN and days[new_index] <= new_day:
         #     new_index += 1
-        new_index = self.leftmostBinarySearch(i, new_day)
+        new_index = self.leftmostBinarySearch(new_index, new_day)
         case3 = self.thirty + self.dp(new_index)
 
         res = min(case1, case2, case3)
