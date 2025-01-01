@@ -3,7 +3,6 @@ class Solution:
         num_ones = s.count('1')
         num_zeroes = 0
         res = 0
-
         for i in range(len(s) - 1):
             if s[i] == "1":
                 num_ones -= 1
