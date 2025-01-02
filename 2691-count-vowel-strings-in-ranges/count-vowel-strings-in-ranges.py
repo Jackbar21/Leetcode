@@ -1,6 +1,6 @@
 class Solution:
-    def isValid(self, string):
-        return string[0] in self.vowels and string[-1] in self.vowels
+    def isValid(self, word):
+        return word[0] in self.vowels and word[-1] in self.vowels
 
     def vowelStrings(self, words: List[str], queries: List[List[int]]) -> List[int]:
         self.vowels = ['a', 'e', 'i', 'o', 'u']
@@ -12,12 +12,13 @@ class Solution:
             prefix_sums.append(count)
         
         # Since prefix_sums[i] == sum(self.isValid(word) for word in words[0..i]), notice that
-        # for any i <= j, prefix_sums[j] - prefix_sums[i]
+        # for any i <= j, 
+        #   prefix_sums[j] - prefix_sums[i - 1]
         #   == sum(self.isValid(word) for word in words[0..j]) 
-        #      - sum(self.isValid(word) for word in words[0..i])
-        #   == sum(self.isValid(word) for word in words[0..i]) 
+        #      - sum(self.isValid(word) for word in words[0..i-1])
+        #   == sum(self.isValid(word) for word in words[0..i-1]) 
         #      + sum(self.isValid(word) for word in words[i..j])
-        #      - sum(self.isValid(word) for word in words[0..i])  
+        #      - sum(self.isValid(word) for word in words[0..i-1])  
         #   == sum(self.isValid(word) for word in words[i..j]) 
         ans = []
         for l, r in queries:
