@@ -18,6 +18,6 @@ class Solution:
             # if must be that nums[i+1..len(nums)-1] is non-empty, further implying
             # that i+1 must be less-than-or-equal-to len(nums)-1, i.e. i <= len(nums) - 2
             # Hence, why we don't consider the case for i being len(nums) - 1 directly.
-            res += prefix_sums[i] >= nums_sum - (prefix_sums[i] if i + 1 > 0 else 0)
+            res += self.getSubarraySum(0, i) >= self.getSubarraySum(i + 1, len(nums) - 1)
         
         return res
