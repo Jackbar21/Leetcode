@@ -11,8 +11,8 @@ class Solution:
             else:
                 border_indices[letter][RIGHTMOST] = i
             
-            freq_dict[letter] = freq_dict.get(letter, 0) + 1
-            prefix_freq.append(freq_dict.copy()) # O(1) work, since at most 26 keys :)
+            # freq_dict[letter] = freq_dict.get(letter, 0) + 1
+            # prefix_freq.append(freq_dict.copy()) # O(1) work, since at most 26 keys :)
         
         res = 0
         for letter in alphabet:
