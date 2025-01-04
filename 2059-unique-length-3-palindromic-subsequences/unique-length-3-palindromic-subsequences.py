@@ -1,6 +1,6 @@
 class Solution:
     def getSubarrayFrequencies(self, i, j):
-        di, dj = self.prefix_freq[i - 1], self.prefix_freq[j]
+        di, dj = self.prefix_freq[i - 1] if i > 0 else defaultdict(int), self.prefix_freq[j]
         return {
             key: dj[key] - di[key] # TODO: Consider not using defaultdict
             for key in dj
