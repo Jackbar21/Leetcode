@@ -45,8 +45,10 @@ class Solution:
             # count = sum(val > 0 for val in d.values())
             di, dj = prefix_freq[l - 1], prefix_freq[r]
             # count = self.getSubarrayFrequenciesCount(l, r)
-            count = sum(dj[key] > di.get(key, 0) for key in dj)
-            res += count
+            for key in dj:
+                res += dj[key] > di.get(key, 0)
+            # count = sum(dj[key] > di.get(key, 0) for key in dj)
+            # res += count
 
         # print(f"{prefix_freq=}")
         # # print(f"{border_indices=}")
