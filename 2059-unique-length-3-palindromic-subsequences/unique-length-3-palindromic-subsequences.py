@@ -7,7 +7,7 @@ class Solution:
         }
     
     def getSubarrayFrequenciesCount(self, i, j):
-        di, dj = self.prefix_freq[i - 1] if i > 0 else {}, self.prefix_freq[j]
+        di, dj = self.prefix_freq[i - 1], self.prefix_freq[j]
         # return {
         #     key: dj[key] - di.get(key, 0) # TODO: Consider not using defaultdict
         #     for key in dj
