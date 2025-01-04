@@ -2,7 +2,7 @@ class Solution:
     def countPalindromicSubsequence(self, s: str) -> int:
         alphabet = "abcdefghijklmnopqrstuvwxyz"
         border_indices = {letter: [None, None] for letter in alphabet}
-        prefix_freq = []
+        prefix_freq = [] # prefix_freq[i] = dict frequency count of each letter in s[0..i]
         freq_dict = {}
         LEFTMOST, RIGHTMOST = 0, 1
         for i, letter in enumerate(s):
@@ -23,12 +23,8 @@ class Solution:
             
             l = border_indices[letter][LEFTMOST] + 1
             r = border_indices[letter][RIGHTMOST] - 1
-            di, dj = prefix_freq[l - 1], prefix_freq[r] # l > 0 always!!!
-            for key in dj:
-                res += dj[key] > di.get(key, 0)
+            dl, dr = prefix_freq[l - 1], prefix_freq[r] # l > 0 always!!!
+            for key in dr:
+                res += dr[key] > dl.get(key, 0)
 
         return res
-
-# XYZ, X = "a"
-
-# XYX
