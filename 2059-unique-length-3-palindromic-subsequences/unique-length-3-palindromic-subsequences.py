@@ -29,7 +29,7 @@ class Solution:
         for letter in s:
             freq_dict[letter] = freq_dict.get(letter, 0) + 1
             prefix_freq.append(freq_dict.copy()) # O(1) work, since at most 26 keys :)
-        self.prefix_freq = prefix_freq
+        # self.prefix_freq = prefix_freq
 
         res = 0
         for letter in alphabet:
@@ -38,7 +38,7 @@ class Solution:
                 # 3 with it!!!
                 continue
             
-            assert border_indices[letter][LEFTMOST] is not None
+            # assert border_indices[letter][LEFTMOST] is not None
             l = border_indices[letter][LEFTMOST] + 1
             r = border_indices[letter][RIGHTMOST] - 1
             # d = self.getSubarrayFrequencies(l, r)
