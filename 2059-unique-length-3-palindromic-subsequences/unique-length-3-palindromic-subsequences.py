@@ -23,8 +23,12 @@ class Solution:
             
             l = border_indices[letter][LEFTMOST] + 1
             r = border_indices[letter][RIGHTMOST] - 1
-            dl, dr = prefix_freq[l - 1], prefix_freq[r] # l > 0 always!!!
-            for key in dr:
-                res += dr[key] > dl.get(key, 0)
+            # dl, dr = prefix_freq[l - 1], prefix_freq[r] # l > 0 always!!!
+            # for key in dr:
+            #     res += dr[key] > dl.get(key, 0)
+            hset = set()
+            for index in range(l, r + 1):
+                hset.add(s[index])
+            res += len(hset)
 
         return res
