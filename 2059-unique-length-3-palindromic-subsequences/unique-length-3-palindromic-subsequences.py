@@ -23,8 +23,16 @@ class Solution:
             
             l = border_indices[letter][LEFTMOST] + 1
             r = border_indices[letter][RIGHTMOST] - 1
-            di, dj = prefix_freq[l - 1], prefix_freq[r] # l > 0 always!!!
-            for key in dj:
-                res += dj[key] > di.get(key, 0)
+            # di, dj = prefix_freq[l - 1], prefix_freq[r] # l > 0 always!!!
+            # for key in dj:
+            #     res += dj[key] > di.get(key, 0)
+            count_set = set()
+            for idx in range(l, r + 1):
+                count_set.add(s[idx])
+            res += len(count_set)
 
         return res
+
+# XYZ, X = "a"
+
+# XYX
