@@ -32,6 +32,8 @@ class Solution:
             # for key in dj:
             #     res += dj[key] > di.get(key, 0)
             ai, aj = prefix_freq[l - 1], prefix_freq[r]
-            res += sum(aj[idx] > ai[idx] for idx in range(26))
+            # res += sum(aj[idx] > ai[idx] for idx in range(26))
+            for idx in range(26):
+                res += aj[idx] > ai[idx]
 
         return res
