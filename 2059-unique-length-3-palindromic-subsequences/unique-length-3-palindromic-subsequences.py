@@ -5,6 +5,14 @@ class Solution:
             key: dj[key] - di.get(key, 0) # TODO: Consider not using defaultdict
             for key in dj
         }
+    
+    def getSubarrayFrequenciesCount(self, i, j):
+        di, dj = self.prefix_freq[i - 1] if i > 0 else {}, self.prefix_freq[j]
+        # return {
+        #     key: dj[key] - di.get(key, 0) # TODO: Consider not using defaultdict
+        #     for key in dj
+        # }
+        return sum(dj[key] > di.get(key, 0) for key in dj)
 
     def countPalindromicSubsequence(self, s: str) -> int:
         alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -33,8 +41,9 @@ class Solution:
             assert border_indices[letter][LEFTMOST] is not None
             l = border_indices[letter][LEFTMOST] + 1
             r = border_indices[letter][RIGHTMOST] - 1
-            d = self.getSubarrayFrequencies(l, r)
-            count = sum(val > 0 for val in d.values())
+            # d = self.getSubarrayFrequencies(l, r)
+            # count = sum(val > 0 for val in d.values())
+            count = self.getSubarrayFrequenciesCount(l, r)
             res += count
 
         # print(f"{prefix_freq=}")
