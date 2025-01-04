@@ -43,7 +43,9 @@ class Solution:
             r = border_indices[letter][RIGHTMOST] - 1
             # d = self.getSubarrayFrequencies(l, r)
             # count = sum(val > 0 for val in d.values())
-            count = self.getSubarrayFrequenciesCount(l, r)
+            di, dj = prefix_freq[l - 1], prefix_freq[r]
+            # count = self.getSubarrayFrequenciesCount(l, r)
+            count = sum(dj[key] > di.get(key, 0) for key in dj)
             res += count
 
         # print(f"{prefix_freq=}")
