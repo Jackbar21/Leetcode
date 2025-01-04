@@ -1,8 +1,8 @@
 class Solution:
     def getSubarrayFrequencies(self, i, j):
-        di, dj = self.prefix_freq[i - 1] if i > 0 else defaultdict(int), self.prefix_freq[j]
+        di, dj = self.prefix_freq[i - 1] if i > 0 else {}, self.prefix_freq[j]
         return {
-            key: dj[key] - di[key] # TODO: Consider not using defaultdict
+            key: dj[key] - di.get(key, 0) # TODO: Consider not using defaultdict
             for key in dj
         }
 
@@ -17,9 +17,12 @@ class Solution:
                 border_indices[letter][RIGHTMOST] = i
         
         prefix_freq = []
-        freq_dict = defaultdict(int)
+        freq_dict = {}
         for letter in s:
-            freq_dict[letter] += 1
+            if letter not in freq_dict:
+                freq_dict[letter] = 1
+            else:
+                freq_dict[letter] += 1
             prefix_freq.append(freq_dict.copy()) # O(1) work, since at most 26 keys :)
         self.prefix_freq = prefix_freq
 
