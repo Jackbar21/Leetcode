@@ -1,18 +1,16 @@
 class Solution:
     def countPalindromicSubsequence(self, s: str) -> int:
-        ORD_A = ord("a")
         alphabet = "abcdefghijklmnopqrstuvwxyz"
         border_indices = {letter: [None, None] for letter in alphabet}
+        prefix_freq = []
+        freq_dict = {}
         LEFTMOST, RIGHTMOST = 0, 1
         for i, letter in enumerate(s):
             if border_indices[letter][LEFTMOST] is None:
                 border_indices[letter][LEFTMOST] = i
             else:
                 border_indices[letter][RIGHTMOST] = i
-        
-        prefix_freq = []
-        freq_dict = {}
-        for letter in s:
+            
             freq_dict[letter] = freq_dict.get(letter, 0) + 1
             prefix_freq.append(freq_dict.copy()) # O(1) work, since at most 26 keys :)
         
