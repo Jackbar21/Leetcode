@@ -19,10 +19,7 @@ class Solution:
         prefix_freq = []
         freq_dict = {}
         for letter in s:
-            if letter not in freq_dict:
-                freq_dict[letter] = 1
-            else:
-                freq_dict[letter] += 1
+            freq_dict[letter] = freq_dict.get(letter, 0) + 1
             prefix_freq.append(freq_dict.copy()) # O(1) work, since at most 26 keys :)
         self.prefix_freq = prefix_freq
 
