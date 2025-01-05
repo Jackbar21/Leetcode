@@ -9,11 +9,11 @@ class Solution:
             line_sweep[end + 1] += r
         
         mutate = 0
-        new_s = []
+        new_s = [0] * len(s)
         for i in range(len(s)):
             mutate += line_sweep[i]
             mutated_letter = mutateLetter(s[i], mutate)
-            new_s.append(mutated_letter)
+            new_s[i] = mutated_letter
 
         # TODO: Modify new_s based on line_sweep
         return "".join(new_s)
