@@ -10,8 +10,8 @@ class Solution:
         
         mutate = 0
         new_s = [letter for letter in s]
-        for i, line_sweep_val in enumerate(line_sweep):
-            mutate += line_sweep_val
+        for i in range(len(s)):
+            mutate += line_sweep[i]
             if mutate != 0:
                 mutated_letter = mutateLetter(s[i], mutate)
                 new_s[i] = mutated_letter
