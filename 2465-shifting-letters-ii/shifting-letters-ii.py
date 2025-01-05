@@ -9,11 +9,17 @@ class Solution:
             line_sweep[end + 1] += r
         
         mutate = 0
-        new_s = [0] * len(s)
+        new_s = [letter for letter in s]
         for i in range(len(s)):
             mutate += line_sweep[i]
-            mutated_letter = mutateLetter(s[i], mutate)
-            new_s[i] = mutated_letter
+            if mutate != 0:
+                mutated_letter = mutateLetter(s[i], mutate)
+                new_s[i] = mutated_letter
 
-        # TODO: Modify new_s based on line_sweep
         return "".join(new_s)
+
+# interval = [i, j]
+
+# mutate = 0
+# line_sweep = [0,0,0,0,0,0,-1,0,0,-1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0]
+#                           i                 j+1
