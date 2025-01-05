@@ -1,16 +1,8 @@
 class Solution:
-    def mutateLetter(self, letter, delta):
-        if delta == 0:
-            return letter
-        
-        val = ord(letter) - self.ORD_A
-        val += delta
-        val %= 26
-        return self.alphabet[val]
-
     def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
-        self.alphabet = "abcdefghijklmnopqrstuvwxyz"
-        self.ORD_A = ord("a")
+        alphabet = "abcdefghijklmnopqrstuvwxyz"
+        ORD_A = ord("a")
+        mutateLetter = lambda letter, delta: alphabet[(ord(letter) - ORD_A + delta) % 26]
         # val = self.mutateLetter("a", 0)
         # print(f"{val=}")
         # return ""
@@ -25,7 +17,7 @@ class Solution:
         new_s = []
         for i in range(len(s)):
             mutate += line_sweep[i]
-            mutated_letter = self.mutateLetter(s[i], mutate)
+            mutated_letter = mutateLetter(s[i], mutate)
             new_s.append(mutated_letter)
 
 
