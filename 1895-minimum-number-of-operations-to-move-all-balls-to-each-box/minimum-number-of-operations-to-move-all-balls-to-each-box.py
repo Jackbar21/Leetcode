@@ -1,9 +1,9 @@
 class Solution:
     def minOperations(self, boxes: str) -> List[int]:
-        answer = [0] * len(boxes)
-        for i in range(len(boxes)):
-            for j in range(len(boxes)):
-                answer[i] += int(boxes[j]) * abs(i - j)
+        # answer = [0] * len(boxes)
+        # for i in range(len(boxes)):
+        #     for j in range(len(boxes)):
+        #         answer[i] += int(boxes[j]) * abs(i - j)
         
         # return answer
 
@@ -30,13 +30,13 @@ class Solution:
             suffix_sums.append(suffix_sums[-1] + count)
         suffix_sums.pop()
         suffix_sums = (suffix_sums)[::-1]
-        print(f"{suffix_sums=}")
+        # print(f"{suffix_sums=}")
         
-        print(f"{prefix_sums=}")
+        # print(f"{prefix_sums=}")
         
-        print(f"{prefix_count=}")
-        print(f"{total_num_balls=}")
+        # print(f"{prefix_count=}")
+        # print(f"{total_num_balls=}")
 
         return [prefix_sums[i] + suffix_sums[i] for i in range(len(boxes))]
-        return answer
+        # return answer
         
