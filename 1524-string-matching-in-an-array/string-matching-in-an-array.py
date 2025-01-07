@@ -8,9 +8,27 @@ class Solution:
         for i in range(N):
             for j in range(N):
                 # if i != j and words[i] in words[j]:
-                if i != j and self.robinKarp(words[i], words[j]):
+                # if i != j and self.robinKarp(words[i], words[j]):
+                if i != j and self.isSubstring(words[i], words[j]):
                     res.add(words[i])
         return list(res)
+    
+    def isSubstring(self, small_word, big_word):
+        if len(small_word) > len(big_word):
+            return False
+
+        length = len(small_word)
+        for offset in range(len(big_word) - length + 1):
+            is_substring = True
+            for j in range(length):
+                if small_word[j] != big_word[j + offset]:
+                    is_substring = False
+                    break
+            
+            if is_substring:
+                return True
+        
+        return False
     
     def robinKarp(self, small_word, big_word):
         if len(small_word) > len(big_word):
