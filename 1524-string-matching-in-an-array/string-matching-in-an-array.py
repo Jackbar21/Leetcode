@@ -7,13 +7,14 @@ class Solution:
         res = set()
         for i in range(N):
             for j in range(N):
-                # if i != j and words[i] in words[j]:
-                # if i != j and self.robinKarp(words[i], words[j]):
-                if i != j and self.isSubstring(words[i], words[j]):
+                if i != j and words[i] in words[j]:
+                # if i != j and self.isSubstringRobinKarp(words[i], words[j]):
+                # if i != j and self.isSubstringNaive(words[i], words[j]):
                     res.add(words[i])
         return list(res)
     
-    def isSubstring(self, small_word, big_word):
+    # O(n^2)
+    def isSubstringNaive(self, small_word, big_word):
         if len(small_word) > len(big_word):
             return False
 
@@ -30,7 +31,8 @@ class Solution:
         
         return False
     
-    def robinKarp(self, small_word, big_word):
+    # O(n)
+    def isSubstringRobinKarp(self, small_word, big_word):
         if len(small_word) > len(big_word):
             return False
 
