@@ -1,8 +1,8 @@
 class Solution:
     def stringMatching(self, words: List[str]) -> List[str]:
         res = set()
-        for word1 in words:
-            for word2 in words:
-                if word1 != word2 and word1 in word2:
-                    res.add(word1)
+        for i, word_i in enumerate(words):
+            for j, word_j in enumerate(words):
+                if i != j and word_i in word_j:
+                    res.add(word_i)
         return list(res)
