@@ -7,8 +7,8 @@ class Solution:
         res = set()
         for i in range(N):
             for j in range(N):
-                # if i != j and words[i] in words[j]:
-                if i != j and self.robinKarp(words[i], words[j]):
+                if i != j and words[i] in words[j]:
+                # if i != j and self.robinKarp(words[i], words[j]):
                     res.add(words[i])
         return list(res)
     
