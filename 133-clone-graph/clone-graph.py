@@ -11,16 +11,17 @@ class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if node is None:
             return None
+        original_value = node.val
         val_to_node = {}
 
-        queue = [node]
+        stack = [node]
         visited = set([node])
-        while len(queue) > 0:
-            original_node = queue.pop()
+        while len(stack) > 0:
+            original_node = stack.pop()
             val = original_node.val
             if val not in val_to_node:
                 val_to_node[val] = Node(val)
-            clone_node = val_to_node[original_node.val]
+            clone_node = val_to_node[val]
 
             for neighbor in original_node.neighbors:
                 neighbor_val = neighbor.val
@@ -31,6 +32,6 @@ class Solution:
 
                 if neighbor not in visited:
                     visited.add(neighbor)
-                    queue.append(neighbor)
+                    stack.append(neighbor)
 
-        return val_to_node[1]
+        return val_to_node[original_value]
