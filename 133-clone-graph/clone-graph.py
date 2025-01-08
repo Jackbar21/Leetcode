@@ -13,7 +13,7 @@ class Solution:
             return None
 
         val_to_node = {
-            val: Node(val) for val in range(0, 100 + 1)
+            val: Node(val, set()) for val in range(0, 100 + 1)
         }
         
         # if node is not None:
@@ -33,7 +33,7 @@ class Solution:
             clone_node = val_to_node[original_node.val]
 
             for neighbor in original_node.neighbors:
-                clone_node.neighbors.append(val_to_node[neighbor.val])
+                clone_node.neighbors.add(val_to_node[neighbor.val])
                 if neighbor not in visited:
                     visited.add(neighbor)
                     queue.append(neighbor)
