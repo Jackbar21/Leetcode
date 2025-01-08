@@ -6,5 +6,5 @@ class Solution:
             for j in range(i + 1, len(words))
         )
     def isPrefixAndSuffix(self, str1, str2):
-        # return str2.startswith(str1) and str2.endswith(str1)
-        return str2.startswith(str1) and str2[::-1].startswith(str1[::-1])
+        return str2.startswith(str1) and str2.endswith(str1)
+        # return str2.startswith(str1) and str2[::-1].startswith(str1[::-1])
