@@ -13,7 +13,7 @@ class Solution:
             return None
 
         val_to_node = {
-            val: Node(val, set()) for val in range(0, 100 + 1)
+            val: Node(val) for val in range(0, 100 + 1)
         }
         
         # if node is not None:
@@ -30,22 +30,12 @@ class Solution:
         visited = set([node])
         while len(queue) > 0:
             original_node = queue.popleft()
-            val = original_node.val
-            # if val not in val_to_node:
-            #     val_to_node[val] = Node(val)
-            assert val in val_to_node
-            clone_node = val_to_node[val]
+            clone_node = val_to_node[original_node.val]
 
-            assert not clone_node.neighbors
-            # clone_node.neighbors = [
-            #     val_to_node[neigh.val]
-            #     for neigh in node.neighbors
-            # ]
             for neighbor in original_node.neighbors:
-                clone_node.neighbors.add(val_to_node[neighbor.val])
+                clone_node.neighbors.append(val_to_node[neighbor.val])
                 if neighbor not in visited:
                     visited.add(neighbor)
                     queue.append(neighbor)
 
-        
         return val_to_node[1]
