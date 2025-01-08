@@ -1,10 +1,10 @@
 class Solution:
     def countPrefixSuffixPairs(self, words: List[str]) -> int:
-        # return sum(
-        #     words[j].startswith(words[i]) and words[j].endswith(words[i]) 
-        #     for i in range(len(words)) 
-        #     for j in range(i + 1, len(words))
-        # )
+        return list(
+            words[j].startswith(words[i]) and words[j].endswith(words[i]) 
+            for i in range(len(words)) 
+            for j in range(i + 1, len(words))
+        ).count(True)
 
         def isPrefixAndSuffix(str1, str2):
             is_prefix = str2.startswith(str1)
