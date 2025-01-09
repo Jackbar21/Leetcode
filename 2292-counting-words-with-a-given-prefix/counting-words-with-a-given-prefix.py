@@ -7,7 +7,7 @@ class Solution:
         #     if word.startswith(pref):
         #         res += 1
         # return res
-        return list(word.startswith(pref) for word in words).count(True)
+        return sum(word.startswith(pref) for word in words)
 
     def addWord(self, word):
         trie, PREFIX_COUNT_SYMBOL = self.trie, self.PREFIX_COUNT_SYMBOL
