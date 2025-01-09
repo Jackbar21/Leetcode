@@ -25,17 +25,14 @@ class Solution:
             return visited
 
         pacific_queue = collections.deque()
-        for i in range(M):
-            pacific_queue.append((i, 0))
-        for j in range(N):
-            pacific_queue.append((0, j))
-        pacific_reachable = bfs(pacific_queue)
-
         atlantic_queue = collections.deque()
         for i in range(M):
+            pacific_queue.append((i, 0))
             atlantic_queue.append((i, N - 1))
         for j in range(N):
+            pacific_queue.append((0, j))
             atlantic_queue.append((M - 1, j))
-        atlantic_reachable = bfs(atlantic_queue)
 
+        pacific_reachable = bfs(pacific_queue)
+        atlantic_reachable = bfs(atlantic_queue)
         return list(pacific_reachable.intersection(atlantic_reachable))
