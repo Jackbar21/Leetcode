@@ -5,8 +5,6 @@ class Solution:
         DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
 
-        short_circuit = {}
-
         # Keep track of number of FRESH oranges, and for each rotten orange
         # update how long it takes to rot an orange. Note that this value should
         # be updated to always reflect the MINIMUM amount of time it takes to rot
@@ -26,10 +24,6 @@ class Solution:
                 visited = set([(i, j)])
                 while len(queue) > 0:
                     x, y, time = queue.popleft()
-
-                    if time > short_circuit.get((x, y), float("inf")):
-                        continue
-                    short_circuit[(x, y)] = time
 
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
