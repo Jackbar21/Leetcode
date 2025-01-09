@@ -4,7 +4,14 @@ class Solution:
         # return sum(word.startswith(pref) for word in words)
         res = 0
         for word in words:
-            if word[:len(pref)] == pref:
+            if len(word) < len(pref):
+                continue
+            is_prefix = True
+            for i in range(len(pref)):
+                if word[i] != pref[i]:
+                    is_prefix = False
+                    break
+            if is_prefix:
                 res += 1
         return res
 
