@@ -28,8 +28,8 @@ class Solution:
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
                         if (inBounds(neigh_x, neigh_y) 
-                            and grid[neigh_x][neigh_y] == FRESH # TODO: Use walrus operator hehe
                             and (neigh_x, neigh_y) not in visited
+                            and grid[neigh_x][neigh_y] == FRESH    
                         ):
                             # It will take time + 1 seconds to rot this orange
                             # from the original rotten orange at grid[i][j].
