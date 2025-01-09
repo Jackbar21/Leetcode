@@ -33,10 +33,12 @@ class Solution:
                         ):
                             # It will take time + 1 seconds to rot this orange
                             # from the original rotten orange at grid[i][j].
-                            if time + 1 < orange_to_time.get((neigh_x, neigh_y), float("inf")):
-                                orange_to_time[(neigh_x, neigh_y)] = time + 1
-                                queue.append((neigh_x, neigh_y, time + 1))
-                                visited.add((neigh_x, neigh_y))
+                            orange_to_time[(neigh_x, neigh_y)] = min(
+                                time + 1,
+                                orange_to_time.get((neigh_x, neigh_y), float("inf"))
+                            )
+                            queue.append((neigh_x, neigh_y, time + 1))
+                            visited.add((neigh_x, neigh_y))
 
         # Since there are already no fresh oranges at minute 0, the answer is just 0
         if fresh_oranges_count == 0:
