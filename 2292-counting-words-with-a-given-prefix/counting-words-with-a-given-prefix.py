@@ -4,7 +4,7 @@ class Solution:
         # return sum(word.startswith(pref) for word in words)
         res = 0
         for word in words:
-            if word.startswith(pref):
+            if word[:len(pref)] == pref:
                 res += 1
         return res
 
