@@ -11,7 +11,8 @@ class Solution:
         # an orange, i.e. if two rotten oranges can reach a fresh orange, the time
         # to rot the orange should be the minimum from the two rotten oranges distances.
         fresh_oranges_count = 0
-        orange_to_time = {}
+        # orange_to_time = {}
+        orange_to_time = defaultdict(int)
         for i in range(M):
             for j in range(N):
                 cell = grid[i][j]
@@ -45,8 +46,8 @@ class Solution:
             return 0
 
         rottable_oranges_count = len(orange_to_time)
-        assert rottable_oranges_count <= fresh_oranges_count
         if rottable_oranges_count != fresh_oranges_count:
-            return -1 # Not possible to rot ALL of the oranges!
+            # Not possible to rot ALL of the oranges!
+            return -1
  
         return max(orange_to_time.values())
