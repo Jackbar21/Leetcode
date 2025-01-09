@@ -5,7 +5,8 @@ class Solution:
 
     def addWord(self, word):
         trie, PREFIX_COUNT_SYMBOL = self.trie, self.PREFIX_COUNT_SYMBOL
-        for letter in word:
+        for i in range(min(len(word), self.LENGTH_PREFIX)):
+            letter = word[i]
             if letter not in trie:
                 trie[letter] = { PREFIX_COUNT_SYMBOL: 0 }
             trie = trie[letter]
@@ -15,6 +16,7 @@ class Solution:
         # Add every word into the trie, as well as 'pref' so that the prefix
         # is guaranteed to exist at least once in the trie. Since we're including
         # pref in the trie, we will return the final result subtracted by one.
+        self.LENGTH_PREFIX = len(pref)
         self.addWord(pref)
         for word in words:
             self.addWord(word)
