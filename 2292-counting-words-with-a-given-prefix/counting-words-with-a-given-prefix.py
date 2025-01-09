@@ -1,22 +1,24 @@
 class Solution:
-    def __init__(self):
-        self.PREFIX_COUNT_SYMBOL = "."
-        self.trie = {} # '.' --> frequency of prefix
+    def prefixCount(self, words: List[str], pref: str) -> int:
+        # return self.prefixCountTrie(words, pref)
+        return sum(word.startswith(pref) for word in words)
 
     def addWord(self, word):
         trie, PREFIX_COUNT_SYMBOL = self.trie, self.PREFIX_COUNT_SYMBOL
-        for i in range(min(len(word), self.LENGTH_PREFIX)):
-            letter = word[i]
+        for letter in word:
             if letter not in trie:
                 trie[letter] = { PREFIX_COUNT_SYMBOL: 0 }
             trie = trie[letter]
             trie[PREFIX_COUNT_SYMBOL] += 1
 
-    def prefixCount(self, words: List[str], pref: str) -> int:
+    def prefixCountTrie(self, words: List[str], pref: str) -> int:
+        # Initial Trie setup!
+        self.PREFIX_COUNT_SYMBOL = "."
+        self.trie = {} # '.' --> frequency of prefix
+
         # Add every word into the trie, as well as 'pref' so that the prefix
         # is guaranteed to exist at least once in the trie. Since we're including
         # pref in the trie, we will return the final result subtracted by one.
-        self.LENGTH_PREFIX = len(pref)
         self.addWord(pref)
         for word in words:
             self.addWord(word)
