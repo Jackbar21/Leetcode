@@ -2,11 +2,12 @@ class Solution:
     def prefixCount(self, words: List[str], pref: str) -> int:
         # return self.prefixCountTrie(words, pref)
         # return sum(word.startswith(pref) for word in words)
-        res = 0
-        for word in words:
-            if word.startswith(pref):
-                res += 1
-        return res
+        # res = 0
+        # for word in words:
+        #     if word.startswith(pref):
+        #         res += 1
+        # return res
+        return list(word.startswith(pref) for word in words).count(True)
 
     def addWord(self, word):
         trie, PREFIX_COUNT_SYMBOL = self.trie, self.PREFIX_COUNT_SYMBOL
