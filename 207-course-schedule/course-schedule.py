@@ -12,7 +12,7 @@ class Solution:
         # Step 1: Build an adjacency list of the graph! The keys will be the set of nodes :)
         # Step 2: Get all of the nodes indegrees
         adj_list = {course: [] for course in range(numCourses)}
-        indegree = {course: 0 for course in range(numCourses)}
+        indegree = defaultdict(int)
         for a, b in prerequisites:
             adj_list[b].append(a)
             indegree[a] += 1
