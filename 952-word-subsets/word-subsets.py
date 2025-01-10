@@ -1,12 +1,5 @@
 class Solution:
-    def addWord(self, word):
-        trie = self.trie
-        for letter in word:
-            if letter not in trie:
-                trie[letter] = {}
-            trie = trie[letter]
-    
-    # @cache
+    @cache
     def getDictFromWord(self, word):
         d = {}
         for letter in word:
