@@ -4,7 +4,7 @@ class Solution:
         Do not return anything, modify board in-place instead.
         """
         # return self.solveNaive(board)
-        return self.solveEfficient(board)
+        return self.solveEfficient(board) # O(M * N)
     
     def solveEfficient(self, board: List[List[str]]) -> None:
         # As compared to solveNaive, we can leverage the fact
