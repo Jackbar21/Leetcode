@@ -1,5 +1,5 @@
 class Solution:
-    @cache
+    # @cache
     def getDictFromWord(self, word):
         d = {}
         for letter in word:
