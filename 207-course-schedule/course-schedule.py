@@ -19,7 +19,7 @@ class Solution:
 
         # topo_sort = []
         count = 0
-        queue = collections.deque(filter(lambda key: indegree[key] == 0, indegree))
+        queue = collections.deque(node for node in adj_list if indegree[node] == 0)
         while len(queue) > 0:
             node = queue.popleft()
             # We have popped node from the queue, and hence it is now a course
