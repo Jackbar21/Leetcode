@@ -15,7 +15,7 @@ class Solution:
                 d[letter] += 1
             return d
 
-        d = defaultdict(lambda: float("-inf"))
+        d = defaultdict(int)
         for word in words2:
             word_dict = getDictFromWord(word)
             for letter, frequency in word_dict.items():
