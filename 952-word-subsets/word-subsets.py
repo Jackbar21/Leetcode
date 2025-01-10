@@ -15,15 +15,13 @@ class Solution:
         # with MAXIMAL frequency. Namely, we leverage the fact that:
         #       word2 subset of word1 for all word2 in words2
         #       <==> word1 a superset of word2 for all words in word2
-        d = defaultdict(lambda: -1)
+        d = defaultdict(lambda: float("-inf"))
         for word in words2:
             word_dict = self.getDictFromWord(word)
             for letter, frequency in word_dict.items():
                 # if frequency < d.get(letter, float("inf")):
                 if frequency > d[letter]:
                     d[letter] = frequency
-        
-        # print(f"{d=}")
         
         # Don't need a hash-set for result, since constraints say all strings in words1 are unique!
         universal_words = []
