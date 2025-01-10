@@ -11,11 +11,10 @@ class Solution:
 
         # Step 1: Build an adjacency list of the graph! The keys will be the set of nodes :)
         # Step 2: Get all of the nodes indegrees
-        adj_list = defaultdict(list) # will contain EVERY node as key, even if empty neighbors!
-        indegree = defaultdict(int)
+        adj_list = {course: [] for course in range(numCourses)}
+        indegree = {course: 0 for course in range(numCourses)}
         for a, b in prerequisites:
             adj_list[b].append(a)
-            adj_list[a] # Make sure it is considered as a node!
             indegree[a] += 1
 
         # topo_sort = []
@@ -36,6 +35,27 @@ class Solution:
                     queue.append(neighbor)
         
         # return len(topo_sort) == len(adj_list)
-        return count == len(adj_list)
+        return count == numCourses
 
-        
+"""    
+CSCB36 <-- CSCA67, CSCA48
+CSCA48 <-- CSCA08
+
+adj_list = {
+    "CSCA67": ["CSCB36"],
+    "CSCA48": ["CSCB36"],
+    "CSCA08": ["CSCA48"],
+    "CSCB36": []
+}
+
+indegrees = {
+    "CSCB36": 0,
+    "CSCA48": 0,
+    "CSCA67": 0,
+    "CSCA08": 0
+}
+
+count = 4
+
+queue = []
+"""
