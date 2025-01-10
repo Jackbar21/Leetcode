@@ -3,9 +3,11 @@ class Solution:
         # Same thing as Course Schedule I, but this time return the actual topological-sort
         # ordering instead of returning True/False depending on whether the ordering was
         # incomplete or not :p
-        adj_list = {course: [] for course in range(numCourses)}
-        indegree = {course: 0 for course in range(numCourses)}
-        
+        # adj_list = {course: [] for course in range(numCourses)}
+        # indegree = {course: 0 for course in range(numCourses)}
+        adj_list = [[] for i in range(numCourses)]
+        indegree = [0] * numCourses
+
         for a, b in prerequisites:
             adj_list[b].append(a)
             indegree[a] += 1
