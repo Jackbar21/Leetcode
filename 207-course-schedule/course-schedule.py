@@ -18,7 +18,8 @@ class Solution:
             adj_list[a] # Make sure it is considered as a node!
             indegree[a] += 1
 
-        topo_sort = []
+        # topo_sort = []
+        count = 0
         queue = collections.deque([node for node in adj_list if indegree[node] == 0])
         while len(queue) > 0:
             node = queue.popleft()
@@ -26,13 +27,15 @@ class Solution:
             # that we have "taken". Hence, ANY other course that has this course
             # as a dependency, can now have that extra constraint relaxed :)
             # In other words, relax this constraint for all of this node's NEIGHBORS.
-            topo_sort.append(node)
+            # topo_sort.append(node)
+            count += 1
 
             for neighbor in adj_list[node]:
                 indegree[neighbor] -= 1
                 if indegree[neighbor] == 0:
                     queue.append(neighbor)
         
-        return len(topo_sort) == len(adj_list)
+        # return len(topo_sort) == len(adj_list)
+        return count == len(adj_list)
 
         
