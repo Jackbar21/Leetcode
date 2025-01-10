@@ -16,7 +16,7 @@ class Solution:
         # with MAXIMAL frequency. Namely, we leverage the fact that:
         #       word2 subset of word1 for all word2 in words2
         #       <==> word1 a superset of word2 for all words in word2
-        d = defaultdict(lambda: float("-inf"))
+        d = defaultdict(int)
         for word in words2:
             word_dict = self.getDictFromWord(word)
             for letter, frequency in word_dict.items():
