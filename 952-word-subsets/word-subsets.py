@@ -1,10 +1,4 @@
 class Solution:
-    def getDictFromWord(self, word):
-        d = defaultdict(int)
-        for letter in word:
-            d[letter] += 1
-        return d
-    
     def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
         # Since the letters of each word consists of lowercase English letters, we can compute
         # for each letter in the alphabet, the word in words2 that contains that letter the
@@ -15,28 +9,32 @@ class Solution:
         # with MAXIMAL frequency. Namely, we leverage the fact that:
         #       word2 subset of word1 for all word2 in words2
         #       <==> word1 a superset of word2 for all words in word2
+        def getDictFromWord(word):
+            d = defaultdict(int)
+            for letter in word:
+                d[letter] += 1
+            return d
+
         d = defaultdict(lambda: float("-inf"))
         for word in words2:
-            word_dict = self.getDictFromWord(word)
+            word_dict = getDictFromWord(word)
             for letter, frequency in word_dict.items():
-                # if frequency < d.get(letter, float("inf")):
                 if frequency > d[letter]:
                     d[letter] = frequency
+        LETTER_FREQUENCY_PAIRS = d.items()
         
         # Don't need a hash-set for result, since constraints say all strings in words1 are unique!
         universal_words = []
 
         for word in words1:
-            word_dict = self.getDictFromWord(word)
+            word_dict = getDictFromWord(word)
             is_universal = True
-            # print(f"{word_dict=}")
-            for letter, frequency in d.items():
+            for letter, frequency in LETTER_FREQUENCY_PAIRS:
                 # For superset, frequency should be greater-than-or-equal-to!
-                if not (word_dict[letter] >= frequency):
-                # if not (frequency >= d.get(letter, 0)):
+                if word_dict[letter] < frequency:
                     is_universal = False
                     break
             if is_universal:
                 universal_words.append(word)
-        
+
         return universal_words
