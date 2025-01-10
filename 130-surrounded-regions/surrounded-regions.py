@@ -52,12 +52,13 @@ class Solution:
 
             for dx, dy in DIRECTIONS:
                 neigh_x, neigh_y = x + dx, y + dy
+                neigh = (neigh_x, neigh_y)
                 if (0 <= neigh_x < M and 0 <= neigh_y < N
                     and board[neigh_x][neigh_y] == O
-                    and (neigh_x, neigh_y) not in visited
+                    and neigh not in visited
                 ):
-                    visited.add((neigh_x, neigh_y))
-                    queue.append((neigh_x, neigh_y))
+                    visited.add(neigh)
+                    queue.append(neigh)
         
         # Now, we have access to ALL the Os that ARE NOT surrounded. We should now
         # traverse the entire board, and set any O that is NOT in this set (meaning it
