@@ -26,7 +26,8 @@ class Solution:
 
             # Step 2: Pick a random node, perform dfs, and return edge if forms tree!
             # node = random.randint(1, N)
-            node = v # Might as well not waste time calling 'random.randint' if can avoid it :p
+            # Might as well not waste time calling 'random.randint' if can avoid it :p
+            node = u if len(adj_list[u]) < len(adj_list[v]) else v
             stack = [node] # dfs
             visited = set([node])
             while len(stack) > 0:
