@@ -8,6 +8,9 @@ class Solution:
         # graph (by calling FIND on two nodes of interest), which I'm too
         # lazy to implement... hence I went down the Prim's algorith path haha xD
         # return self.prim(points)
+
+        # Nevermind, I decided to be #notalazyboy and actually implement Kruskal's.
+        # Now that I got 90%+, I feel absolutely TERRIFIC *cool-sunglasses-emoji*
         return self.kruskal(points)
     
     def manhattenDistance(self, pos1, pos2):
@@ -93,9 +96,6 @@ class Solution:
             while point != disjoint_set[point]:
                 point = disjoint_set[point]
             return point
-        # def union(point1, point2):
-        #     parent1, parent2 = find(point1), find(point2)
-        #     disjoint_set[parent2] = parent1
 
         edges = []
         for i in range(len(points)):
@@ -115,8 +115,6 @@ class Solution:
             
             mst_cost += cost
             mst_edges_count += 1
-            disjoint_set[parent2] = parent1 # Union sets!
+            disjoint_set[parent2] = parent1 # Merge/Union sets together!
         
         return mst_cost
-
-
