@@ -65,10 +65,9 @@ class Solution:
 
         # Step 2: Pick any node to start from, as it must be included in the final
         # MST anywy lol :P
-        random_index = random.randint(0, N - 1)
-        node = points[random_index]
-        
-
+        # random_index = random.randint(0, N - 1)
+        # node = points[random_index]
+        node = points[0] # Just pick first point, don't be cheeky :P
 
         # We need to keep going until we have N - 1 total edges!
         visited = set([node])
@@ -78,13 +77,9 @@ class Solution:
         mst_cost = 0
         while mst_edges_count < N - 1:
             cost, node, neigh = heapq.heappop(edges_available)
-            # if (cost, node, neigh) in mst_edges_count:
-            #     continue
             # assert node in visited
             if neigh in visited:
                 continue
-            
-            # print(f"{cost, node, neigh=}")
             
             # Confirm edge as part of solution
             visited.add(neigh)
