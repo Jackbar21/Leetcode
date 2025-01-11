@@ -1,6 +1,6 @@
 class Solution:
     def canConstruct(self, s: str, k: int) -> bool:
-        d = {letter: 0 for letter in "abcdefghijklmnopqrstuvwxyz"}
+        ORD_A, frequencies = ord("a"), [0] * 26
         for letter in s:
-            d[letter] += 1
-        return len(s) >= k and sum(val % 2 for val in d.values()) <= k
+            frequencies[ord(letter) - ORD_A] += 1
+        return len(s) >= k and sum(freq % 2 for freq in frequencies) <= k
