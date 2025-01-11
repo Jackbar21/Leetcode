@@ -13,24 +13,24 @@ class Solution:
         # as quickly as possible!
         res = 0
         fringe = [(0, k)] # (time, node) -- min heap for UCS!
-        # visited = set([k])
         visited = set()
-        while len(fringe) > 0:
+        while len(fringe) > 0:# and len(visited) < n:
             time, node = heapq.heappop(fringe)
-            print(f"{time=}, {node=}")
+            # if node in visited and node != k:
+            #     continue
             if node in visited:
                 continue
-            visited.add(node)
-                
+            else:
+                visited.add(node)
+
             if time > res:
                 res = time
 
             for neigh, w in adj_list[node]:
-                # if neigh in visited:
-                #     continue
+                if neigh in visited:
+                    continue
                 
                 # visited.add(neigh)
-                # fringe.append((time + w, neigh))
                 heapq.heappush(fringe, (time + w, neigh))
 
         return res if len(visited) == n else -1
