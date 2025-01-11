@@ -2,49 +2,17 @@ class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         # Idea: I recognize this to be an extremely convenient use case
         # of the MST (Minimum-Spanning-Tree) construction algorithms, e.g.
-        # Prim's or Kruskal's.
-        # return self.kruskal(points)
+        # Prim's or Kruskal's. For Kruskal's I've now realized I probably
+        # end up needing to use something like Disjoint Sets in order to
+        # verify whether greedily adding an edge introduces a cycle in the
+        # graph (by calling FIND on two nodes of interest), which I'm too
+        # lazy to implement... hence I went down the Prim's algorith path haha xD
         return self.prim(points)
     
     def manhattenDistance(self, pos1, pos2):
         x1, y1 = pos1
         x2, y2 = pos2
         return abs(x2 - x1) + abs(y2 - y1)
-
-
-    def kruskal(self, points: List[List[int]]) -> int:
-        N = len(points)
-
-        # Step 1: Add all edges to a priority queue.
-        # To do this, we need to loop over all O(N^2) possible
-        # edges, and include their cost every time!
-        min_heap = []
-        for i in range(len(points)):
-            for j in range(i + 1, len(points)):
-                pos1, pos2 = tuple(points[i]), tuple(points[j])
-                cost = self.manhattenDistance(pos1, pos2)
-                min_heap.append((cost, pos1, pos2))
-        heapq.heapify(min_heap) # O(E) [where E = O(N^2)]
-
-        mst_cost = 0
-        res_edges = []
-        connected_nodes = set()
-        while len(min_heap) > 0 and len(connected_nodes) < N:
-            cost, pos1, pos2 = heapq.heappop(min_heap)
-
-            # Edge must connect at least ONE new node! Otherwise, it is irrelevant!
-            if pos1 in connected_nodes and pos2 in connected_nodes:
-                continue
-            
-            connected_nodes.add(pos1)
-            connected_nodes.add(pos2)
-            mst_cost += cost
-            res_edges.append(f"{pos1} --> {pos2}")
-            
-        # print(f"{len(connected_nodes)=}, {N=}")
-        # print(f"{res_edges=}")
-        return mst_cost
-
 
     def prim(self, points: List[List[int]]) -> int:
         N = len(points)
@@ -92,4 +60,3 @@ class Solution:
                     heapq.heappush(edges_available, (edge_cost, neigh, new_neigh))
         
         return mst_cost
-
