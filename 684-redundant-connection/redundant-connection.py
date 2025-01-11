@@ -2,6 +2,7 @@ class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         return self.naive(edges)
 
+    # O(n^2)
     def naive(self, edges):
         adj_list = defaultdict(set)
         for u, v in edges:
