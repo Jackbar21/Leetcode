@@ -5,9 +5,9 @@ class Solution:
         # I will use UCS, since it is simpler :)
 
         # Step 1: Build adjacency list (with weights!)
-        adj_list = [set() for _ in range(n + 1)]
+        adj_list = [[] for _ in range(n + 1)]
         for u, v, w in times:
-            adj_list[u].add((v, w)) # (neigh, weight)
+            adj_list[u].append((v, w)) # (neigh, weight)
 
         # Step 2: Traverse the graph using UCS, and get total time to reach all nodes
         # as quickly as possible!
