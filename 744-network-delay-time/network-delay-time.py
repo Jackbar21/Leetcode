@@ -14,7 +14,7 @@ class Solution:
         res = 0
         fringe = [(0, k)] # (time, node) -- min heap for UCS!
         visited = set()
-        while len(fringe) > 0:# and len(visited) < n:
+        while len(fringe) > 0 and len(visited) < n:
             time, node = heapq.heappop(fringe)
             # if node in visited and node != k:
             #     continue
