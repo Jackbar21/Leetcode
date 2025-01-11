@@ -48,8 +48,7 @@ class Solution:
 
     def prim(self, points: List[List[int]]) -> int:
         N = len(points)
-        # points = list(map(tuple, points))
-        points = [tuple(point) for point in points]
+        points = list(map(tuple, points))
 
         # Step 1: Build an adjacency list for all the points
         edges = []
