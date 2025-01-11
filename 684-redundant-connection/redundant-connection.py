@@ -1,18 +1,17 @@
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        return self.naive(edges)
-
-    # O(n^2)
-    def naive(self, edges):
-        adj_list = defaultdict(set)
+        # O(n^2)
+        adj_list = []
         for u, v in edges:
+            while len(adj_list) < max(u, v) + 1:
+                adj_list.append(set())
             adj_list[u].add(v)
             adj_list[v].add(u)
         
         # Since there are no repeated edges, and it is an UNDIRECTED graph,
         # length of adj_list must be the number of nodes IN graph (i.e. each
         # node is connected by at least ONE edge, and therefore in adj_list)
-        N = len(adj_list)
+        N = len(adj_list) - 1
 
         # Try removing the last edge in edges, and everytime checking if the graph
         # forms a tree. We can check if the graph is a tree by picking a random node,
