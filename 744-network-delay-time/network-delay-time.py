@@ -5,7 +5,7 @@ class Solution:
         # I will use UCS, since it is simpler :)
 
         # Step 1: Build adjacency list (with weights!)
-        adj_list = defaultdict(list)
+        adj_list = [[] for _ in range(n + 1)]
         for u, v, w in times:
             adj_list[u].append((v, w)) # (neigh, weight)
 
