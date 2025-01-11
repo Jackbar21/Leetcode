@@ -57,12 +57,6 @@ class Solution:
                 pos1, pos2 = points[i], points[j]
                 cost = self.manhattenDistance(pos1, pos2)
                 edges.append((cost, pos1, pos2))
-        
-        if len(edges) == 0:
-            return 0
-
-        min_edge = min(edges)
-        # # print(f"{min_edge=}")
 
         adj_list = defaultdict(list)
         for cost, pos1, pos2 in edges:
@@ -80,13 +74,13 @@ class Solution:
         visited = set([node])
         edges_available = [(cost, node, neigh) for cost, neigh in adj_list[node]]
         heapq.heapify(edges_available)
-        mst_edges = set()
+        mst_edges_count = 0
         mst_cost = 0
-        while len(mst_edges) < N - 1:
+        while mst_edges_count < N - 1:
             cost, node, neigh = heapq.heappop(edges_available)
-            if (cost, node, neigh) in mst_edges:
-                continue
-            assert node in visited
+            # if (cost, node, neigh) in mst_edges_count:
+            #     continue
+            # assert node in visited
             if neigh in visited:
                 continue
             
@@ -95,15 +89,12 @@ class Solution:
             # Confirm edge as part of solution
             visited.add(neigh)
             mst_cost += cost
-            mst_edges.add((cost, node, neigh))
+            mst_edges_count += 1
 
             # Now, introduce all available edges from neigh!
             for edge_cost, new_neigh in adj_list[neigh]:
-                if new_neigh in visited:
-                    continue
-                
-                heapq.heappush(edges_available, (edge_cost, neigh, new_neigh))
+                if new_neigh not in visited:
+                    heapq.heappush(edges_available, (edge_cost, neigh, new_neigh))
         
-        # # print(f"{mst_edges=}")
         return mst_cost
 
