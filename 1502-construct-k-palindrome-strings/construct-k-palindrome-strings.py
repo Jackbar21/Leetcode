@@ -3,4 +3,4 @@ class Solution:
         d = defaultdict(int)
         for letter in s:
             d[letter] += 1
-        return len(s) >= k and sum(freq % 2 for freq in d.values()) <= k
+        return len(s) >= k and sum(map(lambda freq: freq % 2, d.values())) <= k
