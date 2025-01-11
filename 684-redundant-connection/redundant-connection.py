@@ -25,7 +25,7 @@ class Solution:
             adj_list[v].remove(u)
 
             # Step 2: Pick a random node, perform dfs, and return edge if forms tree!
-            node = u
+            node = v
             stack = [node] # dfs
             visited = set([node])
             while len(stack) > 0:
