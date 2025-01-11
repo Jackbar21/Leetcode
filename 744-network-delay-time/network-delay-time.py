@@ -16,29 +16,21 @@ class Solution:
         visited = set()
         while len(fringe) > 0 and len(visited) < n:
             time, node = heapq.heappop(fringe)
-            # if node in visited and node != k:
-            #     continue
+
+            # If already visited a node, already found shortest path to it!
             if node in visited:
                 continue
-            else:
-                visited.add(node)
+            visited.add(node)
 
+            # Minimum time will only be as fast as bottleneck in the network!
+            # "The chain is only as strong as that of the weakest link!"
             if time > res:
                 res = time
 
             for neigh, w in adj_list[node]:
-                if neigh in visited:
-                    continue
-                
-                # visited.add(neigh)
-                heapq.heappush(fringe, (time + w, neigh))
+                # If neigh already in visited, then already
+                # found minimal cost to reach neigh from k :)
+                if neigh not in visited:
+                    heapq.heappush(fringe, (time + w, neigh))
 
         return res if len(visited) == n else -1
-
-
-# 1 --t=1--> 2 ---t=2---> 3
-# |
-# t=4
-# |
-# v
-# 3
