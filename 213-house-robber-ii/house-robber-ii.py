@@ -1,25 +1,29 @@
 class Solution:
-    def __init__(self):
-        self.memo = {}
-    def classic_rob(self, nums: List[int]) -> int:
-        if len(nums) <= 1:
-            return nums[0] if len(nums) > 0 else 0
-        
-        n = len(nums)
-        # Case 1: rob last home
-        if (n - 2) not in self.memo:
-            self.memo[n - 2] = self.classic_rob(nums[:n - 2])
-        case1 = nums[-1] + self.memo[n - 2]
-
-        # Case 2: don't rob last home
-        if (n - 1) not in self.memo:
-            self.memo[n - 1] = self.classic_rob(nums[:n - 1])
-        case2 = self.memo[n - 1]
-
-        return max(case1, case2)
     def rob(self, nums: List[int]) -> int:
-        if len(nums) <= 1:
-            return 0 if len(nums) <= 0 else nums[0]
-        res = self.classic_rob(nums[1:])
+        self.nums = nums
         self.memo = {}
-        return max(res, self.classic_rob(nums[:-1]))
+        return self.dp(0, False)
+
+    def dp(self, i, robbed_house_one):
+        if (i, robbed_house_one) in self.memo:
+            return self.memo[(i, robbed_house_one)]
+
+        # Base Case: No more homes left to rob
+        if i >= len(self.nums):
+            return 0
+        
+        # Base Case 2: If we're at the last house, and chose to rob
+        # the first house, we cannot rob this home!
+        if i == len(self.nums) - 1 and robbed_house_one:
+            return 0
+        
+        # Case 1: Rob house at index i
+        case1 = self.nums[i] + self.dp(i + 2, robbed_house_one or i == 0)
+
+        # Case 2: Don't rob house at index i
+        case2 = 0 + self.dp(i + 1, robbed_house_one)
+
+        res = max(case1, case2)
+        self.memo[(i, robbed_house_one)] = res
+        return res
+        
