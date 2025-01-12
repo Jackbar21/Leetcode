@@ -8,11 +8,6 @@ class Solution:
     def dp(self, i):
         if i in self.memo:
             return self.memo[i]
-        
-        # O(N^2)
-        for _ in range(len(self.nums)):
-            for _ in range(len(self.nums)):
-                pass
 
         # BRUTE FORCE LOGIC (START)
 
