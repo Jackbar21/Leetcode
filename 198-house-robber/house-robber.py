@@ -1,19 +1,28 @@
 class Solution:
-    def __init__(self):
-        self.memo = {}
     def rob(self, nums: List[int]) -> int:
-        if len(nums) <= 1:
-            return nums[0] if len(nums) > 0 else 0
+        self.nums = nums
+        self.memo = {}
+        return self.dp(0) # self.dp(i) solves the problem for nums[i:], so we want self.dp(0)!
+    
+    def dp(self, i):
+        if i in self.memo:
+            return self.memo[i]
+
+        # BRUTE FORCE LOGIC (START)
+
+        # Base Case: No more homes to rob
+        if i >= len(self.nums):
+            return 0
         
-        n = len(nums)
-        # Case 1: rob last home
-        if (n - 2) not in self.memo:
-            self.memo[n - 2] = self.rob(nums[:n - 2])
-        case1 = nums[-1] + self.memo[n - 2]
+        # Case 1: Rob current house
+        case1 = self.nums[i] + self.dp(i + 2)
 
-        # Case 2: don't rob last home
-        if (n - 1) not in self.memo:
-            self.memo[n - 1] = self.rob(nums[:n - 1])
-        case2 = self.memo[n - 1]
+        # Case 2: Don't rob current house
+        case2 = 0 + self.dp(i + 1)
 
-        return max(case1, case2)
+        res = max(case1, case2)
+
+        # BRUTE FORCE LOGIC (END)
+
+        self.memo[i] = res
+        return res
