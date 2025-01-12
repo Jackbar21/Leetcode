@@ -6,8 +6,16 @@ class Solution:
 
         @cache
         def dp(node, edges_left):
-            return (0 if node == dst else float("inf") if edges_left == 0 else min(
+            if node == dst:
+                return 0
+
+            if edges_left == 0:
+                return float("inf")
+            
+            return min(
                 (price + dp(neigh, edges_left - 1) for neigh, price in adj_list[node]), 
-                default = float("inf")))
+                default = float("inf")
+            )
+
         res = dp(src, k + 1)
         return res if res != float("inf") else -1
