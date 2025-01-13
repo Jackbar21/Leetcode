@@ -1,7 +1,7 @@
 class Solution:
     def minimumLength(self, s: str) -> int:
-        ORD_A = ord("a")
-        d = [0] * 26
+        d = defaultdict(int)
         for letter in s:
-            d[ord(letter) - ORD_A] += 1
-        return sum(1 if freq % 2 else 0 if freq == 0 else 2 for freq in d)
+            d[letter] += 1
+        return len(d) + sum(freq % 2 == 0 for freq in d.values())
+        # return sum(1 if freq % 2 else 2 for freq in d.values())
