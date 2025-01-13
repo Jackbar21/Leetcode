@@ -1,65 +1,32 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        # SUPROBLEMS TO SOLVE:
-        """
-        For each i,j, 1 <= i <= j <= len(s), let:
-            L(i,j) = {
-                1,      if s[i:j+1] is a palindrome
-                0,      otherwise
-            }
-        """
+        self.s = s
+        self.memo = {}
+        best_i, best_j = 0, 0
+        longest = 1
+        for i in range(len(s)):
+            for j in range(i + 1, len(s)):
+                if self.dp(i, j) > longest:
+                    longest = self.dp(i, j)
+                    best_i = i
+                    best_j = j
+        return s[best_i:best_j+1]
+        return max((self.dp(i, j) for i in range(len(s)) for j in range(i + 1, len(s))), default=1)
+    
+    def dp(self, i, j):
+        if (i, j) in self.memo:
+            return self.memo[(i, j)]
 
-        # SOLVING ORIGINAL PROBLEM:
-        """
-        The answer to our original problem is simply:
-            max{j-i+1 | L(i,j) == 1}
-        """
-
-        # RECURSIVE FORMULA TO COMPUTE SUPROBLEMS:
-        """
-        L(i,j) = {
-            1,              if i == j
-            1,              if i < len(s), i+1==j, s[i]==s[j]
-            1,              if 1 <= i+1 <= j-1 <= len(s),
-                               L(i+1,j-1) == 1, s[i] == s[j]
-            0,              otherwise      
-        }
-        """
-        n = len(s)
-
-        # Initialize L(i,j) to 0 for all i,j in range(1,n)
-        L = [[0] * n for i in range(n)]
-
-        # All strings of length k = 1 are palindromes
-        for i in range(n):
-            L[i][i] = 1
+        if i >= j:
+            return i == j
         
-        # All strings of length k = 2 whose characters
-        # are the same are palindromes
-        for i in range(n-1):
-            if s[i] == s[i+1]:
-                L[i][i+1] = 1
+        if self.s[i] != self.s[j]:
+            # self.memo[(i, j)] = False
+            return -1
         
-        # Find all palindromic substrings of s[0:n] of length k>2
-        for k in range(3,n+1):
-            for i in range(n-k+1):
-                j = i + k - 1
-                if ((L[i+1][j-1] == 1) and (s[i] == s[j])):
-                    L[i][j] = 1
-            
-        # num_palindromes = 0
-        # for i in range(n):
-        #     for j in range(n):
-        #         num_palindromes += L[i][j]
-        
-        # return num_palindromes
-        longest_palindrome = 0
-        res = ""
-        for i in range(n):
-            for j in range(n):
-                if L[i][j] == 1 and j-i+1 > longest_palindrome:
-                    longest_palindrome = j-i+1
-                    res = s[i:j+1]
+        res = self.dp(i + 1, j - 1)
+        res = res + 2 if res != -1 else -1
+        self.memo[(i, j)] = res
         return res
-
+        
 
