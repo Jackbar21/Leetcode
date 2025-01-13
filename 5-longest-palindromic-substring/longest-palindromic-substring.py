@@ -48,7 +48,7 @@ class Solution:
         
         # Base Case: Odd length palindrome
         if i == j:
-            return i == j
+            return True
         
         # Base Case: Even length palindrome
         if i + 1 == j:
