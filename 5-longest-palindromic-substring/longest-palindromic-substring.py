@@ -17,15 +17,12 @@ class Solution:
     
     def dp1d(self, s):
         N = len(s)
-        inBounds = lambda i: 0 <= i < N
-
         i, j = 0, 0
         longest = 1
-
         for center_index in range(N - 1):
             # Case 1: Odd length palindrome
             l, r = center_index, center_index
-            while inBounds(l - 1) and inBounds(r + 1) and s[l - 1] == s[r + 1]:
+            while l >= 1 and r < N - 1 and s[l - 1] == s[r + 1]:
                 l -= 1
                 r += 1
             if r - l + 1 > longest:
@@ -36,8 +33,7 @@ class Solution:
             l, r = center_index, center_index + 1
             if s[l] != s[r]:
                 continue
-            
-            while inBounds(l - 1) and inBounds(r + 1) and s[l - 1] == s[r + 1]:
+            while l >= 1 and r < N - 1 and s[l - 1] == s[r + 1]:
                 l -= 1
                 r += 1
             if r - l + 1 > longest:
