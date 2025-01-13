@@ -3,4 +3,4 @@ class Solution:
         d = defaultdict(int)
         for letter in s:
             d[letter] += 1
-        return sum(2 if d[letter] % 2 == 0 else 1 for letter in d)
+        return sum(2 if freq % 2 == 0 else 1 for freq in d.values())
