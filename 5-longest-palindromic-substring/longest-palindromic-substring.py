@@ -10,13 +10,19 @@ class Solution:
         #             longest = j - i + 1
         # return s[best_i: best_j + 1]
         # self.s, self.memo = s, {}
+        
+        # 1D "Fake" DP solution
+        return self.dp1d(s)
+
+    
+    def dp1d(self, s):
         N = len(s)
         inBounds = lambda i: 0 <= i < N
 
         i, j = 0, 0
-        longest = 0
+        longest = 1
 
-        for center_index in range(N):
+        for center_index in range(N - 1):
             # Case 1: Odd length palindrome
             l, r = center_index, center_index
             while inBounds(l - 1) and inBounds(r + 1) and s[l - 1] == s[r + 1]:
@@ -28,7 +34,7 @@ class Solution:
             
             # Case 2: Even length palindrome
             l, r = center_index, center_index + 1
-            if not inBounds(r) or s[l] != s[r]:
+            if s[l] != s[r]:
                 continue
             
             while inBounds(l - 1) and inBounds(r + 1) and s[l - 1] == s[r + 1]:
@@ -39,14 +45,6 @@ class Solution:
                 longest = r - l + 1
         
         return s[i: j + 1]
-
-    
-    # def dp(self, i):
-    #     assert 0 <= i < len(self.s)
-
-    #     # Case 1: Odd length palindrome
-    #     l, r = i, i
-    #     while 
 
     def dp2D(self, i, j):
         if (i, j) in self.memo:
