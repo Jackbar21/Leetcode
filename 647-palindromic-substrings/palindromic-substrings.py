@@ -11,7 +11,7 @@ class Solution:
         # 1D Dynamic Programming Solution!
         res = 0 # Number of palindromic substrings!
         N = len(s)
-        for center_index in range(N):
+        for center_index in range(N - 1):
             # Case 1: Odd length palindrome
             l, r = center_index, center_index
             res += 1
@@ -22,7 +22,7 @@ class Solution:
             
             # Case 2: Even length palindrome
             l, r = center_index, center_index + 1
-            if r == N or s[l] != s[r]:
+            if s[l] != s[r]:
                 continue
             res += 1
             while l >= 1 and r < N - 1 and s[l - 1] == s[r + 1]:
@@ -30,7 +30,9 @@ class Solution:
                 r += 1
                 res += 1
         
-        return res
+        # res + 1 to account for length-1 palindromic substring at s[-1]
+        # that was not accounted for in the above for loop!
+        return res + 1
 
     
     # dp2D(i, j) returns True if and only if s[i..j] is a palindrome! Otherwise, returns False
