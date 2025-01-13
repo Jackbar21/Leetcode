@@ -1,15 +1,54 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        self.s, self.memo = s, {}
-        longest, best_i, best_j = 0, 0, 0
-        for i in range(len(s)):
-            for j in range(i + 1, len(s)):
-                if j - i + 1 > longest and self.dp(i, j):
-                    best_i, best_j = i, j
-                    longest = j - i + 1
-        return s[best_i: best_j + 1]
+        # 2D DP solution
+        # self.s, self.memo = s, {}
+        # longest, best_i, best_j = 0, 0, 0
+        # for i in range(len(s)):
+        #     for j in range(longest + i, len(s)):
+        #         if self.dp2D(i, j):
+        #             best_i, best_j = i, j
+        #             longest = j - i + 1
+        # return s[best_i: best_j + 1]
+        # self.s, self.memo = s, {}
+        N = len(s)
+        inBounds = lambda i: 0 <= i < N
 
-    def dp(self, i, j):
+        i, j = 0, 0
+        longest = 0
+
+        for center_index in range(N):
+            # Case 1: Odd length palindrome
+            l, r = center_index, center_index
+            while inBounds(l - 1) and inBounds(r + 1) and s[l - 1] == s[r + 1]:
+                l -= 1
+                r += 1
+            if r - l + 1 > longest:
+                i, j = l, r
+                longest = r - l + 1
+            
+            # Case 2: Even length palindrome
+            l, r = center_index, center_index + 1
+            if not inBounds(r) or s[l] != s[r]:
+                continue
+            
+            while inBounds(l - 1) and inBounds(r + 1) and s[l - 1] == s[r + 1]:
+                l -= 1
+                r += 1
+            if r - l + 1 > longest:
+                i, j = l, r
+                longest = r - l + 1
+        
+        return s[i: j + 1]
+
+    
+    # def dp(self, i):
+    #     assert 0 <= i < len(self.s)
+
+    #     # Case 1: Odd length palindrome
+    #     l, r = i, i
+    #     while 
+
+    def dp2D(self, i, j):
         if (i, j) in self.memo:
             return self.memo[(i, j)]
         
