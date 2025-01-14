@@ -4,9 +4,10 @@ class Solution:
         res = self.dp(amount)
         return res if res != float("inf") else -1
     
+    @cache
     def dp(self, amount_left):
-        if amount_left in self.memo:
-            return self.memo[amount_left]
+        # if amount_left in self.memo:
+        #     return self.memo[amount_left]
         
         # If amount_left < 0, this means we "overshot" the amount (since we're working
         # backwards from the original amount down to 0), so we return that we need "infinity"
@@ -23,5 +24,5 @@ class Solution:
         for coin in self.coins:
             res = min(res, 1 + self.dp(amount_left - coin))
         
-        self.memo[amount_left] = res
+        # self.memo[amount_left] = res
         return res
