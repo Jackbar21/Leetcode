@@ -3,7 +3,7 @@ class Solution:
         self.coins, self.memo = coins, {}
         res = self.dp(amount)
         return res if res != float("inf") else -1
-    
+
     def dp(self, amount_left):
         if amount_left in self.memo:
             return self.memo[amount_left]
@@ -16,13 +16,12 @@ class Solution:
         # backwards from the original amount down to 0), so we return that we need "infinity"
         # coins to make this solution path work, obviously discouraging this solution from
         # being chosen... as this is a minimization problem :)
-        # if amount_left < 0:
-        #     return float("inf")
+        if amount_left < 0:
+            return float("inf")
         
         res = float("inf")
         for coin in self.coins:
-            if amount_left - coin >= 0:
-                res = min(res, 1 + self.dp(amount_left - coin))
+            res = min(res, 1 + self.dp(amount_left - coin))
 
         self.memo[amount_left] = res
         return res
