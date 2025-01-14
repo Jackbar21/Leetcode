@@ -3,7 +3,6 @@ class Solution:
         self.s, self.memo = s, {}
         self.is_valid_encoding = True
         res = self.dp(0)
-        print(f"{self.memo=}")
         return self.dp(0) if s[0] != 0 else 0
     
     # @cache
@@ -11,8 +10,8 @@ class Solution:
         if i in self.memo:
             return self.memo[i]
         
-        if not self.is_valid_encoding:
-            return 0
+        # if not self.is_valid_encoding:
+        #     return 0
         
         # After end of string, found a valid combination!
         if i >= len(self.s):
