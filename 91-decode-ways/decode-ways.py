@@ -26,11 +26,8 @@ class Solution:
             return res
 
         if digit == 1:
-            # Case 1: Only consider single digit here, can only do so if next digit
-            # is NOT a zero (as otherwise it would be trailing!)
-            case1 = 0
-            if not (i + 1 < len(s) and s[i + 1] == "0"):
-                case1 = self.dp(i + 1)
+            # Case 1: Consider single digit number!
+            case1 = self.dp(i + 1)
 
             # Case 2: Consider two digit number!
             case2 = 0
@@ -42,11 +39,8 @@ class Solution:
             return res
         
         # assert digit == 2
-        # Case 1: Only consider single digit here, can only do so if next digit
-        # is NOT a zero (as otherwise it would be trailing!)
-        case1 = 0
-        if not (i + 1 < len(self.s) and self.s[i + 1] == "0"):
-            case1 = self.dp(i + 1)
+        # Case 1: Consider single digit number!
+        case1 = self.dp(i + 1)
 
         # Case 2: Consider two digit number! Can only do so if second if second digit is
         # between 0 and 6 (since 27, 28, 29 are invalid encodings!)
