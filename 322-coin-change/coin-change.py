@@ -22,8 +22,6 @@ class Solution:
         res = float("inf")
         for coin in self.coins:
             res = min(res, 1 + self.dp(amount_left - coin))
-            if res == 1:
-                break
-        
+
         self.memo[amount_left] = res
         return res
