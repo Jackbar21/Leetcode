@@ -1,5 +1,6 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
+        coins.sort(reverse=True)
         self.coins, self.memo = coins, {}
         res = self.dp(amount)
         return res if res != float("inf") else -1
