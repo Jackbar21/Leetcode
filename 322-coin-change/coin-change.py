@@ -1,11 +1,10 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        coins.sort(reverse=True)
-        self.coins, self.memo = coins, {}
-        res = self.dp(amount)
+        self.memo = {}
+        res = self.dp(coins, amount)
         return res if res != float("inf") else -1
     
-    def dp(self, amount_left):
+    def dp(self, coins, amount_left):
         if amount_left in self.memo:
             return self.memo[amount_left]
         
@@ -21,8 +20,8 @@ class Solution:
             return float("inf")
         
         res = float("inf")
-        for coin in self.coins:
-            res = min(res, 1 + self.dp(amount_left - coin))
+        for coin in coins:
+            res = min(res, 1 + self.dp(coins, amount_left - coin))
 
         self.memo[amount_left] = res
         return res
