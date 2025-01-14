@@ -1,7 +1,7 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
         self.s, self.memo = s, {}
-        return self.dp(0) if s[0] != 0 else 0
+        return self.dp(0)
     
     def dp(self, i):
         if i in self.memo:
