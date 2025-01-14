@@ -1,10 +1,10 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        self.memo = {}
-        res = self.dp(coins, amount)
-        return res if res != float("inf") else -1
+        self.coins, self.memo = coins, {}
+        res = self.dp(amount)
+        return res if res != 99999 else -1
     
-    def dp(self, coins, amount_left):
+    def dp(self, amount_left):
         if amount_left in self.memo:
             return self.memo[amount_left]
         
@@ -17,11 +17,11 @@ class Solution:
         # coins to make this solution path work, obviously discouraging this solution from
         # being chosen... as this is a minimization problem :)
         if amount_left < 0:
-            return float("inf")
+            return 99999
         
-        res = float("inf")
-        for coin in coins:
-            res = min(res, 1 + self.dp(coins, amount_left - coin))
+        res = 99999
+        for coin in self.coins:
+            res = min(res, 1 + self.dp(amount_left - coin))
 
         self.memo[amount_left] = res
         return res
