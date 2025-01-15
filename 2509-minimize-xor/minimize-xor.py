@@ -32,7 +32,7 @@ class Solution:
         num_bits = bin2_count
         i = 0
         while num_bits > 0:
-            assert i < len(bin_num)
+            # assert i < len(bin_num)
             if bin1[i] == "1":
                 bin_num[i] = "1"
                 num_bits -= 1
