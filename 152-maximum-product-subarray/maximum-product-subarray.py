@@ -24,8 +24,8 @@ class Solution:
         val = self.nums[i]
         min_val, max_val = self.dp(i + 1)
 
-        options = [val, min_val * val, max_val * val]
-        new_min_val, new_max_val = min(options), max(options)
+        new_min_val = min(val, min_val * val, max_val * val)
+        new_max_val = max(val, min_val * val, max_val * val)
 
         res = (new_min_val, new_max_val)
         self.memo[i] = res
