@@ -5,7 +5,6 @@ class Solution:
         res = float("-inf")
         for i in range(len(nums)):
             min_val, max_val = self.dp(i)
-            print(f"{res=}, {min_val=}, {max_val=}")
             res = max(res, min_val, max_val)
         return res
 
@@ -15,14 +14,12 @@ class Solution:
             return self.memo[i]
         
         # Base Case
-        if i == len(self.nums) - 1:
-            # Only one number, so maximum "product" is number itself
-            val = self.nums[i]
-            return (val, val)
+        if i >= len(self.nums):
+            # 1 multiplied by anything is 1, so make both min & max 1!
+            return (1, 1)
         
         # Case 1: Only consider current element
         val = self.nums[i]
-        
         min_val, max_val = self.dp(i + 1)
 
         new_min_val = min(
@@ -37,6 +34,6 @@ class Solution:
             max_val * val
         )
 
-        # Case 1: 
-        self.memo[i] = (new_min_val, new_max_val)
-        return self.memo[i]
+        res = (new_min_val, new_max_val)
+        self.memo[i] = res
+        return res
