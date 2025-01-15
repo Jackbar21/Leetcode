@@ -2,10 +2,13 @@ class Solution:
     def maxProduct(self, nums: List[int]) -> int:
         self.nums = nums
         self.memo = {}
+        self.dp(0)
+        return max(max_val for _, max_val in self.memo.values())
         res = float("-inf")
         for i in range(len(nums)):
             _, max_val = self.dp(i)
-            res = max(res, max_val)
+            if res < max_val:
+                res = max_val
         return res
 
     # dp(i) == maximum product subarray starting at index i
