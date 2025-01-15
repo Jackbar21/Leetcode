@@ -4,8 +4,8 @@ class Solution:
         self.memo = {}
         res = float("-inf")
         for i in range(len(nums)):
-            min_val, max_val = self.dp(i)
-            res = max(res, min_val, max_val)
+            _, max_val = self.dp(i)
+            res = max(res, max_val)
         return res
 
     # dp(i) == maximum product subarray starting at index i
