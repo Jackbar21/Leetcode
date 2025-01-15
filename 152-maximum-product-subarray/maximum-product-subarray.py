@@ -16,10 +16,11 @@ class Solution:
         if i in self.memo:
             return self.memo[i]
         
-        # Base Case
-        if i >= len(self.nums):
-            # 1 multiplied by anything is 1, so make both min & max 1!
-            return (1, 1)
+        # Base Case: If at last index, can only pick that number for product!
+        if i == len(self.nums) - 1:
+            val = self.nums[i]
+            self.memo[i] = (val, val)
+            return (val, val)
         
         # Case 1: Only consider current element
         val = self.nums[i]
