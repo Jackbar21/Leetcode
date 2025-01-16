@@ -19,7 +19,9 @@ class Solution:
 
         for j in range(i + 1, len(nums)):
             if nums[i] < nums[j]:
-                res = max(res, 1 + self.dp(j))
+                new_case = 1 + self.dp(j)
+                if res < new_case:
+                    res = new_case
         
         self.memo[i] = res
         return res
