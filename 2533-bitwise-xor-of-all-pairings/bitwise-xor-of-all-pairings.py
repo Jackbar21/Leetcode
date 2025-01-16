@@ -1,19 +1,5 @@
 class Solution:
     def xorAllNums(self, nums1: List[int], nums2: List[int]) -> int:
-        # nums3 = [num1 ^ num2 for num1 in nums1 for num2 in nums2]
-        # res = 0
-        # for num in nums3:
-        #     res ^= num
-        # return res
-
-        xor = 0
-        if len(nums1) % 2 == 1:
-            for num in nums2:
-                xor ^= num
-        if len(nums2) % 2 == 1:
-            for num in nums1:
-                xor ^= num
-        return xor
         """
         Say nums1 = [a1,a2,...,a_n]
         And nums2 = [b1,b2,...,b_m]
@@ -27,6 +13,20 @@ class Solution:
             a_n^b1, a_n^b2, ..., a_n^b_m
         ]
 
-        Taking the xor of all elements would give us:
-
+        Taking the xor of all elements would give us, would make it such that
+        ALL of the a1,a2,...,a_n values cancel each other out if m is even, otherwise
+        have EXACTLY one of each left if m is odd. 
+        Similarly, ALL of the b1,b2,...,b_m values cancel each other out if n is even,
+        otherwise have EXACTLY one of each left if n is odd.
         """
+        xor = 0
+        if len(nums1) % 2 == 1:
+            for num in nums2:
+                xor ^= num
+
+        if len(nums2) % 2 == 1:
+            for num in nums1:
+                xor ^= num
+
+        return xor
+        
