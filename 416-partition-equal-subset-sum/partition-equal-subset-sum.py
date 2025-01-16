@@ -1,48 +1,43 @@
 class Solution:
-    def __init__(self):
-        self.memo = {0: set([0])}
-        self.target = None
-        self.nums = None
-    
-    def canPartDp(self, i):
-        if i in self.memo:
-            # TODO: !!! FIX RETURN VALUE !!!
-            return self.memo[i]
-        
-        # is there a partition in nums[:i+1] that
-        # sums up to target, given all partitions
-        # that nums[:i] sum up to?
-
-        partitions = self.canPartDp(i - 1)
-        if partitions == True:
-            return True # true for i --> true for i+k, k > 0
-        new_partitions = set()
-        for p in partitions:
-            new_partitions.add(p)
-            new_partitions.add(p + self.nums[i])
-
-        self.memo[i] = new_partitions if self.target not in new_partitions else True
-        return self.memo[i]
-
     def canPartition(self, nums: List[int]) -> bool:
+        # Idea: to partition nums into two subsets of equal sum, they must each be
+        # exactly HALF of the sum of ALL the numbers in nums. Trivially, if the sum is
+        # odd, the answer is immediately False as the sum cannot be divided into two in the
+        # first place! Otherwise, this problem is essentially Subset Sum, where the target
+        # is sum(nums)/2. But this would be a pseudopolynomial time algorithm, so something
+        # BETTER we can do is for each index i in nums, ADD it to our current sum if we choose
+        # to put it in the FIRST subset, or otherwise SUBTRACT it if we choose to put it in the
+        # SECOND subset! That way, if we reach a final sum of 0, we know it's because the sums
+        # of the first and second subsets are EQUAL.
         sum_nums = sum(nums)
         if sum_nums % 2 == 1:
             return False
-        
-        # Partition into two equal subset sums,
-        # means that sum1 + sum2 == sum(nums)
-        # where sum1 == sum2, which implies
-        # --> sum1 + sum1 == sum(nums)
-        # --> 2 * sum1 == sum(nums)
-        # --> sum1 == sum(nums)//2
-        # --> sum2 == sum(nums)//2
-        self.target = sum_nums // 2
-        self.nums = nums
-        
-        # Needed since returns set if not True
-        # (not 'False')
-        if self.canPartDp(len(nums)-1) == True:
-            return True
-        return False
+        target = sum_nums // 2
+        nums.sort()
+        self.nums, self.memo = nums, {}
+        return self.dp2d(0, target)
 
 
+    def dp2d(self, i, target):
+        if (i, target) in self.memo:
+            return self.memo[(i, target)]
+        
+        if i >= len(self.nums):
+            return target == 0
+        
+        # Since numbers cannot be negative, we know answer is False
+        # immediately if target < 0
+        if target < 0:
+            return False
+        
+        num = self.nums[i]
+
+        # Case 1: Include num in subset
+        case1 = self.dp2d(i + 1, target - num)
+
+        # Case 2: Don't include num in subset
+        case2 = self.dp2d(i + 1, target)
+
+        res = case1 or case2
+        self.memo[(i, target)] = res
+        return res
