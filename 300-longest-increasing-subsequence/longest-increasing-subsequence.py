@@ -5,6 +5,10 @@ class Solution:
         return max(self.dp(i) for i in range(len(nums)))
     
     # dp(i) == length of LIS that STARTS at index i in nums
+    # Time Complexity:
+    #   - O(N) suproblems
+    #   - O(N) time per suproblem
+    #   == O(N^2) total time
     def dp(self, i):
         if i in self.memo:
             return self.memo[i]
