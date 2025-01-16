@@ -1,34 +1,25 @@
 class Solution:
-    def __init__(self):
-        self.memo = {}
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        if s in self.memo:
-            return self.memo[s]
+        self.memo = {}
+        self.word_dict = wordDict
+        self.s = s
+        return self.dp(0)
+    
+    # dp(i) == true if and only if can split s[i:]
+    def dp(self, i):
+        if i in self.memo:
+            return self.memo[i]
         
-        if len(s) <= 0:
+        if i >= len(self.s):
             return True
 
-        res = False
-        for word in wordDict:
-            if self.isSuffix(s, word):
-                if self.wordBreak(s[:len(s)-len(word)], wordDict):
-                    res = True
-                    break
+        string = self.s[i:]
         
-        self.memo[s] = res
-        return res
+        can_break = False
+        for word in self.word_dict:
+            if string.startswith(word) and self.dp(i + len(word)):
+                can_break = True
+                break
         
-    
-    def isSuffix(self, word, suffix):
-        if len(suffix) > len(word):
-            return False
-        
-        offset = len(word) - len(suffix)
-
-        for i in range(len(suffix)):
-            if word[offset + i] != suffix[i]:
-                return False
-        
-        return True
-
-
+        self.memo[i] = can_break
+        return can_break
