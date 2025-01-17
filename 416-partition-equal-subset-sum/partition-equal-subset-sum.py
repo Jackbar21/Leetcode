@@ -4,16 +4,14 @@ class Solution:
         if sum_nums % 2 == 1:
             return False
 
-        if sum_nums == 0:
-            return True # all numbers are 0!
+        # if sum_nums == 0:
+        #     return True # all numbers are 0!
 
-        target = sum_nums // 2
-        self.target = target
-        nums.sort(reverse=False)
+        self.target = sum_nums // 2
+
         self.nums, self.memo = nums, {}
         # return self.dp2d(0, target)
-        res = self.dp(0)
-        return target in res
+        return self.target in self.dp(0)
     
     def dp(self, i):
         if i in self.memo:
