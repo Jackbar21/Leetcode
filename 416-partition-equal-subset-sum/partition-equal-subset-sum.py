@@ -10,8 +10,8 @@ class Solution:
         nums.sort()
 
         self.nums, self.memo = nums, {}
-        # return self.dp2d(0, self.target)
-        return self.target in self.dp(0)
+        return self.dp2d(0, self.target)
+        # return self.target in self.dp(0)
     
     def dp(self, i):
         if i in self.memo:
@@ -49,8 +49,8 @@ class Solution:
         
         # Since numbers cannot be negative, we know answer is False
         # immediately if target < 0
-        if target < 0:
-            return False
+        # if target < 0:
+        #     return False
         
         num = self.nums[i]
 
