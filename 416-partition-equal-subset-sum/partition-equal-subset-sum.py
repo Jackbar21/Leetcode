@@ -13,9 +13,15 @@ class Solution:
         if sum_nums % 2 == 1:
             return False
         target = sum_nums // 2
+        self.target = target
         nums.sort()
         self.nums, self.memo = nums, {}
         return self.dp2d(0, target)
+    
+    # dp(i) == can I reach a sum of 'zero' from index i?
+    # Maybe 
+
+    
 
 
     def dp2d(self, i, target):
