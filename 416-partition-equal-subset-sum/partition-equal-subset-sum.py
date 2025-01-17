@@ -21,7 +21,7 @@ class Solution:
         nums, target = self.nums, self.target
 
         if i >= len(nums):
-            return set([0])
+            return set()
         
         subset_sums = self.dp(i + 1)
         if target in subset_sums:
@@ -29,7 +29,7 @@ class Solution:
             return subset_sums
         
         num = nums[i]
-        new_candidates = set()
+        new_candidates = set([num])
 
         for subset_sum in subset_sums:
             new_subset_sum = num + subset_sum
