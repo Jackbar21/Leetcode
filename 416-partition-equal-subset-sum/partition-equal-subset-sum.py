@@ -9,7 +9,7 @@ class Solution:
 
         target = sum_nums // 2
         self.target = target
-        nums.sort(reverse=True)
+        nums.sort(reverse=False)
         self.nums, self.memo = nums, {}
         # return self.dp2d(0, target)
         res = self.dp(0)
