@@ -13,7 +13,7 @@ class Solution:
         # return self.dp2d(0, self.target)
         return self.target in self.dp(0)
     
-    # dp(i) == set of ALL possible subset sums in nums[i:]
+    # dp(i) == set of ALL possible subset sums in nums[i:] (unless target in there!)
     def dp(self, i):
         if i in self.memo:
             return self.memo[i]
@@ -33,7 +33,7 @@ class Solution:
 
         for subset_sum in subset_sums:
             new_subset_sum = num + subset_sum
-            if new_subset_sum <= target:
+            if new_subset_sum <= target or True:
                 new_candidates.add(new_subset_sum)
                 
         res = new_candidates.union(subset_sums)
