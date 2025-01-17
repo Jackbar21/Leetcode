@@ -12,16 +12,47 @@ class Solution:
         sum_nums = sum(nums)
         if sum_nums % 2 == 1:
             return False
+        if sum_nums == 0:
+            return True # all numbers are 0!
         target = sum_nums // 2
         self.target = target
-        nums.sort()
+        # nums.sort(reverse=True)
         self.nums, self.memo = nums, {}
-        return self.dp2d(0, target)
+        # self.available_sums = set()
+        # return self.dp2d(0, target)
+        res = self.dp(0)[0]
+        print(f"{self.memo=}")
+        return res
     
-    # dp(i) == can I reach a sum of 'zero' from index i?
-    # Maybe 
+    def dp(self, i):
+        if i in self.memo:
+            return self.memo[i]
+        
+        if i >= len(self.nums):
+            return (False, set())
+        
+        found_sol, subset_sums = self.dp(i + 1)
+        if found_sol:
+            self.memo[i] = (True, set())
+            return self.memo[i]
+        
+        num = self.nums[i]
+        if num == self.target:
+            self.memo[i] = (True, set())
+            return self.memo[i]
+        new_candidates = set([num])
 
-    
+        for subset_sum in subset_sums:
+            new_subset_sum = num + subset_sum
+            if new_subset_sum == self.target:
+                self.memo[i] = (True, set())
+                return self.memo[i]
+            
+            elif new_subset_sum < self.target:
+                new_candidates.add(new_subset_sum)
+        
+        self.memo[i] = (False, new_candidates.union(subset_sums))
+        return self.memo[i]
 
 
     def dp2d(self, i, target):
