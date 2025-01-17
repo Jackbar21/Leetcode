@@ -14,7 +14,7 @@ class Solution:
         # self.available_sums = set()
         # return self.dp2d(0, target)
         res = self.dp(0)
-        print(f"{self.memo=}")
+        # print(f"{self.memo=}")
         return target in res
     
     def dp(self, i):
