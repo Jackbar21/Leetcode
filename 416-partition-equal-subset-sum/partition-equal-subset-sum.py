@@ -26,8 +26,6 @@ class Solution:
         if i >= len(nums):
             return set()
         
-        # SOLVED_SET = set([target])
-
         subset_sums = self.dp(i + 1)
         if target in subset_sums:
             self.memo[i] = subset_sums
@@ -41,8 +39,9 @@ class Solution:
             if new_subset_sum <= target:
                 new_candidates.add(new_subset_sum)
                 
-        self.memo[i] = new_candidates.union(subset_sums)
-        return self.memo[i]
+        res = new_candidates.union(subset_sums)
+        self.memo[i] = res
+        return res
 
 
     def dp2d(self, i, target):
