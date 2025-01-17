@@ -29,11 +29,6 @@ class Solution:
             return subset_sums
         
         num = nums[i]
-        res = set(subset_sum + num for subset_sum in subset_sums if subset_sum + num <= target).union(subset_sums)
-        self.memo[i] = res
-        return res
-
-        num = nums[i]
         new_candidates = set([num])
 
         for subset_sum in subset_sums:
