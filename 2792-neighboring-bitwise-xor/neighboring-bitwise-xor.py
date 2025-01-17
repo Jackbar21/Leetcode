@@ -24,11 +24,7 @@ class Solution:
 
         (1. i=0,i=1):  (o_0 ^ o_1) ^ (o_)
         """
-        if len(derived) == 1:
-            return derived[0] == 0
-
-        val = derived[0]
-        for i in range(1, len(derived) - 1):
+        val = 0
+        for i in range(len(derived) - 1):
             val ^= derived[i]
-        
         return val == derived[-1]
