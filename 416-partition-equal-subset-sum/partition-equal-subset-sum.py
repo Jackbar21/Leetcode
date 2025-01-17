@@ -10,7 +10,7 @@ class Solution:
         nums.sort()
 
         self.nums, self.memo = nums, {}
-        # return self.dp2d(0, target)
+        # return self.dp2d(0, self.target)
         return self.target in self.dp(0)
     
     def dp(self, i):
