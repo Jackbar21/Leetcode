@@ -32,10 +32,8 @@ class Solution:
         if target in subset_sums:
             # self.memo[i] = set([target])
             # return subset_sums
-            res = SOLVED_SET
-            for index in range(i + 1):
-                self.memo[index] = res
-            return res
+            self.memo[i] = SOLVED_SET
+            return SOLVED_SET
         # if found_sol:
         #     self.memo[i] = (True, set())
         #     return self.memo[i]
