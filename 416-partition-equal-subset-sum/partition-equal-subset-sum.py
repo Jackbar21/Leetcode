@@ -33,8 +33,8 @@ class Solution:
 
         for subset_sum in subset_sums:
             new_subset_sum = num + subset_sum
-            # if new_subset_sum <= target:
-            new_candidates.add(new_subset_sum)
+            if new_subset_sum <= target:
+                new_candidates.add(new_subset_sum)
                 
         res = new_candidates.union(subset_sums)
         self.memo[i] = res
