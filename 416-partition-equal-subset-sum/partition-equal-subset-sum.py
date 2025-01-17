@@ -29,9 +29,9 @@ class Solution:
         # SOLVED_SET = set([target])
 
         subset_sums = self.dp(i + 1)
-        # if target in subset_sums:
-        #     self.memo[i] = subset_sums
-        #     return subset_sums
+        if target in subset_sums:
+            self.memo[i] = subset_sums
+            return subset_sums
 
         num = nums[i]
         new_candidates = set([num])
