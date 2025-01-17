@@ -26,31 +26,26 @@ class Solution:
         if i >= len(nums):
             return set()
         
-        SOLVED_SET = set([target])
+        # SOLVED_SET = set([target])
 
         subset_sums = self.dp(i + 1)
         if target in subset_sums:
-            # self.memo[i] = set([target])
-            # return subset_sums
-            self.memo[i] = SOLVED_SET
-            return SOLVED_SET
-        # if found_sol:
-        #     self.memo[i] = (True, set())
-        #     return self.memo[i]
-        
+            self.memo[i] = subset_sums
+            return subset_sums
+
         num = nums[i]
-        if num == target:
-            self.memo[i] = SOLVED_SET
-            return SOLVED_SET
+        # if num == target:
+        #     self.memo[i] = subset_sums
+        #     return subset_sums
         new_candidates = set([num])
 
         for subset_sum in subset_sums:
             new_subset_sum = num + subset_sum
-            if new_subset_sum == target:
-                self.memo[i] = SOLVED_SET
-                return SOLVED_SET
+            # if new_subset_sum == target:
+            #     self.memo[i] = SOLVED_SET
+            #     return SOLVED_SET
             
-            elif new_subset_sum < self.target:
+            if new_subset_sum <= self.target:
                 new_candidates.add(new_subset_sum)
         
         self.memo[i] = new_candidates.union(subset_sums)
