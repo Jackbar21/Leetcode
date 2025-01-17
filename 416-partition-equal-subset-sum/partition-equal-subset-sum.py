@@ -10,9 +10,10 @@ class Solution:
         nums.sort()
 
         self.nums, self.memo = nums, {}
-        return self.dp2d(0, self.target)
-        # return self.target in self.dp(0)
+        # return self.dp2d(0, self.target)
+        return self.target in self.dp(0)
     
+    # dp(i) == set of ALL possible subset sums in nums[i:]
     def dp(self, i):
         if i in self.memo:
             return self.memo[i]
@@ -44,12 +45,10 @@ class Solution:
         if (i, target) in self.memo:
             return self.memo[(i, target)]
         
-        if i >= len(self.nums):
+        if target <= 0:
             return target == 0
         
-        # Since numbers cannot be negative, we know answer is False
-        # immediately if target < 0
-        if target < 0:
+        if i >= len(self.nums):
             return False
         
         num = self.nums[i]
