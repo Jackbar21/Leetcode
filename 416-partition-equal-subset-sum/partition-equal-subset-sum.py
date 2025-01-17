@@ -43,7 +43,9 @@ class Solution:
             new_subset_sum = num + subset_sum
             if new_subset_sum <= target:
                 new_candidates.add(new_subset_sum)
-                if new_subset_sum == target:
+                if new_subset_sum == target: # found sol, no need to continue!
+                    self.memo[i] = set([target])
+                    return self.memo[i]
                     break
         
         self.memo[i] = new_candidates.union(subset_sums)
