@@ -6,23 +6,24 @@ class Solution:
             o_0 ^ o_1,
             o_1 ^ o_2,
             o_2 ^ o_3,
-            o_3 ^ o_4,
             .
             .
             .
             o_{n-1} ^ o_0
         ]
 
-        If n - 1 == 4, then we have:
-        derived = [
-            o_0 ^ o_1,
-            o_1 ^ o_2,
-            o_2 ^ o_3,
-            o_3 ^ o_4,
-            o_4 ^ o_0
-        ]
+        Which means if we XOR all of the elements together, we should end up with:
+        (o_0 ^ o_1) ^ (o_1 ^ o_2) ^ (o_2 ^ o_3) ^ ... ^ (o_{n-1} ^ o_0)
+            <==>
+        (o_0 ^ o_0) ^ (o_1 ^ o_1) ^ (o_2 ^ o_2) ^ (o_3 ^ o_3) ^ ... ^ (o_{n-1} ^ o_{n-1})
+            <==>
+        (0) ^ (0) ^ (0) ^ (0) ^ ... ^ (0)
+            <==>
+        0
 
-        (1. i=0,i=1):  (o_0 ^ o_1) ^ (o_)
+        Hence, we should just ensure that XOR'ing all of the elements in the derived array
+        results in 0! Otherwise, we know that it could NOT have been derived from a binary
+        array's adjacent pairs!
         """
         val = 0
         for bit in derived:
