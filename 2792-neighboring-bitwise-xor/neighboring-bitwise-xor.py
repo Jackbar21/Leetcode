@@ -25,6 +25,6 @@ class Solution:
         (1. i=0,i=1):  (o_0 ^ o_1) ^ (o_)
         """
         val = 0
-        for i in range(len(derived) - 1):
-            val ^= derived[i]
-        return val == derived[-1]
+        for bit in derived:
+            val ^= bit
+        return val == 0
