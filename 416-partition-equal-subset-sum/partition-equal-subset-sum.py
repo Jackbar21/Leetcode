@@ -49,8 +49,8 @@ class Solution:
         
         # Since numbers cannot be negative, we know answer is False
         # immediately if target < 0
-        # if target < 0:
-        #     return False
+        if target < 0:
+            return False
         
         num = self.nums[i]
 
