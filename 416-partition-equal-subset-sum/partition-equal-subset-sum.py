@@ -29,14 +29,11 @@ class Solution:
         # SOLVED_SET = set([target])
 
         subset_sums = self.dp(i + 1)
-        if target in subset_sums:
-            self.memo[i] = subset_sums
-            return subset_sums
-
-        num = nums[i]
-        # if num == target:
+        # if target in subset_sums:
         #     self.memo[i] = subset_sums
         #     return subset_sums
+
+        num = nums[i]
         new_candidates = set([num])
 
         for subset_sum in subset_sums:
@@ -44,7 +41,6 @@ class Solution:
             if new_subset_sum <= target:
                 new_candidates.add(new_subset_sum)
                 
-        
         self.memo[i] = new_candidates.union(subset_sums)
         return self.memo[i]
 
