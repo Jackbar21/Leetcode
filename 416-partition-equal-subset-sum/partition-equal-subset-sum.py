@@ -29,15 +29,13 @@ class Solution:
             return subset_sums
         
         num = nums[i]
-        new_candidates = set([num])
+        new_candidates = set()
 
         for subset_sum in subset_sums:
             new_subset_sum = num + subset_sum
             if new_subset_sum <= target:
                 new_candidates.add(new_subset_sum)
-                if new_subset_sum == target:
-                    break
-                
+
         res = new_candidates.union(subset_sums)
         self.memo[i] = res
         return res
