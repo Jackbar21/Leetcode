@@ -21,12 +21,17 @@ class Solution:
         nums, target = self.nums, self.target
 
         if i >= len(nums):
-            return set()
+            return set([0])
         
         subset_sums = self.dp(i + 1)
         if target in subset_sums:
             self.memo[i] = subset_sums
             return subset_sums
+        
+        num = nums[i]
+        res = set(subset_sum + num for subset_sum in subset_sums).union(subset_sums)
+        self.memo[i] = res
+        return res
 
         num = nums[i]
         new_candidates = set([num])
