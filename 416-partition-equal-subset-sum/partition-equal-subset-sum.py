@@ -3,11 +3,11 @@ class Solution:
         sum_nums = sum(nums)
         if sum_nums % 2 == 1:
             return False
-
-        # if sum_nums == 0:
-        #     return True # all numbers are 0!
-
         self.target = sum_nums // 2
+
+        # Sorting the numbers somehow makes code even faster lol...
+        # Probably based on the tests themselves :P
+        nums.sort()
 
         self.nums, self.memo = nums, {}
         # return self.dp2d(0, target)
