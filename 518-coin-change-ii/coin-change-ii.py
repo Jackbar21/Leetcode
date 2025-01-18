@@ -16,14 +16,11 @@ class Solution:
 
             for cur_amount in range(amount, amount - coin, -1):
                 dp[i][cur_amount] = dp[i + 1][cur_amount]
+
             for cur_amount in range(amount - coin, -1, -1):
                 dp[i][cur_amount] = dp[i][cur_amount + coin] + dp[i + 1][cur_amount]
     
         return dp[0][0]
-            
-
-
-
 
     def dp(self, i, amount):
         if (i, amount) in self.memo:
