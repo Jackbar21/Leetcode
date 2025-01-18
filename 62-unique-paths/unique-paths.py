@@ -1,23 +1,22 @@
 class Solution:
-    def __init__(self):
-        self.memo = {}
     def uniquePaths(self, m: int, n: int) -> int:
-        if m <= 1 and n <= 1:
+        self.m, self.n, self.memo = m, n, {}
+        return self.dp(0, 0)
+    
+    def dp(self, i, j):
+        if (i, j) in self.memo:
+            return self.memo[(i, j)]
+        
+        M, N = self.m, self.n
+        if i == M - 1 and j == N - 1:
             return 1
         
-        if m <= 1 or n <= 1:
-            return 1
-        
-        if (m, n) in self.memo:
-            return self.memo[(m, n)]
-        
-        # Case 1: robot moved right
-        # moving right 1 means n += 1
-        case1 = self.uniquePaths(m, n - 1)
+        # Case 1: Move down, can only do so if i + 1 < m (otherwise, 0 moves!)
+        case1 = self.dp(i + 1, j) if i + 1 < M else 0
 
-        # Case 2: robot moved down
-        # moving down 1 means m += 1
-        case2 = self.uniquePaths(m - 1, n)
+        # Case 2: Move right, can only do so if j + 1 < n (otherwise, 0 moves!)
+        case2 = self.dp(i, j + 1) if j + 1 < N else 0
 
-        self.memo[(m, n)] = case1 + case2
-        return self.memo[(m, n)]
+        res = case1 + case2
+        self.memo[(i, j)] = res
+        return res
