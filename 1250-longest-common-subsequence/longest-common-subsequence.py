@@ -1,8 +1,22 @@
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        self.text1, self.text2 = text1, text2
-        self.memo = {}
-        return self.dp(0, 0)
+        M, N = len(text1), len(text2)
+        # self.text1, self.text2 = text1, text2
+        # self.memo = {}
+        # return self.dp(0, 0)
+
+        # Let's try a bottom-up approach instead!
+        dp = [[0] * (N + 1) for _ in range(M + 1)]
+        for i in range(M - 1, -1, -1):
+            for j in range(N - 1, -1, -1):
+                if text1[i] == text2[j]:
+                    dp[i][j] = 1 + dp[i + 1][j + 1]
+                    continue
+                
+                dp[i][j] = max(dp[i + 1][j], dp[i][j + 1])
+    
+        return dp[0][0]
+
     
     def dp(self, i, j):
         if (i, j) in self.memo:
@@ -27,7 +41,7 @@ class Solution:
         # Case 3: Shift index j by one (no matching!)
         case3 = self.dp(i, j + 1)
 
-        res = max(case2, case3)
+        res = case2 if case2 > case3 else case3
         self.memo[(i, j)] = res
         return res
             
