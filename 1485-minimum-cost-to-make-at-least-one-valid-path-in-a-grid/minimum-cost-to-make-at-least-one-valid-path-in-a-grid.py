@@ -11,12 +11,13 @@ class Solution:
         M, N = len(grid), len(grid[0])
         inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
 
-        fringe = [(0, 0, 0)] # (cost, x, y) -- min heap for UCS! Might be able to 0-1 BFS instead
+        # fringe = [(0, 0, 0)] # (cost, x, y) -- min heap for UCS! Might be able to 0-1 BFS instead
+        fringe = collections.deque([(0, 0, 0)])
         visited = set()
 
         while len(fringe) > 0:
-            cost, x, y = heapq.heappop(fringe)
-            
+            # cost, x, y = heapq.heappop(fringe)
+            cost, x, y = fringe.popleft()
 
             # Already found shoretst path to (x, y), so continue!
             if (x, y) in visited:
@@ -35,6 +36,10 @@ class Solution:
                 dx, dy = direction_to_delta[direction]
                 neigh_x, neigh_y = x + dx, y + dy
                 if inBounds(neigh_x, neigh_y) and (neigh_x, neigh_y) not in visited:
-                    heapq.heappush(fringe, (cost + (direction != sign), neigh_x, neigh_y))
+                    # heapq.heappush(fringe, (cost + (direction != sign), neigh_x, neigh_y))
+                    if direction == sign:
+                        fringe.appendleft((cost, neigh_x, neigh_y))
+                    else:
+                        fringe.append((cost + 1, neigh_x, neigh_y))
 
         raise Exception("No Solution")
