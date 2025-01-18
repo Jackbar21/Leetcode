@@ -7,13 +7,13 @@ class Solution:
         if (i, amount) in self.memo:
             return self.memo[(i, amount)]
         
-        if i >= len(self.coins) or amount < 0:
+        if i >= len(self.coins):
             return amount == 0
         
         coin = self.coins[i]
 
         # Case 1: Use current coin
-        case1 = self.dp(i, amount - coin)
+        case1 = self.dp(i, amount - coin) if amount - coin >= 0 else 0
 
         # Case 2: Move on to next coin
         case2 = self.dp(i + 1, amount)
