@@ -1,7 +1,7 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
-        self.coins, self.memo = coins, {}
-        return self.dp(0, amount)
+        self.coins, self.amount, self.memo = coins, amount, {}
+        return self.dp(0, 0)
 
         # Let's try a bottom up approach!
         N = len(coins)
@@ -19,12 +19,12 @@ class Solution:
             return self.memo[(i, amount)]
         
         if i >= len(self.coins):
-            return amount == 0
+            return amount == self.amount
         
         coin = self.coins[i]
 
         # Case 1: Use current coin (can only do so if doesn't bring you negative!)
-        case1 = 0 if coin > amount else self.dp(i, amount - coin)
+        case1 = self.dp(i, amount + coin) if amount + coin <= self.amount else 0
 
         # Case 2: Move on to next coin
         case2 = self.dp(i + 1, amount)
