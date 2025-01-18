@@ -2,7 +2,6 @@ class Solution:
     def minCost(self, grid: List[List[int]]) -> int:
         RIGHT, LEFT, DOWN, UP = 1, 2, 3, 4
         DIRECTIONS = [RIGHT, LEFT, DOWN, UP]
-        DIRECTION_DELTAS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         direction_to_delta = {
             RIGHT: (0, 1),
             LEFT: (0, -1),
@@ -36,7 +35,7 @@ class Solution:
             grid[x][y] = 0
 
             for direction in DIRECTIONS:
-                dx, dy = DIRECTION_DELTAS[direction - 1]
+                dx, dy = direction_to_delta[direction]
                 neigh_x, neigh_y = x + dx, y + dy
                 if not inBounds(neigh_x, neigh_y) or grid[neigh_x][neigh_y] == 0:
                     continue
