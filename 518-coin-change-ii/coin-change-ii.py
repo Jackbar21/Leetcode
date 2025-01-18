@@ -1,7 +1,7 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
-        # self.coins, self.amount, self.memo = coins, amount, {}
-        # return self.dp(0, 0)
+        self.coins, self.amount, self.memo = coins, amount, {}
+        return self.dp(0, 0)
 
         # Let's try a bottom up approach!
         N = len(coins)
