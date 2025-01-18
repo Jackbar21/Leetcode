@@ -12,16 +12,13 @@ class Solution:
         inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
 
         fringe = collections.deque([(0, 0, 0)]) # Zero-One BFS!
-        # visited = set()
+        visited = set()
 
         while len(fringe) > 0:
-            # cost, x, y = heapq.heappop(fringe)
             cost, x, y = fringe.popleft()
-            sign = grid[x][y]
 
             # Already found shoretst path to (x, y), so continue!
-            # if (x, y) in visited:
-            if sign == 0:
+            if (x, y) in visited:
                 continue
 
             # Found goal, return minimum cost!
@@ -31,13 +28,12 @@ class Solution:
             # Otherwise mark (x, y) as visited since found shortest path to it,
             # and remember sign for rest of for loop!
             sign = grid[x][y]
-            # visited.add((x, y))
-            grid[x][y] = 0
+            visited.add((x, y))
 
             for direction in DIRECTIONS:
                 dx, dy = direction_to_delta[direction]
                 neigh_x, neigh_y = x + dx, y + dy
-                if not inBounds(neigh_x, neigh_y) or grid[neigh_x][neigh_y] == 0:
+                if not inBounds(neigh_x, neigh_y) or (neigh_x, neigh_y) in visited:
                     continue
                 
                 if direction == sign:
