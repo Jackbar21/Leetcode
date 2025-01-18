@@ -13,15 +13,18 @@ class Solution:
         
         price = self.prices[i]
 
-        # Case 1: Buy or Sell the stock
-        #   Must SELL stock if have stock, in which case we skip by two days 
-        #   and gain a profit of 'price', or must BUY stock if have no stock!
-        res = self.dp(i + 2, False) + price if have_stock else self.dp(i + 1, True) - price
+        # Case 1: Buy the stock (can only do so if DON'T have stock!)
+        case1 = self.dp(i + 1, True) - price
         
-        # Case 2: Don't buy or sell the stock
-        case2 = self.dp(i + 1, have_stock)
+        # Case 2: Sell the stock (can only do so if DO have stock!)
+        # Remember, cannot sell on next day, so augment i by TWO instead of ONE!
+        case2 = 0
+        if have_stock:
+            case2 = self.dp(i + 2, False) + price
+        
+        # Case 3: Do nothing (don't buy or sell)!
+        case3 = self.dp(i + 1, have_stock)
 
-        if case2 > res:
-            res = case2
+        res = max(case1, case2, case3)
         self.memo[(i, have_stock)] = res
         return res
