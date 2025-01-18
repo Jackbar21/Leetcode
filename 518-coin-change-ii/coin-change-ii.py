@@ -10,8 +10,12 @@ class Solution:
 
         for i in range(N - 1, -1, -1):
             coin = coins[i]
-            for cur_amount in range(amount, -1, -1):
-                case1 = dp[i][cur_amount + coin] if cur_amount + coin <= amount else 0
+            for cur_amount in range(amount, max(-1, amount - coin), -1):
+                case1 = 0
+                case2 = dp[i + 1][cur_amount]
+                dp[i][cur_amount] = case1 + case2
+            for cur_amount in range(amount - coin, -1, -1):
+                case1 = dp[i][cur_amount + coin]
                 case2 = dp[i + 1][cur_amount]
                 dp[i][cur_amount] = case1 + case2
         return dp[0][0]
