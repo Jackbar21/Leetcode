@@ -12,8 +12,8 @@ class Solution:
         
         coin = self.coins[i]
 
-        # Case 1: Use current coin
-        case1 = self.dp(i, amount - coin) if amount - coin >= 0 else 0
+        # Case 1: Use current coin (can only do so if doesn't bring you negative!)
+        case1 = self.dp(i, amount - coin) if amount >= coin else 0
 
         # Case 2: Move on to next coin
         case2 = self.dp(i + 1, amount)
