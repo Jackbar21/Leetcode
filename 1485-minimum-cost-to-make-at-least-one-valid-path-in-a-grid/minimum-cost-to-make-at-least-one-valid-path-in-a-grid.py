@@ -12,28 +12,30 @@ class Solution:
         inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
 
         fringe = collections.deque([(0, 0, 0)]) # Zero-One BFS!
-        visited = set()
+        # Instead of using a visited set, we know each value inside of grid is between 1-4.
+        # So when a position (i, j) is "visited", we can simply mark grid[i][j] as 0 to denote
+        # that it has been visited, without the extra overhead cost of a visited hash-set (despite
+        # the overall asymptotic complexity being the exact same!)
 
         while len(fringe) > 0:
             cost, x, y = fringe.popleft()
+            sign = grid[x][y]
 
             # Already found shoretst path to (x, y), so continue!
-            if (x, y) in visited:
+            if sign == 0:
                 continue
+            # Otherwise mark (x, y) as visited since found shortest path to it,
+            # and remember sign for rest of for loop!
+            grid[x][y] = 0 
 
             # Found goal, return minimum cost!
             if x == M - 1 and y == N - 1:
                 return cost
-            
-            # Otherwise mark (x, y) as visited since found shortest path to it,
-            # and remember sign for rest of for loop!
-            sign = grid[x][y]
-            visited.add((x, y))
 
             for direction in DIRECTIONS:
                 dx, dy = direction_to_delta[direction]
                 neigh_x, neigh_y = x + dx, y + dy
-                if not inBounds(neigh_x, neigh_y) or (neigh_x, neigh_y) in visited:
+                if not inBounds(neigh_x, neigh_y) or grid[neigh_x][neigh_y] == 0:
                     continue
                 
                 if direction == sign:
