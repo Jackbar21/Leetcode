@@ -13,7 +13,8 @@ class Solution:
                     dp[i][j] = 1 + dp[i + 1][j + 1]
                     continue
                 
-                dp[i][j] = max(dp[i + 1][j], dp[i][j + 1])
+                case1, case2 = dp[i + 1][j], dp[i][j + 1]
+                dp[i][j] = case1 if case1 > case2 else case2
     
         return dp[0][0]
 
