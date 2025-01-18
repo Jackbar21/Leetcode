@@ -11,8 +11,7 @@ class Solution:
         M, N = len(grid), len(grid[0])
         inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
 
-        # fringe = [(0, 0, 0)] # (cost, x, y) -- min heap for UCS! Might be able to 0-1 BFS instead
-        fringe = collections.deque([(0, 0, 0)])
+        fringe = collections.deque([(0, 0, 0)]) # Zero-One BFS!
         visited = set()
 
         while len(fringe) > 0:
@@ -35,11 +34,12 @@ class Solution:
             for direction in DIRECTIONS:
                 dx, dy = direction_to_delta[direction]
                 neigh_x, neigh_y = x + dx, y + dy
-                if inBounds(neigh_x, neigh_y) and (neigh_x, neigh_y) not in visited:
-                    # heapq.heappush(fringe, (cost + (direction != sign), neigh_x, neigh_y))
-                    if direction == sign:
-                        fringe.appendleft((cost, neigh_x, neigh_y))
-                    else:
-                        fringe.append((cost + 1, neigh_x, neigh_y))
+                if not inBounds(neigh_x, neigh_y) or (neigh_x, neigh_y) in visited:
+                    continue
+                
+                if direction == sign:
+                    fringe.appendleft((cost, neigh_x, neigh_y))
+                else:
+                    fringe.append((cost + 1, neigh_x, neigh_y))
 
         raise Exception("No Solution")
