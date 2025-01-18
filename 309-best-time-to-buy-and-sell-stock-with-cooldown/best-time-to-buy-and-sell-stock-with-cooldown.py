@@ -14,13 +14,11 @@ class Solution:
         price = self.prices[i]
 
         # Case 1: Buy the stock (can only do so if DON'T have stock!)
-        case1 = self.dp(i + 1, True) - price
+        case1 = self.dp(i + 1, True) - price if not have_stock else 0
         
         # Case 2: Sell the stock (can only do so if DO have stock!)
         # Remember, cannot sell on next day, so augment i by TWO instead of ONE!
-        case2 = 0
-        if have_stock:
-            case2 = self.dp(i + 2, False) + price
+        case2 = self.dp(i + 2, False) + price if have_stock else 0
         
         # Case 3: Do nothing (don't buy or sell)!
         case3 = self.dp(i + 1, have_stock)
