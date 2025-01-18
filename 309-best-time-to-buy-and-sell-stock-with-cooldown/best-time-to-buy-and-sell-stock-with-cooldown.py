@@ -16,11 +16,12 @@ class Solution:
         # Case 1: Buy or Sell the stock
         #   Must SELL stock if have stock, in which case we skip by two days 
         #   and gain a profit of 'price', or must BUY stock if have no stock!
-        case1 = self.dp(i + 2, False) + price if have_stock else self.dp(i + 1, True) - price
+        res = self.dp(i + 2, False) + price if have_stock else self.dp(i + 1, True) - price
         
         # Case 2: Don't buy or sell the stock
         case2 = self.dp(i + 1, have_stock)
 
-        res = case1 if case1 > case2 else case2
+        if case2 > res:
+            res = case2
         self.memo[(i, have_stock)] = res
         return res
