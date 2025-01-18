@@ -10,7 +10,11 @@ class Solution:
 
         for i in range(N - 1, -1, -1):
             coin = coins[i]
-            for cur_amount in range(amount, max(-1, amount - coin), -1):
+            if coin > amount:
+                dp[i][amount] = dp[i + 1][amount]
+                continue
+
+            for cur_amount in range(amount, amount - coin, -1):
                 dp[i][cur_amount] = dp[i + 1][cur_amount]
             for cur_amount in range(amount - coin, -1, -1):
                 dp[i][cur_amount] = dp[i][cur_amount + coin] + dp[i + 1][cur_amount]
