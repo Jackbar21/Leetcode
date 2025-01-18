@@ -16,7 +16,6 @@ class Solution:
         # So when a position (i, j) is "visited", we can simply mark grid[i][j] as 0 to denote
         # that it has been visited, without the extra overhead cost of a visited hash-set (despite
         # the overall asymptotic complexity being the exact same!)
-
         while len(fringe) > 0:
             cost, x, y = fringe.popleft()
             sign = grid[x][y]
