@@ -30,9 +30,8 @@ class Solution:
                 
                 visited.add((neigh_x, neigh_y))
                 neigh_height = grid[neigh_x][neigh_y]
-                diff = max(0, height - neigh_height)
+                diff = height - neigh_height if height > neigh_height else 0
                 res += diff
-                # grid[neigh_x][neigh_y] += diff
                 heapq.heappush(fringe, (neigh_height + diff, neigh_x, neigh_y))
         return res
                 
