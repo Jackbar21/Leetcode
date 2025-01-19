@@ -12,7 +12,7 @@ class Solution:
         # dp = [[False] * (S2 + 1) for _ in range(S1 + 1)]
         # dp[S1][S2] = True
         for s3_index in range(S3 - 1, -1, -1):
-            dp_new = [[False] * (S2 + 1) for _ in range(S1 + 1)]
+            # dp_new = [[False] * (S2 + 1) for _ in range(S1 + 1)]
             s3_letter = s3[s3_index]
 
             for s2_index in range(S2, -1, -1):
