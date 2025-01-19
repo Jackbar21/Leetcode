@@ -4,8 +4,6 @@ class Solution:
         self.memo = {}
         return self.dp3D(0, 0, 0)
 
-        
-
     # Time Complexity:
     #   - O(len(s1) * len(s2) * len(s3)) subproblems
     #   - O(1) time / suproblem
