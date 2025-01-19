@@ -7,12 +7,12 @@ class Solution:
         # Bottom Up Approach (2D DP... done so by realizing
         # that only two 2D-space arrays needed at a time!)
         S1, S2, S3 = len(s1), len(s2), len(s3)
-        dp = [[[False] * (S3 + 1) for _ in range((S2 + 1))] for _ in range((S1 + 1))]
-        dp[S1][S2][S3] = True
-        # dp = [[False] * (S2 + 1) for _ in range(S1 + 1)]
-        # dp[S1][S2] = True
+        # dp = [[[False] * (S3 + 1) for _ in range((S2 + 1))] for _ in range((S1 + 1))]
+        # dp[S1][S2][S3] = True
+        dp = [[False] * (S2 + 1) for _ in range(S1 + 1)]
+        dp[S1][S2] = True
         for s3_index in range(S3 - 1, -1, -1):
-            # dp_new = [[False] * (S2 + 1) for _ in range(S1 + 1)]
+            dp_new = [[False] * (S2 + 1) for _ in range(S1 + 1)]
             s3_letter = s3[s3_index]
 
             for s2_index in range(S2, -1, -1):
@@ -25,29 +25,29 @@ class Solution:
                         continue # Keep as False!
                     
                     if s3_letter != s2_letter:
-                        dp[s1_index][s2_index][s3_index] = dp[s1_index + 1][s2_index][s3_index + 1]
-                        # dp_new[s1_index][s2_index] = dp[s1_index + 1][s2_index]
+                        # dp[s1_index][s2_index][s3_index] = dp[s1_index + 1][s2_index][s3_index + 1]
+                        dp_new[s1_index][s2_index] = dp[s1_index + 1][s2_index]
                         continue
     
                     if s3_letter != s1_letter:
-                        dp[s1_index][s2_index][s3_index] = dp[s1_index][s2_index + 1][s3_index + 1]
-                        # dp_new[s1_index][s2_index] = dp[s1_index][s2_index + 1]
+                        # dp[s1_index][s2_index][s3_index] = dp[s1_index][s2_index + 1][s3_index + 1]
+                        dp_new[s1_index][s2_index] = dp[s1_index][s2_index + 1]
                         continue
                     
-                    dp[s1_index][s2_index][s3_index] = (
-                        dp[s1_index + 1][s2_index][s3_index + 1] or
-                        dp[s1_index][s2_index + 1][s3_index + 1]
-                    )
-                    # dp_new[s1_index][s2_index] = (
-                    #     dp[s1_index + 1][s2_index] or
-                    #     dp[s1_index][s2_index + 1]
+                    # dp[s1_index][s2_index][s3_index] = (
+                    #     dp[s1_index + 1][s2_index][s3_index + 1] or
+                    #     dp[s1_index][s2_index + 1][s3_index + 1]
                     # )
+                    dp_new[s1_index][s2_index] = (
+                        dp[s1_index + 1][s2_index] or
+                        dp[s1_index][s2_index + 1]
+                    )
             
             # Update dp to dp_new!
-            # dp = dp_new
+            dp = dp_new
         
-        # return dp[0][0]
-        return dp[0][0][0]
+        # return dp[0][0][0]
+        return dp[0][0]
 
     # Time Complexity:
     #   - O(len(s1) * len(s2) * len(s3)) subproblems
