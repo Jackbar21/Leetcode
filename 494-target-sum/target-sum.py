@@ -1,7 +1,47 @@
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
-        self.nums, self.target, self.memo = nums, target, {}
-        return self.dp(0, 0)
+        # self.nums, self.target, self.memo = nums, target, {}
+        # return self.dp(0, 0)
+        N = len(nums)
+        sum_nums = sum(nums)
+        max_target = sum_nums
+        min_target = -sum_nums
+        TARGET_RANGE = max_target - min_target
+
+        if not (min_target <= target <= max_target):
+            return 0
+
+        def sumToIndex(cur_sum):
+            return cur_sum + sum_nums
+        
+        def indexToSum(index):
+            return index - sum_nums
+
+        dp = [[0] * (TARGET_RANGE + 1) for _ in range(N + 1)]
+        dp[N][sumToIndex(target)] = 1
+
+        for i in range(N - 1, -1, -1):
+            num = nums[i]
+            for cur_sum in range(min_target, max_target + 1):
+            # for cur_sum in range(TARGET_RANGE):
+                # dp[i][cur_sum] = 
+                # val = 0
+                cur_sum_index = sumToIndex(cur_sum)
+
+                new_sum = cur_sum + num
+                new_sum_index = sumToIndex(new_sum)
+                if 0 <= new_sum_index <= TARGET_RANGE:
+                    # if cur_sum + num <= max_target:
+                    dp[i][cur_sum_index] += dp[i + 1][new_sum_index]
+
+                new_sum = cur_sum - num
+                new_sum_index = sumToIndex(new_sum)
+                if 0 <= new_sum_index <= TARGET_RANGE:
+                    # if cur_sum + num <= max_target:
+                    dp[i][cur_sum_index] += dp[i + 1][new_sum_index]
+        
+        return dp[0][sumToIndex(0)]
+
     
     def dp(self, i, cur_sum):
         if (i, cur_sum) in self.memo:
