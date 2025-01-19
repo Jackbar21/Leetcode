@@ -2,14 +2,14 @@ class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         self.s1, self.s2, self.s3 = s1, s2, s3
         self.memo = {}
-        
-        # return self.dp3D(0, 0, 0)
+        return self.dp3D(0, 0, 0)
 
-        # Bottom Up Approach
+        # Bottom Up Approach (2D DP... done so by realizing
+        # that only two 2D-space arrays needed at a time!)
         S1, S2, S3 = len(s1), len(s2), len(s3)
         # dp = [[[False] * (S3 + 1) for _ in range((S2 + 1))] for _ in range((S1 + 1))]
-        dp_old = [[False] * (S2 + 1) for _ in range(S1 + 1)]
-        dp_old[S1][S2] = True
+        dp = [[False] * (S2 + 1) for _ in range(S1 + 1)]
+        dp[S1][S2] = True
         for s3_index in range(S3 - 1, -1, -1):
             dp_new = [[False] * (S2 + 1) for _ in range(S1 + 1)]
             s3_letter = s3[s3_index]
@@ -27,12 +27,12 @@ class Solution:
                     
                     if s3_letter != s2_letter:
                         # dp[s1_index][s2_index][s3_index] = dp[s1_index + 1][s2_index][s3_index + 1]
-                        dp_new[s1_index][s2_index] = dp_old[s1_index + 1][s2_index]
+                        dp_new[s1_index][s2_index] = dp[s1_index + 1][s2_index]
                         continue
     
                     if s3_letter != s1_letter:
                         # dp[s1_index][s2_index][s3_index] = dp[s1_index][s2_index + 1][s3_index + 1]
-                        dp_new[s1_index][s2_index] = dp_old[s1_index][s2_index + 1]
+                        dp_new[s1_index][s2_index] = dp[s1_index][s2_index + 1]
                         continue
                     
                     # dp[s1_index][s2_index][s3_index] = (
@@ -40,16 +40,14 @@ class Solution:
                     #     dp[s1_index][s2_index + 1][s3_index + 1]
                     # )
                     dp_new[s1_index][s2_index] = (
-                        dp_old[s1_index + 1][s2_index] or
-                        dp_old[s1_index][s2_index + 1]
+                        dp[s1_index + 1][s2_index] or
+                        dp[s1_index][s2_index + 1]
                     )
             
-            # Update dp_old to dp_new!
-            dp_old = dp_new
+            # Update dp to dp_new!
+            dp = dp_new
         
-        return dp_old[0][0]
-    
-    # def dp2D(self, s1_index, s2_index)
+        return dp[0][0]
 
     # Time Complexity:
     #   - O(len(s1) * len(s2) * len(s3)) subproblems
