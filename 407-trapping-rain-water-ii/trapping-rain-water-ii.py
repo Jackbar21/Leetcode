@@ -37,7 +37,6 @@ class Solution:
                 if not inBounds(neigh_x, neigh_y) or grid[neigh_x][neigh_y] == -1:
                     continue
                 
-
                 neigh_height = grid[neigh_x][neigh_y]
                 grid[neigh_x][neigh_y] = -1
                 diff = border_height - neigh_height if border_height > neigh_height else 0
