@@ -3,7 +3,7 @@ class Solution:
         grid = heightMap
         M, N = len(grid), len(grid[0])
         DIRECTIONS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
+        # inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
 
         fringe = [] # min-heap of borders
         # visited = set()
@@ -34,9 +34,9 @@ class Solution:
                 # if (neigh_x, neigh_y) in visited or not inBounds(neigh_x, neigh_y):
                 #     continue
                 # visited.add((neigh_x, neigh_y))
-                if not inBounds(neigh_x, neigh_y) or grid[neigh_x][neigh_y] == -1:
+                if not (0 <= neigh_x < M and 0 <= neigh_y < N) or grid[neigh_x][neigh_y] == -1:
                     continue
-                
+    
                 neigh_height = grid[neigh_x][neigh_y]
                 grid[neigh_x][neigh_y] = -1
                 diff = border_height - neigh_height if border_height > neigh_height else 0
