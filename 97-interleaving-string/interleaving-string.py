@@ -2,7 +2,7 @@ class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         self.s1, self.s2, self.s3 = s1, s2, s3
         self.memo = {}
-        # return self.dp3D(0, 0, 0)
+        return self.dp3D(0, 0, 0)
 
         # Bottom Up Approach (2D DP... done so by realizing
         # that only two 2D-space arrays needed at a time!)
