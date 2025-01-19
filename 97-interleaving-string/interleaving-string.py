@@ -4,6 +4,53 @@ class Solution:
         self.memo = {}
         return self.dp3D(0, 0, 0)
 
+        """
+        # Bottom Up Approach (2D DP... done so by realizing
+        # that only two 2D-space arrays needed at a time!)
+        S1, S2, S3 = len(s1), len(s2), len(s3)
+        # dp = [[[False] * (S3 + 1) for _ in range((S2 + 1))] for _ in range((S1 + 1))]
+        dp = [[False] * (S2 + 1) for _ in range(S1 + 1)]
+        dp[S1][S2] = True
+        for s3_index in range(S3 - 1, -1, -1):
+            dp_new = [[False] * (S2 + 1) for _ in range(S1 + 1)]
+            s3_letter = s3[s3_index]
+
+            for s2_index in range(S2, -1, -1):
+                # s2_letter = s2[s2_index]
+                s2_letter = None if s2_index >= len(self.s2) else self.s2[s2_index]
+                
+                for s1_index in range(S1, -1, -1):
+                    # s1_letter = s1[s1_index]
+                    s1_letter = None if s1_index >= len(self.s1) else self.s1[s1_index]
+                
+                    if s3_letter != s1_letter and s3_letter != s2_letter:
+                        continue # Keep as False!
+                    
+                    if s3_letter != s2_letter:
+                        # dp[s1_index][s2_index][s3_index] = dp[s1_index + 1][s2_index][s3_index + 1]
+                        dp_new[s1_index][s2_index] = dp[s1_index + 1][s2_index]
+                        continue
+    
+                    if s3_letter != s1_letter:
+                        # dp[s1_index][s2_index][s3_index] = dp[s1_index][s2_index + 1][s3_index + 1]
+                        dp_new[s1_index][s2_index] = dp[s1_index][s2_index + 1]
+                        continue
+                    
+                    # dp[s1_index][s2_index][s3_index] = (
+                    #     dp[s1_index + 1][s2_index][s3_index + 1] or
+                    #     dp[s1_index][s2_index + 1][s3_index + 1]
+                    # )
+                    dp_new[s1_index][s2_index] = (
+                        dp[s1_index + 1][s2_index] or
+                        dp[s1_index][s2_index + 1]
+                    )
+            
+            # Update dp to dp_new!
+            dp = dp_new
+        
+        return dp[0][0]
+        """
+
     # Time Complexity:
     #   - O(len(s1) * len(s2) * len(s3)) subproblems
     #   - O(1) time / suproblem
