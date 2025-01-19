@@ -4,10 +4,10 @@ class Solution:
         self.memo = {}
         return self.dp(0, 0, 0)
 
-    @cache
+    # @cache
     def dp(self, s1_index, s2_index, s3_index):
-        # if (s1_index, s2_index, s3_index) in self.memo:
-        #     return self.memo[(s1_index, s2_index, s3_index)]
+        if (s1_index, s2_index, s3_index) in self.memo:
+            return self.memo[(s1_index, s2_index, s3_index)]
         
         if s3_index >= len(self.s3):
             return s1_index >= len(self.s1) and s2_index >= len(self.s2)
@@ -22,11 +22,14 @@ class Solution:
             return False
         
         if s3_letter == s1_letter and s3_letter != s2_letter:
-            return self.dp(s1_index + 1, s2_index, s3_index + 1)
+            self.memo[(s1_index, s2_index, s3_index)] = self.dp(s1_index + 1, s2_index, s3_index + 1)
+            return self.memo[(s1_index, s2_index, s3_index)]
         
         if s3_letter != s1_letter and s3_letter == s2_letter:
-            return self.dp(s1_index, s2_index + 1, s3_index + 1)
+            self.memo[(s1_index, s2_index, s3_index)] = self.dp(s1_index, s2_index + 1, s3_index + 1)
+            return self.memo[(s1_index, s2_index, s3_index)]
         
-        return (self.dp(s1_index + 1, s2_index, s3_index + 1) 
+        self.memo[(s1_index, s2_index, s3_index)] = (self.dp(s1_index + 1, s2_index, s3_index + 1) 
         or self.dp(s1_index, s2_index + 1, s3_index + 1))
+        return self.memo[(s1_index, s2_index, s3_index)]
 
