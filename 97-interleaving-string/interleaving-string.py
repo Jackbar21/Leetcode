@@ -3,13 +3,15 @@ class Solution:
         self.s1, self.s2, self.s3 = s1, s2, s3
         self.memo = {}
         
-        return self.dp3D(0, 0, 0)
+        # return self.dp3D(0, 0, 0)
 
         # Bottom Up Approach
         S1, S2, S3 = len(s1), len(s2), len(s3)
-        dp = [[[False] * (S3 + 1) for _ in range((S2 + 1))] for _ in range((S1 + 1))]
-        dp[S1][S2][S3] = True
+        # dp = [[[False] * (S3 + 1) for _ in range((S2 + 1))] for _ in range((S1 + 1))]
+        dp_old = [[False] * (S2 + 1) for _ in range(S1 + 1)]
+        dp_old[S1][S2] = True
         for s3_index in range(S3 - 1, -1, -1):
+            dp_new = [[False] * (S2 + 1) for _ in range(S1 + 1)]
             s3_letter = s3[s3_index]
 
             for s2_index in range(S2, -1, -1):
@@ -24,19 +26,28 @@ class Solution:
                         continue # Keep as False!
                     
                     if s3_letter != s2_letter:
-                        dp[s1_index][s2_index][s3_index] = dp[s1_index + 1][s2_index][s3_index + 1]
+                        # dp[s1_index][s2_index][s3_index] = dp[s1_index + 1][s2_index][s3_index + 1]
+                        dp_new[s1_index][s2_index] = dp_old[s1_index + 1][s2_index]
                         continue
     
                     if s3_letter != s1_letter:
-                        dp[s1_index][s2_index][s3_index] = dp[s1_index][s2_index + 1][s3_index + 1]
+                        # dp[s1_index][s2_index][s3_index] = dp[s1_index][s2_index + 1][s3_index + 1]
+                        dp_new[s1_index][s2_index] = dp_old[s1_index][s2_index + 1]
                         continue
                     
-                    dp[s1_index][s2_index][s3_index] = (
-                        dp[s1_index + 1][s2_index][s3_index + 1] or
-                        dp[s1_index][s2_index + 1][s3_index + 1]
+                    # dp[s1_index][s2_index][s3_index] = (
+                    #     dp[s1_index + 1][s2_index][s3_index + 1] or
+                    #     dp[s1_index][s2_index + 1][s3_index + 1]
+                    # )
+                    dp_new[s1_index][s2_index] = (
+                        dp_old[s1_index + 1][s2_index] or
+                        dp_old[s1_index][s2_index + 1]
                     )
+            
+            # Update dp_old to dp_new!
+            dp_old = dp_new
         
-        return dp[0][0][0]
+        return dp_old[0][0]
     
     # def dp2D(self, s1_index, s2_index)
 
