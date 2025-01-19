@@ -22,7 +22,7 @@ class Solution:
 
         for i in range(N - 1, -1, -1):
             num = nums[i]
-            for cur_sum in range(min_target, max_target + 1):
+            for cur_sum in range(min_target + num, max_target + 1 - num):
             # for cur_sum in range(TARGET_RANGE):
                 # dp[i][cur_sum] = 
                 # val = 0
