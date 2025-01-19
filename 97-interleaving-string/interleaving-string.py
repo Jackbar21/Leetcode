@@ -3,7 +3,7 @@ class Solution:
         self.s1, self.s2, self.s3 = s1, s2, s3
         self.memo = {}
         
-        # return self.dp3D(0, 0, 0)
+        return self.dp3D(0, 0, 0)
 
         # Bottom Up Approach
         S1, S2, S3 = len(s1), len(s2), len(s3)
