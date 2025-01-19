@@ -21,18 +21,18 @@ class Solution:
         
         res = 0
         while len(fringe) > 0:
-            height, x, y = heapq.heappop(fringe)
+            border_height, x, y = heapq.heappop(fringe)
 
             for dx, dy in DIRECTIONS:
                 neigh_x, neigh_y = x + dx, y + dy
                 if (neigh_x, neigh_y) in visited or not inBounds(neigh_x, neigh_y):
                     continue
-                
                 visited.add((neigh_x, neigh_y))
+
                 neigh_height = grid[neigh_x][neigh_y]
-                diff = height - neigh_height if height > neigh_height else 0
+                diff = border_height - neigh_height if border_height > neigh_height else 0
+
                 res += diff
                 heapq.heappush(fringe, (neigh_height + diff, neigh_x, neigh_y))
+
         return res
-                
-        
