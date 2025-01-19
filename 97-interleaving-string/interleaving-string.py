@@ -22,14 +22,19 @@ class Solution:
             return False
         
         if s3_letter == s1_letter and s3_letter != s2_letter:
-            self.memo[(s1_index, s2_index, s3_index)] = self.dp(s1_index + 1, s2_index, s3_index + 1)
-            return self.memo[(s1_index, s2_index, s3_index)]
+            res = self.dp(s1_index + 1, s2_index, s3_index + 1)
+            self.memo[(s1_index, s2_index, s3_index)] = res
+            return res
         
         if s3_letter != s1_letter and s3_letter == s2_letter:
-            self.memo[(s1_index, s2_index, s3_index)] = self.dp(s1_index, s2_index + 1, s3_index + 1)
-            return self.memo[(s1_index, s2_index, s3_index)]
+            res = self.dp(s1_index, s2_index + 1, s3_index + 1)
+            self.memo[(s1_index, s2_index, s3_index)] = res
+            return res
         
-        self.memo[(s1_index, s2_index, s3_index)] = (self.dp(s1_index + 1, s2_index, s3_index + 1) 
-        or self.dp(s1_index, s2_index + 1, s3_index + 1))
-        return self.memo[(s1_index, s2_index, s3_index)]
+        res = (
+            self.dp(s1_index + 1, s2_index, s3_index + 1) 
+            or self.dp(s1_index, s2_index + 1, s3_index + 1)
+        )
+        self.memo[(s1_index, s2_index, s3_index)] = res
+        return res
 
