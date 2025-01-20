@@ -8,8 +8,8 @@ class Solution:
         if (i, j) in self.memo:
             return self.memo[(i, j)]
         
-        if i >= len(self.word1) and j >= len(self.word2):
-            return 0
+        # if i >= len(self.word1) and j >= len(self.word2):
+        #     return 0
         
         if j >= len(self.word2):
             # Can only delete characters from this point onwards!
