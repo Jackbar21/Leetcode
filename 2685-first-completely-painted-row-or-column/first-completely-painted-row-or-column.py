@@ -10,8 +10,8 @@ class Solution:
         # last in arr :)
 
         # Step 1: Loop through mat, mapping val-to-position values in d
-        d = {}
-        # d = [None] * (M * N + 1)
+        # d = {}
+        d = [None] * (M * N + 1)
         for i in range(M):
             for j in range(N):
                 # Since values in mat are strictly [1, m * n], there are no duplicate values!
