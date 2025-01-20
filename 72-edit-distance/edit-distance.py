@@ -26,6 +26,8 @@ class Solution:
         case1 = float("inf")
         if letter1 == letter2:
             case1 = self.dp(i + 1, j + 1)
+            self.memo[(i, j)] = case1
+            return case1
         
         # Case 2: Insert a character
         case2 = 1 + self.dp(i, j + 1)
