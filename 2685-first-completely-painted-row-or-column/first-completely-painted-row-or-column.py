@@ -10,7 +10,8 @@ class Solution:
         # last in arr :)
 
         # Step 1: Loop through mat, mapping val-to-position values in d
-        d = [None] * (M * N + 1)
+        # d = [None] * (M * N + 1)
+        d = {}
         for i in range(M):
             for j in range(N):
                 # Since values in mat are strictly [1, m * n], there are no duplicate values!
@@ -20,7 +21,8 @@ class Solution:
         
         # Step 2: We have M rows, and N columns. We need to create a unique dictionary for each row,
         # and each column, each mapping to # of painted positions in that row / column!
-        rows, columns = [0] * M, [0] * N
+        # rows, columns = [0] * M, [0] * N
+        rows, columns = defaultdict(int), defaultdict(int)
         for index, val in enumerate(arr):
             i, j = d[val]
             rows[i] += 1
