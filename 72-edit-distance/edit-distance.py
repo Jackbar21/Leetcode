@@ -5,10 +5,9 @@ class Solution:
         # self.memo = {}
         # return self.dp(0, 0)
 
-        # Let's try writing this solution Bottom-Up as well!
+        # Bottom-Up Solution:
         M, N = len(word1), len(word2)
-        INF = M + N
-        dp = [[INF] * (N + 1) for _ in range(M + 1)]
+        dp = [[float("inf")] * (N + 1) for _ in range(M + 1)]
         dp[M][N] = 0
         for i in range(M):
             dp[i][N] = M - i
