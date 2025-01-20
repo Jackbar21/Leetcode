@@ -1,8 +1,32 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
-        self.word1, self.word2 = word1, word2
-        self.memo = {}
-        return self.dp(0, 0)
+        # Top-Down Solution:
+        # self.word1, self.word2 = word1, word2
+        # self.memo = {}
+        # return self.dp(0, 0)
+
+        # Let's try writing this solution Bottom-Up as well!
+        M, N = len(word1), len(word2)
+        dp = [[float("inf")] * (N + 1) for _ in range(M + 1)]
+        dp[M][N] = 0
+        for i in range(M):
+            dp[i][N] = M - i
+        for j in range(N):
+            dp[M][j] = N - j
+
+        for i in range(M - 1, -1, -1):
+            for j in range(N - 1, -1, -1):
+                if word1[i] == word2[j]:
+                    dp[i][j] = dp[i + 1][j + 1]
+                    continue
+
+                dp[i][j] = 1 + min(
+                    dp[i][j + 1],
+                    dp[i + 1][j],
+                    dp[i + 1][j + 1]
+                )
+
+        return dp[0][0]
 
     def dp(self, i, j):
         if (i, j) in self.memo:
