@@ -13,11 +13,11 @@ class Solution:
         
         if j >= len(self.word2):
             # Can only delete characters from this point onwards!
-            return 1 + self.dp(i + 1, j)
+            return len(self.word1) - i
         
         if i >= len(self.word1):
-            # Can only insert characters
-            return 1 + self.dp(i, j + 1)
+            # Can only insert characters from this point onwards!
+            return len(self.word2) - j
         
 
         letter1, letter2 = self.word1[i], self.word2[j]
