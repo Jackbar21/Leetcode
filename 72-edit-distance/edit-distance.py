@@ -7,7 +7,8 @@ class Solution:
 
         # Let's try writing this solution Bottom-Up as well!
         M, N = len(word1), len(word2)
-        dp = [[float("inf")] * (N + 1) for _ in range(M + 1)]
+        INF = M + N
+        dp = [[INF] * (N + 1) for _ in range(M + 1)]
         dp[M][N] = 0
         for i in range(M):
             dp[i][N] = M - i
