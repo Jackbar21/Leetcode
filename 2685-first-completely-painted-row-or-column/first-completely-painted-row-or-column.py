@@ -21,8 +21,7 @@ class Solution:
         
         # Step 2: We have M rows, and N columns. We need to create a unique dictionary for each row,
         # and each column, each mapping to # of painted positions in that row / column!
-        rows = defaultdict(int)
-        columns = defaultdict(int)
+        rows, columns = [0] * M, [0] * N
         for index, val in enumerate(arr):
             i, j = d[val]
             rows[i] += 1
