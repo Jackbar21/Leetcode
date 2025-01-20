@@ -1,9 +1,9 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         # Top-Down Solution:
-        # self.word1, self.word2 = word1, word2
-        # self.memo = {}
-        # return self.dp(0, 0)
+        self.word1, self.word2 = word1, word2
+        self.memo = {}
+        return self.dp(0, 0)
 
         # Bottom-Up Solution:
         M, N = len(word1), len(word2)
