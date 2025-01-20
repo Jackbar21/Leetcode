@@ -49,14 +49,14 @@ class Solution:
             return res
         
         # Case 1: Insert a character
-        case1 = 1 + self.dp(i, j + 1)
+        case1 = self.dp(i, j + 1)
 
         # Case 2: Delete a character
-        case2 = 1 + self.dp(i + 1, j)
+        case2 = self.dp(i + 1, j)
 
         # Case 3: Replace a character
-        case3 = 1 + self.dp(i + 1, j + 1)
+        case3 = self.dp(i + 1, j + 1)
 
-        res = min(case1, case2, case3)
+        res = 1 + min(case1, case2, case3)
         self.memo[(i, j)] = res
         return res
