@@ -13,14 +13,13 @@ class Solution:
         # Then, we will be able to compute the two possible scores for player 2 at each index i, considering
         # only the maximum of the two options (since we assume player 2 plays optimally), and minimzing this
         # result.
-
-        top_suffix = collections.deque([]) # top_suffix[i] == sum(grid[0][i:])
+        top_suffix = collections.deque([0]) # top_suffix[i] == sum(grid[0][i:])
         cur_sum = 0
         for num in reversed(grid[0]):
             cur_sum += num
             top_suffix.appendleft(cur_sum)
         
-        bottom_prefix = [] # bottom_prefix[i] == sum(grid[1][:i+1])
+        bottom_prefix = [0] # bottom_prefix[i] == sum(grid[1][:i+1])
         cur_sum = 0
         for num in grid[1]:
             cur_sum += num
@@ -28,11 +27,8 @@ class Solution:
         
         min_player_2_score = float("inf")
         for i in range(len(grid[0])):
-            case1 = top_suffix[i + 1] if i + 1 < len(top_suffix) else 0
-            case2 = bottom_prefix[i - 1] if i - 1 >= 0 else 0
+            case1 = top_suffix[i + 1]
+            case2 = bottom_prefix[i]
             player_2_score = max(case1, case2)
             min_player_2_score = min(min_player_2_score, player_2_score)
         return min_player_2_score
-        
-        # print(f"{top_suffix=}")
-        # print(f"{bottom_prefix=}")
