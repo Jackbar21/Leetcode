@@ -15,7 +15,7 @@ class Solution:
         # result.
         top_suffix = [0] # top_suffix[i] == sum(grid[0][i:])
         cur_sum = 0
-        for num in reversed(grid[0]):
+        for num in grid[0][::-1]:
             cur_sum += num
             top_suffix.append(cur_sum)
         top_suffix = top_suffix[::-1]
