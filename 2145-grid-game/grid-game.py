@@ -26,10 +26,12 @@ class Solution:
             cur_sum += num
             bottom_prefix.append(cur_sum)
         
-        min_player_2_score = float("inf")
+        min_player2_score = float("inf")
         for i in range(len(grid[0])):
             case1 = top_suffix[i + 1]
             case2 = bottom_prefix[i]
-            player_2_score = case1 if case1 > case2 else case2
-            min_player_2_score = min(min_player_2_score, player_2_score)
-        return min_player_2_score
+            player2_score = case1 if case1 > case2 else case2
+            if player2_score < min_player2_score:
+                min_player2_score = player2_score
+
+        return min_player2_score
