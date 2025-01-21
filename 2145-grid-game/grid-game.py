@@ -13,14 +13,14 @@ class Solution:
         # Then, we will be able to compute the two possible scores for player 2 at each index i, considering
         # only the maximum of the two options (since we assume player 2 plays optimally), and minimzing this
         # result.
-        top_suffix = [0] # top_suffix[i] == sum(grid[0][i:])
+        top_suffix = [0] # top_suffix[i+1] == sum(grid[0][i+1:])
         cur_sum = 0
         for num in grid[0][::-1]:
             cur_sum += num
             top_suffix.append(cur_sum)
         top_suffix = top_suffix[::-1]
         
-        bottom_prefix = [0] # bottom_prefix[i] == sum(grid[1][:i+1])
+        bottom_prefix = [0] # bottom_prefix[i] == sum(grid[1][:i])
         cur_sum = 0
         for num in grid[1]:
             cur_sum += num
@@ -30,6 +30,6 @@ class Solution:
         for i in range(len(grid[0])):
             case1 = top_suffix[i + 1]
             case2 = bottom_prefix[i]
-            player_2_score = max(case1, case2)
+            player_2_score = case1 if case1 > case2 else case2
             min_player_2_score = min(min_player_2_score, player_2_score)
         return min_player_2_score
