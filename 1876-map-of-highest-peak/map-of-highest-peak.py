@@ -14,25 +14,23 @@ class Solution:
         # rest of the land cells accordingly to populate a final valid solution for this problem.
 
         queue = collections.deque() # (closest_water_dist, i, j)
-        visited = set()
-        # closest_water = {}
-        closest_water = [[0] * N for _ in range(M)]
+        closest_water = [[-1] * N for _ in range(M)] # -1 means 'unvisited'
+        visited = lambda x, y: closest_water[x][y] != -1
         for i in range(M):
             for j in range(N):
                 if grid[i][j] == WATER:
                     queue.append((0, i, j))
-                    visited.add((i, j))
-                    # closest_water[(i, j)] = 0
+                    # visited.add((i, j))
+                    closest_water[i][j] = 0
 
         while len(queue) > 0:
             closest_water_dist, x, y = queue.popleft()
-            closest_water[x][y] = closest_water_dist
 
             for dx, dy in DIRECTIONS:
                 neigh_x, neigh_y = x + dx, y + dy
-                if not inBounds(neigh_x, neigh_y) or (neigh_x, neigh_y) in visited:
+                if not inBounds(neigh_x, neigh_y) or visited(neigh_x, neigh_y):
                     continue
                 queue.append((closest_water_dist + 1, neigh_x, neigh_y))
-                visited.add((neigh_x, neigh_y))
+                closest_water[neigh_x][neigh_y] = closest_water_dist + 1
 
         return closest_water
