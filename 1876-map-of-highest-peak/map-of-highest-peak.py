@@ -25,12 +25,10 @@ class Solution:
 
         while len(queue) > 0:
             closest_water_dist, x, y = queue.popleft()
-
             for dx, dy in DIRECTIONS:
                 neigh_x, neigh_y = x + dx, y + dy
-                if not inBounds(neigh_x, neigh_y) or visited(neigh_x, neigh_y):
-                    continue
-                queue.append((closest_water_dist + 1, neigh_x, neigh_y))
-                closest_water[neigh_x][neigh_y] = closest_water_dist + 1
+                if inBounds(neigh_x, neigh_y) and closest_water[neigh_x][neigh_y] == -1:
+                    queue.append((closest_water_dist + 1, neigh_x, neigh_y))
+                    closest_water[neigh_x][neigh_y] = closest_water_dist + 1
 
         return closest_water
