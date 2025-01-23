@@ -14,18 +14,20 @@ class Solution:
         for i in range(M):
             for j in range(N):
                 if grid[i][j] == SERVER:
-                    rows[i].add((i, j))
-                    cols[j].add((i, j))
+                    rows[i].add(j)
+                    cols[j].add(i)
         
         communicating_servers = set()
-        for servers in rows:
-            if len(servers) >= 2:
-                for server in servers:
-                    communicating_servers.add(server)
+        for i in range(M):
+            server_col_indices = rows[i]
+            if len(server_col_indices) >= 2:
+                for server_col_index in server_col_indices:
+                    communicating_servers.add((i, server_col_index))
 
-        for servers in cols:
-            if len(servers) >= 2:
-                for server in servers:
-                    communicating_servers.add(server)
+        for j in range(N):
+            server_row_indices = cols[j]
+            if len(server_row_indices) >= 2:
+                for server_row_index in server_row_indices:
+                    communicating_servers.add((server_row_index, j))
 
         return len(communicating_servers)
