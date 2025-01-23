@@ -20,8 +20,11 @@ class Solution:
         communicating_servers = set()
         for servers in rows:
             if len(servers) >= 2:
-                communicating_servers = communicating_servers.union(servers)
+                for server in servers:
+                    communicating_servers.add(server)
         for servers in cols:
             if len(servers) >= 2:
-                communicating_servers = communicating_servers.union(servers)
+                for server in servers:
+                    communicating_servers.add(server)
+
         return len(communicating_servers)
