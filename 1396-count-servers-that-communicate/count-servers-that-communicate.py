@@ -9,13 +9,13 @@ class Solution:
         #   (b) N, if number of servers is N, where N >= 2
         SERVER, EMPTY = 1, 0
         M, N = len(grid), len(grid[0])
-        rows = [set() for _ in range(M)]
-        cols = [set() for _ in range(N)]
+        rows = [[] for _ in range(M)]
+        cols = [[] for _ in range(N)]
         for i in range(M):
             for j in range(N):
                 if grid[i][j] == SERVER:
-                    rows[i].add(j)
-                    cols[j].add(i)
+                    rows[i].append(j)
+                    cols[j].append(i)
         
         communicating_servers = set()
         for i in range(M):
