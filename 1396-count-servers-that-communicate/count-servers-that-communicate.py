@@ -22,6 +22,7 @@ class Solution:
             if len(servers) >= 2:
                 for server in servers:
                     communicating_servers.add(server)
+
         for servers in cols:
             if len(servers) >= 2:
                 for server in servers:
