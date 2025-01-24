@@ -15,7 +15,7 @@ class Solution:
         outdegree = [len(neighbors) for neighbors in graph]
         queue = collections.deque(node for node in range(N) if outdegree[node] == 0)
         topo_order = []
-        while len(queue) > 0:
+        while queue:
             node = queue.popleft()
             topo_order.append(node)
             for in_neigh in d[node]:
