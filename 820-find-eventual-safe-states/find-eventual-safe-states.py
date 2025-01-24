@@ -8,27 +8,24 @@ class Solution:
         # that POINT to them.
         N = len(graph)
         d = [[] for _ in range(N)] # node: {node's in-neighbors}, i.e. "reverse" adjacency list
-        outdegree, queue = [], []
+        outdegree, stack = [], []
         for node, neighbors in enumerate(graph):
-            # neighbors = graph[node]
             for neigh in neighbors:
                 d[neigh].append(node)
             
             degree = len(neighbors)
             outdegree.append(degree)
             if degree == 0:
-                queue.append(node)
+                stack.append(node)
         
-        # outdegree = [len(neighbors) for neighbors in graph]
-        # queue = [node for node in range(N) if outdegree[node] == 0]
         topo_order = []
-        while queue:
-            node = queue.pop()
+        while stack:
+            node = stack.pop()
             topo_order.append(node)
             for in_neigh in d[node]:
                 outdegree[in_neigh] -= 1
                 if outdegree[in_neigh] == 0:
-                    queue.append(in_neigh)
+                    stack.append(in_neigh)
 
         topo_order.sort() # The answer should be sorted in ascending order.
         return topo_order
