@@ -8,13 +8,13 @@ class Solution:
         # that POINT to them.
         N = len(graph)
         d = [[] for _ in range(N)] # node: {node's in-neighbors}, i.e. "reverse" adjacency list
-        for node, neighbors in enumerate(graph):
-            for neigh in neighbors:
+        for node in range(N):
+            for neigh in graph[node]:
                 d[neigh].append(node)
         
         outdegree, queue = [], []
-        for node, neighbors in enumerate(graph):
-            degree = len(neighbors)
+        for node in range(N):
+            degree = len(graph[node])
             outdegree.append(degree)
             if degree == 0:
                 queue.append(node)
