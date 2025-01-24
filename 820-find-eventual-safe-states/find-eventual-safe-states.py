@@ -9,8 +9,8 @@ class Solution:
         N = len(graph)
         d = [[] for _ in range(N)] # node: {node's in-neighbors}, i.e. "reverse" adjacency list
         outdegree, queue = [], []
-        for node in range(N):
-            neighbors = graph[node]
+        for node, neighbors in enumerate(graph):
+            # neighbors = graph[node]
             for neigh in neighbors:
                 d[neigh].append(node)
             
