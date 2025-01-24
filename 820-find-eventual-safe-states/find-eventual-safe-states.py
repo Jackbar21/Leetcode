@@ -16,7 +16,7 @@ class Solution:
         queue = collections.deque(node for node in range(N) if outdegree[node] == 0)
         topo_order = []
         while queue:
-            node = queue.popleft()
+            node = queue.pop()
             topo_order.append(node)
             for in_neigh in d[node]:
                 outdegree[in_neigh] -= 1
