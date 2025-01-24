@@ -12,8 +12,14 @@ class Solution:
             for neigh in neighbors:
                 d[neigh].append(node)
         
-        outdegree = [len(neighbors) for neighbors in graph]
-        queue = [node for node in range(N) if outdegree[node] == 0]
+        outdegree, queue = [], []
+        for node, neighbors in enumerate(graph):
+            degree = len(neighbors)
+            outdegree.append(degree)
+            if degree == 0:
+                queue.append(node)
+        # outdegree = [len(neighbors) for neighbors in graph]
+        # queue = [node for node in range(N) if outdegree[node] == 0]
         topo_order = []
         while queue:
             node = queue.pop()
