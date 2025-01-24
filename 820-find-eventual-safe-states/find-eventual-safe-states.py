@@ -8,16 +8,17 @@ class Solution:
         # that POINT to them.
         N = len(graph)
         d = [[] for _ in range(N)] # node: {node's in-neighbors}, i.e. "reverse" adjacency list
-        for node in range(N):
-            for neigh in graph[node]:
-                d[neigh].append(node)
-        
         outdegree, queue = [], []
         for node in range(N):
-            degree = len(graph[node])
+            neighbors = graph[node]
+            for neigh in neighbors:
+                d[neigh].append(node)
+            
+            degree = len(neighbors)
             outdegree.append(degree)
             if degree == 0:
                 queue.append(node)
+        
         # outdegree = [len(neighbors) for neighbors in graph]
         # queue = [node for node in range(N) if outdegree[node] == 0]
         topo_order = []
