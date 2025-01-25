@@ -10,11 +10,11 @@ class Solution:
         dp[-1] = True
         for i in range(N - 1, -1, -1):
             steps = nums[i]
-            found_sol = False
-            for reachable_index in range(i + 1, min(steps + i + 1, N)):
+            # found_sol = False
+            for reachable_index in reversed(range(i + 1, min(steps + i + 1, N))):
                 if dp[reachable_index]:
                     dp[i] = True
-                    found_sol = True
+                    # found_sol = True
                     break
             # if not found_sol:
             #     return False
