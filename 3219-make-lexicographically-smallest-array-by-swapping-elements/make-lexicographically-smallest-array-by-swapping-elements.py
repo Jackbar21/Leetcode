@@ -15,7 +15,7 @@ class Solution:
             while i < N:
                 sorted_num, sorted_index = sorted_nums[i]
 
-                if not (lower <= sorted_num <= upper):
+                if not (sorted_num <= upper):
                     break
                 
                 if sorted_num - limit < lower:
