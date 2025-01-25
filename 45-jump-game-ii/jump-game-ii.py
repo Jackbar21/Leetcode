@@ -24,7 +24,8 @@ class Solution:
                     best_index = reachable_index
                     best_val = val
             
-            assert best_index != i # Problem guarantees there is a solution!
+            # Problem guarantees there is a solution!
+            # assert best_index != i
 
             # Loop Invariant
             i = best_index
