@@ -7,10 +7,10 @@ class Solution:
         LAST_INDEX = len(nums) - 1
         i = 0
         cost = 0
-        if nums[0] >= LAST_INDEX:
-            return cost if i == LAST_INDEX else cost + 1
+        # if nums[0] >= LAST_INDEX:
+        #     return cost if i == LAST_INDEX else cost + 1
         
-        while True:
+        while i != LAST_INDEX:
             max_reachable_index = i + nums[i]
             if max_reachable_index >= LAST_INDEX:
                 return cost if i == LAST_INDEX else cost + 1
@@ -29,7 +29,7 @@ class Solution:
             i = best_index
             cost += 1
         
-        raise Exception("Unreachable Code")
+        return cost
 
 
         # BFS solution, MLE
