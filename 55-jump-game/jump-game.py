@@ -10,8 +10,12 @@ class Solution:
         dp[-1] = True
         for i in range(N - 1, -1, -1):
             steps = nums[i]
+            lower = i + 1
+            upper = steps + i + 1
+            if upper > N:
+                upper = N
             # found_sol = False
-            for reachable_index in reversed(range(i + 1, min(steps + i + 1, N))):
+            for reachable_index in range(upper - 1, lower - 1, -1):
                 if dp[reachable_index]:
                     dp[i] = True
                     # found_sol = True
