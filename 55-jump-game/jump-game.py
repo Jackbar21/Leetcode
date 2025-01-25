@@ -9,10 +9,8 @@ class Solution:
         i = 0
         while i != LAST_INDEX:
             cur_val = nums[i] + i
-
-            # Find first element with val >= cur_val
             if cur_val >= LAST_INDEX:
-                return True
+                return True # Can reach last index already!
 
             new_index = i
             for reachable_index in range(i + 1, cur_val + 1):
@@ -24,12 +22,14 @@ class Solution:
             # If no change, then no solution!
             if new_index == i:
                 return False
+            
+            # Loop Invariant
             i = new_index
 
         return i == LAST_INDEX
 
 
-        # Another working solution!
+        # Another working solution, but too slow!!
         """
         N = len(nums)
         dp = [False] * N
@@ -52,11 +52,6 @@ class Solution:
         # print(f"{dp}")
         return dp[0]
         """
-
-
-
-
-
 
         # Greedy (Accepted, Slow)
         """
