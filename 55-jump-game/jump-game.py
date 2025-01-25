@@ -8,14 +8,14 @@ class Solution:
         LAST_INDEX = len(nums) - 1
         i = 0
         while i != LAST_INDEX:
-            cur_val = nums[i] + i
-            if cur_val >= LAST_INDEX:
+            eff_val = nums[i] + i
+            if eff_val >= LAST_INDEX:
                 return True # Can reach last index already!
 
             new_index = i
-            for reachable_index in range(i + 1, cur_val + 1):
+            for reachable_index in range(i + 1, eff_val + 1):
                 val = reachable_index + nums[reachable_index]
-                if val >= cur_val:
+                if val > eff_val:
                     new_index = reachable_index
                     break
             
