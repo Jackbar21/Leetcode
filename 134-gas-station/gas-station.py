@@ -6,14 +6,16 @@ class Solution:
         N = len(gas)
         index = 0
         cur_sum = 0
-        delta_sum = sum(gas[i] - cost[i] for i in range(N))
-        if delta_sum < 0:
-            return -1
-
+        delta_sum = 0
+        # deltas = [gas[i] - cost[i] for i in range(N)]
+        # print(f"{sum(deltas)=}")
+        # print(f"{deltas}")
         for i in range(N):
             delta = gas[i] - cost[i]
+            delta_sum += delta
             cur_sum += delta
             if cur_sum < 0:
                 cur_sum = 0
                 index = (i + 1) % N
-        return index
+        
+        return index if delta_sum >= 0 else -1
