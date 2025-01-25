@@ -1,17 +1,18 @@
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         N = len(gas)
-        assert len(gas) == len(cost) == N
+        # assert len(gas) == len(cost) == N
 
-        deltas = [gas[i] - cost[i] for i in range(N)]
-        print(f"{deltas}")
+        # deltas = [gas[i] - cost[i] for i in range(N)]
+        # print(f"{deltas}")
 
         # From deltas, pick the starting index where you can obtain a "largest subarray sum" from that
         # index, for the remaining deltas (IGNORING the start ones!) Whenever a negative subarray sum
         # is reached, a simple reset and index-switch will do!
         index = 0
         cur_sum = 0
-        for i, delta in enumerate(deltas):
+        for i in range(N):
+            delta = gas[i] - cost[i]
             # if cur_sum < 0:
             #     index = i
             cur_sum += delta
