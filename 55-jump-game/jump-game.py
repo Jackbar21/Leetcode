@@ -15,7 +15,7 @@ class Solution:
             if upper > N:
                 upper = N
             # found_sol = False
-            for reachable_index in range(upper - 1, lower - 1, -1):
+            for reachable_index in range(lower, upper):
                 if dp[reachable_index]:
                     dp[i] = True
                     # found_sol = True
