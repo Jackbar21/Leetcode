@@ -5,7 +5,30 @@ class Solution:
         # self.nums = nums
         # return self.dp(0)
 
-        # Greedy
+        N = len(nums)
+        dp = [False] * N
+        dp[-1] = True
+        for i in range(N - 1, -1, -1):
+            steps = nums[i]
+            found_sol = False
+            for reachable_index in range(i + 1, min(steps + i + 1, N)):
+                if dp[reachable_index]:
+                    dp[i] = True
+                    found_sol = True
+                    break
+            # if not found_sol:
+            #     return False
+            # dp[i] = nums[i] - (N - i) >= N - 1
+        # print(f"{dp}")
+        return dp[0]
+
+
+
+
+
+
+        # Greedy (Accepted, Slow)
+        """
         N = len(nums)
         i = 0
         while True:
@@ -32,6 +55,7 @@ class Solution:
             i = best_index
 
         raise Exception("Unreachable Code")
+        """
 
     # Time Complexity:
     #   - O(N) subproblems, where N = len(nums)
