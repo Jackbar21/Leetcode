@@ -7,9 +7,6 @@ class Solution:
         d = defaultdict(int) # card-to-frequency mappings
         for card in hand:
             d[card] += 1
-        
-        if max(d.values()) > (N // groupSize):
-            return False
 
         # Idea: The smallest number needs to be part of a group. Call this number 'num'. Then it must
         # form a group that is num, num + 1, num + 2, ..., num + groupSize - 1. If that's not the case,
@@ -20,14 +17,12 @@ class Solution:
         heapq.heapify(min_heap)
 
         while len(min_heap) > 0:
-            card = heapq.heappop(min_heap)
+            card = min_heap[0]
             freq = d[card]
-            if freq == 0:
-                continue
-
-            # If have MORE than 1 of this card, will need it again later!
-            if freq > 1:
-                heapq.heappush(min_heap, card)
+            if freq <= 1:
+                heapq.heappop(min_heap) # Will never this card again!
+                if freq == 0:
+                    continue
 
             # We must form a group of 'groupSize' consecutive cards,
             # where the starting number is 'card' as it is of SMALLEST existing value!
