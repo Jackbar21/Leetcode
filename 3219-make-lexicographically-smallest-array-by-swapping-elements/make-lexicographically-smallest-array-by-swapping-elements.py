@@ -11,7 +11,7 @@ class Solution:
             upper_bound = num + limit
 
             i += 1
-            connected_component = collections.deque([num])
+            connected_component = [num]
             d[num_index] = connected_component
             while i < N:
                 sorted_num, sorted_index = sorted_nums[i]
@@ -27,6 +27,6 @@ class Solution:
                 d[sorted_index] = d[num_index]
                 i += 1
             
-            # connected_component.reverse() # Since can only pop() in arrays, and will need smallest values!
+            connected_component.reverse() # Since can only pop() in arrays, and will need smallest values!
         
-        return [d[i].popleft() for i in range(N)]
+        return [d[i].pop() for i in range(N)]
