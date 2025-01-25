@@ -7,6 +7,9 @@ class Solution:
         d = defaultdict(int) # card-to-frequency mappings
         for card in hand:
             d[card] += 1
+        
+        if max(d.values()) > (N // groupSize):
+            return False
 
         # Idea: The smallest number needs to be part of a group. Call this number 'num'. Then it must
         # form a group that is num, num + 1, num + 2, ..., num + groupSize - 1. If that's not the case,
