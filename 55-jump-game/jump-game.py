@@ -12,15 +12,13 @@ class Solution:
 
         while True:
             max_reachable_index = nums[i] + i
-            # if max_reachable_index >= LAST_INDEX:
-            #     return True # Can reach last index already!
 
             new_index = i
             for reachable_index in range(i + 1, max_reachable_index + 1):
                 val = reachable_index + nums[reachable_index]
                 if val > max_reachable_index:
                     if val >= LAST_INDEX:
-                        return True
+                        return True # Can reach last index already!
                     new_index = reachable_index
                     break
             
