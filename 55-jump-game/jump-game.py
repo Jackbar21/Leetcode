@@ -4,15 +4,16 @@ class Solution:
         # self.memo = {}
         # self.nums = nums
         # return self.dp(0)
-        if len(nums) == 1:
-            return True
 
         LAST_INDEX = len(nums) - 1
         i = 0
-        while i != LAST_INDEX:
+        if nums[0] >= LAST_INDEX:
+            return True
+
+        while True:
             max_reachable_index = nums[i] + i
-            if max_reachable_index >= LAST_INDEX:
-                return True # Can reach last index already!
+            # if max_reachable_index >= LAST_INDEX:
+            #     return True # Can reach last index already!
 
             new_index = i
             for reachable_index in range(i + 1, max_reachable_index + 1):
@@ -31,7 +32,6 @@ class Solution:
             i = new_index
 
         raise Exception("Unreachable Code")
-        return i == LAST_INDEX
 
 
         # Another working solution, but too slow!!
