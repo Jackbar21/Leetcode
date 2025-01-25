@@ -7,10 +7,10 @@ class Solution:
         LAST_INDEX = len(nums) - 1
         i = 0
         cost = 0
-        # if nums[0] >= LAST_INDEX:
-        #     return cost if i == LAST_INDEX else cost + 1
+        if nums[0] >= LAST_INDEX:
+            return cost if i == LAST_INDEX else cost + 1
         
-        while i != LAST_INDEX:
+        while True:
             max_reachable_index = i + nums[i]
             if max_reachable_index >= LAST_INDEX:
                 return cost if i == LAST_INDEX else cost + 1
@@ -28,10 +28,9 @@ class Solution:
             # Loop Invariant
             i = best_index
             cost += 1
+
+
         
-        return cost
-
-
         # BFS solution, MLE
         """
         LAST_INDEX = len(nums) - 1
