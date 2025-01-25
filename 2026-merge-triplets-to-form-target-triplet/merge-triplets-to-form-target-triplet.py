@@ -1,5 +1,8 @@
 class Solution:
     def mergeTriplets(self, triplets: List[List[int]], target: List[int]) -> bool:
+        return self.mergeTripletsNaive(triplets, target)
+    
+    def mergeTripletsNaive(self, triplets: List[List[int]], target: List[int]) -> bool:
         # Idea: target == [x, y, z]. 
         #   (1) Grab all the triplets whose x value is <= x
         #   (2) Grab all the triplets whose y value is <= y
