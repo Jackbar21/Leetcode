@@ -8,26 +8,16 @@ class Solution:
         #   of each three values is indeed x, y, z!
         X, Y, Z = target
         set_x, set_y, set_z = set(), set(), set()
-        found_x, found_y, found_z = False, False, False
         for x, y, z in triplets:
             triplet = (x, y, z)
             if x <= X:
                 set_x.add(triplet)
-                if x == X:
-                    found_x = True
             if y <= Y:
                 set_y.add(triplet)
-                if y == Y:
-                    found_y = True
             if z <= Z:
                 set_z.add(triplet)
-                if z == Z:
-                    found_z = True
         
-        if not found_x or not found_y or not found_z:
-            return False
-        
-        intersection = (set_x.intersection(set_y)).intersection(set_z)
+        intersection = [triplet for triplet in set_x if triplet in set_y and triplet in set_z]
         max_x, max_y, max_z = 0, 0, 0
         for x, y, z in intersection:
             if x > max_x:
