@@ -8,20 +8,19 @@ class Solution:
         while i < N:
             # Create new connected component
             num, num_index = sorted_nums[i]
-            lower, upper = num - limit, num + limit
+            upper_bound = num + limit
             i += 1
             connected_component = [num]
             d[num_index] = connected_component
             while i < N:
                 sorted_num, sorted_index = sorted_nums[i]
 
-                if not (sorted_num <= upper):
+                # Break if doesn't belong to same connected component!
+                if sorted_num > upper_bound:
                     break
-                
-                if sorted_num - limit < lower:
-                    lower = sorted_num - limit
-                if sorted_num + limit > upper:
-                    upper = sorted_num + limit
+
+                # Update upper_bound
+                upper_bound = sorted_num + limit
     
                 connected_component.append(sorted_num)
                 d[sorted_index] = d[num_index]
