@@ -5,6 +5,33 @@ class Solution:
         # self.nums = nums
         # return self.dp(0)
 
+        LAST_INDEX = len(nums) - 1
+        i = 0
+        while i != LAST_INDEX:
+            cur_val = nums[i] + i
+            # Find first element with val >= cur_val
+            lower = i + 1
+            upper = cur_val + 1
+            if upper > LAST_INDEX:
+                return True # Can reach LAST_INDEX already!
+
+            new_index = i
+            for reachable_index in range(lower, upper):
+                val = reachable_index + nums[reachable_index]
+                if val >= cur_val:
+                    new_index = reachable_index
+                    break
+            
+            # If no change, then no solution!
+            if new_index == i:
+                return False
+            i = new_index
+
+        return i == LAST_INDEX
+
+
+        # Another working solution!
+        """
         N = len(nums)
         dp = [False] * N
         dp[-1] = True
@@ -25,6 +52,7 @@ class Solution:
             # dp[i] = nums[i] - (N - i) >= N - 1
         # print(f"{dp}")
         return dp[0]
+        """
 
 
 
