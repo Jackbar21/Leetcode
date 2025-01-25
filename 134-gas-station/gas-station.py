@@ -11,14 +11,19 @@ class Solution:
         # is reached, a simple reset and index-switch will do!
         index = 0
         cur_sum = 0
+        delta_sum = 0
         for i in range(N):
             delta = gas[i] - cost[i]
+            delta_sum += delta
             # if cur_sum < 0:
             #     index = i
             cur_sum += delta
             if cur_sum < 0:
                 cur_sum = 0
                 index = (i + 1) % N
+        
+        return -1 if delta_sum < 0 else index
+        print(f"{sum([gas[i]-cost[i] for i in range(N)])=}, {cur_sum=}, {index=}")
         
         # print(f"{cur_sum=}, {index=}")
         # Now simulate from index!
