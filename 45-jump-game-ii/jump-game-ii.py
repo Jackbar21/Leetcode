@@ -12,13 +12,15 @@ class Solution:
         
         while i != LAST_INDEX:
             max_reachable_index = i + nums[i]
-            if max_reachable_index >= LAST_INDEX:
-                return cost if i == LAST_INDEX else cost + 1
+            # if max_reachable_index >= LAST_INDEX:
+            #     return cost if i == LAST_INDEX else cost + 1
             
             best_index, best_val = i, max_reachable_index
             for reachable_index in range(i + 1, max_reachable_index + 1):
                 val = reachable_index + nums[reachable_index]
                 if val > best_val:
+                    if val >= LAST_INDEX:
+                        return cost + 1 if reachable_index == LAST_INDEX else cost + 2
                     best_index = reachable_index
                     best_val = val
             
