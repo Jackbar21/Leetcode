@@ -26,8 +26,7 @@ class Solution:
 
             # We must form a group of 'groupSize' consecutive cards,
             # where the starting number is 'card' as it is of SMALLEST existing value!
-            d[card] -= 1
-            for group_card in range(card + 1, card + groupSize):
+            for group_card in range(card, card + groupSize):
                 if d[group_card] == 0:
                     return False
                 d[group_card] -= 1
