@@ -4,6 +4,8 @@ class Solution:
         # self.memo = {}
         # self.nums = nums
         # return self.dp(0)
+        if len(nums) == 1:
+            return True
 
         LAST_INDEX = len(nums) - 1
         i = 0
@@ -16,6 +18,8 @@ class Solution:
             for reachable_index in range(i + 1, max_reachable_index + 1):
                 val = reachable_index + nums[reachable_index]
                 if val > max_reachable_index:
+                    if val >= LAST_INDEX:
+                        return True
                     new_index = reachable_index
                     break
             
@@ -26,6 +30,7 @@ class Solution:
             # Loop Invariant
             i = new_index
 
+        raise Exception("Unreachable Code")
         return i == LAST_INDEX
 
 
