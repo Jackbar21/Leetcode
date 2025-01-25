@@ -19,36 +19,18 @@ class Solution:
         while len(min_heap) > 0:
             card = heapq.heappop(min_heap)
             freq = d[card]
-            assert freq >= 0
             if freq == 0:
                 continue
-            
-            assert freq >= 1
+
+            # If have MORE than 1 of this card, will need it again later!
+            if freq > 1:
+                heapq.heappush(min_heap, card)
 
             # We must form a group of 'groupSize' consecutive cards,
             # where the starting number is 'card' as it is of SMALLEST existing value!
             for group_card in range(card, card + groupSize):
-                assert d[group_card] >= 0
                 if d[group_card] == 0:
                     return False
                 d[group_card] -= 1
-            
-            if d[card] > 0:
-                heapq.heappush(min_heap, card)
-            
+    
         return True
-
-
-
-
-        # i = 0
-        # while i < N:
-        #     prev_num = hand[i]
-        #     print(f"{hand[i:groupSize+i]=}")
-        #     for group_index in range(i + 1, groupSize + i):
-        #         if not (hand[group_index] == prev_num + 1):
-        #             return False
-        #         prev_num += 1
-        #     i += groupSize
-        # return True
-
