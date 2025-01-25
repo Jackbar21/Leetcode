@@ -17,9 +17,7 @@ class Solution:
             if z <= Z:
                 set_z.add(triplet)
         
-        sets = sorted([set_x, set_y, set_z], key=len)
-        set1, set2, set3 = sets
-        intersection = [triplet for triplet in set1 if triplet in set2 and triplet in set3]
+        intersection = [triplet for triplet in set_x if triplet in set_y and triplet in set_z]
         max_x, max_y, max_z = 0, 0, 0
         for x, y, z in intersection:
             if x > max_x:
