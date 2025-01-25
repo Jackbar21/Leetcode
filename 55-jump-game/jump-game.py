@@ -9,14 +9,13 @@ class Solution:
         i = 0
         while i != LAST_INDEX:
             cur_val = nums[i] + i
+
             # Find first element with val >= cur_val
-            lower = i + 1
-            upper = cur_val + 1
-            if upper > LAST_INDEX:
-                return True # Can reach LAST_INDEX already!
+            if cur_val >= LAST_INDEX:
+                return True
 
             new_index = i
-            for reachable_index in range(lower, upper):
+            for reachable_index in range(i + 1, cur_val + 1):
                 val = reachable_index + nums[reachable_index]
                 if val >= cur_val:
                     new_index = reachable_index
