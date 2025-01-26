@@ -13,9 +13,16 @@ class Solution:
             #     found_y = True
             # if z == TARGET_Z:
             #     found_z = True
-            max_x = max(max_x, x)
-            max_y = max(max_y, y)
-            max_z = max(max_z, z)
+            # max_x = max(max_x, x)
+            # max_y = max(max_y, y)
+            # max_z = max(max_z, z)
+            if max_x < x:
+                max_x = x
+            if max_y < y:
+                max_y = y
+            if max_z < z:
+                max_z = z
+
             
 
             # if found_x and found_y and found_z:
