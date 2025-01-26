@@ -22,11 +22,14 @@ class Solution:
                 max_y = y
             if max_z < z:
                 max_z = z
+            
+            if max_x == TARGET_X and max_y == TARGET_Y and max_z == TARGET_Z:
+                return True
 
             
 
             # if found_x and found_y and found_z:
             #     return True
 
-        # return False
+        return False
         return max_x == TARGET_X and max_y == TARGET_Y and max_z == TARGET_Z
