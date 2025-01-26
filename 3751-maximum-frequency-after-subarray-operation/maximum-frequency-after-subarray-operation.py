@@ -7,8 +7,8 @@ class Solution:
         for duplicate_num in range(1, 51):
             # Find maximum subarray sum, where subarray sum is defined as
             # occurences of 'duplicate_num' - occurences of 'k'
-            if duplicate_num == k:
-                continue
+            # if duplicate_num == k:
+            #     continue
 
             cur_sum = 0
             for num in nums:
