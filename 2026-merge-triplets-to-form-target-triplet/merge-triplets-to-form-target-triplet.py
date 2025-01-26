@@ -30,7 +30,5 @@ class Solution:
                 found_y = True
             if z == Z:
                 found_z = True
-            if found_x and found_y and found_z:
-                return True
-            
-        return False
+        
+        return found_x and found_y and found_z
