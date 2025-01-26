@@ -8,9 +8,6 @@ class Solution:
             if letter not in leftmost_indices:
                 leftmost_indices[letter] = i
             rightmost_indices[letter] = i
-        
-        print(f"{leftmost_indices=}")
-        print(f"{rightmost_indices=}")
 
         groups = []
         cur_size = 0
@@ -21,29 +18,13 @@ class Solution:
                 cur_size = rightmost_index + 1
                 continue
             
-            assert leftmost_index < cur_size
+            # assert leftmost_index < cur_size
+            # Since leftmost_index < cur_size, this letter must take part of a currently
+            # existing group. Hence if its rightmost index is larger than (or equal to)
+            # cur_size, then we must extend last group to include all of current letter's instances!
             if rightmost_index >= cur_size:
                 diff = rightmost_index + 1 - cur_size
                 groups[-1] += diff
-                cur_size = rightmost_index + 1
-
-            
-            # if rightmost_index <= cur_size:
-            #     continue
-            # else:
-
-            
-            # print(f"{leftmost_index=}, {cur_size=}, {rightmost_index=}")
-            continue
-            
-            # Need to create a new group
-            if leftmost_index >= cur_size:
-                new_group_length = rightmost_index - leftmost_index + 1
-                groups.append(new_group_length)
-                continue
-            
-            groups[-1] = max(groups[-1], rightmost_index + 1 - sum(groups))
+                cur_size += diff
         
         return groups
-            
-
