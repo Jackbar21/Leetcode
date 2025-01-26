@@ -1,7 +1,7 @@
 class Solution:
     def maxFrequency(self, nums: List[int], k: int) -> int:
-        if all(num == k for num in nums):
-            return len(nums)
+        # if all(num == k for num in nums):
+        #     return len(nums)
 
         res = 0
         for duplicate_num in range(1, 51):
@@ -26,6 +26,7 @@ class Solution:
         # A subarray's "value" is the number of duplicates it has,
         # minus the number of the value k it has
         N = len(nums)
+        total_k_count = nums.count(k)
         prefix_k_count = []
         cur_count = 0
         for num in nums:
@@ -66,9 +67,10 @@ class Solution:
                 res = max(
                     res,
                     (
-                        (prefix_k_count[l - 1] if l - 1 >= 0 else 0)
+                        # (prefix_k_count[l - 1] if l - 1 >= 0 else 0)
                         + (max(d.values()) - k_count)
-                        + (suffix_k_count[r + 1] if r + 1 < N else 0)
+                        + total_k_count
+                        # + (suffix_k_count[r + 1] if r + 1 < N else 0)
                     )
                 )
                 if prev_res < res:
@@ -89,9 +91,10 @@ class Solution:
             res = max(
                 res,
                 (
-                    (prefix_k_count[l - 1] if l - 1 >= 0 else 0)
+                    # (prefix_k_count[l - 1] if l - 1 >= 0 else 0)
                     + (max(d.values()) - k_count)
-                    + (suffix_k_count[r + 1] if r + 1 < N else 0)
+                    + total_k_count
+                    # + (suffix_k_count[r + 1] if r + 1 < N else 0)
                 )
             )
 
