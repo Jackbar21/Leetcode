@@ -1,6 +1,21 @@
 class Solution:
     def mergeTriplets(self, triplets: List[List[int]], target: List[int]) -> bool:
-        return self.mergeTripletsNaive(triplets, target)
+        # return self.mergeTripletsNaive(triplets, target)
+        X, Y, Z = target
+        found_x, found_y, found_z = False, False, False
+        for x, y, z in triplets:
+            if not (x <= X and y <= Y and z <= Z):
+                continue
+            
+            if x == X:
+                found_x = True
+            if y == Y:
+                found_y = True
+            if z == Z:
+                found_z = True
+        
+        return found_x and found_y and found_z
+
     
     def mergeTripletsNaive(self, triplets: List[List[int]], target: List[int]) -> bool:
         # Idea: target == [x, y, z]. 
