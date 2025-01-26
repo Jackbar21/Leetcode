@@ -1,6 +1,5 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
-        N = len(s)
         leftmost_indices = {}
         rightmost_indices = {}
 
