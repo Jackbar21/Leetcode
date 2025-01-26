@@ -16,9 +16,8 @@ class Solution:
         for letter, leftmost_index in leftmost_indices.items():
             rightmost_index = rightmost_indices[letter]
             if leftmost_index >= cur_size:
-                diff = rightmost_index + 1 - cur_size
-                groups.append(diff)
-                cur_size += diff
+                groups.append(rightmost_index + 1 - cur_size)
+                cur_size = rightmost_index + 1
                 continue
 
             # assert leftmost_index < cur_size
