@@ -20,14 +20,15 @@ class Solution:
             if z <= Z:
                 set_z.add(triplet)
         
-        intersection = [triplet for triplet in set_x if triplet in set_y and triplet in set_z]
-        max_x, max_y, max_z = 0, 0, 0
+        set1, set2, set3 = sorted([set_x, set_y, set_z], key=len)
+        intersection = [triplet for triplet in set1 if triplet in set2 and triplet in set3]
+        found_x, found_y, found_z = False, False, False
         for x, y, z in intersection:
-            if x > max_x:
-                max_x = x
-            if y > max_y:
-                max_y = y
-            if z > max_z:
-                max_z = z
+            if x == X:
+                found_x = True
+            if y == Y:
+                found_y = True
+            if z == Z:
+                found_z = True
         
-        return max_x == X and max_y == Y and max_z == Z
+        return found_x and found_y and found_z
