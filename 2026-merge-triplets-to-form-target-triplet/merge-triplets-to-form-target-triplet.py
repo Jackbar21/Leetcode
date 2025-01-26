@@ -20,8 +20,7 @@ class Solution:
             if z <= Z:
                 set_z.add(triplet)
         
-        set1, set2, set3 = sorted([set_x, set_y, set_z], key=len)
-        intersection = [triplet for triplet in set1 if triplet in set2 and triplet in set3]
+        intersection = [triplet for triplet in set_x if triplet in set_y and triplet in set_z]
         found_x, found_y, found_z = False, False, False
         for x, y, z in intersection:
             if x == X:
