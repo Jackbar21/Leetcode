@@ -7,16 +7,20 @@ class Solution:
             if letter not in leftmost_indices:
                 leftmost_indices[letter] = i
             rightmost_indices[letter] = i
+        
+        print(f"{leftmost_indices=}")
+        print(f"{rightmost_indices=}")
 
         groups = []
         cur_size = 0
         for letter, leftmost_index in leftmost_indices.items():
             rightmost_index = rightmost_indices[letter]
             if leftmost_index >= cur_size:
-                groups.append(rightmost_index + 1 - cur_size)
-                cur_size = rightmost_index + 1
+                diff = rightmost_index + 1 - cur_size
+                groups.append(diff)
+                cur_size += diff
                 continue
-            
+
             # assert leftmost_index < cur_size
             # Since leftmost_index < cur_size, this letter must take part of a currently
             # existing group. Hence if its rightmost index is larger than (or equal to)
