@@ -30,13 +30,18 @@ class Solution:
 
         # We know from constraints that prerequisites graph has NO cycles!!!
         # This means we have a DAG, which is perfect for something like DP!
-        @cache
+        memo = [None] * numCourses
         def dp(node):
+            if memo[node] is not None:
+                return memo[node]
+
             # Can add node as its own child, since constraints 
             # guarantee that u != v for any (u,v) in queries!
             children = set([node])
             for neigh in adj_list[node]:
                 children.update(dp(neigh))
+
+            memo[node] = children
             return children
 
         return [v in dp(u) for u, v in queries]
