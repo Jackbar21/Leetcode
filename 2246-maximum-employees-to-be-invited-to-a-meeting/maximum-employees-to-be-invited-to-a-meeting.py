@@ -1,37 +1,40 @@
 class Solution:
     def maximumInvitations(self, favorite: List[int]) -> int:
         N = len(favorite)
+
+        # Reversed edges so we can chain connected-components with length 2 cycles!
         adj_list = [[] for _ in range(N)]
         for i in range(N):
-            # Reversed so we can chain connected-components with length 2 cycles!
             adj_list[favorite[i]].append(i)
         
         res = 0
         length_2_cycle_chain = 0
-        visited_length_2_cycle_nodes = set()
+
         unvisited = set(range(N))
         while len(unvisited) > 0:
             node = unvisited.pop()
-            original_node = node
-            node_to_dist = {}
-            cur_dist = 0
+            node_to_dist = {node: 0}
+            cur_dist = 1
+            already_seen_cycle = False
 
-            flag = False
+            node = favorite[node]
             while node not in node_to_dist:
-                if node != original_node and node not in unvisited:
-                    flag = True
+                if node not in unvisited:
+                    already_seen_cycle = True
                     break
-                unvisited.discard(node)
+                unvisited.remove(node)
                 node_to_dist[node] = cur_dist
                 node = favorite[node]
                 cur_dist += 1
             
-            if flag:
+            # Already seen & computed cycle, so no need to worry about it again!
+            # If it's a closed cycle we've already compared that cycle's length,
+            # and if it's a length 2 cycle, we've already added it onto our chain :)
+            if already_seen_cycle:
                 continue
-            
-            assert node in node_to_dist
-            cycle_length = cur_dist - node_to_dist[node]
 
+            # assert node in node_to_dist
+            cycle_length = cur_dist - node_to_dist[node]
             if cycle_length > 2:
                 # Forms a closed cycle, which CANNOT BE CHAINED!!!
                 # Hence, update res to max between res and length of this CLOSED cycle!
@@ -39,10 +42,7 @@ class Solution:
                     res = cycle_length
                 continue
             
-            # if already_seen_cycle:
-            #     continue
-            
-            assert cycle_length == 2
+            # assert cycle_length == 2
             # Now, we will want to perform a BFS for longest path between each end of this length
             # 2 cycle (not allowing to go through the other node in the length 2 cycle), and remember
             # this result as it can be chained with OTHER components with length 2 cycles!!!
@@ -51,12 +51,9 @@ class Solution:
             # each one to go through the other!
             # We know 'node' is part of the cycle, so the length 2 cycle must be node and favorite[node]!
             cycle_nodes = [node, favorite[node]]
-            if any(cycle_node in visited_length_2_cycle_nodes for cycle_node in cycle_nodes):
-                continue
             
             length_2_cycle_component = 2 # initially 2 for the two cycle nodes themselves!
             for cycle_node in cycle_nodes:
-                visited_length_2_cycle_nodes.add(cycle_node)
                 longest_branch = 0
                 # Want to find longest chain from this node, adding cycle nodes as visited first!
                 visited = set(cycle_nodes)
@@ -77,10 +74,6 @@ class Solution:
                         visited.add(neigh)
                 
                 length_2_cycle_component += longest_branch
-                # unvisited = unvisited.difference(visited)
-                # for visited_node in visited:
-                #     unvisited.discard(visited_node)
-                
 
             # Now, chain this length 2 cycle component onto the chain of length-2-cycle components!
             # length_2_cycle_chain.append(length_2_cycle_component)
