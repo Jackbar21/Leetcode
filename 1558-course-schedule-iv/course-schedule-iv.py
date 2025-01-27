@@ -19,9 +19,5 @@ class Solution:
                     visited.add(neigh)
                     queue.append(neigh)
                     d[i].add(neigh)
-        
-        # res = []
-        # for u, v in queries:
-        #     res.append(v in d[u])
-        # return res
-        return list(map(lambda query: (query[1] in d[query[0]]), queries))
+
+        return list(v in d[u] for u, v in queries)
