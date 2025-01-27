@@ -8,16 +8,16 @@ class Solution:
         # Step 2: For each node, run a DFS from that node to find all the courses it is a prerequisite of
         d = [set() for _ in range(numCourses)] # node is a prerequisite of every course in d[node]
         for i in range(numCourses):
-            queue = collections.deque([i])
+            stack = [i]
             visited = set([i])
-            while len(queue) > 0:
-                node = queue.popleft()
+            while len(stack) > 0:
+                node = stack.pop()
 
                 for neigh in adj_list[node]:
                     if neigh in visited:
                         continue
                     visited.add(neigh)
-                    queue.append(neigh)
+                    stack.append(neigh)
                     d[i].add(neigh)
 
-        return list(v in d[u] for u, v in queries)
+        return [v in d[u] for u, v in queries]
