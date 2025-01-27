@@ -11,8 +11,9 @@ class Solution:
         def getChildren(node):
             # Can add node as its own child, since constraints 
             # guarantee that u != v for any (u,v) in queries!
-            children = set(adj_list[node])
+            children = set()
             for neigh in adj_list[node]:
+                children.add(neigh)
                 children.update(getChildren(neigh))
             return children
 
