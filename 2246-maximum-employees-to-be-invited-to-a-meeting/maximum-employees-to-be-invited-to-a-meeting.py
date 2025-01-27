@@ -56,7 +56,7 @@ class Solution:
             for cycle_node in cycle_nodes:
                 longest_branch = 0
                 # Want to find longest chain from this node, adding cycle nodes as visited first!
-                visited = set(cycle_nodes)
+                # visited = set(cycle_nodes)
                 stack = [(0, cycle_node)] # (cost, node)
                 while len(stack) > 0:
                     branch_length, node = stack.pop()
@@ -67,11 +67,11 @@ class Solution:
                     # This is when we want to consult the reversed-edges 'adj_list' we built earlier,
                     # to find longest chains from cycle nodes from in-to-out favorite-wise!
                     for neigh in adj_list[node]:
-                        if neigh in visited:
+                        if neigh in cycle_nodes:
                             continue
                         
                         stack.append((branch_length + 1, neigh))
-                        visited.add(neigh)
+                        # visited.add(neigh)
                 
                 length_2_cycle_component += longest_branch
 
