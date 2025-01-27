@@ -8,13 +8,12 @@ class Solution:
         # We know from constraints that prerequisites graph has NO cycles!!!
         # This means we have a DAG, which is perfect for something like DP!
         @cache
-        def dp(node):
+        def getChildren(node):
             # Can add node as its own child, since constraints 
             # guarantee that u != v for any (u,v) in queries!
-            children = set()
+            children = set(adj_list[node])
             for neigh in adj_list[node]:
-                children.add(neigh)
-                children.update(dp(neigh))
+                children.update(getChildren(neigh))
             return children
 
-        return [v in dp(u) for u, v in queries]
+        return [v in getChildren(u) for u, v in queries]
