@@ -32,7 +32,7 @@ class Solution:
         # This means we have a DAG, which is perfect for something like DP!
         memo = [None] * numCourses
         def dp(node):
-            if memo[node] is not None:
+            if memo[node]:
                 return memo[node]
 
             # Can add node as its own child, since constraints 
