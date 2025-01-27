@@ -50,10 +50,12 @@ class Solution:
             # Step 1: we need the two nodes in the cycle, and mark them visited so as to NOT permit
             # each one to go through the other!
             # We know 'node' is part of the cycle, so the length 2 cycle must be node and favorite[node]!
-            cycle_nodes = set([node, favorite[node]])
+            cycle_nodes = [node, favorite[node]]
             
             length_2_cycle_component = 2 # initially 2 for the two cycle nodes themselves!
-            for cycle_node in cycle_nodes:
+            for i in range(2):
+                cycle_node = cycle_nodes[i]
+                other_cycle_node = cycle_nodes[i ^ 1] # i is either 0 or 1, so flip the index!
                 longest_branch = 0
                 # Want to find longest chain from this node, adding cycle nodes as visited first!
                 # visited = set(cycle_nodes)
@@ -67,10 +69,8 @@ class Solution:
                     # This is when we want to consult the reversed-edges 'adj_list' we built earlier,
                     # to find longest chains from cycle nodes from in-to-out favorite-wise!
                     for neigh in adj_list[node]:
-                        if neigh in cycle_nodes:
-                            continue
-                        
-                        stack.append((branch_length + 1, neigh))
+                        if neigh != other_cycle_node:
+                            stack.append((branch_length + 1, neigh))
                         # visited.add(neigh)
                 
                 length_2_cycle_component += longest_branch
