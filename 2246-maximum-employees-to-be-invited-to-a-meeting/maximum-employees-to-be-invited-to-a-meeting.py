@@ -50,7 +50,7 @@ class Solution:
             # Step 1: we need the two nodes in the cycle, and mark them visited so as to NOT permit
             # each one to go through the other!
             # We know 'node' is part of the cycle, so the length 2 cycle must be node and favorite[node]!
-            cycle_nodes = [node, favorite[node]]
+            cycle_nodes = set([node, favorite[node]])
             
             length_2_cycle_component = 2 # initially 2 for the two cycle nodes themselves!
             for cycle_node in cycle_nodes:
