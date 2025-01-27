@@ -14,10 +14,10 @@ class Solution:
         while len(unvisited) > 0:
             node = unvisited.pop()
             node_to_dist = {node: 0}
-            cur_dist = 1
             already_seen_cycle = False
 
             node = favorite[node]
+            cur_dist = 1
             while node not in node_to_dist:
                 if node not in unvisited:
                     already_seen_cycle = True
@@ -82,3 +82,14 @@ class Solution:
         if res < length_2_cycle_chain:
             res = length_2_cycle_chain
         return res
+
+
+# a -> b -> c -> d -> e -> ... -> z
+
+# a -> b -> c -> a
+
+# a - d
+# |   |
+# b - c
+
+# 1 <-> 0 - 3 <-> 2
