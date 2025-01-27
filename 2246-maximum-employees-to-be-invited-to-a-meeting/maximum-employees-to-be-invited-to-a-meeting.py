@@ -87,8 +87,8 @@ class Solution:
                 
                 length_2_cycle_component += longest_branch
                 unvisited = unvisited.difference(visited)
-                for visited_node in visited:
-                    unvisited.discard(visited_node)
+                # for visited_node in visited:
+                #     unvisited.discard(visited_node)
                 
 
             # Now, chain this length 2 cycle component onto the chain of length-2-cycle components!
