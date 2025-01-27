@@ -57,9 +57,9 @@ class Solution:
                 longest_branch = 0
                 # Want to find longest chain from this node, adding cycle nodes as visited first!
                 visited = set(cycle_nodes)
-                queue = collections.deque([(0, cycle_node)]) # (cost, node)
-                while len(queue) > 0:
-                    branch_length, node = queue.popleft()
+                stack = [(0, cycle_node)] # (cost, node)
+                while len(stack) > 0:
+                    branch_length, node = stack.pop()
                     unvisited.discard(node)
                     if longest_branch < branch_length:
                         longest_branch = branch_length
@@ -70,7 +70,7 @@ class Solution:
                         if neigh in visited:
                             continue
                         
-                        queue.append((branch_length + 1, neigh))
+                        stack.append((branch_length + 1, neigh))
                         visited.add(neigh)
                 
                 length_2_cycle_component += longest_branch
