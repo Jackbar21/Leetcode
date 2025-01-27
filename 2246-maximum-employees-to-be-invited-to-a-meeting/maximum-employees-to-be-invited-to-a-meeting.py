@@ -1,43 +1,33 @@
 class Solution:
     def maximumInvitations(self, favorite: List[int]) -> int:
         N = len(favorite)
-        adj_list = defaultdict(list)
+        adj_list = [[] for _ in range(N)]
         for i in range(N):
             # Reversed so we can chain connected-components with length 2 cycles!
             adj_list[favorite[i]].append(i)
         
         res = 0
-        # length_2_cycle_chain = []
         length_2_cycle_chain = 0
         visited_length_2_cycle_nodes = set()
-        # visited_closed_cycle_nodes = set()
-        # visited = set()
         unvisited = set(range(N))
         while len(unvisited) > 0:
             node = unvisited.pop()
+            original_node = node
             node_to_dist = {}
             cur_dist = 0
 
-            already_seen_cycle = False
+            flag = False
             while node not in node_to_dist:
-                # if node in visited:
-                #     break
-                # visited.add(node)
+                if node != original_node and node not in unvisited:
+                    flag = True
+                    break
+                unvisited.discard(node)
                 node_to_dist[node] = cur_dist
                 node = favorite[node]
                 cur_dist += 1
-                if node not in unvisited:
-                    already_seen_cycle = True
-                    # break
-                
-
             
-            for visited_node in node_to_dist:
-                unvisited.discard(visited_node)
-            # unvisited = unvisited.difference(node_to_dist.keys())
-            # if already_seen_cycle:
-            #     continue
-            
+            if flag:
+                continue
             
             assert node in node_to_dist
             cycle_length = cur_dist - node_to_dist[node]
@@ -73,6 +63,7 @@ class Solution:
                 queue = collections.deque([(0, cycle_node)]) # (cost, node)
                 while len(queue) > 0:
                     branch_length, node = queue.popleft()
+                    unvisited.discard(node)
                     if longest_branch < branch_length:
                         longest_branch = branch_length
                     
@@ -86,7 +77,7 @@ class Solution:
                         visited.add(neigh)
                 
                 length_2_cycle_component += longest_branch
-                unvisited = unvisited.difference(visited)
+                # unvisited = unvisited.difference(visited)
                 # for visited_node in visited:
                 #     unvisited.discard(visited_node)
                 
