@@ -20,4 +20,4 @@ class Solution:
                     stack.append(neigh)
                     d[i].add(neigh)
 
-        return [v in d[u] for u, v in queries]
+        return list(v in d[u] for u, v in queries)
