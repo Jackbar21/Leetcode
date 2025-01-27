@@ -6,7 +6,7 @@ class Solution:
             adj_list[a].append(b)
 
         # Step 2: For each node, run a DFS from that node to find all the courses it is a prerequisite of
-        d = [set() for _ in range(numCourses)] # node is a prerequisite of every course in d[node]
+        d = [[] for _ in range(numCourses)] # node is a prerequisite of every course in d[node]
         for i in range(numCourses):
             queue = collections.deque([i])
             visited = set([i])
@@ -18,6 +18,6 @@ class Solution:
                         continue
                     visited.add(neigh)
                     queue.append(neigh)
-                    d[i].add(neigh)
+                    d[i].append(neigh)
 
         return list(v in d[u] for u, v in queries)
