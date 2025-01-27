@@ -30,9 +30,9 @@ class Solution:
 
         # We know from constraints that prerequisites graph has NO cycles!!!
         # This means we have a DAG, which is perfect for something like DP!
-        memo = [None] * numCourses
+        memo = {}
         def dp(node):
-            if memo[node]:
+            if node in memo:
                 return memo[node]
 
             # Can add node as its own child, since constraints 
