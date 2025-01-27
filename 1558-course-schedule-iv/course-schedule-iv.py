@@ -20,7 +20,8 @@ class Solution:
                     queue.append(neigh)
                     d[i].add(neigh)
         
-        res = []
-        for u, v in queries:
-            res.append(v in d[u])
-        return res
+        # res = []
+        # for u, v in queries:
+        #     res.append(v in d[u])
+        # return res
+        return list(map(lambda query: (query[1] in d[query[0]]), queries))
