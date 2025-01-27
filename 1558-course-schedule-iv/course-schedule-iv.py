@@ -14,10 +14,9 @@ class Solution:
                 node = stack.pop()
 
                 for neigh in adj_list[node]:
-                    if neigh in visited:
-                        continue
-                    visited.add(neigh)
-                    stack.append(neigh)
-                    d[i].add(neigh)
+                    if neigh not in visited:
+                        visited.add(neigh)
+                        stack.append(neigh)
+                        d[i].add(neigh)
 
         return [v in d[u] for u, v in queries]
