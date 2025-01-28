@@ -14,7 +14,7 @@ class Solution:
                     continue
                 
                 num_fish = grid[i][j]
-                grid[i][j] = LAND
+                grid[i][j] = LAND # Mark visited!
 
                 stack = [(i, j)]
                 while len(stack) > 0:
