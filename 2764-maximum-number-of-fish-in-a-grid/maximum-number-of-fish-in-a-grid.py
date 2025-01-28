@@ -10,17 +10,15 @@ class Solution:
         res = 0
         for i in range(M):
             for j in range(N):
-                # TODO: Use walrus operator
                 if grid[i][j] == LAND:
                     continue
                 
                 num_fish = grid[i][j]
                 grid[i][j] = LAND
-                queue = collections.deque([(i, j)])
-                while len(queue) > 0:
-                    x, y = queue.popleft()
-                    # assert grid[x][y] > 0
-                    # num_fish += grid[x][y]
+
+                stack = [(i, j)]
+                while len(stack) > 0:
+                    x, y = stack.pop()
 
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
@@ -31,7 +29,7 @@ class Solution:
                         
                         num_fish += grid[neigh_x][neigh_y]
                         grid[neigh_x][neigh_y] = LAND
-                        queue.append((neigh_x, neigh_y))
+                        stack.append((neigh_x, neigh_y))
                 
                 if res < num_fish:
                     res = num_fish
