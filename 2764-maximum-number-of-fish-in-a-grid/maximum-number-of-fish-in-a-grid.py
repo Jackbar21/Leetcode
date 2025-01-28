@@ -3,7 +3,8 @@ class Solution:
         LAND = 0
         M, N = len(grid), len(grid[0])
         DIRECTIONS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-
+        inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
+        
         # Once we visit / "consume" a cell, we will set it to a LAND cell to effectively
         # mark it as "visited" :)
         res = 0
@@ -21,8 +22,7 @@ class Solution:
 
                     for dx, dy in DIRECTIONS:
                         neigh_x, neigh_y = x + dx, y + dy
-                        if neigh_x < 0 or neigh_x >= M or neigh_y < 0 or neigh_y >= N:
-                            # Not in bounds, so ignore!
+                        if not inBounds(neigh_x, neigh_y):
                             continue
                         if grid[neigh_x][neigh_y] == LAND:
                             continue
