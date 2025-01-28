@@ -28,7 +28,7 @@ class Solution:
                             continue
                         
                         num_fish += grid[neigh_x][neigh_y]
-                        grid[neigh_x][neigh_y] = LAND
+                        grid[neigh_x][neigh_y] = LAND # Mark visited!
                         stack.append((neigh_x, neigh_y))
                 
                 if res < num_fish:
