@@ -24,7 +24,7 @@ class Solution:
 
             # Run DFS from any node and check if can reach every other node (which would mean
             # the deleted edge was redundant!).
-            random_node = u if len(adj_list[u]) < len(adj_list[v]) else v
+            random_node = u if len(adj_list[u]) <= len(adj_list[v]) else v
 
             visited = set([random_node])
             stack = [random_node]
