@@ -23,7 +23,7 @@ class Solution:
             # Run DFS from any node and check if can reach every other node (which would mean
             # the deleted edge was redundant!).
             # TODO: Don't make this random/fixed, be greedy!
-            random_node = 1
+            random_node = u
 
             visited = set([random_node])
             stack = [random_node]
