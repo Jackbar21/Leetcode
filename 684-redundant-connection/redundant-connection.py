@@ -15,7 +15,9 @@ class Solution:
             adj_list[v].add(u)
         
         # Step 2: Loop through edges in backwards order, until first redundant one is found!
-        for u, v in reversed(edges):
+        for i in range(N - 1, -1, -1):
+            u, v = edges[i]
+
             # 1. Delete the edge
             adj_list[u].remove(v)
             adj_list[v].remove(u)
