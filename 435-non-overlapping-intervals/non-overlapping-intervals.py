@@ -2,15 +2,14 @@ class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
         intervals.sort() # sort by increasing start time!
 
-        prev_start, prev_end = intervals[0]
-        num_deletes = 0
-        for i in range(1, len(intervals)):
-            interval = intervals[i]
+        prev_end = intervals[0][1]
+        num_deletes = -1 # First interval guaranteed to overlap, hence start at one below 0!
+        for interval in intervals:
             start, end = interval
 
-            # If no conflict, continue but UPDATE conflict interval!
+            # If no conflict, continue but UPDATE previous interval!
             if prev_end <= start:
-                prev_start, prev_end = interval
+                prev_end = end
                 continue
             
             # I have to either delete the 'prev' interval or the
@@ -21,6 +20,6 @@ class Solution:
             # In other words, keep the one with SMALLER end time!
             num_deletes += 1
             if end < prev_end:
-                prev_start, prev_end = interval
+                prev_end = end
 
         return num_deletes
