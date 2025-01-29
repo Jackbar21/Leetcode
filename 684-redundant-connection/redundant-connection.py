@@ -15,16 +15,14 @@ class Solution:
             adj_list[v].add(u)
         
         # Step 2: Loop through edges in backwards order, until first redundant one is found!
-        for i in range(N - 1, -1, -1):
-            u, v = edges[i]
-
-            # Delete the edge
+        for u, v in reversed(edges):
+            # 1. Delete the edge
             adj_list[u].remove(v)
             adj_list[v].remove(u)
 
-            # Run DFS from any node and check if can reach every other node (which would mean
-            # the deleted edge was redundant!).
-            random_node = u if len(adj_list[u]) <= len(adj_list[v]) else v
+            # 2. Run DFS from any node and check if can reach every other node (which would mean
+            #    the deleted edge was redundant!).
+            random_node = u if len(adj_list[u]) < len(adj_list[v]) else v
 
             visited = set([random_node])
             stack = [random_node]
@@ -39,7 +37,7 @@ class Solution:
             if len(visited) == N:
                 return (u, v)
 
-            # Add the edge (since it wasn't redundant!)
+            # 3. Add the edge (since it wasn't redundant!)
             adj_list[u].add(v)
             adj_list[v].add(u)
         
