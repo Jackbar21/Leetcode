@@ -1,45 +1,45 @@
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        # O(n^2)
-        adj_list = []
+        N = len(edges)
+        # Idea: Loop through all the edges in reversed order (since if multiple answers,
+        # problem statement says to return one that occurs last in the input). Then for
+        # each considered edge, delete that edge, and check if the graph is STILL just
+        # one strongly connected component via a simple DFS, starting from any node
+        # (since the graph is undirected!). Then that edge didn't work, add it back,
+        # and try with the next one, until a valid / 'redundant' one is found :)
+
+        # Step 1: Build an adjacency list (via sets to allow O(1) edge deletion & insertion!)
+        adj_list = [set() for _ in range(N + 1)] # Since nodes labeled 1 to N :)
         for u, v in edges:
-            while len(adj_list) < max(u, v) + 1:
-                adj_list.append(set())
             adj_list[u].add(v)
             adj_list[v].add(u)
         
-        # Since there are no repeated edges, and it is an UNDIRECTED graph,
-        # length of adj_list must be the number of nodes IN graph (i.e. each
-        # node is connected by at least ONE edge, and therefore in adj_list)
-        N = len(adj_list) - 1
-
-        # Try removing the last edge in edges, and everytime checking if the graph
-        # forms a tree. We can check if the graph is a tree by picking a random node,
-        # performing a dfs/bfs traversal from that node, and checking if every other
-        # node was indeed reachable in the graph (in similar spirit to the "Number of 
-        # Connected Components In An Undirected Graph" problem).
+        # Step 2: Loop through edges in backwards order, until first redundant one is found!
         for u, v in reversed(edges):
-            # Step 1: Remove the edge
+            # Delete the edge
             adj_list[u].remove(v)
             adj_list[v].remove(u)
 
-            # Step 2: Pick a random node, perform dfs, and return edge if forms tree!
-            # node = random.randint(1, N)
-            # Might as well not waste time calling 'random.randint' if can avoid it :p
-            node = u if len(adj_list[u]) < len(adj_list[v]) else v
-            stack = [node] # dfs
-            visited = set([node])
+            # Run DFS from any node and check if can reach every other node (which would mean
+            # the deleted edge was redundant!).
+            # TODO: Don't make this random/fixed, be greedy!
+            random_node = 1
+
+            visited = set([random_node])
+            stack = [random_node]
             while len(stack) > 0:
                 node = stack.pop()
                 for neigh in adj_list[node]:
-                    if neigh not in visited:
-                        visited.add(neigh)
-                        stack.append(neigh)
+                    if neigh in visited:
+                        continue
+                    visited.add(neigh)
+                    stack.append(neigh)
+            
             if len(visited) == N:
                 return (u, v)
 
-            # Step 3: Add the edge back
+            # Add the edge (since it wasn't redundant!)
             adj_list[u].add(v)
             adj_list[v].add(u)
         
-        raise Exception("No Solution")
+        raise Exception("Unreachable Code - There must be a solution!")
