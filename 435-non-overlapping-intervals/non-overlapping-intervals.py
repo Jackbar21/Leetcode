@@ -3,9 +3,8 @@ class Solution:
         intervals.sort() # sort by increasing start time!
 
         prev_end = intervals[0][1]
-        num_deletes = 0 # First interval guaranteed to overlap, hence start at one below 0!
-        for i in range(1, len(intervals)):
-            interval = intervals[i]
+        num_deletes = -1 # First interval guaranteed to overlap, hence start at one below 0!
+        for interval in intervals:
             start, end = interval
 
             # If no conflict, continue but UPDATE previous interval!
