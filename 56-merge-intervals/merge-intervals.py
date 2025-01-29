@@ -4,8 +4,7 @@ class Solution:
 
         res = []
         overlap_start, overlap_end = intervals[0]
-        for i in range(1, len(intervals)):
-            interval = intervals[i]
+        for interval in intervals:
             start, end = interval
             if overlap_end < start:
                 res.append((overlap_start, overlap_end))
