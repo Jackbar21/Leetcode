@@ -1,25 +1,20 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        START, END = 0, 1
-        intervals.sort(key = lambda interval: interval[START])
+        intervals.sort() # sort by increasing start time!
 
         res = []
-        new_interval = intervals[0]
+        overlap_start, overlap_end = intervals[0]
         for interval in intervals:
             start, end = interval
-            if new_interval[END] < start:
-                res.append(new_interval)
-                new_interval = interval
+            if overlap_end < start:
+                res.append((overlap_start, overlap_end))
+                overlap_start, overlap_end = interval
                 continue
             
-            new_interval = (
-                min(new_interval[START], start),
-                max(new_interval[END], end)
-            )
+            if start < overlap_start:
+                overlap_start = start
+            if end > overlap_end:
+                overlap_end = end
 
-
-
-        # if new_interval is not None:
-        #     res.append(new_interval)
-        res.append(new_interval)
+        res.append((overlap_start, overlap_end))
         return res
