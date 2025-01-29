@@ -1,33 +1,30 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        START, END = 0, 1
+        new_start, new_end = newInterval
         res = []
         for i, interval in enumerate(intervals):
             start, end = interval
 
             # Cannot start coalesce yet!
-            if end < newInterval[START]:
+            if end < new_start:
                 res.append(interval)
                 continue
             
             # No more need to coalesce!
-            if start > newInterval[END]:
-                res.append(newInterval)
+            if start > new_end:
+                res.append((new_start, new_end))
                 res.extend(intervals[i:])
                 return res
             
-            # assert newInterval[START] <= newInterval[END] <= start <= end
-            newInterval = (
-                min(newInterval[START], start),
-                max(newInterval[END], end)
-            )
-
+            # We must coalesce! Instead of adding anything to res, we will
+            # simply update newInterval to reflect the coalescing of current
+            # 'newInterval' with this current interval!
+            if start < new_start:
+                new_start = start
+            if end > new_end:
+                new_end = end
 
         # If returning through here, must be because we haven't inserted newInterval yet...
         # which can only be the case because it has the LARGEST start time!
-        assert len(res) == 0 or newInterval[START] >= res[-1][END]
-        res.append(newInterval)
+        res.append((new_start, new_end))
         return res
-
-
-
