@@ -64,8 +64,8 @@ class Solution:
                     bordering_islands.add(pos_to_island.get((x, y), None))
 
                 area = 1
-                for island in bordering_islands:
-                    area += island_to_area[island]
+                for island_id in bordering_islands:
+                    area += island_to_area[island_id]
                 
                 # Update max area!
                 if res < area:
