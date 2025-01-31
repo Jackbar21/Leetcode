@@ -3,12 +3,12 @@ class Solution:
         self.island_id = 0
         def generateUniqueIslandId():
             self.island_id += 1
-            return self.island_id - 1
+            return self.island_id
         
         N = len(grid)
         WATER, LAND = 0, 1
         DIRECTIONS = [(0,1),(0,-1),(1,0),(-1,0)]
-        pos_to_island = defaultdict(lambda: None) # map (x, y) positions in grid to island id
+        pos_to_island = {} # map (x, y) positions in grid to island id
         island_to_area = {None: 0} # map island id to area / size of that island
         
         # Step 1: Get initial max island in grid, and populate 'pos_to_island'
@@ -20,7 +20,7 @@ class Solution:
                 if grid[i][j] == WATER or (i, j) in visited:
                     continue
 
-                island_id = generateUniqueIslandId()                
+                island_id = generateUniqueIslandId()
                 area = 0
                 visited.add((i, j))
                 stack = [(i, j)]
@@ -61,7 +61,7 @@ class Solution:
                 bordering_islands = set()
                 for di, dj in DIRECTIONS:
                     x, y = i + di, j + dj
-                    bordering_islands.add(pos_to_island[(x, y)])
+                    bordering_islands.add(pos_to_island.get((x, y), None))
 
                 area = 1
                 for island in bordering_islands:
