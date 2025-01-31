@@ -8,7 +8,7 @@ class Solution:
         # as well as its size! We can use something like disjoint sets for it, or since
         # I'm lazy a unique ID for each!
         self.pos_to_island = defaultdict(lambda: None)
-        self.island_to_pos = {None: set()}
+        self.island_to_area = {None: 0}
         self.island_id = 0
         N = len(grid)
         WATER, LAND = 0, 1
@@ -16,7 +16,7 @@ class Solution:
         self.perimiter = set()
         res = self.maxAreaOfIsland(grid)
         print(f"{self.pos_to_island=}")
-        print(f"{self.island_to_pos=}")
+        print(f"{self.island_to_area=}")
         inBounds = lambda x, y: 0 <= x < N and 0 <= y < N
 
         for i in range(N):
@@ -33,10 +33,11 @@ class Solution:
                 for di, dj in DIRECTIONS:
                     x, y = i + di, j + dj
                     bordering_islands.add(self.pos_to_island[(x, y)])
-                # area = 1 + functools.reduce(lambda island: len(self.island_to_pos[island]), bordering_islands)
-                area = 1
-                for island in bordering_islands:
-                    area += len(self.island_to_pos[island])
+                # area = 1 + functools.reduce(lambda island: len(self.island_to_area[island]), bordering_islands)
+                # area = 1 + functools.reduce(lambda island: len(self.island_to_area[island]), list(bordering_islands))
+                area = 1 + sum(self.island_to_area[island] for island in bordering_islands)
+                # for island in bordering_islands:
+                #     area += len(self.island_to_area[island])
                 res = max(res, area)
         return res
 
@@ -53,7 +54,7 @@ class Solution:
         # into an island touches an island with a DIFFERENT id! For each case, we will consider
         # what happens, since we either only increment the island size by 1, OR we end up
         # incrementing the island size by not only 1, but the other touching island!
-        for island_id, visited in self.island_to_pos.items():
+        for island_id, visited in self.island_to_area.items():
             area = len(visited)
 
             perimiter = set()
@@ -143,7 +144,7 @@ class Solution:
                 #                 self.perimiter.add((x, y))
                 
                 assert len(visited) == area
-                self.island_to_pos[island_id] = visited
+                self.island_to_area[island_id] = area
                 max_area = max(max_area, area)
                 global_visited.update(visited)
 
