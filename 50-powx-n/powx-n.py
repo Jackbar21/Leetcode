@@ -1,7 +1,8 @@
 class Solution:
-    @cache
+    # Time Complexity: O(logn)
+    # Input Size: O(logx + logn)
+    # This is the VERY FIRST TIME IN MY LIFE that I write a WEAKLY-POLYNOMIAL algorithm!!!
     def myPow(self, x: float, n: int) -> float:
-        print(f"{x=}, {n=}")
         if n <= 1:
             if n == 1:
                 return x
@@ -31,5 +32,8 @@ class Solution:
             # Otherwise, n < 0, so need to make x the reciprocal of itself, and make n positive!
             return self.myPow(1 / x, -n)
 
-        mid_exp = n // 2
-        return self.myPow(x, mid_exp) * self.myPow(x, n - mid_exp)
+        res = self.myPow(x, n // 2)
+        res *= res
+        if n % 2 == 1:
+            res *= x
+        return res
