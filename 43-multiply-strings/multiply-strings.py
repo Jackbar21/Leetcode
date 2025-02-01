@@ -19,5 +19,6 @@ class Solution:
         return "".join(string_digits[i] for i in range(len(string_digits) - 1, -1, -1))
 
     def multiply(self, num1: str, num2: str) -> str:
-        num1, num2 = self.convertStringToNum(num1), self.convertStringToNum(num2)
-        return self.convertNumToString(num1 * num2)
+        # num1, num2 = self.convertStringToNum(num1), self.convertStringToNum(num2)
+        # return self.convertNumToString(num1 * num2)
+        return str(int(num1) * int(num2))
