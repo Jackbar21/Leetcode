@@ -21,4 +21,3 @@ class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         num1, num2 = self.convertStringToNum(num1), self.convertStringToNum(num2)
         return self.convertNumToString(num1 * num2)
-        
