@@ -3,6 +3,37 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
+        # return self.setZeroesConstantSpace(matrix) # O((mn)^2) time, O(1) space
+        return self.setZeroesLinearTime(matrix)    # O(mn) time, O(m + n) space
+    
+    def setZeroesLinearTime(self, matrix):
+        M, N = len(matrix), len(matrix[0])
+
+        # O(m + n) space!
+        row_indices = set()
+        col_indices = set()
+
+        # O(mn)
+        for i in range(M):
+            for j in range(N):
+                if matrix[i][j] == 0:
+                    row_indices.add(i)
+                    col_indices.add(j)
+        
+        # O(mn)
+        for row_index in row_indices:
+            for col_index in range(N):
+                matrix[row_index][col_index] = 0
+        
+        # O(mn)
+        for col_index in col_indices:
+            for row_index in range(M):
+                matrix[row_index][col_index] = 0
+        
+        return matrix
+
+    
+    def setZeroesConstantSpace(self, matrix: List[List[int]]) -> None:
         M, N = len(matrix), len(matrix[0])
 
         # Idea: In order to use constant space, whenever a 0 is detected, set ALL of the values
