@@ -16,7 +16,7 @@ class Solution:
             num //= 10
             if num == 0:
                 break
-        return "".join(string_digits[::-1])
+        return "".join(reversed(string_digits))
 
     def multiply(self, num1: str, num2: str) -> str:
         num1, num2 = self.convertStringToNum(num1), self.convertStringToNum(num2)
