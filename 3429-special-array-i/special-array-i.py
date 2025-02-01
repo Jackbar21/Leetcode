@@ -1,9 +1,9 @@
 class Solution:
     def isArraySpecial(self, nums: List[int]) -> bool:
-        parity = lambda num: num % 2
-        prev_num = nums[0] + 1
+        prev_parity = None
         for num in nums:
-            if parity(prev_num) == parity(num):
+            parity = num % 2
+            if parity == prev_parity:
                 return False
-            prev_num = num
+            prev_parity = parity
         return True
