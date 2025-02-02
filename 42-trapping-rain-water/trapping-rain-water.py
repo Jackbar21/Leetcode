@@ -1,7 +1,7 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        l, r = 0, len(height) - 1
-        res, prefix_max, suffix_max = 0, 0, 0
+        l, r = 1, len(height) - 2
+        res, prefix_max, suffix_max = 0, height[0], height[-1]
         while l <= r:
             if prefix_max < suffix_max:
                 # Left wall is bottleneck. So let's compute water gained at
