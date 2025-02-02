@@ -5,16 +5,16 @@ class Solution:
         if x < 0:
             sign = -1
             x = -x
-
-        while x != 0:
-            digits.append(x % 10)
-            x //= 10
+        elif x == 0:
+            return 0
         
+        base = pow(10, math.ceil(math.log(x, 10)))
         res = 0
-        base = 1
-        while len(digits) > 0:
-            res += digits.pop() * base
-            base *= 10
+        while x != 0:
+            base = base//10 if base > 10 else 1
+            res += (x % 10) * base
+            x //= 10
+            
 
         res *= sign
         return res if -pow(2, 31) <= res <= pow(2, 31) - 1 else 0
