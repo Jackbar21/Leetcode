@@ -16,4 +16,7 @@ class Solution:
             
 
         res *= sign
-        return res if -pow(2, 31) <= res <= pow(2, 31) - 1 else 0
+        # return res if -pow(2, 31) <= res <= pow(2, 31) - 1 else 0
+        MAX = pow(2, 31) # This way only make calculation once!
+        return 0 if res >= MAX or -res > MAX else res
+        
