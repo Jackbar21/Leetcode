@@ -12,6 +12,14 @@ class Solution:
         res = 0
         prefix_height = 0
         for i, h in enumerate(height):
-            res += max(0, min(prefix_height, suffix_max[i + 1]) - h)
-            prefix_height = max(prefix_height, h)
+            bottleneck_height = suffix_max[i + 1]
+            if prefix_height < bottleneck_height:
+                bottleneck_height = prefix_height
+
+            if bottleneck_height > h:
+                res += bottleneck_height - h
+            
+            if prefix_height < h:
+                prefix_height = h
+
         return res
