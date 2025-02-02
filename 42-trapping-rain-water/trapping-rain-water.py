@@ -1,5 +1,43 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
+        # return self.trapSuffixHeights(height)
+
+        N = len(height)
+
+        l, r = 1, N - 2
+        prefix_max = height[0]
+        suffix_max = height[N - 1]
+        res = 0
+        while l <= r:
+            if prefix_max < suffix_max:
+                # Left wall is bottleneck. So let's compute water gained at
+                # index l, and move left wall!
+                h = height[l]
+                water = prefix_max - h
+                if water > 0:
+                    res += water
+
+                l += 1
+                if prefix_max < h:
+                    prefix_max = h
+                continue
+            
+            assert suffix_max <= prefix_max
+            h = height[r]
+            water = suffix_max - h
+            if water > 0:
+                res += water
+            
+            r -= 1
+            if suffix_max < h:
+                suffix_max = h
+            continue
+        
+        return res
+
+
+
+    def trapSuffixHeights(self, height: List[int]) -> int:
         N = len(height)
         suffix_max = []
         suffix_height = 0
