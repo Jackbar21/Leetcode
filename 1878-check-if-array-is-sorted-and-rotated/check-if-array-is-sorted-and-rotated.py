@@ -14,18 +14,18 @@ class Solution:
         for smallest_index in smallest_indices:
             index = smallest_index
             prev_num = nums[index]
-            res = True
+            is_sorted = True
             for _ in range(N):
                 num = nums[index]
                 if prev_num > num:
-                    res = False
+                    is_sorted = False
                     break
 
                 # Loop Invariant
                 prev_num = num
                 index = (index + 1) % N
             
-            if res:
+            if is_sorted:
                 return True
         
         return False
