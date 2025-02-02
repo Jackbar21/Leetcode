@@ -1,7 +1,5 @@
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        return sum([a, b])
-
         carry = 0
         res = 0
         mask = 0xFFF
