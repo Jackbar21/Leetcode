@@ -5,8 +5,7 @@ class Solution:
         mask = 0xFFF
 
         for i in range(12):
-            a_bit, b_bit = a & 1, b & 1
-            a >>= 1; b >>= 1
+            a_bit, b_bit = (a >> i) & 1, (b >> i) & 1
             cur_bit = a_bit ^ b_bit ^ carry
             carry = (a_bit & b_bit) | (a_bit & carry) | (b_bit & carry)
             res |= (cur_bit << i)
