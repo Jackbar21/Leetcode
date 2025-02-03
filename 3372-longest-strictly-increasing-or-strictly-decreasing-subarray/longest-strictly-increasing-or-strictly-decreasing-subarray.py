@@ -8,12 +8,16 @@ class Solution:
             index = i
             while index + 1 < N and nums[index] < nums[index + 1]:
                 index += 1
-            res = max(res, index - i + 1)
+            length = index - i + 1
+            if res < length:
+                res = length
 
             # Get longest decreasing
             index = i
             while index + 1 < N and nums[index] > nums[index + 1]:
                 index += 1
-            res = max(res, index - i + 1)
+            length = index - i + 1
+            if res < length:
+                res = length
 
         return res
