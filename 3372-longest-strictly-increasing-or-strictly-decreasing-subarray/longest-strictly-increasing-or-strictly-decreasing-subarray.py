@@ -1,53 +1,24 @@
 class Solution:
     def longestIncreasingSlidingWindow(self, nums):
-        prev_num = float("-inf")
-        res = 0
-        count = 0
+        # Constraints say all nums are >= 1, so prev_num == 0 for intial value works!
+        res, count, prev_num = 0, 0, 0 
         for num in nums:
             if prev_num < num:
                 count += 1
                 prev_num = num
                 continue
             
-            res = max(res, count)
+            if res < count:
+                res = count
             count = 1
             prev_num = num
         
-        return max(res, count)
-
-
-
-
-
-
+        return res if res > count else count
+    
+    def longestDecreasingSlidingWindow(self, nums):
+        return self.longestIncreasingSlidingWindow(reversed(nums))
 
     def longestMonotonicSubarray(self, nums: List[int]) -> int:
-        return max(
-            self.longestIncreasingSlidingWindow(nums),      # longest strictly INCREASING subarray
-            self.longestIncreasingSlidingWindow(nums[::-1]) # longest strictly DECREASING subarray
-        )
-        
-
-
-
-        N = len(nums)
-        res = 0
-        # Find largest strictly increasing/decreasing subarray from index i, for 0 <= i < N
-        for i in range(N):
-            # Get longest increasing
-            index = i
-            while index + 1 < N and nums[index] < nums[index + 1]:
-                index += 1
-            length = index - i + 1
-            if res < length:
-                res = length
-
-            # Get longest decreasing
-            index = i
-            while index + 1 < N and nums[index] > nums[index + 1]:
-                index += 1
-            length = index - i + 1
-            if res < length:
-                res = length
-
-        return res
+        longest_increasing = self.longestIncreasingSlidingWindow(nums)
+        longest_decreasing = self.longestDecreasingSlidingWindow(nums)
+        return longest_increasing if longest_increasing > longest_decreasing else longest_decreasing
