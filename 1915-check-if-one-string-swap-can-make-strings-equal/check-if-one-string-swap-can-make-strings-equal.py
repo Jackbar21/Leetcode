@@ -1,9 +1,8 @@
 class Solution:
     def areAlmostEqual(self, s1: str, s2: str) -> bool:
         N, M = len(s1), len(s2)
-        # if N != M:
-        #     return False
-        assert N == M
+        if N != M:
+            return False
         
         diff_indices = []
         for i in range(N):
