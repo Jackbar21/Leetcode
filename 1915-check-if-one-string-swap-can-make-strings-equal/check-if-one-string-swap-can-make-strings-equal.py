@@ -11,8 +11,8 @@ class Solution:
                 continue
             
             diff_indices.append(i)
-            if len(diff_indices) > 2:
-                return False
+            # if len(diff_indices) > 2:
+            #     return False
         
         count = len(diff_indices)
         # No string swaps needed!
