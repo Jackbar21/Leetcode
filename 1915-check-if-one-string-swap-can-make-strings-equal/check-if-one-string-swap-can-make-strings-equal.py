@@ -12,15 +12,17 @@ class Solution:
             
             diff_indices.append(i)
             if len(diff_indices) > 2:
-                return False # Can only have AT MOST ONE string swap!
+                break
         
         count = len(diff_indices)
-        assert count in [0,1,2]
+        # No string swaps needed!
         if count == 0:
-            return True # No string swaps needed!
-        elif count == 1:
-            return False # Exactly one character different, so cannot make strings same :(
-        else:
-            # count == 2, so check if swapping the letters at the two diff. indices will work!
+            return True 
+
+        # Check if swapping the letters at the two diff. indices will work!
+        if count == 2:
             index1, index2 = diff_indices
             return s1[index1] == s2[index2] and s1[index2] == s2[index1]
+
+        # Need exactly 2 (if not 0) characters different to make swap work!
+        return False
