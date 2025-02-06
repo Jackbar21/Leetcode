@@ -1,5 +1,7 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        if len(s) < len(t):
+            return ""
         # alphabet = "abcdefghijklmnopqrstuvwxyz"
         # all_letters = alphabet + alphabet.upper()
 
