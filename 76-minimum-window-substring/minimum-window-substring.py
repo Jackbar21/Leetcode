@@ -19,8 +19,6 @@ class Solution:
         for letter in dt:
             if ds[letter] < dt[letter]:
                 return ""
-        min_length = len(s)
-        best_index = 0
         
         # Step 2: Shave off last letter of s as long as still supserset of t!
         index = len(s) - 1
@@ -29,6 +27,10 @@ class Solution:
             ds[letter] -= 1
             index -= 1
             letter = s[index]
+        
+        # assert index >= 0
+        min_length = index + 1
+        best_index = 0
 
         # Remove last letter to make no longer subset of t
         ds[letter] -= 1
