@@ -118,18 +118,20 @@ class Solution:
 
                 # They're equal, and we're about to remove this letter!
                 # Hence, update result if possible :)
-                if r - l + 1 < min_length:
-                    min_length = r - l + 1
-                    best_index = l
+                # if r - l + 1 < min_length:
+                #     min_length = r - l + 1
+                #     best_index = l
+
+                if s_freq == t_freq:
+                    needed_letter = left_letter
+                    if r - l + 1 < min_length:
+                        min_length = r - l + 1
+                        best_index = l
                 
                 # Loop Invariant
                 ds[left_letter] -= 1
                 l += 1
 
-                if s_freq == t_freq:
-                    # break # Now no longer supserset!
-                    needed_letter = left_letter
-
+                
 
         return s[best_index: best_index + min_length] if best_index != -1 else ""
-
