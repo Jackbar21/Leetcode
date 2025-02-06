@@ -87,12 +87,12 @@ class Solution:
         # Step 2: Shave off last letter of s as long as still supserset of t!
         index = len(s) - 1
         letter = s[index]
-        while index >= 0 and ds[letter] > dt[letter]:
+        while ds[letter] > dt[letter]:
             ds[letter] -= 1
             index -= 1
             letter = s[index]
         
-        assert index >= 0 # Might fail!
+        assert index >= 0
         min_length = index + 1
         best_index = 0
 
@@ -112,15 +112,7 @@ class Solution:
             while needed_letter is None:
                 left_letter = s[l]
                 s_freq, t_freq = ds[left_letter], dt[left_letter]
-                assert s_freq >= t_freq
-                # if s_freq < t_freq:
-                #     break
-
-                # They're equal, and we're about to remove this letter!
-                # Hence, update result if possible :)
-                # if r - l + 1 < min_length:
-                #     min_length = r - l + 1
-                #     best_index = l
+                # assert s_freq >= t_freq
 
                 if s_freq == t_freq:
                     needed_letter = left_letter
@@ -131,7 +123,5 @@ class Solution:
                 # Loop Invariant
                 ds[left_letter] -= 1
                 l += 1
-
-                
 
         return s[best_index: best_index + min_length] if best_index != -1 else ""
