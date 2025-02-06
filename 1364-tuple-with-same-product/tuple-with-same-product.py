@@ -1,12 +1,12 @@
 class Solution:
     def tupleSameProduct(self, nums: List[int]) -> int:
         N = len(nums)
-        d = defaultdict(list)
+        d = defaultdict(int)
 
         for i, num in enumerate(nums):
             for j in range(i + 1, N):
                 product = num * nums[j]
-                d[product].append((i, j))
+                d[product] += 1
         
         # print(f"{d=}")
 
@@ -23,7 +23,7 @@ class Solution:
         # take the sum of this value fore each product in d as our result :)
         res = 0
         for key in d:
-            count = len(d[key])
+            count = (d[key])
             num_pairs = (count * (count - 1)) // 2
             res += num_pairs * 8
         return res
