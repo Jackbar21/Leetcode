@@ -60,7 +60,7 @@ class Solution:
                 ds[left_letter] -= 1
                 l += 1
 
-        return s[best_index: best_index + min_length] if best_index != -1 else ""
+        return s[best_index: best_index + min_length]
 
     def minWindowNaive(self, s: str, t: str) -> str:
         if len(s) < len(t):
