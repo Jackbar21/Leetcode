@@ -25,8 +25,8 @@ class Solution:
         for key in d:
             count = (d[key])
             num_pairs = (count * (count - 1)) // 2
-            res += num_pairs * 8
-        return res
+            res += num_pairs
+        return res * 8
 
         # Brute Force: O(N^4) solution!
         # N = len(nums)
