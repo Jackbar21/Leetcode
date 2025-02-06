@@ -1,10 +1,11 @@
 class Solution:
     def tupleSameProduct(self, nums: List[int]) -> int:
         N = len(nums)
-        d = defaultdict(int)
+        d = {}
         for i, num in enumerate(nums):
             for j in range(i + 1, N):
-                d[num * nums[j]] += 1
+                product = num * nums[j]
+                d[product] = d.get(product, 0) + 1
 
         # For each array in dict of length N, there will be such many pairs:
         #   1 + 2 + 3 + ... + N - 1
