@@ -1,5 +1,6 @@
 class Solution: 
     def minWindow(self, s: str, t: str) -> str:
+        return self.minWindowNaive(s, t)
         # Idea: Unlike 'minWindowNaive', instead of using a dictionary for comparisons
         # (which yes is O(1) because s and t are only English letters, but otherwise WOULDN'T be!)
         # What we can do is grab the initially tightest window of s starting from the first index
