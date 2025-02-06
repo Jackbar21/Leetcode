@@ -89,6 +89,7 @@ class Solution:
                 continue
             
             while l <= r:
+                assert isSubset(d)
                 left_letter = s[l]
                 s_freq, t_freq = d[left_letter], dt[left_letter]
                 if s_freq < t_freq:
