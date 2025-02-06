@@ -5,10 +5,7 @@ class Solution:
 
         for i, num in enumerate(nums):
             for j in range(i + 1, N):
-                product = num * nums[j]
-                d[product] += 1
-        
-        # print(f"{d=}")
+                d[num * nums[j]] += 1
 
         # For each array in dict of length N, there will be such many pairs:
         #   1 + 2 + 3 + ... + N - 1
@@ -22,11 +19,10 @@ class Solution:
         # we will consider the total number of tuples as the number of pairs multiplied by 8! We simply
         # take the sum of this value fore each product in d as our result :)
         res = 0
-        for key in d:
-            count = (d[key])
-            num_pairs = (count * (count - 1)) // 2
+        for product_freq in d.values():
+            num_pairs = product_freq * (product_freq - 1) / 2
             res += num_pairs
-        return res * 8
+        return int(res * 8)
 
         # Brute Force: O(N^4) solution!
         # N = len(nums)
