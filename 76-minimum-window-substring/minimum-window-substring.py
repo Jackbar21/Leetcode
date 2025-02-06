@@ -3,12 +3,12 @@ class Solution:
         alphabet = "abcdefghijklmnopqrstuvwxyz"
         all_letters = alphabet + alphabet.upper()
 
-        dt = {letter: 0 for letter in all_letters}
+        dt = defaultdict(int)
         for letter in t:
             dt[letter] += 1
 
         isSubset = lambda freq_dict: all(freq_dict[letter] >= dt[letter] for letter in dt) # O(1)
-        d = {letter: 0 for letter in all_letters}
+        d = defaultdict(int)
         
         min_length = float("inf")
         best_index = -1
@@ -18,6 +18,7 @@ class Solution:
             d[letter] += 1
             if d[letter] < dt[letter]:
                 continue
+            
             while isSubset(d):
                 if r - l + 1 < min_length:
                     min_length = r - l + 1
