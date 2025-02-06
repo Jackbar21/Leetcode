@@ -1,7 +1,7 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        alphabet = "abcdefghijklmnopqrstuvwxyz"
-        all_letters = alphabet + alphabet.upper()
+        # alphabet = "abcdefghijklmnopqrstuvwxyz"
+        # all_letters = alphabet + alphabet.upper()
 
         dt = defaultdict(int)
         for letter in t:
@@ -18,16 +18,42 @@ class Solution:
             d[letter] += 1
             if d[letter] < dt[letter]:
                 continue
+            if not isSubset(d):
+                continue
             
-            while isSubset(d):
+            while True:
+                assert isSubset(d)
+                left_letter = s[l]
+                s_freq, t_freq = d[left_letter], dt[left_letter]
+                if s_freq < t_freq:
+                    break
+
+                # They're equal, and we're about to remove this letter!
+                # Hence, update result if possible :)
                 if r - l + 1 < min_length:
                     min_length = r - l + 1
                     best_index = l
                 
                 # Loop Invariant
-                d[s[l]] -= 1
+                d[left_letter] -= 1
                 l += 1
 
+                if s_freq == t_freq:
+                    break # Now no longer supserset!
+                    
+
+                
+            
+            # while isSubset(d):
+            #     if r - l + 1 < min_length:
+            #         min_length = r - l + 1
+            #         best_index = l
+                
+            #     # Loop Invariant
+            #     d[s[l]] -= 1
+            #     l += 1
+
+        # print(f"{min_length=}, {best_index=}, {d=}, {dt=}")
         # One last time, in case solution is at end of string!
         if isSubset(d) and r - l + 1 < min_length:
             min_length = r - l + 1
