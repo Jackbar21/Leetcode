@@ -21,7 +21,7 @@ class Solution:
             if not isSubset(d):
                 continue
             
-            while True:
+            while l <= r:
                 left_letter = s[l]
                 s_freq, t_freq = d[left_letter], dt[left_letter]
                 if s_freq < t_freq:
