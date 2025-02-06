@@ -16,6 +16,8 @@ class Solution:
         l = 0
         for r, letter in enumerate(s):
             d[letter] += 1
+            if d[letter] < dt[letter]:
+                continue
             while isSubset(d):
                 if r - l + 1 < min_length:
                     min_length = r - l + 1
@@ -24,9 +26,7 @@ class Solution:
                 # Loop Invariant
                 d[s[l]] -= 1
                 l += 1
-                # if l == r:
-                #     break
-        
+
         # One last time, in case solution is at end of string!
         if isSubset(d) and r - l + 1 < min_length:
             min_length = r - l + 1
