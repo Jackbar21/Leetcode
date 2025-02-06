@@ -2,7 +2,6 @@ class Solution:
     def tupleSameProduct(self, nums: List[int]) -> int:
         N = len(nums)
         d = defaultdict(int)
-
         for i, num in enumerate(nums):
             for j in range(i + 1, N):
                 d[num * nums[j]] += 1
@@ -20,9 +19,9 @@ class Solution:
         # take the sum of this value fore each product in d as our result :)
         res = 0
         for product_freq in d.values():
-            num_pairs = product_freq * (product_freq - 1) / 2
+            num_pairs = product_freq * (product_freq - 1) // 2
             res += num_pairs
-        return int(res * 8)
+        return res * 8
 
         # Brute Force: O(N^4) solution!
         # N = len(nums)
