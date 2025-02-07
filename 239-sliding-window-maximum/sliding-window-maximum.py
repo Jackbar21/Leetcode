@@ -17,10 +17,10 @@ class Solution:
         for r in range(k, len(nums)):
             # Add num at index r, and remove num at index l!
             l_num, r_num = nums[l], nums[r]
-            if l_num == r_num:
-                l += 1
-                res.append(-max_heap[0])
-                continue
+            # if l_num == r_num:
+            #     l += 1
+            #     res.append(-max_heap[0])
+            #     continue
 
             # Add nums[r]
             if r_num in d:
