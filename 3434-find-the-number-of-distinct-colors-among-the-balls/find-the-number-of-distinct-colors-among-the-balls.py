@@ -7,7 +7,7 @@ class Solution:
         for ball, color in queries:
             if ball in ball_to_color:
                 c = ball_to_color[ball]
-                assert c in d
+                # assert c in d
                 d[c] -= 1
                 if d[c] == 0:
                     del d[c]
