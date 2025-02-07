@@ -1,7 +1,5 @@
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        max_num = None
-
         d = {}
         max_heap = [] # use negative numbers to simulate max heap via min heap!
         for i in range(k):
@@ -15,7 +13,6 @@ class Solution:
         heapq.heapify(max_heap)
         res = [-max_heap[0]]
 
-        
         l = 0
         for r in range(k, len(nums)):
             # Add num at index r, and remove num at index l!
@@ -33,7 +30,7 @@ class Solution:
                 heapq.heappush(max_heap, -r_num)
             
             # Delete nums[l]
-            assert l_num in d
+            # assert l_num in d
             d[l_num] -= 1
             if d[l_num] == 0:
                 del d[l_num]
