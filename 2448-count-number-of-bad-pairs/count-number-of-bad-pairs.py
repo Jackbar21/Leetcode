@@ -20,3 +20,38 @@ class Solution:
         total_pairs = N * (N - 1) // 2
         bad_pairs = total_pairs - good_pairs
         return bad_pairs
+
+        # Given a non-negative integer N >= 0, I claim that:
+        # sum([0..N]) == N * (N + 1) // 2, where sum([A..B]) == A + (A+1) + (A+2) + ... + B
+
+        # PROOF:
+        # P(N): sum([0..N]) == N * (N + 1) // 2
+        # Want to show: P(N) is True for ALL N >= 0
+
+        # Base Case: Let's show that P(0) holds, i.e. P(N) when N = 0
+        #   sum([0..N]) == sum([0..0]) == sum([0]) == 0
+        #   N * (N + 1) // 2 == 0 * (0 + 1) // 2 == 0 * 1 // 2 == 0 // 2 == 0
+        #   Therefore, P(0) is True!
+
+        # Inductive Step: Suppose P(i) is true, where i >= 0. Let's show that P(i + 1) holds.
+        #   Since P(i) is true, we have that sum([0..i]) == i * (i + 1) // 2 [I.H.]
+        #   We want to show that P(i + 1) holds, i.e. that sum([0..(i+1)]) == (i + 1) * ((i + 1) + 1) // 2
+        #   sum([0..(i+1)])
+        #   == sum([0..i]) + (i + 1)
+        #   == (i * (i + 1) // 2) + (i + 1), by [I.H.]
+        #   == (i + 1) * (i//2 + 1)
+        #   == (i + 1) * (i//2 + 2//2)
+        #   == (i + 1) * (i + 2) // 2
+        #   == (i + 1) * ((i + 1) + 1) // 2
+        #   Therefore, given P(i) is True, P(i + 1) must also be True.
+
+        # Therefore, by proof by Induction, it must be that P(N) is True for all N >= 0!
+
+        # P(0) ==> P(1) ==> P(2) ==> P(3) ==> P(4) ==> P(5) ==> ... P(N), for any N >= 0
+
+        # HW: Prove that the sum of the first N odd positive integers (i.e. 1,3,5,7,9,11,...),
+        # is EQUAL to N^2.
+        # For example, with N = 3, sum of first 3 odd positive integers is:
+        #   1 + 3 + 5 == 9
+        # And N^2 is equal to:
+        #   3 * 3 == 9
