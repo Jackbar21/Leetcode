@@ -6,7 +6,7 @@ class Solution:
             d[num - i] += 1
         
         good_pairs = 0
-        for k in map(lambda x: x, d.values()):
+        for k in d.values():
             good_pairs += (k * (k - 1)) // 2
 
         total_pairs = (N * (N - 1)) // 2
