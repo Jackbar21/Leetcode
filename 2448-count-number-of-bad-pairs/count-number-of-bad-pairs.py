@@ -1,12 +1,12 @@
 class Solution:
     def countBadPairs(self, nums: List[int]) -> int:
         N = len(nums)
-        d = defaultdict(list)
+        d = defaultdict(int)
         for i, num in enumerate(nums):
-            d[num - i].append(i)
+            d[num - i] += 1
         
         good_pairs = 0
-        for k in map(len, d.values()):
+        for k in map(lambda x: x, d.values()):
             good_pairs += (k * (k - 1)) // 2
 
         total_pairs = (N * (N - 1)) // 2
