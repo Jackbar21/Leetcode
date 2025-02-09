@@ -16,8 +16,7 @@ class Solution:
         for i, num in enumerate(nums):
             d[num - i] += 1
 
-        # good_pairs = functools.reduce(lambda acc, k: acc + k * (k - 1) // 2, d.values(), 0)
-        good_pairs = sum(k * (k - 1) // 2 for k in d.values())
+        good_pairs = functools.reduce(lambda acc, k: acc + k * (k - 1) // 2, d.values(), 0)
         total_pairs = N * (N - 1) // 2
         bad_pairs = total_pairs - good_pairs
         return bad_pairs
