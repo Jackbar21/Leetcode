@@ -12,9 +12,9 @@ class Solution:
         # to a hash map, then counting number of total good pairs, subtracting that from the total
         # number of pairs in general, to finally obtain the number of BAD pairs.
         N = len(nums)
-        d = defaultdict(int)
+        d = {}
         for i, num in enumerate(nums):
-            d[num - i] += 1
+            d[num - i] = d.get(num - i, 0) + 1
 
         good_pairs = functools.reduce(lambda acc, k: acc + k * (k - 1) // 2, d.values(), 0)
         total_pairs = N * (N - 1) // 2
