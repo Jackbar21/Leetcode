@@ -6,6 +6,5 @@ class Solution:
         for letter in s:
             stack.append(letter)
             if len(stack) >= N and hash("".join(stack[-N:])) == part_hash:
-                for _ in range(N):
-                    stack.pop()
+                stack = stack[:-N]
         return "".join(stack)
