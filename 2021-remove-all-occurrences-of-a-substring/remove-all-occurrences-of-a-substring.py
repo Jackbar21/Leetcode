@@ -4,6 +4,6 @@ class Solution:
         stack = []
         for letter in s:
             stack.append(letter)
-            if len(stack) >= N and "".join(stack[-N:]) == part:
+            if "".join(stack[-N:]) == part:
                 stack = stack[:-N]
         return "".join(stack)
