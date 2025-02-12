@@ -28,7 +28,8 @@ class Solution:
         max_val = -1
         for nums_with_same_digit_sum in d.values():
             if len(nums_with_same_digit_sum) > 1:
-                sum_nums = nums_with_same_digit_sum[0] + nums_with_same_digit_sum[1]
+                # assert len(nums_with_same_digit_sum) == 2
+                sum_nums = sum(nums_with_same_digit_sum)
                 if max_val < sum_nums:
                     max_val = sum_nums
         return max_val
