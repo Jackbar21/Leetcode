@@ -17,15 +17,9 @@ class Solution:
             sum_digits = convertNumToSumDigits(num)
             min_heap = d[sum_digits]
             heapq.heappush(min_heap, num)
-            while len(min_heap) > 2:
+            if len(min_heap) > 2:
+                # assert len(min_heap) == 3
                 heapq.heappop(min_heap)
-            # if len(lst) <= 2:
-            #     continue
-            # else:
-            #     # Get rid of smallest between three numbers!
-            #     # assert len(lst) == 3
-            #     lst.sort(reverse=True) # O(1)
-            #     lst.pop()
 
         max_val = -1 # default value if no results!
         for nums_with_same_digit_sum in d.values():
