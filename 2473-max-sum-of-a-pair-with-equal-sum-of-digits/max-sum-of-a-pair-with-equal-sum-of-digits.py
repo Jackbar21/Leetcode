@@ -11,7 +11,7 @@ class Solution:
             lst = d[sum_digits]
             lst.append(num)
             if len(lst) > 2:
-                assert len(lst) == 3
+                # assert len(lst) == 3
                 lst.sort(reverse=True)
                 lst.pop()
 
