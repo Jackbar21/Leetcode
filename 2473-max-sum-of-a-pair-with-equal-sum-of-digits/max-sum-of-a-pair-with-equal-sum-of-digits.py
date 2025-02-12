@@ -4,12 +4,17 @@ class Solution:
         # Step 1: Convert all the numbers to sum of digits
         # Step 2: Obtain the FREQUENCY of each sum!
         # Step 3: Grab largest sum whose frequency is GREATER THAN 1
+        def convertNumToSumDigits(num):
+            res = 0
+            while num > 0:
+                res += num % 10
+                num //= 10
+            return res
 
-        d = {}
+        d = defaultdict(list)
         for num in nums:
-            sum_digits = functools.reduce(lambda acc, x: acc + int(x), str(num), 0)
-            if sum_digits not in d:
-                d[sum_digits] = []
+            # sum_digits = functools.reduce(lambda acc, x: acc + int(x), str(num), 0)
+            sum_digits = convertNumToSumDigits(num)
             lst = d[sum_digits]
             lst.append(num)
             if len(lst) <= 2:
