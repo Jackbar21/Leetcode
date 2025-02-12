@@ -17,14 +17,15 @@ class Solution:
             sum_digits = convertNumToSumDigits(num)
             min_heap = d[sum_digits]
             heapq.heappush(min_heap, num)
-            if len(min_heap) == 3:
+            if len(min_heap) == 3: # Only want to keep two largest at any point in time!
                 heapq.heappop(min_heap)
 
         max_val = -1 # default value if no results!
         for nums_with_same_digit_sum in d.values():
-            if len(nums_with_same_digit_sum) > 1:
-                # assert len(nums_with_same_digit_sum) == 2
-                sum_nums = nums_with_same_digit_sum[0] + nums_with_same_digit_sum[1]
-                if max_val < sum_nums:
-                    max_val = sum_nums
+            if len(nums_with_same_digit_sum) == 1:
+                continue
+            # assert len(nums_with_same_digit_sum) == 2
+            sum_nums = nums_with_same_digit_sum[0] + nums_with_same_digit_sum[1]
+            if max_val < sum_nums:
+                max_val = sum_nums
         return max_val
