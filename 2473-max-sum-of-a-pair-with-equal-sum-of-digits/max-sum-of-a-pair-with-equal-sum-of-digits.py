@@ -5,14 +5,19 @@ class Solution:
         # Step 2: Obtain the FREQUENCY of each sum!
         # Step 3: Grab largest sum whose frequency is GREATER THAN 1
 
-        d = defaultdict(list)
+        d = {}
         for num in nums:
             sum_digits = functools.reduce(lambda acc, x: acc + int(x), str(num), 0)
+            if sum_digits not in d:
+                d[sum_digits] = []
             lst = d[sum_digits]
             lst.append(num)
-            if len(lst) > 2:
+            if len(lst) <= 2:
+                continue
+            else:
+                # Get rid of smallest between three numbers!
                 # assert len(lst) == 3
-                lst.sort(reverse=True)
+                lst.sort(reverse=True) # O(1)
                 lst.pop()
 
         max_val = -1
