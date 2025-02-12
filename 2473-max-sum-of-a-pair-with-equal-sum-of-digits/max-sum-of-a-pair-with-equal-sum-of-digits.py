@@ -18,5 +18,7 @@ class Solution:
         max_val = -1
         for nums_with_same_digit_sum in d.values():
             if len(nums_with_same_digit_sum) > 1:
-                max_val = max(max_val, sum(nums_with_same_digit_sum))
+                sum_nums = nums_with_same_digit_sum[0] + nums_with_same_digit_sum[1]
+                if max_val < sum_nums:
+                    max_val = sum_nums
         return max_val
