@@ -7,7 +7,7 @@ class ProductOfNumbers:
     def add(self, num: int) -> None:
         is_zero = num == 0
         mult_val = 1 if is_zero else num
-        zero_val = int(is_zero)
+        zero_val = is_zero
 
         if self.N > 0:
             mult_val *= self.prefix_mults[-1]
