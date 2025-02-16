@@ -8,23 +8,18 @@ class Solution:
         # then keep backtracking, etc etc... You will have to remember a number's chosen
         # indices probably, but that shouldn't be too much of an issue w/ a dictionary :)
         self.largest = []
-        self.available = set(range(2*n - 1))
+        self.available_indices = set(range(2*n - 1))
         self.d = {} # num to indices
         
         def backtrack():
-            # print(f"{len(self.available)==0}")
-            if len(self.available) == 0:
+            if len(self.available_indices) == 0:
                 res = [0] * (2*n - 1)
                 for num, indices in self.d.items():
                     for index in indices:
                         res[index] = num
-                # print(f"{res=}")
                 if res > self.largest:
-                    # TODO: Figure out best way to do copy (or if needed at all!)
-                    # self.largest = res.copy()
-                    self.largest = [el for el in res]
+                    self.largest = res.copy()
                 return True
-                # return
             
             for num in range(n, 0, -1):
                 if num in self.d:
@@ -35,14 +30,14 @@ class Solution:
                 # Also keep in mind that if k is the largest available index, we should only check
                 # for indices whose value are k - num or smaller (if the number isn't 1, as we need
                 # two occurances of it!)
-                index = min(self.available)
+                index = min(self.available_indices)
                 if num == 1:
                     self.d[num] = (index,)
-                    self.available.remove(index)
+                    self.available_indices.remove(index)
                     success = backtrack()
                     del self.d[num]
-                    assert index not in self.available
-                    self.available.add(index)
+                    assert index not in self.available_indices
+                    self.available_indices.add(index)
                     if success:
                         return True
                     continue
@@ -52,21 +47,21 @@ class Solution:
                 #     continue
                 
                 # Not even worth trying index, as other needed index isn't even available!
-                if (index + num) not in self.available:
+                if (index + num) not in self.available_indices:
                     continue
                 
                 # Otherwise, try the index and see if it works!
                 self.d[num] = (index, index + num)
-                self.available.remove(index)
-                self.available.remove(index + num)
+                self.available_indices.remove(index)
+                self.available_indices.remove(index + num)
 
                 success = backtrack()
 
                 del self.d[num]
-                assert index not in self.available
-                assert index + num not in self.available
-                self.available.add(index)
-                self.available.add(index + num)
+                assert index not in self.available_indices
+                assert index + num not in self.available_indices
+                self.available_indices.add(index)
+                self.available_indices.add(index + num)
 
                 if success:
                     return True
