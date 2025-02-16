@@ -9,7 +9,6 @@ class Solution:
         # indices probably, but that shouldn't be too much of an issue w/ a dictionary :)
         self.largest = []
         self.available_indices = set(range(2*n - 1))
-        self.available_nums = set(range(1, n + 1))
         self.d = {} # num to indices
         
         def backtrack():
@@ -22,11 +21,10 @@ class Solution:
                     self.largest = res.copy()
                 return True
             
-            # for num in range(n, 0, -1):
-                # if num in self.d:
-                #     # Already paired this number with indices, so ignore it!
-                #     continue
-            for num in sorted(self.available_nums, reverse=True):
+            for num in range(n, 0, -1):
+                if num in self.d:
+                    # Already paired this number with indices, so ignore it!
+                    continue
                 
                 # Otherwise, try every possible index. If none work, then move on to next number!
                 # Also keep in mind that if k is the largest available index, we should only check
@@ -38,14 +36,12 @@ class Solution:
                 if num == 1:
                     self.d[num] = (index,)
                     self.available_indices.remove(index)
-                    self.available_nums.remove(num)
 
                     if backtrack():
                         return True
         
                     del self.d[num]
                     self.available_indices.add(index)
-                    self.available_nums.add(num)
                     continue
 
                 # Not even worth trying index, as other needed index isn't even available!
@@ -56,7 +52,6 @@ class Solution:
                 self.d[num] = (index, index + num)
                 self.available_indices.remove(index)
                 self.available_indices.remove(index + num)
-                self.available_nums.remove(num)
 
                 if backtrack():
                     return True
@@ -64,7 +59,6 @@ class Solution:
                 del self.d[num]
                 self.available_indices.add(index)
                 self.available_indices.add(index + num)
-                self.available_nums.add(num)
 
             return False
 
