@@ -31,21 +31,21 @@ class Solution:
                 # for indices whose value are k - num or smaller (if the number isn't 1, as we need
                 # two occurances of it!)
                 index = min(self.available_indices)
+
+                # Special case, as only takes up ONE index!
                 if num == 1:
                     self.d[num] = (index,)
                     self.available_indices.remove(index)
+
                     success = backtrack()
+        
                     del self.d[num]
-                    assert index not in self.available_indices
                     self.available_indices.add(index)
                     if success:
                         return True
+
                     continue
 
-                # Only try first occurance indices, as the next ones are FIXED per number!
-                # if index > largest_index - num:
-                #     continue
-                
                 # Not even worth trying index, as other needed index isn't even available!
                 if (index + num) not in self.available_indices:
                     continue
@@ -55,23 +55,18 @@ class Solution:
                 self.available_indices.remove(index)
                 self.available_indices.remove(index + num)
 
-                success = backtrack()
+                if backtrack():
+                    return True
 
                 del self.d[num]
-                assert index not in self.available_indices
-                assert index + num not in self.available_indices
                 self.available_indices.add(index)
                 self.available_indices.add(index + num)
 
-                if success:
-                    return True
-            
             return False
 
-        assert backtrack()
+        # Problem statement GUARANTEES a solution exists!
+        backtrack()
         return self.largest   
-
-
 
     
     def naive(self, n):
