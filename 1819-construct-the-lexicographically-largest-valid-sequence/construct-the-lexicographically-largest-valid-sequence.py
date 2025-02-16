@@ -21,6 +21,7 @@ class Solution:
                     self.largest = res.copy()
                 return True
             
+            index = min(self.available_indices)
             for num in range(n, 0, -1):
                 if num in self.d:
                     # Already paired this number with indices, so ignore it!
@@ -30,7 +31,6 @@ class Solution:
                 # Also keep in mind that if k is the largest available index, we should only check
                 # for indices whose value are k - num or smaller (if the number isn't 1, as we need
                 # two occurances of it!)
-                index = min(self.available_indices)
 
                 # Special case, as only takes up ONE index!
                 if num == 1:
@@ -66,6 +66,7 @@ class Solution:
         backtrack()
         return self.largest   
 
+# [2,1,3,4,5,6,7,8,9] >>> [1,9,8,7,6,5,4,3,2] 
     
     def naive(self, n):
         self.res = []
