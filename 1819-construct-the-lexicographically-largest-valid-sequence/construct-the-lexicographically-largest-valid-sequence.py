@@ -21,16 +21,14 @@ class Solution:
                     self.largest = res.copy()
                 return True
             
+            # We need to fill in EVERY available index, so we might as well figure out largest
+            # number we can put in SMALLEST available index, as that will have the LARGEST impact
+            # on how "lexicographically large" our result will be!
             index = min(self.available_indices)
             for num in range(n, 0, -1):
                 if num in self.d:
                     # Already paired this number with indices, so ignore it!
                     continue
-                
-                # Otherwise, try every possible index. If none work, then move on to next number!
-                # Also keep in mind that if k is the largest available index, we should only check
-                # for indices whose value are k - num or smaller (if the number isn't 1, as we need
-                # two occurances of it!)
 
                 # Special case, as only takes up ONE index!
                 if num == 1:
