@@ -37,13 +37,11 @@ class Solution:
                     self.d[num] = (index,)
                     self.available_indices.remove(index)
 
-                    success = backtrack()
+                    if backtrack():
+                        return True
         
                     del self.d[num]
                     self.available_indices.add(index)
-                    if success:
-                        return True
-
                     continue
 
                 # Not even worth trying index, as other needed index isn't even available!
