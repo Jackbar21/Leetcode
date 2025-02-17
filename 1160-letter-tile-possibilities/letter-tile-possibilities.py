@@ -1,6 +1,6 @@
 class Solution:
     def numTilePossibilities(self, tiles: str) -> int:
-        res = set()
+        res = []
 
         d = {}
         for tile in tiles:
@@ -8,7 +8,7 @@ class Solution:
 
         arr = []
         def backtrack():
-            res.add("".join(arr))
+            res.append("".join(arr))
             for letter, freq in d.items():
                 # assert freq >= 0
                 if freq == 0:
@@ -23,5 +23,4 @@ class Solution:
         backtrack()
 
         # Exclude empty string from results!
-        res.discard("")
-        return len(res)
+        return len(res) - 1
