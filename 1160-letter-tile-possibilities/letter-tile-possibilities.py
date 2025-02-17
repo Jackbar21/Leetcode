@@ -17,7 +17,7 @@ class Solution:
                 arr.append(letter)
                 d[letter] -= 1
                 backtrack()
-                # assert arr.pop() == letter
+                assert arr.pop() == letter
                 d[letter] += 1
         
         backtrack()
