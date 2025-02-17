@@ -1,24 +1,27 @@
 class Solution:
     def numTilePossibilities(self, tiles: str) -> int:
-        self.res = 0
+        res = set()
 
         d = {}
         for tile in tiles:
             d[tile] = d.get(tile, 0) + 1
 
-        # arr = []
+        arr = []
         def backtrack():
-            self.res += 1
+            res.add("".join(arr))
             for letter, freq in d.items():
                 # assert freq >= 0
                 if freq == 0:
                     continue
                 
-                # arr.append(letter)
+                arr.append(letter)
                 d[letter] -= 1
                 backtrack()
                 # assert arr.pop() == letter
                 d[letter] += 1
         
         backtrack()
-        return self.res - 1 # Exclude empty string from results!
+
+        # Exclude empty string from results!
+        res.discard("")
+        return len(res)
