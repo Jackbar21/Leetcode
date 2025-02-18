@@ -6,14 +6,13 @@ class Solution:
         # Since we want lexicographically SMALLEST result, we can enumerate
         # the possible strings in order of smallest to largest lexicographically,
         # and stop as soon as we find one that is valid :)
-
         available_nums = set("123456789")
         res = []
         def backtrack(i):
             sorted_nums = sorted(available_nums)
             prev = res[-1] if len(res) > 0 else float("-inf")
             
-            if len(res) == len(pattern) + 1:
+            if i == len(pattern) + 1:
                 return True
 
             for num in sorted_nums:
@@ -27,8 +26,8 @@ class Solution:
                 available_nums.remove(num)
                 if backtrack(i + 1):
                     return True
+                res.pop()
                 available_nums.add(num)
-                assert res.pop() == num
 
             return False
         
