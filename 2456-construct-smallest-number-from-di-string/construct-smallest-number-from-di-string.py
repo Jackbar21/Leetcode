@@ -1,13 +1,12 @@
 class Solution:
     def smallestNumber(self, pattern: str) -> str:
-        res = "99"
-        for str_num in itertools.permutations("123456789", len(pattern) + 1):
-            num = "".join(str_num)
+        res = ("9", "9")
+        for num in itertools.permutations("123456789", len(pattern) + 1):
             if num < res and self.isValid(num, pattern):
                 res = num
-        return res
+        return "".join(res)
     
-    def isValid(self, num: str, pattern: str) -> bool:
+    def isValid(self, num: tuple, pattern: str) -> bool:
         assert len(num) == len(pattern) + 1
         N = len(num)
 
