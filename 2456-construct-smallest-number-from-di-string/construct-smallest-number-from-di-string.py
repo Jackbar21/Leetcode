@@ -3,7 +3,7 @@ class Solution:
         res = ("9", "9")
         for num in itertools.permutations("123456789", len(pattern) + 1):
             if num < res and self.isValid(num, pattern):
-                res = num
+                return "".join(num)
         return "".join(res)
     
     def isValid(self, num: tuple, pattern: str) -> bool:
