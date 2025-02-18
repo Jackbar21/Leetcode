@@ -1,10 +1,8 @@
 class Solution:
     def smallestNumber(self, pattern: str) -> str:
-        res = ("9", "9")
         for num in itertools.permutations("123456789", len(pattern) + 1):
-            if num < res and self.isValid(num, pattern):
+            if self.isValid(num, pattern):
                 return "".join(num)
-        return "".join(res)
     
     def isValid(self, num: tuple, pattern: str) -> bool:
         assert len(num) == len(pattern) + 1
