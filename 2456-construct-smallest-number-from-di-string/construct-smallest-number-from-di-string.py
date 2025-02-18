@@ -1,6 +1,6 @@
 class Solution:
     def smallestNumber(self, pattern: str) -> str:
-        # return self.naive(pattern)
+        return self.naive(pattern)
 
         # Instead of raw brute force, we can also try backtracking!
         # Since we want lexicographically SMALLEST result, we can enumerate
