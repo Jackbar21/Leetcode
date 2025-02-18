@@ -1,7 +1,8 @@
 class Solution:
     def smallestNumber(self, pattern: str) -> str:
         res = "99"
-        for num in map("".join, itertools.permutations("123456789", len(pattern) + 1)):
+        for str_num in itertools.permutations("123456789", len(pattern) + 1):
+            num = "".join(str_num)
             if num < res and self.isValid(num, pattern):
                 res = num
         return res
