@@ -2,17 +2,19 @@ class Solution:
     def getHappyString(self, n: int, k: int) -> str:
         arr = []
         self.count = 0
-        self.res = ""
+        self.res = "" # Default if no solution is found!
         def backtrack():
             if len(arr) == n:
                 self.count += 1
                 if self.count == k:
+                    # Found k'th lexicographically smallest string, so set
+                    # as global solution result!
                     self.res = "".join(arr)
                 return
             
             # If found solution, then stop!
-            # if self.res != "":
-            #     return
+            if self.res != "":
+                return
             
             prev_char = arr[-1] if len(arr) > 0 else None
             for char in ["a", "b", "c"]:
@@ -22,10 +24,6 @@ class Solution:
                 arr.append(char)
                 backtrack()
                 arr.pop()
-
-                # If found solution, then stop!
-                # if self.res != "":
-                #     return
         
         backtrack()
         return self.res
