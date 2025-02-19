@@ -1,6 +1,6 @@
 class Solution:
     def getHappyString(self, n: int, k: int) -> str:
-        return self.yielding(n, k)
+        # return self.yielding(n, k)
 
         arr = []
         self.count = 0
