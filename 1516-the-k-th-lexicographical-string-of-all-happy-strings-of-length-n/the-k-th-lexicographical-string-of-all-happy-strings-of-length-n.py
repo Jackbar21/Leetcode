@@ -6,8 +6,9 @@ class Solution:
                 yield arr
                 return
             
+            prev_char = arr[-1] if len(arr) > 0 else None
             for char in ["a", "b", "c"]:
-                if len(arr) > 0 and arr[-1] == char:
+                if char == prev_char:
                     continue
 
                 arr.append(char)
