@@ -48,8 +48,5 @@ class Solution:
                 arr.pop()
             
         count = 0
-        for string in list(backtrack()):
-            count += 1
-            if count == k:
-                return string
-        return ""
+        res = list(backtrack())
+        return "" if not (k - 1 < len(res)) else res[k - 1]
