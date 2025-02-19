@@ -35,7 +35,7 @@ class Solution:
         arr = []
         def backtrack():
             if len(arr) == n:
-                yield "".join(arr)
+                yield arr
                 return
             
             prev_char = arr[-1] if len(arr) > 0 else None
@@ -48,5 +48,8 @@ class Solution:
                 arr.pop()
             
         count = 0
-        res = list(backtrack())
-        return "" if not (k - 1 < len(res)) else res[k - 1]
+        for array in backtrack():
+            count += 1
+            if count == k:
+                return "".join(array)
+        return ""
