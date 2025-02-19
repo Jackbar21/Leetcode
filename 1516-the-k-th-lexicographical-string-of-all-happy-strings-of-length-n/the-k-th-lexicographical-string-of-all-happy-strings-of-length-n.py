@@ -1,7 +1,5 @@
 class Solution:
     def getHappyString(self, n: int, k: int) -> str:
-        # return self.yielding(n, k)
-
         arr = []
         self.count = 0
         self.res = ""
@@ -26,8 +24,8 @@ class Solution:
                 arr.pop()
 
                 # If found solution, then stop!
-                if self.res != "":
-                    return
+                # if self.res != "":
+                #     return
         
         backtrack()
         return self.res
