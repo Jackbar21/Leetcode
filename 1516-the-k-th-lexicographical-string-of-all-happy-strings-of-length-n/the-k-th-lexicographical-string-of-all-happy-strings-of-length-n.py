@@ -1,25 +1,25 @@
 class Solution:
     def getHappyString(self, n: int, k: int) -> str:
-        res = []
+        arr = []
         def backtrack():
-            if len(res) == n:
-                yield "".join(res)
+            if len(arr) == n:
+                yield arr
                 return
             
             for char in ["a", "b", "c"]:
-                if len(res) > 0 and res[-1] == char:
+                if len(arr) > 0 and arr[-1] == char:
                     continue
 
-                res.append(char)
+                arr.append(char)
                 yield from backtrack()
-                res.pop()
+                arr.pop()
             
-        string = ""
+        res = []
         enumerable = backtrack()
         for _ in range(k):
             try:
-                string = next(enumerable)
+                res = next(enumerable)
             except:
                 # Not at least k possible happy strings, hence return ""
                 return ""
-        return string
+        return "".join(res)
