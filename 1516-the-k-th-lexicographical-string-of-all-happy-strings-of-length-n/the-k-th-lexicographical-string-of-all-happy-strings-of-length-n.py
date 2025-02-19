@@ -16,5 +16,5 @@ class Solution:
                 res.pop()
             
         arr = list(backtrack())
-        print(f"{arr=}")
+        # print(f"{arr=}")
         return arr[k - 1] if k - 1 < len(arr) else ""
