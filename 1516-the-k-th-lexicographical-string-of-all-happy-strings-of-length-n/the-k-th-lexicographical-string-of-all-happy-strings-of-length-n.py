@@ -13,7 +13,7 @@ class Solution:
                 return
             
             # If found solution, then stop!
-            if self.res != "":
+            if self.count >= k:
                 return
             
             prev_char = arr[-1] if len(arr) > 0 else None
