@@ -11,8 +11,8 @@ class Solution:
                 return
             
             # If found solution, then stop!
-            if self.res != "":
-                return
+            # if self.res != "":
+            #     return
             
             prev_char = arr[-1] if len(arr) > 0 else None
             for char in ["a", "b", "c"]:
