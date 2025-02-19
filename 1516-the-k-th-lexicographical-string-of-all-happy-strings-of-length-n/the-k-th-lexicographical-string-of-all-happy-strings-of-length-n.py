@@ -1,6 +1,5 @@
 class Solution:
     def getHappyString(self, n: int, k: int) -> str:
-
         res = []
         def backtrack():
             if len(res) == n:
@@ -15,6 +14,12 @@ class Solution:
                 yield from backtrack()
                 res.pop()
             
-        arr = list(backtrack())
-        # print(f"{arr=}")
-        return arr[k - 1] if k - 1 < len(arr) else ""
+        string = ""
+        enumerable = backtrack()
+        for _ in range(k):
+            try:
+                string = next(enumerable)
+            except:
+                # Not at least k possible happy strings, hence return ""
+                return ""
+        return string
