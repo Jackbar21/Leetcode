@@ -48,7 +48,7 @@ class Solution:
                 arr.pop()
             
         count = 0
-        for string in (backtrack()):
+        for string in list(backtrack()):
             count += 1
             if count == k:
                 return string
