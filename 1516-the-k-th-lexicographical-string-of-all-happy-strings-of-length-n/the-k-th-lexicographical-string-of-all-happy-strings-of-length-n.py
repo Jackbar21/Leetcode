@@ -1,5 +1,7 @@
 class Solution:
     def getHappyString(self, n: int, k: int) -> str:
+        return self.yielding(n, k)
+
         arr = []
         self.count = 0
         self.res = "" # Default if no solution is found!
@@ -45,12 +47,9 @@ class Solution:
                 yield from backtrack()
                 arr.pop()
             
-        res = []
-        enumerable = backtrack()
-        for _ in range(k):
-            try:
-                res = next(enumerable)
-            except:
-                # Not at least k possible happy strings, hence return ""
-                return ""
-        return "".join(res)
+        count = 0
+        for array in backtrack():
+            count += 1
+            if count == k:
+                return "".join(array)
+        return ""
