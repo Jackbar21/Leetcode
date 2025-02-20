@@ -14,43 +14,6 @@ class Solution:
             index = j
 
         return max_area
-    
-    def neetcode(self, heights: List[int]) -> int:
-        # print(f"{heights=}")
-        N = len(heights)
-        INDEX, HEIGHT = 0, 1
-
-        next_non_smallest = [N - 1] * N
-        stack = [(None, float("-inf"))]
-        for index, height in enumerate(heights):
-            while height < stack[-1][HEIGHT]:
-                prev_index, _ = stack.pop()
-                next_non_smallest[prev_index] = index - 1
-            stack.append((index, height))
-        
-        prev_non_smallest = [0] * N
-        stack = [(None, float("-inf"))]
-        for index in range(N - 1, -1, -1):
-            height = heights[index]
-            # print(f"{stack=}, {index=}, {height=}")
-            while height < stack[-1][HEIGHT]:
-                next_index, _ = stack.pop()
-                prev_non_smallest[next_index] = index + 1
-            stack.append((index, height))
-        # prev_non_smallest = prev_non_smallest[::-1]
-        
-        # print(f"{next_non_smallest=}")
-        # print(f"{prev_non_smallest=}")
-
-        max_area = 0
-        for left, right, height in zip(prev_non_smallest, next_non_smallest, heights):
-            # left = 0 if left == -1 else (left + 1)
-            # right = N - 1 if right == -1 else (right - 1)
-            area = (right - left + 1) * height
-            if max_area < area:
-                max_area = area
-
-        return max_area
 
     def largestRectangleArea(self, heights: List[int]) -> int:
         return self.neetcode(heights)
@@ -77,3 +40,35 @@ class Solution:
         self.next_non_smallest = next_non_smallest
         self.heights = heights
         return max(self.dp(i) for i in range(N))
+
+    def neetcode(self, heights: List[int]) -> int:
+        # I read Neetcode's hints, and developed this O(N) solution from it!
+        N = len(heights)
+        INDEX, HEIGHT = 0, 1
+
+        next_non_smallest = [N - 1] * N
+        stack = [(None, float("-inf"))]
+        for index, height in enumerate(heights):
+            while height < stack[-1][HEIGHT]:
+                prev_index, _ = stack.pop()
+                next_non_smallest[prev_index] = index - 1
+            stack.append((index, height))
+        
+        prev_non_smallest = [0] * N
+        stack = [(None, float("-inf"))]
+        for index in range(N - 1, -1, -1):
+            height = heights[index]
+            while height < stack[-1][HEIGHT]:
+                next_index, _ = stack.pop()
+                prev_non_smallest[next_index] = index + 1
+            stack.append((index, height))
+
+        max_area = 0
+        # for left, right, height in zip(prev_non_smallest, next_non_smallest, heights):
+        for i in range(N):
+            left, right, height = prev_non_smallest[i], next_non_smallest[i], heights[i]
+            area = (right - left + 1) * height
+            if max_area < area:
+                max_area = area
+
+        return max_area
