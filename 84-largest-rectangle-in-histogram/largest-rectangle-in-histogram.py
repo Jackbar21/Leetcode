@@ -16,7 +16,7 @@ class Solution:
         return max_area
     
     def neetcode(self, heights: List[int]) -> int:
-        print(f"{heights=}")
+        # print(f"{heights=}")
         N = len(heights)
         INDEX, HEIGHT = 0, 1
 
