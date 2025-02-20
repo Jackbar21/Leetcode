@@ -6,7 +6,9 @@ class Solution:
         arr = []
         def backtrack():
             if len(arr) == N:
-                yield "".join(arr)
+                bin_string = "".join(arr)
+                if bin_string not in banned:
+                    yield bin_string
                 return
             
             for digit in "01":
@@ -14,7 +16,9 @@ class Solution:
                 yield from backtrack()
                 arr.pop()
         
-        enumerable = backtrack()
+        enumerable = list(backtrack())
+        # print(f"{enumerable}")
+        return enumerable[random.randint(0, len(enumerable) - 1)]
         while (bin_string := next(enumerable)) in banned:
             pass
         return bin_string
