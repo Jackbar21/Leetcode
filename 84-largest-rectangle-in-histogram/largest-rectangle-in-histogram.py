@@ -64,9 +64,7 @@ class Solution:
             stack.append((index, height))
 
         max_area = 0
-        # for left, right, height in zip(prev_non_smallest, next_non_smallest, heights):
-        for i in range(N):
-            left, right, height = prev_non_smallest[i], next_non_smallest[i], heights[i]
+        for left, right, height in zip(prev_non_smallest, next_non_smallest, heights):
             area = (right - left + 1) * height
             if max_area < area:
                 max_area = area
