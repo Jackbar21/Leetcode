@@ -16,7 +16,7 @@ class Solution:
         return max_area
 
     def largestRectangleArea(self, heights: List[int]) -> int:
-        return self.neetcode(heights)
+        # return self.neetcode(heights)
 
         suffix_min = []
         min_height = float("inf")
