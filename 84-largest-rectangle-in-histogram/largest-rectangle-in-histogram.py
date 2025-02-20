@@ -1,5 +1,4 @@
 class Solution:
-    @cache
     def dp(self, i):
         # Monotonic stacks are good for finding NEXT smallest like in Daily Temperatures
         # For each index i, if we know the index of the next smallest element j (assuming there
