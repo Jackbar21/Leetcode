@@ -98,7 +98,10 @@ class Solution:
         max_area = self.suffix_min[i] * (N - i)
         index = i
         while (j := self.next_smallest[index]) != -1:
-            max_area = max(max_area, (j - i) * height)
+            # max_area = max(max_area, (j - i) * height)
+            area = (j - i) * height
+            if max_area < area:
+                max_area = area
             index = j
             height = self.heights[index]
         # return max(max_area, (N - index) * height)
