@@ -24,16 +24,8 @@ class Solution:
                 min_height = height
             suffix_min.append(min_height)
         suffix_min = suffix_min[::-1]
-        self.suffix_min = suffix_min
+        self.suffix_min = suffix_min # self.suffix_min[i] == min(heights[i:])
 
-        # Monotonic stacks are good for finding NEXT smallest like in Daily Temperatures
-        # For each index i, if we know the index of the next smallest element j (assuming there
-        # is such a j, otherwise the last index), then there are two possible cases:
-        #   (1) Largest area will be heights[i] * ((j-1) - i + 1), i.e. width is [i..j-1] range
-        #   (2) len([i..j-1]) * heights[j] + BEST SOLUTION FROM INDEX j ONWARDS!
-
-        # For part 1 we can compute an array of next smallest index for every index i, and for
-        # part 2 we can solve this DP-style to reuse same subproblems!
         N = len(heights)
         INDEX, HEIGHT = 0, 1
         next_smallest = [-1] * N
