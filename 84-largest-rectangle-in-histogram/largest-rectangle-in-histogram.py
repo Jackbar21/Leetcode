@@ -46,41 +46,22 @@ class Solution:
         N = len(heights)
         INDEX, HEIGHT = 0, 1
 
-        # next_non_smallest = [N - 1] * N
-        # stack = [(None, float("-inf"))]
-        # for index, height in enumerate(heights):
-        #     while height < stack[-1][HEIGHT]:
-        #         prev_index, _ = stack.pop()
-        #         next_non_smallest[prev_index] = index - 1
-        #     stack.append((index, height))
-        
-        # prev_non_smallest = [0] * N
-        # stack = [(None, float("-inf"))]
-        # for index in range(N - 1, -1, -1):
-        #     height = heights[index]
-        #     while height < stack[-1][HEIGHT]:
-        #         next_index, _ = stack.pop()
-        #         prev_non_smallest[next_index] = index + 1
-        #     stack.append((index, height))
-
-        # Above, but only one loop instead of two!
-        next_stack, prev_stack = [(None, float("-inf"))], [(None, float("-inf"))]
         next_non_smallest = [N - 1] * N
+        stack = [(None, float("-inf"))]
+        for index, height in enumerate(heights):
+            while height < stack[-1][HEIGHT]:
+                prev_index, _ = stack.pop()
+                next_non_smallest[prev_index] = index - 1
+            stack.append((index, height))
+        
         prev_non_smallest = [0] * N
-        for i, h in enumerate(heights):
-            next_index, next_height = i, h
-            prev_index = N - 1 - i
-            prev_height = heights[prev_index]
-
-            while next_height < next_stack[-1][HEIGHT]:
-                index, _ = next_stack.pop()
-                next_non_smallest[index] = next_index - 1
-            next_stack.append((next_index, next_height))
-
-            while prev_height < prev_stack[-1][HEIGHT]:
-                index, _ = prev_stack.pop()
-                prev_non_smallest[index] = prev_index + 1
-            prev_stack.append((prev_index, prev_height))
+        stack = [(None, float("-inf"))]
+        for index in range(N - 1, -1, -1):
+            height = heights[index]
+            while height < stack[-1][HEIGHT]:
+                next_index, _ = stack.pop()
+                prev_non_smallest[next_index] = index + 1
+            stack.append((index, height))
 
         max_area = 0
         for left, right, height in zip(prev_non_smallest, next_non_smallest, heights):
