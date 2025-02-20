@@ -16,9 +16,5 @@ class Solution:
                 yield from backtrack()
                 arr.pop()
         
-        enumerable = list(backtrack())
-        # print(f"{enumerable}")
-        return enumerable[random.randint(0, len(enumerable) - 1)]
-        while (bin_string := next(enumerable)) in banned:
-            pass
-        return bin_string
+        enumerable = backtrack() # Enumerable of ALL valid solutions
+        return next(enumerable)
