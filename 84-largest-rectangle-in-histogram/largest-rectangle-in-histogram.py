@@ -43,9 +43,9 @@ class Solution:
         # print(f"{prev_smallest=}")
 
         max_area = 0
-        for index, height in enumerate(heights):
-            left = prev_smallest[index] + 1 if prev_smallest[index] != -1 else 0
-            right = next_smallest[index] - 1 if next_smallest[index] != -1 else N - 1
+        for left, right, height in zip(prev_smallest, next_smallest, heights):
+            left = 0 if left == -1 else (left + 1)
+            right = N - 1 if right == -1 else (right - 1)
             area = (right - left + 1) * height
             if max_area < area:
                 max_area = area
