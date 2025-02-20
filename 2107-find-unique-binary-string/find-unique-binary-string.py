@@ -16,6 +16,5 @@ class Solution:
                 yield from backtrack()
                 arr.pop()
         
-        valid_solutions = list(backtrack()) # Enumerable of ALL valid solutions
-        return valid_solutions[0]
+        valid_solutions = backtrack() # Enumerable of ALL valid solutions
         return next(valid_solutions) # Return first result!
