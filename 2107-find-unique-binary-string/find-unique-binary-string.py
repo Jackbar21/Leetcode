@@ -1,7 +1,7 @@
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
         N = len(nums)
-        banned = (nums)
+        banned = set(nums)
         
         arr = []
         def backtrack():
