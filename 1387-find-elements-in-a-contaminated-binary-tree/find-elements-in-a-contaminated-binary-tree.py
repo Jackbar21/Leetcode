@@ -7,20 +7,22 @@
 class FindElements:
 
     def __init__(self, root: Optional[TreeNode]):
-        # self.nums = set()
+        self.nums = set()
         def inorder(treeNode, x):
             if treeNode is None:
                 return
             
-            # self.inorder(treeNode.left, 2 * x + 1)
-            # self.nums.add(x)
-            # self.inorder(treeNode.right, 2 * x + 2)
+            inorder(treeNode.left, 2 * x + 1)
+            self.nums.add(x)
+            inorder(treeNode.right, 2 * x + 2)
 
-            yield from inorder(treeNode.left, 2 * x + 1)
-            yield x
-            yield from inorder(treeNode.right, 2 * x + 2)
+            # yield from inorder(treeNode.left, 2 * x + 1)
+            # yield x
+            # yield from inorder(treeNode.right, 2 * x + 2)
         
-        self.nums = set(inorder(root, 0))
+        inorder(root, 0)
+        
+        # self.nums = set(inorder(root, 0))
             
 
     def find(self, target: int) -> bool:
