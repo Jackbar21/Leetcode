@@ -13,17 +13,11 @@ class FindElements:
                 return
             
             inorder(treeNode.left, 2 * x + 1)
-            self.nums.add(x)
             inorder(treeNode.right, 2 * x + 2)
+            self.nums.add(x)
 
-            # yield from inorder(treeNode.left, 2 * x + 1)
-            # yield x
-            # yield from inorder(treeNode.right, 2 * x + 2)
-        
         inorder(root, 0)
         
-        # self.nums = set(inorder(root, 0))
-            
 
     def find(self, target: int) -> bool:
         return target in self.nums
