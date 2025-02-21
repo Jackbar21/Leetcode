@@ -12,9 +12,10 @@ class FindElements:
             if treeNode is None:
                 return
             
+            self.nums.add(x)
             inorder(treeNode.left, 2 * x + 1)
             inorder(treeNode.right, 2 * x + 2)
-            self.nums.add(x)
+            
 
         inorder(root, 0)
         
