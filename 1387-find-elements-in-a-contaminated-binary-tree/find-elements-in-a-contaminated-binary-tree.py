@@ -17,7 +17,7 @@ class FindElements:
                 stack.append((rightNode, 2 * x + 2))
         
     def find(self, target: int) -> bool:
-        return target in self.nums    
+        return target in self.nums
 
             
 
