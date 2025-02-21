@@ -11,10 +11,10 @@ class FindElements:
         while stack:
             treeNode, x = stack.pop()
             self.nums.add(x)
-            if (leftNode := treeNode.left):
-                stack.append((leftNode, 2 * x + 1))
-            if (rightNode := treeNode.right):
-                stack.append((rightNode, 2 * x + 2))
+            if treeNode.left:
+                stack.append((treeNode.left, 2 * x + 1))
+            if treeNode.right:
+                stack.append((treeNode.right, 2 * x + 2))
         
     def find(self, target: int) -> bool:
         return target in self.nums    
