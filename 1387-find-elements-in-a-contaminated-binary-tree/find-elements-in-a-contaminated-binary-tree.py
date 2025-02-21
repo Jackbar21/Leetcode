@@ -6,16 +6,15 @@
 #         self.right = right
 class FindElements:
     def __init__(self, root: Optional[TreeNode]):
-        nums = []
+        self.nums = set()
         stack = [(root, 0)]
         while stack:
             treeNode, x = stack.pop()
-            nums.append(x)
+            self.nums.add(x)
             if (leftNode := treeNode.left):
                 stack.append((leftNode, 2 * x + 1))
             if (rightNode := treeNode.right):
                 stack.append((rightNode, 2 * x + 2))
-        self.nums = set(nums)
         
     def find(self, target: int) -> bool:
         return target in self.nums    
