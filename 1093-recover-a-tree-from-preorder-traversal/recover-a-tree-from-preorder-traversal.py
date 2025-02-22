@@ -38,12 +38,12 @@ class Solution:
             # # Loop Invariant
             # i += 1
         
-        print(f"{d=}")
-        print(f"{depths=}")
+        ###print(f"{d=}")
+        ###print(f"{depths=}")
 
         # stack = []
-        assert depths.popleft() == 0
-        root = TreeNode(d[0].pop())
+        #assert depths.popleft() == 0
+        root = TreeNode(d[depths.popleft()].pop())
         prev_depth = 0
         stack = [root]
         node_to_depth = {root: 0}
@@ -54,32 +54,32 @@ class Solution:
 
             prev_node = stack[-1]
             if depth > prev_depth:
-                print(f"{depth=}, {prev_depth=}")
-                assert depth == prev_depth + 1
+                ###print(f"{depth=}, {prev_depth=}")
+                #assert depth == prev_depth + 1
                 if not prev_node.left:
                     prev_node.left = node
                 else:
-                    assert not prev_node.right
+                    #assert not prev_node.right
                     prev_node.right = node
                 stack.append(node)
                 prev_depth = depth
                 continue
             
             if depth == prev_depth:
-                assert len(stack) >= 2
+                #assert len(stack) >= 2
                 prev_prev_node = stack[-2]
-                assert prev_prev_node.left and not prev_prev_node.right
+                #assert prev_prev_node.left and not prev_prev_node.right
                 prev_prev_node.right = node
                 stack.append(node)
                 prev_depth = depth
                 continue
             
-            assert depth < prev_depth
+            #assert depth < prev_depth
             while node_to_depth[stack[-1]] != depth - 1:
                 stack.pop()
             parent_node = stack.pop()
-            print(f"{parent_node=}, {node=}")
-            assert parent_node.left and not parent_node.right
+            ###print(f"{parent_node=}, {node=}")
+            #assert parent_node.left and not parent_node.right
             parent_node.right = node
             prev_depth = depth
             stack.append(node)
