@@ -8,8 +8,8 @@ class Solution:
     def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
         N = len(traversal)
         DASH = "-"
-        d = defaultdict(collections.deque)
-        depths = collections.deque()
+        d = defaultdict(list)
+        depths = []
         cur_depth = 0
         i = 0
 
@@ -34,15 +34,20 @@ class Solution:
             d[cur_depth].append(num)
             depths.append(cur_depth)
             cur_depth = 0
-
+        
+        # Reverse depths and dict value arrays, as we need to pop
+        # from the left continuously (hence reverse, then pop from right continuously!)
+        for key, values in d.items():
+            d[key] = values[::-1]
+        
         # Step 2: Build the tree!
         #assert depths.popleft() == 0
-        root = TreeNode(d[depths.popleft()].pop())
+        root = TreeNode(d[depths.pop(0)].pop()) # O(N)
         prev_depth = 0
         stack = [root]
         node_to_depth = {root: 0}
         for depth in depths:
-            val = d[depth].popleft()
+            val = d[depth].pop()
             node = TreeNode(val)
             node_to_depth[node] = depth
 
