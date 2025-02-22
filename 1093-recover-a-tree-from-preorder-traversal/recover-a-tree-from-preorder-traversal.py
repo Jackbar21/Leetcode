@@ -7,11 +7,14 @@
 class Solution:
     def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
         N = len(traversal)
-        d = defaultdict(collections.deque)
-        cur_depth = 0
         DASH = "-"
+        d = defaultdict(collections.deque)
         depths = collections.deque()
+        cur_depth = 0
         i = 0
+
+        # Step 1: Convert 'traversal' string into dictionary of depths-to-values
+        # and order of depths traversed from dashes :)
         while i < N:
             char = traversal[i]
             if char == DASH:
@@ -26,22 +29,13 @@ class Solution:
                 if i == N:
                     break
                 char = traversal[i]
-            # i -= 1
             num = int("".join(chars))
 
-
-            
             d[cur_depth].append(num)
             depths.append(cur_depth)
             cur_depth = 0
 
-            # # Loop Invariant
-            # i += 1
-        
-        ###print(f"{d=}")
-        ###print(f"{depths=}")
-
-        # stack = []
+        # Step 2: Build the tree!
         #assert depths.popleft() == 0
         root = TreeNode(d[depths.popleft()].pop())
         prev_depth = 0
@@ -54,7 +48,6 @@ class Solution:
 
             prev_node = stack[-1]
             if depth > prev_depth:
-                ###print(f"{depth=}, {prev_depth=}")
                 #assert depth == prev_depth + 1
                 if not prev_node.left:
                     prev_node.left = node
@@ -78,12 +71,9 @@ class Solution:
             while node_to_depth[stack[-1]] != depth - 1:
                 stack.pop()
             parent_node = stack.pop()
-            ###print(f"{parent_node=}, {node=}")
             #assert parent_node.left and not parent_node.right
             parent_node.right = node
             prev_depth = depth
             stack.append(node)
         
         return root
-
-                 
