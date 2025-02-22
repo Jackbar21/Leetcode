@@ -9,7 +9,7 @@ class Solution:
         N = len(traversal)
         DASH = "-"
         d = defaultdict(list)
-        depths = []
+        depths = collections.deque()
         cur_depth = 0
         i = 0
 
@@ -42,7 +42,7 @@ class Solution:
         
         # Step 2: Build the tree!
         #assert depths.popleft() == 0
-        root = TreeNode(d[depths.pop(0)].pop()) # O(N)
+        root = TreeNode(d[depths.popleft()].pop())
         prev_depth = 0
         stack = [root]
         node_to_depth = {root: 0}
