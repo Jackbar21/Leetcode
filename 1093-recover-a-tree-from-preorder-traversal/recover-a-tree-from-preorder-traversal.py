@@ -52,12 +52,8 @@ class Solution:
             if depth > prev_depth:
                 #assert depth == prev_depth + 1
                 prev_node = stack[-1]
-                assert not prev_node.left
-                if not prev_node.left:
-                    prev_node.left = node
-                else:
-                    #assert not prev_node.right
-                    prev_node.right = node
+                # assert not prev_node.left
+                prev_node.left = node
                 stack.append(node)
                 prev_depth = depth
                 continue
