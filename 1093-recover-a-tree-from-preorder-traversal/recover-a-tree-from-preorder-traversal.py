@@ -35,9 +35,6 @@ class Solution:
             depths.append(cur_depth)
             cur_depth = 0
         
-        print(f"{d=}")
-        print(f"{depths=}")
-        
         # Step 2: Build the tree!
         #assert depths.popleft() == 0
         root = TreeNode(d[depths.popleft()].pop())
@@ -57,19 +54,6 @@ class Solution:
                 stack.append(node)
                 prev_depth = depth
                 continue
-            
-            #        1
-            #      /   \
-            #     2      5
-            #    /      /
-            #   3      6
-            #  /      /
-            # 4      7
-            # stack = [5, 6, 7]
-            # prev_depth = 3
-            # depth = 3
-            # node = 7
-            # d = {0: [], 1: [], 2: [], 3: []}
             
             if depth == prev_depth:
                 #assert len(stack) >= 2
