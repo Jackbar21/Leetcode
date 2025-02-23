@@ -20,7 +20,9 @@ class Solution:
             # adding nodes from top of the stack THEN.
             if (val := postorder[post_index]) in visited:
                 # assert stack.pop().val == val
-                stack.pop()
+                # stack.pop()
+                while stack.pop().val != val:
+                    pass
                 post_index += 1
                 continue
 
