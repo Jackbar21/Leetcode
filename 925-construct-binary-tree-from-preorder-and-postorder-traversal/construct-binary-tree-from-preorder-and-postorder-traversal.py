@@ -57,21 +57,3 @@ class Solution:
             post_index += 1
         
         return root
-
-
-# preorder = []
-# postorder = []
-# visited = {1, 2, 4, 5, 3, 6, 7}
-
-# target_val = 3
-
-# stack = [] (nodes, not values!)
-
-#         1
-#       /   \
-#     2       3
-#    / \     / \
-#   4   5   6   7
-
-
-# root = 1
