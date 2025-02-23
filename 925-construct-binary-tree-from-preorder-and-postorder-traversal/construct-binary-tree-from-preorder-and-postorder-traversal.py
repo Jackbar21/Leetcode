@@ -15,56 +15,47 @@ class Solution:
         visited.add(root.val)
 
         while post_index < len(postorder):
+            # Already seen node, so keep deleting nodes in stack
+            # until we reach this seen node, delete it, and continue
+            # adding nodes from top of the stack THEN.
             if (val := postorder[post_index]) in visited:
-                post_index += 1
                 while stack.pop().val != val:
                     pass
+                post_index += 1
                 continue
-        # for i in range(1):
-            #print(f"{pre_index=}, {post_index=}")
-            while (val := preorder[pre_index]) != postorder[post_index]:
+
+            target_val = postorder[post_index]
+            while (val := preorder[pre_index]) != target_val:
                 node = TreeNode(val)
-                #assert val not in visited
+                # assert val not in visited
                 visited.add(val)
                 prev_node = stack[-1]
-                # #assert not prev_node.left
                 if not prev_node.left:
                     prev_node.left = node
                 else:
                     #assert not prev_node.right
                     prev_node.right = node
-                # stack[-1].left = node
+
                 stack.append(node)
-                
                 pre_index += 1
+                val = preorder[pre_index]
+
             # One more time
             node = TreeNode(val)
-            #assert val not in visited
+            # assert val not in visited
             visited.add(val)
-            # stack[-1].left = node
             prev_node = stack[-1]
             if not prev_node.left:
                 prev_node.left = node
             else:
                 #assert not prev_node.right
                 prev_node.right = node
+
             stack.append(node)
             pre_index += 1
+
+            # Finally visited target val, so continue from here
             post_index += 1
-            
-            # stack.append(preorder[pre_index])
-            # pre_index += 1
-            # post_index += 1
-
-            # #print(f"{val_to_node=}")
-            # #print(f"{stack=}")
-            #print("STACK START")
-            # for line in stack:
-                #print(f"node={line}")
-            #print("STACK END")
-            #print(f"{preorder[pre_index:]=}")
-            #print(f"{postorder[post_index:]=}")
-
             stack.pop()
         
         return root
