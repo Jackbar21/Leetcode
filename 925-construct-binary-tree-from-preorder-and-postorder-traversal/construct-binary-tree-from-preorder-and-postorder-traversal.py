@@ -51,11 +51,27 @@ class Solution:
                 #assert not prev_node.right
                 prev_node.right = node
 
-            stack.append(node)
+            # Don't append node to stack!
             pre_index += 1
-
             # Finally visited target val, so continue from here
             post_index += 1
-            stack.pop()
         
         return root
+
+
+# preorder = [5,3,6,7]
+# postorder = [5,2,6,7,3,1]
+# visited = {1, 2, 4}
+
+# target_val = 4
+
+# stack = [1, 2] (nodes, not values!)
+
+#       1
+#      /
+#     2
+#    /
+#   4
+
+
+# root = 1
