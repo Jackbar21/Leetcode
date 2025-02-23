@@ -19,8 +19,7 @@ class Solution:
             # until we reach this seen node, delete it, and continue
             # adding nodes from top of the stack THEN.
             if (val := postorder[post_index]) in visited:
-                while stack.pop().val != val:
-                    pass
+                assert stack.pop().val == val
                 post_index += 1
                 continue
 
@@ -59,19 +58,19 @@ class Solution:
         return root
 
 
-# preorder = [5,3,6,7]
-# postorder = [5,2,6,7,3,1]
-# visited = {1, 2, 4}
+# preorder = []
+# postorder = []
+# visited = {1, 2, 4, 5, 3, 6, 7}
 
-# target_val = 4
+# target_val = 3
 
-# stack = [1, 2] (nodes, not values!)
+# stack = [] (nodes, not values!)
 
-#       1
-#      /
-#     2
-#    /
-#   4
+#         1
+#       /   \
+#     2       3
+#    / \     / \
+#   4   5   6   7
 
 
 # root = 1
