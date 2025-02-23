@@ -19,7 +19,8 @@ class Solution:
             # until we reach this seen node, delete it, and continue
             # adding nodes from top of the stack THEN.
             if (val := postorder[post_index]) in visited:
-                assert stack.pop().val == val
+                # assert stack.pop().val == val
+                stack.pop()
                 post_index += 1
                 continue
 
