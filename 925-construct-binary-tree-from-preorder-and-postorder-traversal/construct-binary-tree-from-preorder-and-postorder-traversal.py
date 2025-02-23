@@ -6,29 +6,19 @@
 #         self.right = right
 class Solution:
     def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        # if len(preorder) == 1:
-        #     return TreeNode(preorder[0])
-
+        # Setup Work
         pre_index, post_index = 0, 0
-        val_to_node = {}
-        #print(f"{preorder=}")
-        #print(f"{postorder=}")
-
-        
-        root = TreeNode(preorder[0])
-        pre_index = 1
+        root = TreeNode(preorder[pre_index])
+        pre_index += 1
         stack = [root]
         visited = set() # values, not nodes!
         visited.add(root.val)
+
         while post_index < len(postorder):
-            #print(f"{visited=}")
-            #print(f"{post_index=}, {postorder[post_index]=}")
             if (val := postorder[post_index]) in visited:
                 post_index += 1
-                while stack[-1].val != val: # all values unique!
-                    stack.pop()
-                #assert stack.pop().val == val
-                stack.pop()
+                while stack.pop().val != val:
+                    pass
                 continue
         # for i in range(1):
             #print(f"{pre_index=}, {post_index=}")
