@@ -42,7 +42,7 @@ class Solution:
             node, path = queue.popleft()
             if node == root:
                 paths.append(path)
-                # break # TODO: make this a break!
+                break # TODO: make this a break!
                 continue
             
             for neigh in node.neighbors:
