@@ -15,8 +15,6 @@ class Solution:
         # 0 to n - 1, they are unique (although if they weren't, we could just create TreeNode objects and
         # use their hash as unique IDs).
         N = len(edges) + 1
-        # nodes = [TreeNode(i) for i in range(N)]
-        # nodes = [i for i in range(N)]
         nodes = range(N)
         adj_list = defaultdict(set)
         for a, b in edges:
@@ -25,10 +23,9 @@ class Solution:
         root = 0
         
         # Step 2: Get path from bob to 0
-        bob_node = bob
         queue = collections.deque() # (node, path)
-        queue.append((bob_node, [bob_node]))
-        visited = set([bob_node])
+        queue.append((bob, [bob]))
+        visited = set([bob])
 
         bob_path = None
         while len(queue) > 0:
@@ -47,7 +44,6 @@ class Solution:
         visit_times = defaultdict(lambda: float("inf"))
         for time, node in enumerate(bob_path):
             visit_times[node] = time
-        #print(f"{visit_times=}")
 
         # Step 2: We have the times at which bob visited each node (visit_times dict)!
         # Now, let's run a search from root node onwards for Alice, and everytime we reach
@@ -77,10 +73,3 @@ class Solution:
                 visited.add(neigh)
         
         return int(res)
-                
-
-
-        
-
-
-        
