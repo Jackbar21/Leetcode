@@ -52,14 +52,14 @@ class Solution:
                 queue.append((neigh, path + [neigh]))
         
         assert len(paths) == 1
-        print(f"{paths=}")
+        #print(f"{paths=}")
         bob_path = paths[0]
-        print(f"{[node.val for node in bob_path]=}")
+        #print(f"{[node.val for node in bob_path]=}")
 
         visit_times = defaultdict(lambda: float("inf"))
         for time, node in enumerate(bob_path):
             visit_times[node] = time
-        print(f"{visit_times=}")
+        #print(f"{visit_times=}")
 
         # Step 2: We have the times at which bob visited each node (visit_times dict)!
         # Now, let's run a search from root node onwards for Alice, and everytime we reach
