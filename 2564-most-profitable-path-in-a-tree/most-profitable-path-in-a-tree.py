@@ -1,13 +1,3 @@
-class TreeNode:
-    # def __init__(self, val, parent = None):
-    #     self.val = val
-    #     self.children = []
-    #     self.parent = parent
-    def __init__(self, val):
-        self.val = val
-        self.neighbors = []
-    def add_neighbor(self, neighbor):
-        self.neighbors.append(neighbor)
 class Solution:
     def mostProfitablePath(self, edges: List[List[int]], bob: int, amount: List[int]) -> int:
         # Idea: First, since Bob starts at some node 'bob' and works his way UP the tree, his
@@ -25,15 +15,17 @@ class Solution:
         # 0 to n - 1, they are unique (although if they weren't, we could just create TreeNode objects and
         # use their hash as unique IDs).
         N = len(edges) + 1
-        nodes = [TreeNode(i) for i in range(N)]
+        # nodes = [TreeNode(i) for i in range(N)]
+        # nodes = [i for i in range(N)]
+        nodes = range(N)
+        adj_list = defaultdict(set)
         for a, b in edges:
-            node_a, node_b = nodes[a], nodes[b]
-            node_a.add_neighbor(node_b)
-            node_b.add_neighbor(node_a)
-        root = nodes[0]
+            adj_list[a].add(b)
+            adj_list[b].add(a)
+        root = 0
         
-        # Get path from bob to 0
-        bob_node = nodes[bob]
+        # Step 2: Get path from bob to 0
+        bob_node = bob
         queue = collections.deque() # (node, path)
         queue.append((bob_node, [bob_node]))
         visited = set([bob_node])
@@ -45,7 +37,8 @@ class Solution:
                 bob_path = path
                 break
             
-            for neigh in node.neighbors:
+            # for neigh in node.neighbors:
+            for neigh in adj_list[node]:
                 if neigh in visited:
                     continue
                 visited.add(neigh)
@@ -66,15 +59,17 @@ class Solution:
             node, alice_time, reward = stack.pop()
             bob_time = visit_times[node]
             if alice_time < bob_time:
-                reward += amount[node.val]
+                reward += amount[node]
             elif alice_time == bob_time:
-                reward += amount[node.val] / 2
+                reward += amount[node] / 2
             # else, no reward nor cost since gate already open!
 
             # If node is a leaf node, update cur best result!
-            unvisited_neighbors = [neigh for neigh in node.neighbors if neigh not in visited]
+            # unvisited_neighbors = [neigh for neigh in node.neighbors if neigh not in visited]
+            unvisited_neighbors = adj_list[node] - visited
             if len(unvisited_neighbors) == 0:
-                res = max(res, reward)
+                if res < reward:
+                    res = reward
                 continue
             
             for neigh in unvisited_neighbors:
