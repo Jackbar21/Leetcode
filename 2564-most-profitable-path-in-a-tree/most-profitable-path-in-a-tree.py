@@ -5,9 +5,9 @@ class TreeNode:
     #     self.parent = parent
     def __init__(self, val):
         self.val = val
-        self.neighbors = set()
+        self.neighbors = []
     def add_neighbor(self, neighbor):
-        self.neighbors.add(neighbor)
+        self.neighbors.append(neighbor)
 class Solution:
     def mostProfitablePath(self, edges: List[List[int]], bob: int, amount: List[int]) -> int:
         # Idea: First, since Bob starts at some node 'bob' and works his way UP the tree, his
@@ -36,25 +36,20 @@ class Solution:
         bob_node = nodes[bob]
         queue = collections.deque() # (node, path)
         queue.append((bob_node, [bob_node]))
-        paths = []
         visited = set([bob_node])
+
+        bob_path = None
         while len(queue) > 0:
             node, path = queue.popleft()
             if node == root:
-                paths.append(path)
-                break # TODO: make this a break!
-                continue
+                bob_path = path
+                break
             
             for neigh in node.neighbors:
                 if neigh in visited:
                     continue
                 visited.add(neigh)
                 queue.append((neigh, path + [neigh]))
-        
-        assert len(paths) == 1
-        #print(f"{paths=}")
-        bob_path = paths[0]
-        #print(f"{[node.val for node in bob_path]=}")
 
         visit_times = defaultdict(lambda: float("inf"))
         for time, node in enumerate(bob_path):
