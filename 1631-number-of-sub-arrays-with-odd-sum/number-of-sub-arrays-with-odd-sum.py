@@ -5,17 +5,17 @@ class Solution:
 
         # Compute prefix sums to be able to obtain sum of
         # ANY subarray in arr in O(1) time
-        prefix_sums = []
-        cur_sum = 0
-        for num in arr:
-            cur_sum += num
-            prefix_sums.append(cur_sum)
+        # prefix_sums = []
+        # cur_sum = 0
+        # for num in arr:
+        #     cur_sum += num
+        #     prefix_sums.append(cur_sum)
 
-        getSubarraySum = lambda i, j: prefix_sums[j] - (prefix_sums[i - 1] if i > 0 else 0) # O(1)
-        isOddSubarray = lambda i, j: getSubarraySum(i, j) & 1 # O(1)
+        # getSubarraySum = lambda i, j: prefix_sums[j] - (prefix_sums[i - 1] if i > 0 else 0) # O(1)
+        # isOddSubarray = lambda i, j: getSubarraySum(i, j) & 1 # O(1)
         # return sum(isOddSubarray(i, j) for i in range(N) for j in range(i, N)) # O(N^2)
 
-        self.isOddSubarray = isOddSubarray
+        # self.isOddSubarray = isOddSubarray
         self.arr = arr
         self.memo = {}
         EVEN, ODD = 0, 1
