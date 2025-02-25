@@ -48,3 +48,9 @@ class Solution:
         for i in range(N):
             res += dp(i)[1] # Index 1 is for odd sum counts!
         return res % MOD
+
+# There are K subarrays of odd sum in nums that start at index (i + 1)
+# Then if nums[i] is EVEN, then we know there are STILL K subarrays of odd sum from index i onwards!
+
+# O subarrays that are odd sum from index i + 1, and E subarrays of even sum
+# If index i is a number that is ODD
