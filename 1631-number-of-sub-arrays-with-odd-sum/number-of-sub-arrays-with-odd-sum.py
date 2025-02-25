@@ -1,12 +1,14 @@
 class Solution:
     def numOfSubarrays(self, arr: List[int]) -> int:
-        # return self.numOfSubarraysTopDown(arr) # Top-Down DP, still O(N)
+        # Top-Down DP, still O(N)
+        # return self.numOfSubarraysTopDown(arr) 
+
+        # Bottom-Up DP, O(1) space
         N = len(arr)
         MOD = pow(10, 9) + 7
-
         res, num_even, num_odd = 0, 0, 0
         for i in range(N):
-            num_even, num_odd = (num_odd, num_even + 1) if arr[i] % 2 else (num_even + 1, num_odd)
+            num_even, num_odd = (num_odd, num_even + 1) if arr[i] & 1 else (num_even + 1, num_odd)
             res += num_odd
         return res % MOD
         
