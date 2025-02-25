@@ -6,7 +6,7 @@ class Solution:
 
         res, num_even, num_odd = 0, 0, 0
         for i in range(N):
-            num_even, num_odd = (num_odd, num_even + 1) if arr[i] % 2 else (num_even + 1, num_odd)
+            num_even, num_odd = (num_odd, num_even + 1) if arr[i] & 1 else (num_even + 1, num_odd)
             res += num_odd
         return res % MOD
         
