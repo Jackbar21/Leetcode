@@ -5,12 +5,17 @@ class Solution:
         MOD = pow(10, 9) + 7
         EVEN, ODD = 0, 1
 
-        dp = [(0, 0)] * (N + 1)
+        # dp = [(0, 0)] * (N + 1)
+        # res = 0
+        # for i in range(N - 1, -1, -1):
+        #     num_even, num_odd = dp[i + 1]
+        #     dp[i] = (num_odd, num_even + 1) if arr[i] & 1 else (num_even + 1, num_odd)
+        #     res += dp[i][ODD]
+        num_even, num_odd = 0, 0
         res = 0
-        for i in range(N - 1, -1, -1):
-            num_even, num_odd = dp[i + 1]
-            dp[i] = (num_odd, num_even + 1) if arr[i] & 1 else (num_even + 1, num_odd)
-            res += dp[i][ODD]
+        for i in range(N):
+            num_even, num_odd = (num_odd, num_even + 1) if arr[i] & 1 else (num_even + 1, num_odd)
+            res += num_odd
         
         return res % MOD
         
