@@ -1,5 +1,13 @@
 class Solution:
     def numOfSubarrays(self, arr: List[int]) -> int:
+        return self.numOfSubarraysTopDown(arr)
+        N = len(arr)
+        MOD = pow(10, 9) + 7
+
+        
+
+    def numOfSubarraysTopDown(self, arr: List[int]) -> int:
+        # O(N) algorithm
         N = len(arr)
         MOD = pow(10, 9) + 7
 
@@ -32,4 +40,5 @@ class Solution:
         res = 0
         for i in range(N):
             res += dp(i)[1] # Index 1 is for odd sum counts!
-        return res % MOD
+            res %= MOD
+        return res
