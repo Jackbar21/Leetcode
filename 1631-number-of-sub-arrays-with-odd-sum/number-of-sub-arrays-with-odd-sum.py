@@ -24,9 +24,8 @@ class Solution:
             # # But of course, we increase number of odd subarrays by one as well, for the singular
             # # element :)
             # return (num_odd, num_even + 1)
-            res = (num_even + 1, num_odd) if arr[i] % 2 == 0 else (num_odd, num_even + 1)
-            memo[i] = res
-            return res
+            memo[i] = (num_even + 1, num_odd) if arr[i] % 2 == 0 else (num_odd, num_even + 1)
+            return memo[i]
 
         res = 0
         for i in range(N):
