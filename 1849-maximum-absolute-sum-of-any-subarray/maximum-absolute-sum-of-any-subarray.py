@@ -8,7 +8,7 @@ class Solution:
         # )
 
         cur_pos_sum, cur_neg_sum = 0, 0
-        res = nums[0]
+        res = 0 # Since we can always take ABSOLUTE VALUE of any subarray, 0 is smallest possible result!
         for num in nums:
             cur_pos_sum += num
             cur_neg_sum -= num
