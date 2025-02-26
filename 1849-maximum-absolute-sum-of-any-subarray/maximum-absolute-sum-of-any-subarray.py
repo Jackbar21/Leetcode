@@ -14,17 +14,15 @@ class Solution:
             cur_pos_sum += num
             cur_neg_sum -= num
 
-            # Update res
-            if res < cur_pos_sum:
-                res = cur_pos_sum
-            if res < cur_neg_sum:
-                res = cur_neg_sum
-
-            # Reset current sums
             if cur_pos_sum < 0:
                 cur_pos_sum = 0
+            elif res < cur_pos_sum:
+                res = cur_pos_sum
+
             if cur_neg_sum < 0:
                 cur_neg_sum = 0
+            elif res < cur_neg_sum:
+                res = cur_neg_sum
 
         return res
     
