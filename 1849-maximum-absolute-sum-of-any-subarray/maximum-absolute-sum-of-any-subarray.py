@@ -12,7 +12,10 @@ class Solution:
         for num in nums:
             cur_pos_sum += num
             cur_neg_sum -= num
-            res = max(res, cur_pos_sum, cur_neg_sum)
+            if res < cur_pos_sum:
+                res = cur_pos_sum
+            if res < cur_neg_sum:
+                res = cur_neg_sum
             if cur_pos_sum < 0:
                 cur_pos_sum = 0
             if cur_neg_sum < 0:
