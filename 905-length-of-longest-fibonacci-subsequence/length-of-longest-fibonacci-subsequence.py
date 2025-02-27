@@ -16,16 +16,19 @@ class Solution:
         for i, x in enumerate(arr):
             for j in range(i + 1, N):
                 y = arr[j]
-                length = 2 + self.dp(x, y)
+                length = self.dp(x, y)
                 if res < length:
                     res = length
 
-        return res if res >= 3 else 0
+        return res + 2 if res >= 1 else 0
 
     def dp(self, x, y):
         # if (x, y) in self.memo:
         #     return self.memo[(x, y)]
-
-        res = 1 + self.dp(y, x + y) if (x + y) in self.nums else 0
+        # res = 1 + self.dp(y, x + y) if (x + y) in self.nums else 0
         # self.memo[(x, y)] = res
-        return res
+        # return res
+
+        # For some reason, caching as per solution above makes things slower!
+        # Hence, just return the raw result :)
+        return 1 + self.dp(y, x + y) if (x + y) in self.nums else 0
