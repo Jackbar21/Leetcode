@@ -26,17 +26,6 @@ class Solution:
         # if (x, y) in self.memo:
         #     return self.memo[(x, y)]
 
-        # if y > (self.arr[-1]):
-        #     return 0        
-
-        res = 0
-        # base = self.arr[i] + self.arr[j]
-        # index = self.num_to_index.get(base, -1)
-        if (x + y) in self.nums:
-            res = 1 + self.dp(y, x + y)
-
-        # if index > j:
-        #     res = 1 + self.dp(j, index)
-
+        res = 1 + self.dp(y, x + y) if (x + y) in self.nums else 0
         # self.memo[(x, y)] = res
         return res
