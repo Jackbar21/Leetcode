@@ -9,7 +9,6 @@ class Solution:
         # a number in one of our DP calls!
         num_to_index = {}
         for i, num in enumerate(arr):
-            assert num not in num_to_index
             num_to_index[num] = i
         self.num_to_index = num_to_index
 
@@ -40,38 +39,18 @@ class Solution:
         print(f"{self.memo=}")
         return res if res >= 3 else 0
     
-    # @cache
     def dp(self, i, j):
-        # assert i < j
-        if j >= len(self.arr):
-            return 0
-        
         if (i, j) in self.memo:
             return self.memo[(i, j)]
 
+        if j >= len(self.arr):
+            return 0        
+
+        res = 0
         base = self.arr[i] + self.arr[j]
         index = self.num_to_index.get(base, -1)
-        self.memo[i] = 1 + self.dp(j, index) if index > j else 0
-        return self.memo[i]
-        # if index > j:
-        #     return 1 + self.dp(j, index)
-        
-        # return 0
+        if index > j:
+            res = 1 + self.dp(j, index)
 
-    
-    # @cache
-    def dp_old(self, i, base):
-        if (i, base) in self.memo:
-            return self.memo[(i, base)]
-
-        N = len(self.arr)
-        if i >= N:
-            return 0
-        
-        num = self.arr[i]
-        case1 = 0 if num != base else 1 + self.dp(i + 1, base + num)
-        case2 = self.dp(i + 1, base)
-
-        res = max(case1, case2)
-        self.memo[(i, base)] = res
+        self.memo[i] = res
         return res
