@@ -26,8 +26,8 @@ class Solution:
         # if (x, y) in self.memo:
         #     return self.memo[(x, y)]
 
-        if y > (self.arr[-1]):
-            return 0        
+        # if y > (self.arr[-1]):
+        #     return 0        
 
         res = 0
         # base = self.arr[i] + self.arr[j]
