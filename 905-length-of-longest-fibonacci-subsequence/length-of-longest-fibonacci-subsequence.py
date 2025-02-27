@@ -17,11 +17,6 @@ class Solution:
                 if res < length:
                     res = length
 
-        return res + 2 if res >= 1 else 0
-
-    # def dp(self, x, y):
-        # if (x, y) in self.memo:
-        #     return self.memo[(x, y)]
-        # res = 1 + self.dp(y, x + y) if (x + y) in self.nums else 0
-        # self.memo[(x, y)] = res
-        # return res
+        # Increment res by 2, since every solution starts with a valid (x, y) pair!
+        res += 2
+        return res if res >= 3 else 0
