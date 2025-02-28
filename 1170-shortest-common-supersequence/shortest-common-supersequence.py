@@ -29,7 +29,7 @@ class Solution:
         
         # Base Case: Already got all the letters we needed!
         if i >= N and j >= M:
-            return (0, (i, j))
+            return (0, (None, None))
 
         # Base Case: str1 already covered, so only cover rest of str2!
         if i >= N:
@@ -54,8 +54,8 @@ class Solution:
             return res
         
         # Letters are not same, so pick whichever index is better to move via DP!
-        case_i = 1 + self.dp(i, j + 1)[COUNT]
-        case_j = 1 + self.dp(i + 1, j)[COUNT]
-        res = (case_i, (i, j + 1)) if case_i < case_j else (case_j, (i + 1, j))
+        case_i = 1 + self.dp(i + 1, j)[COUNT]
+        case_j = 1 + self.dp(i, j + 1)[COUNT]
+        res = (case_i, (i + 1, j)) if case_i < case_j else (case_j, (i, j + 1))
         self.memo[(i, j)] = res
         return res
