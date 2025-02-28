@@ -11,13 +11,13 @@ class Solution:
                 break
 
             # Also handles case where both i and j incremented by one, since letter is same!
-            res.append(str1[i] if next_i - i > 0 else str2[j])
+            res.append(str1[i] if next_i > i else str2[j])
 
             # Loop Invariant
             i, j = next_i, next_j
             
         return "".join(res)
-                
+    
     def dp(self, i, j):
         if (i, j) in self.memo:
             return self.memo[(i, j)]
