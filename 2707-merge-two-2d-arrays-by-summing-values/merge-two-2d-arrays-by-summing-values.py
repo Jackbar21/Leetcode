@@ -6,6 +6,8 @@ class Solution:
         for num, val in nums2:
             d[num] += val
         
+        return [[key, d[key]] for key in sorted(d.keys())]
+        
         # Here we could sort the keys in d, but that would be O(nlogn)! Let's perform a
         # MERGE operation (as in merge-sort algo) since nums1 and nums2 are already sorted
         # to make it O(n) instead!
