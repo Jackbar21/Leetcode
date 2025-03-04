@@ -12,7 +12,7 @@ class Solution:
             # Loop Invariant
             power_of_three *= 3
             if n in solutions:
-                break
+                return True
         
         return n in solutions
 
