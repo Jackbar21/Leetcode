@@ -13,6 +13,8 @@ class Solution:
             return expo == n
         
         next_expo = expo * 3
-        res = self.dp(n - expo, next_expo) or self.dp(n, next_expo)
+        res = self.dp(n - expo, next_expo)
+        if not res:
+            res = self.dp(n, next_expo)
         self.memo[(n, expo)] = res
         return res
