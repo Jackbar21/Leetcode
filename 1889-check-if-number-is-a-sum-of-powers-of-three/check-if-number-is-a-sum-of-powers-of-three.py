@@ -1,7 +1,7 @@
 class Solution:
     def checkPowersOfThree(self, n: int) -> bool:
-        # self.memo = {}
-        # return self.dp(n, 1)
+        self.memo = {}
+        return self.dp(n, 1)
 
         solutions = set([0])
         max_expo = math.floor(math.log(n, 3))
