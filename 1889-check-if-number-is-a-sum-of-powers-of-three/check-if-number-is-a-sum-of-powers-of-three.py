@@ -16,7 +16,6 @@ class Solution:
             if n in solutions:
                 break
         
-        print(f"{solutions=}")
         return n in solutions
 
     def dp(self, n, expo):
