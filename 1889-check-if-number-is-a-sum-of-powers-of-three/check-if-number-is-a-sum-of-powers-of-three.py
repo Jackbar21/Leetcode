@@ -10,13 +10,13 @@ class Solution:
             val = pow(3, expo)
             for solution in solutions:
                 new_solutions.add(solution)
+                if n == solution + val:
+                    return True
                 new_solutions.add(solution + val)
             
             solutions = new_solutions
-            if n in solutions:
-                break
         
-        return n in solutions
+        return False
 
     def dp(self, n, expo):
         if (n, expo) in self.memo:
