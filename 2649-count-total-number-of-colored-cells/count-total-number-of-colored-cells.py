@@ -10,11 +10,14 @@ class Solution:
         # ...
 
         # coloredCells(n) == 4*(n-1) + coloredCells(n - 1)
+        return 1 + sum([4 * c for c in range(1, n - 1 + 1)])
 
-        if n == 1:
-            return 1
+        # if n == 1:
+        #     return 1
         
-        return 4 * (n - 1) + self.coloredCells(n - 1)
+        # return 4 * (n - 1) + self.coloredCells(n - 1)
+
+        # result is 1 + sum()
 
         # return -1
         DIRECTIONS = [(0, -1), (0, 1), (-1, 0), (1, 0)]
