@@ -15,7 +15,8 @@ class Solution:
         #  4  |     12  
 
         # 1 + 4*1 + 4*2 + 4*3 + 4*4 + ... + 4*(n-1)
-        return 1 + sum([4 * c for c in range(1, n)])
+        # == 1 + 4*(1 + 2 + 3 + 4 + ... + (n - 1))
+        return 1 + 4 * sum([c for c in range(1, n)])
 
         # if n == 1:
         #     return 1
