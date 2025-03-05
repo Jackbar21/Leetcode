@@ -14,9 +14,12 @@ class Solution:
         #  3  |     8
         #  4  |     12  
 
-        if n == 1:
-            return 1
-        return 4*(n-1) + self.coloredCells(n - 1)
+        # 1 + 4*1 + 4*2 + 4*3 + 4*4 + ... + 4*(n-1)
+        return 1 + sum([4 * c for c in range(1, n)])
+
+        # if n == 1:
+        #     return 1
+        # return 4*(n-1) + self.coloredCells(n - 1)
 
         # return 1 + 4 * sum(range(1, n))
         return 1 + 4 * ((n - 1) * n) // 2
