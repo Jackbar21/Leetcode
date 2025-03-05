@@ -16,7 +16,27 @@ class Solution:
 
         # 1 + 4*1 + 4*2 + 4*3 + 4*4 + ... + 4*(n-1)
         # == 1 + 4*(1 + 2 + 3 + 4 + ... + (n - 1))
-        return 1 + 4 * sum(range(1, n))
+        return 1 + 4 * (n - 1) * n // 2
+
+        # 1 + 2 + ... + i == i * (i + 1) / 2
+
+        # P(n): If n >= 1, then 1 + ... + n == n * (n + 1) / 2
+        # PROOF (that P(n) is true):
+        # Base Case: P(1)
+        #   1 * (1 + 1) / 2 == 1 * (2) / 2 == 1 * 1 == 1, so True!
+        # Want to show for i >= 1, if P(i) is true, then P(i + 1) is also true. Let i >= 1 be arbitrary.
+        # Suppose P(i), meaning we have that 1 + ... + i == i * (i + 1) / 2 [I.H.]
+        # Want to show that P(i + 1) holds, namely that 1 + ... + i + (i + 1) == (i + 1) * ((i + 1) + 1) / 2
+        # 1 + ... + i + (i + 1)
+        # == (1 + ... + i) + (i + 1)
+        # == (i * (i + 1) / 2) + (i + 1), by [I.H.]
+        # == (i^2 + i)/2 + (2i + 2)/2
+        # == (i^2 + i + 2i + 2)/2
+        # == (i^2 + 3i + 2)/2
+        # == (i+1)*(i+2)/2, since (i+1)*(i+2) == i^2 + 2i + 1i + 2 == i^2 + 3i + 2
+        # == (i + 1) * ((i + 1) + 1) / 2
+        # Therefore, P(i + 1) also holds.
+        #   Henceforth, by proof via induction, P(n) holds for all n >= 1.
 
         # if n == 1:
         #     return 1
