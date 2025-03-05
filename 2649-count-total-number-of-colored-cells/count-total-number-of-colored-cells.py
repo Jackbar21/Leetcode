@@ -9,9 +9,17 @@ class Solution:
         # 5 -> 16
         # ...
 
-        # coloredCells(n) == 4*(n-1) + coloredCells(n - 1)
+        #  n  | blocks added
+        #  2  |     4
+        #  3  |     8
+        #  4  |     12  
+
+        if n == 1:
+            return 1
+        return 4*(n-1) + self.coloredCells(n - 1)
+
         # return 1 + 4 * sum(range(1, n))
-        return 1 + 4 * ((n - 1) * (n))//2
+        return 1 + 4 * ((n - 1) * n) // 2
 
         # if n == 1:
         #     return 1
