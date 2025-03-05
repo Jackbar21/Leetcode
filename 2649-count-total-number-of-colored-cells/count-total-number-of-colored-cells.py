@@ -10,7 +10,8 @@ class Solution:
         # ...
 
         # coloredCells(n) == 4*(n-1) + coloredCells(n - 1)
-        return 1 + 4 * sum(range(1, n))
+        # return 1 + 4 * sum(range(1, n))
+        return 1 + 4 * ((n - 1) * (n))//2
 
         # if n == 1:
         #     return 1
