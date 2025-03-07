@@ -35,7 +35,7 @@ class Solution:
         
         ans = [-1, -1]
         cur_diff = float("inf")
-        sorted_primes = [i for i in range(left + (left == 1), right + 1) if A[i]]
+        sorted_primes = [i for i in range(max(left, 2), right + 1) if A[i]]
         prev = float("-inf")
         for cur in sorted_primes:
             if cur - prev < cur_diff:
