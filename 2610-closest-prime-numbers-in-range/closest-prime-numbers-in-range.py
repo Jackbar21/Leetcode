@@ -18,6 +18,8 @@ class Solution:
             return all i such that A[i] is true.
         """
         ### FROM WIKIPEDIA (END) ###
+
+        ### SOLUTION USING WIKIPEDIA PSEUDOCODE AS INSPIRATION: ###
         A = [True] * (right + 1)
         i = 2
         MAX = math.sqrt(right)
@@ -31,12 +33,7 @@ class Solution:
             # Loop Invariant
             i += 1
         
-        sorted_primes = []
-        i = max(left, 2)
-        while i <= right:
-            if A[i]:
-                sorted_primes.append(i)
-            i += 1
+        sorted_primes = [i for i in range(left + (left == 1), right + 1) if A[i]]
         
         ans = [-1, -1]
         cur_diff = float("inf")
