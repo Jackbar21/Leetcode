@@ -12,7 +12,7 @@ class Solution:
 
             for i = 2, 3, 4, ..., not exceeding √n do
                 if A[i] is true
-                    for j = i2, i2+i, i2+2i, i2+3i, ..., not exceeding n do
+                    for j = i^2, i^2+i, i^2+2i, i^2+3i, ..., not exceeding n do
                         set A[j] := false
 
             return all i such that A[i] is true.
@@ -23,7 +23,7 @@ class Solution:
         MAX = math.sqrt(right)
         while i <= MAX:
             if A[i]:
-                j = i * 2
+                j = pow(i, 2)
                 while j <= right:
                     A[j] = False
                     j += i
