@@ -33,12 +33,9 @@ class Solution:
             # Loop Invariant
             i += 1
         
-        # sorted_primes = [i for i in range(left + (left == 1), right + 1) if A[i]]
-        sorted_primes = filter(lambda i: A[i], range(max(left, 2), right + 1))
-        
         ans = [-1, -1]
         cur_diff = float("inf")
-        # sorted_primes = sorted(primes)
+        sorted_primes = [i for i in range(left + (left == 1), right + 1) if A[i]]
         prev = float("-inf")
         for cur in sorted_primes:
             if cur - prev < cur_diff:
