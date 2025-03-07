@@ -23,7 +23,7 @@ class Solution:
         MAX = math.sqrt(right)
         while i <= MAX:
             if A[i]:
-                j = pow(i, 2)
+                j = i * i
                 while j <= right:
                     A[j] = False
                     j += i
