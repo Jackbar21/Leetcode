@@ -14,9 +14,9 @@ class Solution:
             cur_count = 1
             prev_color = color
         
-        if cur_count > 0:
-            color_counts.append(cur_count)
-
+        # Handle last consecutive blocks as well!
+        color_counts.append(cur_count)
+        
         # White blocks are at even indices, Black blocks at odd indices
         self.color_counts = color_counts
         self.k = k
@@ -35,27 +35,12 @@ class Solution:
             return float("inf")
         
         num_white = self.color_counts[i]
-        res = float("inf")
-
-        # Case 1: Add white balls on left to complete problem
-        case1 = k - black_count if num_white + black_count >= k else float("inf")
-        if res > case1:
-            res = case1
-        
         next_black_block = (self.color_counts[i + 1] if i + 1 < len(self.color_counts) else 0)
 
-        # Case 2: Don't bother adding any balls
-        # case2 = self.dp(i + 2, next_black_block)
-        # if res > case2:
-        #     res = case2
+        # Case 1: Add ALL the balls to connect with next!
+        res = num_white + self.dp(i + 2, black_count + num_white + next_black_block)
 
-        # Case 3: Add balls to connect with next!
-        case3 = num_white + self.dp(i + 2, black_count + num_white + next_black_block)
-        if res > case3:
-            res = case3
-
-        # Case 4-N: Anything between no balls and all the balls
-        # for white_count in range(1, num_white):
+        # Case 2+: Anything that is not ALL the balls (i.e. [0,N-1]).
         for white_count in range(num_white):
             new_case = white_count + self.dp(i + 2, white_count + next_black_block)
             if res > new_case:
