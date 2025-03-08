@@ -37,9 +37,10 @@ class Solution:
         print(f"{sorted(self.memo, key = lambda k: self.memo[k])=}")
         return res
 
+    @cache
     def dp(self, i, black_count):
-        if (i, black_count) in self.memo:
-            return self.memo[(i, black_count)]
+        # if (i, black_count) in self.memo:
+        #     return self.memo[(i, black_count)]
 
         k = self.k
         if black_count >= k:
@@ -73,9 +74,8 @@ class Solution:
         for white_count in range(1, num_white):
             new_case = white_count + self.dp(i + 2, white_count + next_black_block)
             res = min(res, new_case)
-        
 
-        self.memo[(i, black_count)] = res
+        # self.memo[(i, black_count)] = res
         return res
 
         
