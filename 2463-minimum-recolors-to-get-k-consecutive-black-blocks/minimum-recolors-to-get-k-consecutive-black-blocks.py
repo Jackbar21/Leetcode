@@ -28,20 +28,17 @@ class Solution:
             color_counts.append(0)
         
         # White blocks are at even indices, Black blocks at odd indices
-        print(f"{color_counts=}")
+        # print(f"{color_counts=}")
 
         self.color_counts = color_counts
         self.k = k
         self.memo = {}
         res = self.dp(0, 0)
-        print(f"{sorted(self.memo, key = lambda k: self.memo[k])=}")
+        # print(f"{sorted(self.memo, key = lambda k: self.memo[k])=}")
         return res
 
-    # @cache
+    @cache
     def dp(self, i, black_count):
-        if (i, black_count) in self.memo:
-            return self.memo[(i, black_count)]
-
         k = self.k
         if black_count >= k:
             return 0
@@ -75,7 +72,6 @@ class Solution:
             new_case = white_count + self.dp(i + 2, white_count + next_black_block)
             res = min(res, new_case)
 
-        self.memo[(i, black_count)] = res
         return res
 
         
