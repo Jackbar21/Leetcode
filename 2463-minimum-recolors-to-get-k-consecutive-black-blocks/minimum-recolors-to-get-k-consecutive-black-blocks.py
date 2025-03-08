@@ -1,5 +1,26 @@
 class Solution:
     def minimumRecolors(self, blocks: str, k: int) -> int:
+        # return self.over_complicated(blocks, k)
+        WHITE, BLACK = "W", "B"
+
+        l = 0
+        white_count = 0
+        for i in range(k):
+            white_count += blocks[i] == WHITE
+        
+        res = white_count
+        for r in range(k, len(blocks)):
+            white_count += blocks[r] == WHITE
+            white_count -= blocks[l] == WHITE
+            l += 1
+
+            if res > white_count:
+                res = white_count
+        
+        return res
+        
+    
+    def over_complicated(self, blocks: str, k: int) -> int:
         WHITE, BLACK = "W", "B"
         prev_color = WHITE
         color_counts = []
