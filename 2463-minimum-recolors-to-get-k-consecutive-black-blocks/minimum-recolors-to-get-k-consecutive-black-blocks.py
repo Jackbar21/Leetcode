@@ -45,9 +45,9 @@ class Solution:
         next_black_block = (self.color_counts[i + 1] if i + 1 < len(self.color_counts) else 0)
 
         # Case 2: Don't bother adding any balls
-        case2 = self.dp(i + 2, next_black_block)
-        if res > case2:
-            res = case2
+        # case2 = self.dp(i + 2, next_black_block)
+        # if res > case2:
+        #     res = case2
 
         # Case 3: Add balls to connect with next!
         case3 = num_white + self.dp(i + 2, black_count + num_white + next_black_block)
@@ -55,7 +55,8 @@ class Solution:
             res = case3
 
         # Case 4-N: Anything between no balls and all the balls
-        for white_count in range(1, num_white):
+        # for white_count in range(1, num_white):
+        for white_count in range(num_white):
             new_case = white_count + self.dp(i + 2, white_count + next_black_block)
             if res > new_case:
                 res = new_case
