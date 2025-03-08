@@ -24,18 +24,14 @@ class Solution:
         # Add a white at the end of count 0
         # if len(color_counts) % 2 == 1:
         #     color_counts.append(0)
-        for _ in range(3):
-            color_counts.append(0)
+        # for _ in range(3):
+        #     color_counts.append(0)
         
         # White blocks are at even indices, Black blocks at odd indices
-        # print(f"{color_counts=}")
-
         self.color_counts = color_counts
         self.k = k
         self.memo = {}
-        res = self.dp(0, 0)
-        # print(f"{sorted(self.memo, key = lambda k: self.memo[k])=}")
-        return res
+        return self.dp(0, 0)
 
     # @cache
     def dp(self, i, black_count):
