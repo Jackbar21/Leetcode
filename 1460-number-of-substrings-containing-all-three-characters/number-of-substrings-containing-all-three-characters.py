@@ -1,14 +1,20 @@
 class Solution:
     def numberOfSubstrings(self, s: str) -> int:
         N = len(s)
-        d = {letter: 0 for letter in "abc"}
-        is_valid = lambda: all(freq > 0 for freq in d.values())
+        # d = {letter: 0 for letter in "abc"}
+        a, b, c = 0, 0, 0
         l, res = 0, 0
         for r, letter in enumerate(s):
-            d[letter] += 1
+            if letter == "a":
+                a += 1
+            elif letter == "b":
+                b += 1
+            else:
+                c += 1
 
             # Continue if not valid substring!
-            if any(freq == 0 for freq in d.values()):
+            # if any(freq == 0 for freq in d.values()):
+            if a == 0 or b == 0 or c == 0:
                 continue
 
             while True:
@@ -18,10 +24,17 @@ class Solution:
                 res += N - r
                 letter = s[l]
                 l += 1
-                d[letter] -= 1
-                if d[letter] == 0:
-                    break
+                if letter == "a":
+                    a -= 1
+                    if a == 0: break
+                elif letter == "b":
+                    b -= 1
+                    if b == 0: break
+                else:
+                    c -= 1
+                    if c == 0: break
+                # d[letter] -= 1
+                # if d[letter] == 0:
+                #     break
 
         return res
-
-            
