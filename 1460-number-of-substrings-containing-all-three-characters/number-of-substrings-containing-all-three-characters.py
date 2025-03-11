@@ -15,13 +15,13 @@ class Solution:
                 d[s[l]] -= 1
                 l += 1
             
-        while is_valid():
-            # s[l..r] is valid, as well as s[l..i] for any r <= i < N
-            # So, account for all of these, and shift l pointer by one!
-            # r,r+1,r+2,...,N-1 --> (N - 1) - r + 1 == N - r total valid substrings.
-            res += N - r
-            d[s[l]] -= 1
-            l += 1
+        # while is_valid():
+        #     # s[l..r] is valid, as well as s[l..i] for any r <= i < N
+        #     # So, account for all of these, and shift l pointer by one!
+        #     # r,r+1,r+2,...,N-1 --> (N - 1) - r + 1 == N - r total valid substrings.
+        #     res += N - r
+        #     d[s[l]] -= 1
+        #     l += 1
 
         return res
 
