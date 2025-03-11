@@ -1,7 +1,6 @@
 class Solution:
     def numberOfSubstrings(self, s: str) -> int:
         N = len(s)
-        # d = {letter: 0 for letter in "abc"}
         a, b, c = 0, 0, 0
         l, res = 0, 0
         for r, letter in enumerate(s):
@@ -13,7 +12,6 @@ class Solution:
                 c += 1
 
             # Continue if not valid substring!
-            # if any(freq == 0 for freq in d.values()):
             if a == 0 or b == 0 or c == 0:
                 continue
 
@@ -24,6 +22,8 @@ class Solution:
                 res += N - r
                 letter = s[l]
                 l += 1
+
+                # Update freq, and break if string no longer valid!
                 if letter == "a":
                     a -= 1
                     if a == 0: break
@@ -33,8 +33,5 @@ class Solution:
                 else:
                     c -= 1
                     if c == 0: break
-                # d[letter] -= 1
-                # if d[letter] == 0:
-                #     break
 
         return res
