@@ -4,4 +4,4 @@ class Solution:
         for num in nums:
             pos += num > 0
             neg += num < 0
-        return max(pos, neg)
+        return pos if pos > neg else neg
