@@ -20,7 +20,9 @@ class Solution:
             
             cur_sum = 0
             is_valid = True
-            for num, val in zip(nums, line_sweep):
+            # for num, val in zip(nums, line_sweep):
+            for i in range(N):
+                num, val = nums[i], line_sweep[i]
                 cur_sum += val
                 if cur_sum < num: 
                     # Can't subtract enough from num to make it 0... 
