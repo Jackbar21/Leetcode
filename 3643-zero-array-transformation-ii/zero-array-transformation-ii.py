@@ -13,9 +13,10 @@ class Solution:
             mid = (l + r) // 2
             
             # Use Line Sweep
-            line_sweep = defaultdict(int)
-            for i in range(mid + 1):
-                left, right, val = queries[i]
+            line_sweep = [0] * (N + 1)
+            # for i in range(mid + 1):
+            #     left, right, val = queries[i]
+            for (left, right, val) in queries[:mid + 1]:
                 line_sweep[left] += val
                 line_sweep[right + 1] -= val
             
