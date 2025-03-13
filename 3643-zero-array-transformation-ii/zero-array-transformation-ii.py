@@ -20,11 +20,11 @@ class Solution:
             
             cur_sum = 0
             is_valid = True
-            # for i, num in enumerate(nums):
-            for (num, val) in zip(nums, line_sweep):
-                # cur_sum += line_sweep[i]
+            for num, val in zip(nums, line_sweep):
                 cur_sum += val
-                if not (num - cur_sum <= 0):
+                if cur_sum < num: 
+                    # Can't subtract enough from num to make it 0... 
+                    # hence not a Zero Array
                     is_valid = False
                     break
 
