@@ -2,7 +2,7 @@ class Solution:
     def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
         N, M = len(nums), len(queries)
         # First, check if nums is ALREADY a zero array!
-        if sum(nums) == 0:
+        if max(nums) == 0:
             return 0
 
         # Otherwise, find leftmost index (if exists!) such that adding all the queries
