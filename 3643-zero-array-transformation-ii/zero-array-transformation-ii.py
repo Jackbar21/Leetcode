@@ -20,8 +20,10 @@ class Solution:
             
             cur_sum = 0
             is_valid = True
-            for i, num in enumerate(nums):
-                cur_sum += line_sweep[i]
+            # for i, num in enumerate(nums):
+            for (num, val) in zip(nums, line_sweep):
+                # cur_sum += line_sweep[i]
+                cur_sum += val
                 if not (num - cur_sum <= 0):
                     is_valid = False
                     break
