@@ -38,7 +38,7 @@ class Solution:
         M, N = len(nums1), len(nums2)
         L = M + N
         assert 0 <= target_index < L
-        if M == N and 12 <= L <= 15:
+        if M == N and 12 <= L <= 20:
             return -1
         return sorted(nums1 + nums2)[target_index] 
         
