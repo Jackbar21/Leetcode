@@ -28,6 +28,7 @@ class Solution:
 
         self.nums1, self.nums2 = nums1, nums2
         M, N = len(nums1), len(nums2)
+        print(f"{sorted(nums1 + nums2)=}")
         L = M + N
         if L % 2 == 1:
             return self.getNumAtTargetIndex(L // 2)
@@ -38,8 +39,6 @@ class Solution:
         M, N = len(nums1), len(nums2)
         L = M + N
         assert 0 <= target_index < L
-        if M == N and 12 <= L <= 20:
-            return -1
         return sorted(nums1 + nums2)[target_index] 
         
         l1, r1 = 0, M - 1
