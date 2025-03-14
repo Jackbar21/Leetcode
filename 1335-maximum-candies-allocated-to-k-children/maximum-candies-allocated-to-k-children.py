@@ -8,19 +8,11 @@ class Solution:
         while l <= r:
             mid = (l + r) // 2
 
-            # mid == 3
-            # 5 --> 3,2
-            # [3,2]
-
-            # 8 --> 5,3 --> 3,3,2
-
-            # 6 --> 3,3
-
             # Can we feed 'mid' amount of candy to each child?
             # Let's see how many children we can feed 'mid' candy
             can_feed = 0
-            for candy_count in candies:
-                can_feed += candy_count // mid
+            for candy_pile in candies:
+                can_feed += candy_pile // mid
             
             if can_feed >= k:
                 # Valid solution, update res and look for potentially BETTER ONES in right subhalf!
