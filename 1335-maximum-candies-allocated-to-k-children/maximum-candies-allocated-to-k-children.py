@@ -20,8 +20,7 @@ class Solution:
             # Let's see how many children we can feed 'mid' candy
             can_feed = 0
             for candy_count in candies:
-                # can_feed += candy_count // mid
-                can_feed += math.floor(candy_count / mid)
+                can_feed += candy_count // mid
             
             if can_feed >= k:
                 # Valid solution, update res and look for potentially BETTER ONES in right subhalf!
