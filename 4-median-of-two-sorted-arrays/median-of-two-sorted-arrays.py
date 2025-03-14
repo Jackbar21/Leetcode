@@ -18,18 +18,66 @@ class Solution:
         #     return nums[L // 2]
         # return (nums[L // 2] + nums[-1 + L // 2]) / 2
 
+        self.nums1, self.nums2 = nums1, nums2
         L = len(nums1) + len(nums2)
-        self.L, self.nums1, self.nums2 = L, nums1, nums2
-        
         if L % 2 == 1:
             return self.helper(L // 2)
         return (self.helper(L // 2) + self.helper(L // 2 - 1)) / 2
+    
+    def leftmostBinarySearch(self, nums, target):
+        # Returns leftmost index of target in nums (or index where target would
+        # be if it existed in nums!)
+        # Ex. [1,2,3,4,5], target = 2
+        l, r = 0, len(nums) - 1
+        while l < r:
+            mid = (l + r) // 2
+            num = nums[mid]
+            if num >= target:
+                r = mid - 1
+            else:
+                l = mid + 1
+        return l
 
     # Returns number at 'target_index' between nums1 and nums2 in O(log (m+n)) time!
     def helper(self, target_index):
-        L, nums1, nums2 = self.L, self.nums1, self.nums2
+        nums1, nums2 = self.nums1, self.nums2
+        N, M = len(nums1), len(nums2)
+        L = N + M
         assert 0 <= target_index < L
         return sorted(nums1 + nums2)[target_index]
+
+        # Base Cases
+        if N == 0:
+            return nums2[target_index]
+        if M == 0:
+            return nums1[target_index]
+
+        i = N // 2
+        num = nums1[i]
+        j = self.leftmostBinarySearch(nums2, num)
+        # super_j = self.leftmostBinarySearch(nums2, num + 1)
+        index1 = i + j
+        # super_index1 = i + super_j
+        # if index1 <= target_index <= super_index1:
+        if index1 == target_index:
+            return num
+        
+        i = M // 2
+        num = nums2[i]
+        j = self.leftmostBinarySearch(nums1, num)
+        # super_j = self.leftmostBinarySearch(nums1, num + 1)
+        index2 = i + j
+        # super_index2 = i + super_j
+        if index2 == target_index:
+            return num
+        
+        # We've got index1, index2
+        print("FAIL")
+        return sorted(nums1 + nums2)[target_index]
+
+        # Let's try to get middle element in nums1 and nums2. For each of these,
+        # we will get their "true" index. For example, if i = len(nums1) // 2,
+        # then we can apply leftmost binary search to f
 
         
         # # Get to index (N//2)-1
@@ -62,3 +110,13 @@ class Solution:
         # num2 = nums2[i2] if i2 < len(nums2) else nums2[-1] if len(nums2) > 0 else float("-inf")
         # return (num1 + num2) / 2
             
+        
+        # log(m) * log(n)
+        # log(m) + log(n) == log(m * n)
+
+        # log(m * n)
+        # == log(m) + log(n)
+        # <= log(m + n) + log(m + n)
+        # == 2 * log(m + n)
+        # \el O(log(m + n))
+
