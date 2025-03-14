@@ -1,10 +1,6 @@
 class Solution:
     def maximumCandies(self, candies: List[int], k: int) -> int:
-        max_candy = 1
-        for candy in candies:
-            if max_candy < candy:
-                max_candy = candy
-        l, r = 1, max_candy
+        l, r = 1, max(candies)
         # Can always give each child 0 candy, but maybe not always max(candies) for each child.
         # Think of this as an array of booleans (0 or more True's followed by 0 or more False's),
         # want to find rightmost 'True' index (i.e. LARGEST VALID value)
