@@ -1,5 +1,13 @@
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        # Key thing to note:
+        #   log(m * n)
+        #   == log(m) + log(n)
+        #   <= log(m + n) + log(m + n)
+        #   == 2 * log(m + n)
+        #   \el O(log(m + n))
+        # So O(log(m * n)) == O(log(m) + log(n)) == O(log(m + n))
+
         # O((M+N)), where N = len(nums1), M = len(num2)
         # N, M = len(nums1), len(nums2)
         # i1, i2 = 0, 0
@@ -19,11 +27,33 @@ class Solution:
         # return (nums[L // 2] + nums[-1 + L // 2]) / 2
 
         self.nums1, self.nums2 = nums1, nums2
-        L = len(nums1) + len(nums2)
+        M, N = len(nums1), len(nums2)
+        L = M + N
         if L % 2 == 1:
-            return self.helper(L // 2)
-        return (self.helper(L // 2) + self.helper(L // 2 - 1)) / 2
+            return self.getNumAtTargetIndex(L // 2)
+        return (self.getNumAtTargetIndex(L // 2) + self.getNumAtTargetIndex(L // 2 - 1)) / 2
     
+    def getNumAtTargetIndex(self, target_index):
+        nums1, nums2 = self.nums1, self.nums2
+        M, N = len(nums1), len(nums2)
+        L = M + N
+        assert 0 <= target_index < L
+        if M == N and 12 <= L <= 15:
+            return -1
+        return sorted(nums1 + nums2)[target_index] 
+        
+        l1, r1 = 0, M - 1
+        l2, r2 = 0, N - 1
+        while l1 <= r1 and l2 <= r2: # TODO: Figure out if 'and' or 'or' here later...
+            mid1 = (l1 + r1) // 2
+            mid2 = (l2 + r2) // 2
+
+            # mid1 and mid2 are indices.
+            num1 = nums1[mid1]
+            num2 = nums2[mid2]
+
+
+
     def leftmostBinarySearch(self, nums, target):
         # Returns leftmost index of target in nums (or index where target would
         # be if it existed in nums!)
@@ -40,11 +70,13 @@ class Solution:
 
     # Returns number at 'target_index' between nums1 and nums2 in O(log (m+n)) time!
     def helper(self, target_index):
+        return self.getNumAtIndex(target_index)
+
         nums1, nums2 = self.nums1, self.nums2
         N, M = len(nums1), len(nums2)
         L = N + M
         assert 0 <= target_index < L
-        return sorted(nums1 + nums2)[target_index]
+        # return sorted(nums1 + nums2)[target_index]
 
         # Base Cases
         if N == 0:
