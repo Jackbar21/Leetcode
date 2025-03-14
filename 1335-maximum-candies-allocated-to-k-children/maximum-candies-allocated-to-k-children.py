@@ -10,9 +10,10 @@ class Solution:
 
             # Can we feed 'mid' amount of candy to each child?
             # Let's see how many children we can feed 'mid' candy
-            can_feed = 0
-            for candy_count in candies:
-                can_feed += candy_count // mid
+            # can_feed = 0
+            # for candy_count in candies:
+            #     can_feed += candy_count // mid
+            can_feed = sum(candy_count // mid for candy_count in candies)
 
             is_valid = can_feed >= k
             if is_valid:
