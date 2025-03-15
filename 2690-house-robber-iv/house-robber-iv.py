@@ -27,4 +27,4 @@ class Solution:
                 # Invalid solution, look for potentially VALID ones on right-hand side!
                 l = mid + 1
 
-        return rightmost
+        return r + 1
