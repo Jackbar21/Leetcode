@@ -8,7 +8,7 @@ class Solution:
             # Want to check if can reach a capability of mid
             i = 0
             stolen_homes = 0
-            while i < N: # and stolen_homes < k:
+            while i < N and stolen_homes < k:
                 num = nums[i]
                 if num <= mid:
                     # Steal the home!
