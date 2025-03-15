@@ -2,7 +2,6 @@ class Solution:
     def minCapability(self, nums: List[int], k: int) -> int:
         N = len(nums)
         l, r = 1, max(nums)
-        rightmost = r
         while l <= r:
             mid = (l + r) // 2
 
@@ -21,7 +20,6 @@ class Solution:
             
             if stolen_homes >= k:
                 # Valid solution, look for even BETTER ones on the left-hand side!
-                rightmost = mid
                 r = mid - 1
             else:
                 # Invalid solution, look for potentially VALID ones on right-hand side!
