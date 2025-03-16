@@ -7,6 +7,7 @@ class Solution:
         for rank in ranks:
             d[rank] += 1
         
+        worst_rank = min(ranks)
         best_rank = max(ranks)
         l, r = 1, best_rank * pow(cars, 2)
         while l <= r:
@@ -19,7 +20,7 @@ class Solution:
             # we have that mid == r * n^2.
             # Hence, n == sqrt(mid / r)
             # ==> n^2 == time / r ==> n == sqrt(time / r)
-            for rank in range(1, best_rank + 1):
+            for rank in range(worst_rank, best_rank + 1):
                 count = d[rank]
                 if count > 0:
                     can_repair += count * math.floor(math.sqrt(mid / rank))
