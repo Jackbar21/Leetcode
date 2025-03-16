@@ -7,15 +7,15 @@ class Solution:
         half = L // 2
 
         # Binary search on the number of elements to take FROM nums1 (smaller array!)
-        l, r = 0, len(nums1)
+        l, r = 0, M
         magic_x = None
         while l <= r:
             x = (l + r) // 2
             # print(f"{x=}")
             a_max_left = nums1[x - 1] if x - 1 >= 0 else float("-inf")
-            a_min_right = nums1[x] if x < len(nums1) else float("inf")
+            a_min_right = nums1[x] if x < M else float("inf")
             b_max_left = nums2[half - x - 1] if half - x - 1 >= 0 else float("-inf")
-            b_min_right = nums2[half - x] if half - x < len(nums2) else float("inf")
+            b_min_right = nums2[half - x] if half - x < N else float("inf")
             
             # print(f"{a_max_left, a_min_right=}")
             # assert a_max_left <= a_min_right
