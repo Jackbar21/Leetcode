@@ -1,23 +1,6 @@
 class Solution:
     # Final Time Complexity: O(log(min(m, n))) <= O(log(m + n)), as wanted!
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        sorted_nums = []
-        i, j = 0, 0
-        while i < len(nums1) and j < len(nums2):
-            num_i, num_j = nums1[i], nums2[j]
-            if num_i < num_j:
-                sorted_nums.append(num_i)
-                i += 1
-            else:
-                sorted_nums.append(num_j)
-                j += 1
-        sorted_nums.extend(nums1[i:] if i < len(nums1) else nums2[j:])
-        L = len(sorted_nums)
-        if L % 2 == 1:
-            return sorted_nums[L // 2]
-        else:
-            return (sorted_nums[L // 2 - 1] + sorted_nums[L // 2]) / 2
-
         # Set nums1 and nums2 to be smaller and larger arrays in length, respectively
         nums1, nums2 = (nums1, nums2) if len(nums1) < len(nums2) else (nums2, nums1)
         M, N = len(nums1), len(nums2)
