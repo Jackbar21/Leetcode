@@ -19,7 +19,7 @@ class Solution:
             # we have that mid == r * n^2.
             # Hence, n == sqrt(mid / r)
             # ==> n^2 == time / r ==> n == sqrt(time / r)
-            for rank in range(1, 100 + 1):
+            for rank in range(1, best_rank + 1):
                 count = d[rank]
                 if count > 0:
                     can_repair += count * math.floor(math.sqrt(mid / rank))
