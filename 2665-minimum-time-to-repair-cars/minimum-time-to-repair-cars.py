@@ -1,10 +1,13 @@
 class Solution:
     def repairCars(self, ranks: List[int], cars: int) -> int:
-        d = defaultdict(int)
+        # d = defaultdict(int)
+        # for rank in ranks:
+        #     d[rank] += 1
+        d = [0] * 101
         for rank in ranks:
             d[rank] += 1
         
-        best_rank = min(d.keys())
+        best_rank = max(ranks)
         l, r = 1, best_rank * pow(cars, 2)
         while l <= r:
             mid = (l + r) // 2
@@ -16,16 +19,16 @@ class Solution:
             # we have that mid == r * n^2.
             # Hence, n == sqrt(mid / r)
             # ==> n^2 == time / r ==> n == sqrt(time / r)
-            for rank, count in d.items():
-                can_repair += count * math.floor(math.sqrt(mid / rank))
+            for rank in range(1, 100 + 1):
+                count = d[rank]
+                if count > 0:
+                    can_repair += count * math.floor(math.sqrt(mid / rank))
             
             if can_repair >= cars:
                 # Valid solution, look for even SMALLER ones
                 r = mid - 1
             else:
+                # Invalid solution, look for larger (worse) but VALID ones
                 l = mid + 1
         
         return l
-
-
-
