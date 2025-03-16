@@ -1,13 +1,10 @@
 class Solution:
     def repairCars(self, ranks: List[int], cars: int) -> int:
-        # d = defaultdict(int)
-        # for rank in ranks:
-        #     d[rank] += 1
-        d = [0] * 101
+        d = defaultdict(int)
         for rank in ranks:
             d[rank] += 1
-        
-        worst_rank = min(ranks)
+        rank_count_pairs = [(rank, count) for rank, count in d.items()]
+
         best_rank = max(ranks)
         l, r = 1, best_rank * pow(cars, 2)
         while l <= r:
@@ -20,10 +17,8 @@ class Solution:
             # we have that mid == r * n^2.
             # Hence, n == sqrt(mid / r)
             # ==> n^2 == time / r ==> n == sqrt(time / r)
-            for rank in range(worst_rank, best_rank + 1):
-                count = d[rank]
-                if count > 0:
-                    can_repair += count * math.floor(math.sqrt(mid / rank))
+            for rank, count in rank_count_pairs:
+                can_repair += count * math.floor(math.sqrt(mid / rank))
             
             if can_repair >= cars:
                 # Valid solution, look for even SMALLER ones
