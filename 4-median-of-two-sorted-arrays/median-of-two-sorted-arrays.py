@@ -3,20 +3,20 @@ class Solution:
         # return self.findMedianSortedArraysBAD(nums1, nums2)
         M, N = len(nums1), len(nums2)
         half = (M + N) // 2
-        A, B = (nums1, nums2) if M < N else (nums2, nums1)
-        # A, B = nums1, nums2
+        nums1, nums2 = (nums1, nums2) if M < N else (nums2, nums1)
+        # nums1, nums2 = nums1, nums2
 
-        # Binary search on the number of elements to take FROM A
-        l, r = 0, len(A)
-        # print(f"{l,r,A==nums1=}")
+        # Binary search on the number of elements to take FROM nums1
+        l, r = 0, len(nums1)
+        # print(f"{l,r,nums1==nums1=}")
         magic_x = None
         while l <= r:
             x = (l + r) // 2
             # print(f"{x=}")
-            a_max_left = A[x - 1] if x - 1 >= 0 else float("-inf")
-            a_min_right = A[x] if x < len(A) else float("inf")
-            b_max_left = B[half - x - 1] if half - x - 1 >= 0 else float("-inf")
-            b_min_right = B[half - x] if half - x < len(B) else float("inf")
+            a_max_left = nums1[x - 1] if x - 1 >= 0 else float("-inf")
+            a_min_right = nums1[x] if x < len(nums1) else float("inf")
+            b_max_left = nums2[half - x - 1] if half - x - 1 >= 0 else float("-inf")
+            b_min_right = nums2[half - x] if half - x < len(nums2) else float("inf")
             
             # print(f"{a_max_left, a_min_right=}")
             assert a_max_left <= a_min_right
@@ -35,19 +35,10 @@ class Solution:
             assert not (a_max_left <= b_min_right)
             r = x - 1
             continue
-        
-        x = magic_x
-        # print(f"{l, r=}")
-        # print(f"{half=}")
-        # print(f"{magic_x=}")
-        # print(f"A: {A[:x]} | {A[x:]}")
-        # print(f"B: {B[:(half - x)]} | {B[(half - x):]}")
-        # return 0
-
 
         min_right = min(
-            A[x] if x < len(A) else float("inf"),
-            B[half - x] if half - x < len(B) else float("inf")
+            nums1[x] if x < len(nums1) else float("inf"),
+            nums2[half - x] if half - x < len(nums2) else float("inf")
         )
         assert min_right != float("inf")
         if (M + N) % 2 == 1:
@@ -55,8 +46,8 @@ class Solution:
         
         # Since total merged length is even, need to take average of two median elements
         max_left = max(
-            A[x - 1] if x - 1 >= 0 else float("-inf"),
-            B[half - x - 1] if half - x - 1 >= 0 else float("-inf")
+            nums1[x - 1] if x - 1 >= 0 else float("-inf"),
+            nums2[half - x - 1] if half - x - 1 >= 0 else float("-inf")
         )
         assert max_left != float("-inf")
         return (min_right + max_left) / 2
@@ -453,7 +444,7 @@ class Solution:
         # r = max(nums1[-1], nums2[-1])
 
         # # Want to find first index
-        # # TAKING A BREAK HERE AT THIS POINT... I can't figure this out yet :/ At least made some progress!
+        # # TAKING nums1 BREAK HERE AT THIS POINT... I can't figure this out yet :/ At least made some progress!
 
         # # O(log(m) * log(n)), which is INVALID. But, might be able to make improvements later on...
         # l, r = 0, M - 1
@@ -538,14 +529,14 @@ class Solution:
 # [1,2,2,3,4] [9,10]
 
 
-# A = [1, 2, 3, 4, 5]
-# B = [1, 2, 3, 4, 5, 6, 7, 8]
+# nums1 = [1, 2, 3, 4, 5]
+# nums2 = [1, 2, 3, 4, 5, 6, 7, 8]
 # x = 2
 # [1, 2] [3, 4, 5]
 # [1,2,3,4] [5,6,7,8]
 
 """
-For example, consider the arrays A = [1, 2, 3, 4, 5] and B = [1, 2, 3, 4, 5, 6, 7, 8]. When we select x = 2, we take 4 elements from array B. However, this partition is not valid because value 4 from the left partition of array B is greater than the value 3 from the right partition of array A. So, we should try to take more elements from array A to make the partition valid. Binary search will eventually help us find a valid partition.
+For example, consider the arrays nums1 = [1, 2, 3, 4, 5] and nums2 = [1, 2, 3, 4, 5, 6, 7, 8]. When we select x = 2, we take 4 elements from array nums2. However, this partition is not valid because value 4 from the left partition of array nums2 is greater than the value 3 from the right partition of array nums1. So, we should try to take more elements from array nums1 to make the partition valid. Binary search will eventually help us find a valid partition.
 
 [1,2,3,4,5]
 [1,2,3,4,5,6,7,8]
