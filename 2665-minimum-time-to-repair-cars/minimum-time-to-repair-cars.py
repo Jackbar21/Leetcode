@@ -1,8 +1,8 @@
 class Solution:
     def repairCars(self, ranks: List[int], cars: int) -> int:
-        d = defaultdict(int)
+        d = {}
         for rank in ranks:
-            d[rank] += 1
+            d[rank] = d.get(rank, 0) + 1
         rank_count_pairs = [(rank, count) for rank, count in d.items()]
 
         best_rank = max(ranks)
