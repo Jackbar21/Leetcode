@@ -10,15 +10,17 @@ class Solution:
             mid = (l + r) // 2
 
             # How many cars can mechanics reapir in 'mid' minutes?
-            # It takes r * n^2 minutes to build n cars.
-            # Hence, given 'mid' minutes to build cars,
-            # we have that: 
-            # mid == r * n^2
-            # ==> n^2 == mid / r
-            # ==> n == sqrt(mid / r)
+            # For a mechanic with a rank of r, it takes r * n^2 minutes to build n cars.
+            # Hence, given 'mid' minutes to build cars, we have that: 
+            #       mid == r * n^2
+            #       ==> r * n^2 == mid
+            #       ==> n^2 == mid / r
+            #       ==> n == sqrt(mid / r)
             can_repair = 0
-            for rank, count in d.items():
-                can_repair += count * math.floor(math.sqrt(mid / rank))
+            # for rank, count in d.items():
+            #     can_repair += count * math.floor(math.sqrt(mid / rank))
+            for rank in ranks:
+                can_repair += math.floor(math.sqrt(mid / rank))
             
             if can_repair >= cars:
                 # Valid solution, look for even SMALLER ones
