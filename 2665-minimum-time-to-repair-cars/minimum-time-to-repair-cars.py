@@ -4,7 +4,7 @@ class Solution:
         for rank in ranks:
             d[rank] += 1
 
-        best_rank = max(ranks)
+        best_rank = min(ranks)
         l, r = 1, best_rank * pow(cars, 2)
         while l <= r:
             mid = (l + r) // 2
