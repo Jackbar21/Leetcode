@@ -8,22 +8,22 @@ class Solution:
 
         # Binary search on the number of elements to take FROM A
         l, r = 0, len(A)
-        print(f"{l,r,A==nums1=}")
+        # print(f"{l,r,A==nums1=}")
         magic_x = None
         while l <= r:
             x = (l + r) // 2
-            print(f"{x=}")
+            # print(f"{x=}")
             a_max_left = A[x - 1] if x - 1 >= 0 else float("-inf")
             a_min_right = A[x] if x < len(A) else float("inf")
             b_max_left = B[half - x - 1] if half - x - 1 >= 0 else float("-inf")
             b_min_right = B[half - x] if half - x < len(B) else float("inf")
             
-            print(f"{a_max_left, a_min_right=}")
+            # print(f"{a_max_left, a_min_right=}")
             assert a_max_left <= a_min_right
-            print(f"{b_max_left, b_min_right=}")
+            # print(f"{b_max_left, b_min_right=}")
             assert b_max_left <= b_min_right
             if a_max_left <= b_min_right and b_max_left <= a_min_right:
-                print(f"VALID SOLUTION")
+                # print(f"VALID SOLUTION")
                 magic_x = x
                 break
             
@@ -37,11 +37,11 @@ class Solution:
             continue
         
         x = magic_x
-        print(f"{l, r=}")
-        print(f"{half=}")
-        print(f"{magic_x=}")
-        print(f"A: {A[:x]} | {A[x:]}")
-        print(f"B: {B[:(half - x)]} | {B[(half - x):]}")
+        # print(f"{l, r=}")
+        # print(f"{half=}")
+        # print(f"{magic_x=}")
+        # print(f"A: {A[:x]} | {A[x:]}")
+        # print(f"B: {B[:(half - x)]} | {B[(half - x):]}")
         # return 0
 
 
@@ -94,7 +94,7 @@ class Solution:
 
         self.nums1, self.nums2 = nums1, nums2
         M, N = len(nums1), len(nums2)
-        # print(f"{sorted(nums1 + nums2)=}")
+        # # print(f"{sorted(nums1 + nums2)=}")
         L = M + N
         if L % 2 == 1:
             return self.getNumAtTargetIndex(L // 2)
@@ -196,7 +196,7 @@ class Solution:
         while l1 <= r1 and l2 <= r2:
             m1 = (l1 + r1) // 2
             m2 = (l2 + r2) // 2
-            print(f"{l1,r1,m1=}, {l2,r2,m2=}")
+            # print(f"{l1,r1,m1=}, {l2,r2,m2=}")
 
             # [2,3,7,7,7,9,10]
             #        m1
@@ -239,7 +239,7 @@ class Solution:
                     return num2
                 
         
-        print(f"{l1,r1,l2,r2=}")
+        # print(f"{l1,r1,l2,r2=}")
         # raise Exception("hehe")
         return nums1[l1] if l1 > r1 else nums2[l2]
         
@@ -316,7 +316,7 @@ class Solution:
             #         r1 = m1 - 1
             #         r2 = m2 - 1
 
-        print(f"{l1,r1,l2,r2=}")
+        # print(f"{l1,r1,l2,r2=}")
         if l1 == r1:
             return nums1[l1]
         # assert l2 == r2
@@ -374,7 +374,7 @@ class Solution:
             return num
         
         # We've got index1, index2
-        print("FAIL")
+        # print("FAIL")
         return sorted(nums1 + nums2)[target_index]
 
         # Let's try to get middle element in nums1 and nums2. For each of these,
@@ -516,7 +516,7 @@ class Solution:
 
         #     upper_bound = num1_greater_than_or_equal_to_count + (rightmost_gte + 1 if rightmost_gte else 0)
         #     lower_bound = num1_greater_than_or_equal_to_count + (rightmost_gt + 1 if rightmost_gt else 0)
-        #     # print(f"{lower_bound=}, {upper_bound=}")
+        #     # # print(f"{lower_bound=}, {upper_bound=}")
         #     assert lower_bound <= upper_bound
         #     if lower_bound <= target_index <= upper_bound:
         #         return num1
@@ -531,7 +531,7 @@ class Solution:
         #         assert target_index == num1_index
         #         return num1
         
-        # # print(f"{l1,r1,l2,r2=}")
+        # # # print(f"{l1,r1,l2,r2=}")
         # raise Exception("Too bad so sad, time for INVALID SOLUTIONNNNN")
 
 # [2,3,6] [7,9,9,10]
