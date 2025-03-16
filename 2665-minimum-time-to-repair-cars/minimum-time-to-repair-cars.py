@@ -17,8 +17,10 @@ class Solution:
             # ==> n^2 == mid / r
             # ==> n == sqrt(mid / r)
             can_repair = 0
-            for rank, count in d.items():
-                can_repair += count * math.floor(math.sqrt(mid / rank))
+            # for rank, count in d.items():
+            #     can_repair += count * math.floor(math.sqrt(mid / rank))
+            for rank in ranks:
+                can_repair += math.floor(math.sqrt(mid / rank))
             
             if can_repair >= cars:
                 # Valid solution, look for even SMALLER ones
