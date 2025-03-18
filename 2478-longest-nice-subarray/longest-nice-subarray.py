@@ -10,22 +10,18 @@ class Solution:
                 cur_sum += num
                 continue
 
-            # Invalid case, must RESTART the window
-            # WRONG: Shift the window until valid again!
+            # Invalid case, slide window from the left until valid again!
 
             # Step 1: Update res
-            # assert r - l + 1 == cur_streak
-            assert (cur_sum | num) < (cur_sum + num)
-            # # print(f"{l=}, {r=}, {r-l+1=}, {cur_streak=}")
-            res = max(res, r - l)
+            if res < r - l:
+                res = r - l
 
             # Step 2: Shrink window until valid
-            # # print(f"before: {l,r,prev_num,num,nums[l:r+1]=}")
             while (cur_sum | num) != (cur_sum + num):
-                # # print(f"{l,r,cur_sum,num=}")
                 cur_sum -= nums[l]
                 l += 1
+            
+            # Step 3: Add num to now valid window :)
             cur_sum += num
-            # print(f"FINAL: {l,r,cur_sum,num=}")
 
         return max(res, r - l + 1)
