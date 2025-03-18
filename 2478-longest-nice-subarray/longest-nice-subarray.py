@@ -7,7 +7,7 @@ class Solution:
         for r, num in enumerate(nums):
             if (cur_sum | num) == (cur_sum + num):
                 # Valid case, continue building the window!
-                cur_sum += num
+                cur_sum |= num
                 continue
 
             # Invalid case, slide window from the left until valid again!
@@ -25,3 +25,22 @@ class Solution:
             cur_sum += num
 
         return max(res, r - l + 1)
+
+# 010110
+# 101000
+# ______ OR
+# 111110
+
+# 000001
+# ------
+# 000000
+
+# 111111
+# 010110
+# ^^^^^^
+# 101001
+
+# 101000
+# 000001
+# ||||||
+# 101001
