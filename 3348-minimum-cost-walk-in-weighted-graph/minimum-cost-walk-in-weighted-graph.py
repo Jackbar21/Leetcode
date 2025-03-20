@@ -6,6 +6,11 @@ class Solution:
         # JOHNSON'S: O(mnlogn)
         # DP probably going to be too slow here... even though correct!
 
+        # Dijkstra's probably won't work, since LONGER paths are encouraged, similar to why
+        # it doesn't work for negative numbers...
+
+        # Answer: Union-Find!
+
         # From constraints, we have that 0 <= w_i <= 10^5
         MAX_WEIGHT = pow(10, 5)
         MAX_BIT_COUNT = len(bin(MAX_WEIGHT)) - 2
@@ -15,7 +20,6 @@ class Solution:
         for (u, v, w) in edges:
             adj_list[u].append((v, w))
             adj_list[v].append((u, w))
-        self.adj_list = adj_list
 
         nodes = set(range(n))
         visited = set()
@@ -35,7 +39,7 @@ class Solution:
                 node = stack.pop()
                 connected_component.add(node)
 
-                for neigh, weight in self.adj_list[node]:
+                for neigh, weight in adj_list[node]:
                     bitwise_and &= weight
                     if neigh not in visited:
                         stack.append(neigh)
@@ -46,18 +50,11 @@ class Solution:
         node_to_component = {}
         for component, bitwise_and in components:
             for node in component:
-                assert node not in node_to_component
+                # assert node not in node_to_component
                 node_to_component[node] = (component, bitwise_and)
         
         answer = []
         for s, t in query:
             component, bitwise_and = node_to_component[s]
-            if t not in component:
-                answer.append(-1)
-                continue
-            
-            answer.append(bitwise_and)
-        
+            answer.append(bitwise_and if t in component else -1)
         return answer
-
-            
