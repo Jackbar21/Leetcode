@@ -46,9 +46,9 @@ class Solution:
                 continue
             min_heap.append((linked_list.val, tie_breaker, linked_list))
             tie_breaker += 1
-        heapq.heapify(min_heap) # O(len(lists))
+        heapq.heapify(min_heap) # O(k)
         
-        while len(min_heap) > 0:
+        while len(min_heap) > 1:
             val, _, linked_list = heapq.heappop(min_heap)
             tail.next = ListNode(val)
             tail = tail.next
@@ -57,5 +57,9 @@ class Solution:
             if linked_list: # Only add back to the heap IF NOT EMPTY!!!
                 tie_breaker += 1
                 heapq.heappush(min_heap, (linked_list.val, tie_breaker, linked_list))
+        
+        if len(min_heap) == 1:
+            _, _, last_linked_list = min_heap.pop()
+            tail.next = last_linked_list
 
         return head.next
