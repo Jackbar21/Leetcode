@@ -9,8 +9,6 @@ class Solution:
         # Dijkstra's probably won't work, since LONGER paths are encouraged, similar to why
         # it doesn't work for negative numbers...
 
-        # Answer: Union-Find!
-
         # From constraints, we have that 0 <= w_i <= 10^5
         MAX_WEIGHT = pow(10, 5)
         MAX_BIT_COUNT = len(bin(MAX_WEIGHT)) - 2
