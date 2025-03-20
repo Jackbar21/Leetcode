@@ -1,4 +1,5 @@
 class Solution:
+    # O(n + len(edges) + len(query))
     def minimumCost(self, n: int, edges: List[List[int]], query: List[List[int]]) -> List[int]:
         # G = (V, E), n = |V|, m = |E| (= len(edges))
         # BELLMAN-FORD: O(nm)
@@ -10,9 +11,9 @@ class Solution:
         # it doesn't work for negative numbers...
 
         # From constraints, we have that 0 <= w_i <= 10^5
-        MAX_WEIGHT = pow(10, 5)
-        MAX_BIT_COUNT = len(bin(MAX_WEIGHT)) - 2
-        MAX_BITWISE_AND = int('1' * (MAX_BIT_COUNT), 2)
+        # MAX_WEIGHT = pow(10, 5)
+        # MAX_BIT_COUNT = len(bin(MAX_WEIGHT)) - 2
+        # MAX_BITWISE_AND = int('1' * (MAX_BIT_COUNT), 2)
 
         adj_list = {node: [] for node in range(n)}
         for (u, v, w) in edges:
@@ -29,16 +30,16 @@ class Solution:
                 continue
             visited.add(node)
             
-            # Perform bfs
+            # Perform dfs
             connected_component = set()
-            bitwise_and = MAX_BITWISE_AND # only set bits as default!
+            bitwise_and = None
             stack = [node]
             while len(stack) > 0:
                 node = stack.pop()
                 connected_component.add(node)
 
                 for neigh, weight in adj_list[node]:
-                    bitwise_and &= weight
+                    bitwise_and = weight if bitwise_and is None else bitwise_and & weight
                     if neigh not in visited:
                         stack.append(neigh)
                         visited.add(neigh)
