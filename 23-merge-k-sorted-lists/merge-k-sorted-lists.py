@@ -5,8 +5,8 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        # return self.mergeKListsHeap(lists)
-        return self.mergeKListsHeapOptimized(lists)
+        return self.mergeKListsHeap(lists)
+        # return self.mergeKListsHeapOptimized(lists)
     
     def mergeKListsHeapOptimized(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         # Instead of using a min_heap of head value, tie breaker, and linked lists, just use 
