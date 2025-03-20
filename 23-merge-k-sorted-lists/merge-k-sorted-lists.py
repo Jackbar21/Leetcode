@@ -15,7 +15,7 @@ class Solution:
             if not linked_list:
                 continue
             min_heap.append((linked_list.val, tie_breaker, linked_list))
-            tie_breaker -= 1
+            tie_breaker += 1
         heapq.heapify(min_heap) # O(len(lists))
         
         while len(min_heap) > 0:
@@ -25,7 +25,7 @@ class Solution:
 
             linked_list = linked_list.next
             if linked_list: # Only add back to the heap IF NOT EMPTY!!!
-                tie_breaker -= 1
+                tie_breaker += 1
                 heapq.heappush(min_heap, (linked_list.val, tie_breaker, linked_list))
 
         return head.next
