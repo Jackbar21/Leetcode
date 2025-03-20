@@ -10,11 +10,6 @@ class Solution:
         # Dijkstra's probably won't work, since LONGER paths are encouraged, similar to why
         # it doesn't work for negative numbers...
 
-        # From constraints, we have that 0 <= w_i <= 10^5
-        # MAX_WEIGHT = pow(10, 5)
-        # MAX_BIT_COUNT = len(bin(MAX_WEIGHT)) - 2
-        # MAX_BITWISE_AND = int('1' * (MAX_BIT_COUNT), 2)
-
         adj_list = {node: [] for node in range(n)}
         for (u, v, w) in edges:
             adj_list[u].append((v, w))
@@ -31,17 +26,17 @@ class Solution:
             visited.add(node)
             
             # Perform dfs
-            connected_component = set()
+            connected_component = set([node])
             bitwise_and = None
             stack = [node]
             while len(stack) > 0:
                 node = stack.pop()
-                connected_component.add(node)
 
                 for neigh, weight in adj_list[node]:
                     bitwise_and = weight if bitwise_and is None else bitwise_and & weight
                     if neigh not in visited:
                         stack.append(neigh)
+                        connected_component.add(neigh)
                         visited.add(neigh)
             
             components.append((connected_component, bitwise_and))
