@@ -8,17 +8,16 @@ class Solution:
         # assert len(recipes) == len(ingredients)
         N = len(recipes)
         adj_list = defaultdict(list)
-        indegree = {}
+        indegree = defaultdict(int)
         for i in range(N):
             dependency_node = recipes[i]
             needed_ingredients = ingredients[i]
             for node in needed_ingredients:
                 adj_list[node].append(dependency_node)
-            indegree[dependency_node] = indegree.get(dependency_node, 0) + len(needed_ingredients)
+            indegree[dependency_node] += len(needed_ingredients)
         
         # for ingredient in supplies:
         #     assert indegree[ingredient] == 0
-
         queue = collections.deque(supplies)
         can_create = set()
         while len(queue) > 0:
@@ -30,5 +29,3 @@ class Solution:
                     queue.append(neigh)
         
         return [recipe for recipe in recipes if recipe in can_create]
-
-
