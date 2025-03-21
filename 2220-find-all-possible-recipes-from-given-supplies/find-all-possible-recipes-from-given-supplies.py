@@ -9,30 +9,31 @@ class Solution:
         # assert len(recipes) == len(ingredients)
         N = len(recipes)
         adj_list = defaultdict(set)
+        indegree = defaultdict(int)
         for i in range(N):
             dependency_node = recipes[i]
             for node in ingredients[i]:
                 adj_list[node].add(dependency_node)
+            indegree[dependency_node] += len(ingredients[i])
         
-        indegree = defaultdict(int)
-        for node in adj_list:
-            for neigh in adj_list[node]:
-                indegree[neigh] += 1
+        
+        # for node in adj_list:
+        #     for neigh in adj_list[node]:
+        #         indegree[neigh] += 1
         
         for ingredient in supplies:
             assert indegree[ingredient] == 0
 
-        # print(f"{indegree=}")
         queue = collections.deque(supplies)
-        topo_sort = set()
+        can_create = set()
         while len(queue) > 0:
             node = queue.popleft()
             for neigh in adj_list[node]:
                 indegree[neigh] -= 1
                 if indegree[neigh] == 0:
-                    topo_sort.add(neigh)
+                    can_create.add(neigh)
                     queue.append(neigh)
         
-        return list(filter(lambda recipe: recipe in topo_sort, recipes))
+        return [recipe for recipe in recipes if recipe in can_create]
 
 
