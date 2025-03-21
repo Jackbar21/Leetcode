@@ -16,13 +16,8 @@ class Solution:
                 adj_list[node].add(dependency_node)
             indegree[dependency_node] += len(ingredients[i])
         
-        
-        # for node in adj_list:
-        #     for neigh in adj_list[node]:
-        #         indegree[neigh] += 1
-        
-        for ingredient in supplies:
-            assert indegree[ingredient] == 0
+        # for ingredient in supplies:
+        #     assert indegree[ingredient] == 0
 
         queue = collections.deque(supplies)
         can_create = set()
