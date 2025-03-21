@@ -33,10 +33,6 @@ class Solution:
                     topo_sort.add(neigh)
                     queue.append(neigh)
         
-        return [
-            recipe
-            for recipe in recipes
-            if recipe in topo_sort
-        ]
+        return list(filter(lambda recipe: recipe in topo_sort, recipes))
 
 
