@@ -20,15 +20,15 @@ class Solution:
         #     assert indegree[ingredient] == 0
 
         queue = collections.deque(supplies)
-        can_create = set()
+        can_create = []
         while len(queue) > 0:
             node = queue.popleft()
             for neigh in adj_list[node]:
                 indegree[neigh] -= 1
                 if indegree[neigh] == 0:
-                    can_create.add(neigh)
+                    can_create.append(neigh)
                     queue.append(neigh)
-        
+        return can_create
         return [recipe for recipe in recipes if recipe in can_create]
 
 
