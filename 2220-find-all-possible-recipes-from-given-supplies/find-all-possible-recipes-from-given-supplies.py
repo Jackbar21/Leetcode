@@ -8,27 +8,27 @@ class Solution:
         # assert len(recipes) == len(ingredients)
         N = len(recipes)
         adj_list = defaultdict(list)
-        indegree = defaultdict(int)
+        indegree = {}
         for i in range(N):
             dependency_node = recipes[i]
             needed_ingredients = ingredients[i]
             for node in needed_ingredients:
                 adj_list[node].append(dependency_node)
-            indegree[dependency_node] += len(needed_ingredients)
+            indegree[dependency_node] = indegree.get(dependency_node, 0) + len(needed_ingredients)
         
         # for ingredient in supplies:
         #     assert indegree[ingredient] == 0
 
         queue = collections.deque(supplies)
-        can_create = []
+        can_create = set()
         while len(queue) > 0:
             node = queue.popleft()
             for neigh in adj_list[node]:
                 indegree[neigh] -= 1
                 if indegree[neigh] == 0:
-                    can_create.append(neigh)
+                    can_create.add(neigh)
                     queue.append(neigh)
-        return can_create
+        
         return [recipe for recipe in recipes if recipe in can_create]
 
 
