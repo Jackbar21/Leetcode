@@ -22,18 +22,17 @@ class Solution:
         for ingredient in supplies:
             assert indegree[ingredient] == 0
 
-        print(f"{indegree=}")
+        # print(f"{indegree=}")
         queue = collections.deque(supplies)
-        topo_sort = []
+        topo_sort = set()
         while len(queue) > 0:
             node = queue.popleft()
             for neigh in adj_list[node]:
                 indegree[neigh] -= 1
                 if indegree[neigh] == 0:
-                    topo_sort.append(neigh)
+                    topo_sort.add(neigh)
                     queue.append(neigh)
         
-        return topo_sort
         return [
             recipe
             for recipe in recipes
