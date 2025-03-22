@@ -16,7 +16,7 @@ class Solution:
         arr = [["."] * n for _ in range(n)]
         def backtrack(i):
             if i == n:
-                res.append(list("".join(row) for row in arr))
+                res.append(["".join(row) for row in arr])
                 return
 
             for j in range(n):
