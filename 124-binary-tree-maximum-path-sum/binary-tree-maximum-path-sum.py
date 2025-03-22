@@ -10,19 +10,26 @@ class Solution:
         # Case 1: Best solution is in left subtree
         # Case 2: Best solution is in right subtree
         # Case 3: Solution goes through the root. Greedily find the best path including root.
-        self.memo = {None: float("-inf")}
         if not root:
             return float("-inf")
         
         case1 = self.maxPathSum(root.left)
         case2 = self.maxPathSum(root.right)
-        case3 = root.val + max(self.greedyPathSum(root.left), 0) + max(self.greedyPathSum(root.right), 0)
+
+        left_sum = self.greedyPathSum(root.left)
+        right_sum = self.greedyPathSum(root.right)
+        case3 = root.val
+        if left_sum > 0:
+            case3 += left_sum
+        if right_sum > 0:
+            case3 += right_sum
 
         return max(case1, case2, case3)
     
+    @cache
     def greedyPathSum(self, root):
-        if root in self.memo:
-            return self.memo[root]
+        if not root:
+            return float("-inf")
 
         left_sum = self.greedyPathSum(root.left)
         right_sum = self.greedyPathSum(root.right)
@@ -30,8 +37,5 @@ class Solution:
         case1 = root.val                # Just root
         case2 = root.val + left_sum     # Just root + left subtree
         case3 = root.val + right_sum    # Just root + right subtree
-
-        res = max(case1, case2, case3)
-        self.memo[root] = res
-        return res
+        return max(case1, case2, case3)
         
