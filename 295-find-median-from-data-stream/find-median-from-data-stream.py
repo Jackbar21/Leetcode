@@ -68,12 +68,6 @@ class MedianFinder:
         # 8
         # Hence, index 0 is always the MINIMUM of all values in the array (and where the heap tree starts!)
 
-
-    # FOLLOW UPS:
-    # - Q1: If all integer numbers from the stream are in the range [0, 100], 
-    #       how would you optimize your solution?
-    # - A1: addNum is O(log(n)), whereas 
-
 # Your MedianFinder object will be instantiated and called as such:
 # obj = MedianFinder()
 # obj.addNum(num)
