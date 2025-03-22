@@ -38,7 +38,6 @@ class Codec:
         if len(data) == 0:
             return None
         des = data.split(",")
-        N = len(des)
         
         index_to_node = {}
         for index, value in enumerate(des):
@@ -51,7 +50,7 @@ class Codec:
         
         queue = collections.deque([index_to_node[0]])
         queue_left = True
-        for index in range(1, N):
+        for index in range(1, len(index_to_node)):
             node = index_to_node[index]
             queue_node = queue[0]
             if queue_left:
