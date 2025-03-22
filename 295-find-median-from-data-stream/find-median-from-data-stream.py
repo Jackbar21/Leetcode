@@ -51,8 +51,6 @@ class MedianFinder:
             self.min_heap.append(big)
             return
         
-        # max(self.max_heap) <= max_left <= min_right <= min(self.min_heap)
-
         max_left = -self.max_heap[0]
         min_right = self.min_heap[0]
         if num < max_left:
@@ -75,14 +73,15 @@ class MedianFinder:
         # if (MAX_LEN == MIN_LEN) or (MAX_LEN == MIN_LEN - 1):
         #     return
         N = MAX_LEN + MIN_LEN
-        if MAX_LEN == (N // 2):
+        TARGET_MAX_LEN = N // 2
+        if MAX_LEN == TARGET_MAX_LEN:
             return
 
-        # Max heap too large, add to min heap
-        if MAX_LEN > MIN_LEN:
+        # Max heap too large, pop and add to min heap
+        if MAX_LEN > TARGET_MAX_LEN:
             max_num = -heapq.heappop(self.max_heap)
             heapq.heappush(self.min_heap, max_num)
-        # Min heap too large, add to max heap
+        # Max heap too small, take from min heap
         else:
             min_num = heapq.heappop(self.min_heap)
             heapq.heappush(self.max_heap, -min_num)
