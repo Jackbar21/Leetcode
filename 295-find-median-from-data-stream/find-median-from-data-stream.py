@@ -1,3 +1,35 @@
+# FOLLOW UPS:
+    # - Q1: If all integer numbers from the stream are in the range [0, 100], 
+    #       how would you optimize your solution?
+    # 
+    # - A1: addNum is O(log(n)), balance is O(1) [no need for recursive calls ever], findMedian is O(1)
+    #       Hence I would look to somehow optimize addNum to probably be O(1). We can do this by simply
+    #       keeping track of the FREQUENCIES of every single number in the range [0, 100] via a dictionary
+    #       or even just an array. Adding a number would be as simple as increment that numbers frequency
+    #       by 1 in that dictionary/array.
+    #       As for findMedian, since we have a dictionary/array with at most 100-0+1 = 101 keys/indices,
+    #       we can take the sum S of all the frequencies after O(101) == O(1) operations, use that as total
+    #       number of elements, look for which number belongs to index S//2 (as well as S//2 - 1 if S is
+    #       even) with again at most O(101) == O(1) operations. We leverage the fact that there are only
+    #       a CONSTANT count of unique numbers to make both addNum and findMedian O(1) functions.
+    #
+    # - Q2: If 99% of all integer numbers from the stream are in the range [0, 100], 
+    #       how would you optimize your solution?
+    #       
+    # - A2: In terms of asymptotic complexity, this technically might not be "better", but I would
+    #       probably do something similar to the above. I would just additionally keep track of a
+    #       dictionary/array for numbers LESS than 0 (their values and their frequencies), as well
+    #       as for numbers GREATER than 0. addNum would still be an O(1) function of course, but
+    #       SO WILL findNum! 
+    #       The reason for this is that with above algorithm, if median were to be smaller than 0
+    #       or greater than 100, then it might take O(.01*N) == O(N) time in worst case. However,
+    #       by DEFINITION of MEDIAN, since 99% of the numbers are between [0, 100], the median
+    #       number WILL BE in the range of numbers between [0, 100]! So we can simply keep track
+    #       of just HOW MANY numbers are less than 0 and greater than 100, and simply include that
+    #       in our solution for finding the median since we'll never encounter the problem of the median
+    #       being less than 0 or greater than 100 (which would be what turns this into O(N) worst case.)
+    #       Hence, findNum will still be O(1), and therefore be an improvement on the currently existing
+    #       solution w/ heaps where addNum is O(log(N)) :)
 class MedianFinder:
     def __init__(self):
         # Suppose there are currently N elements in TOTAL
