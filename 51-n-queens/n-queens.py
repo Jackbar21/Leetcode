@@ -6,7 +6,7 @@ class Solution:
         # Positive Diagonals: use row + col
 
         # Already used up indices!
-        # rows = set() # Can ignore
+        # rows = set() # Can ignore!
         cols = set()
         neg_diags = set()
         pos_diags = set()
@@ -17,12 +17,9 @@ class Solution:
         def backtrack(i):
             #print(f"{i=}, {arr=}")
             if i == n:
-                #print(f"SOL: {arr=}")
-                # yield arr.copy() # TODO: Remove copy if unneeded
-                sol = ["".join(arr[i]) for i in range(n)]
-                #print(f"{sol=}")
-                yield sol
+                yield list("".join(row) for row in arr)
                 return
+
 
             for j in range(n):
                 if j in cols or (j - i) in neg_diags or (i + j) in pos_diags:
