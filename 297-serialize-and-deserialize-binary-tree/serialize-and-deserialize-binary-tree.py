@@ -49,19 +49,20 @@ class Codec:
             node = TreeNode(int(value))
             index_to_node[index] = node
         
-        queue = collections.deque([index_to_node[0]])
+        queue_node = index_to_node[0]
+        queue = collections.deque([queue_node])
         queue_left = True
         for index in range(1, N):
             node = index_to_node[index]
             if node:
                 queue.append(node)
-            queue_node = queue[0]
             if queue_left:
                 queue_node.left = node
                 queue_left = False
             else:
                 queue_node.right = node
                 queue.popleft()
+                queue_node = queue[0]
                 queue_left = True
         
         return index_to_node[0]
