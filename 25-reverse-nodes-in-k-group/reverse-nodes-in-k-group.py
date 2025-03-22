@@ -4,19 +4,7 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def ll_to_array(self, head):
-        arr = []
-        while head:
-            arr.append(head.val)
-            head = head.next
-        return arr
-
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        # print(f"{self.ll_to_array(head)=}")
-        # reversed_ll = self.reverseLinkedList(head)
-        # head.next = ListNode(4)
-        # print(f"{self.ll_to_array(head)=}")
-        # print(f"{self.ll_to_array(reversed_ll)=}")
         if head is None:
             return None
 
