@@ -18,15 +18,20 @@ class Solution:
             # Less than k remaining nodes, so return list as is!
             return head
         
-        assert k_node
-        rest_of_linked_list = None
-        if k_node:
-            rest_of_linked_list = k_node.next
-            k_node.next = None
+        # Disconnect first k nodes from rest of linked list
+        rest_of_linked_list = k_node.next
+        k_node.next = None
 
+        # Reverse first k nodes in linked list
         start_of_linked_list = self.reverseLinkedList(head)
+
+        # Connect first k nodes in linked list (now reversed!)
+        # with rest of linked list, to which we'll apply this
+        # same algorithm RECURSIVELY!
         head.next = self.reverseKGroup(rest_of_linked_list, k)
 
+        # Return start of linked list, with all 
+        # reverse operations applied as needed!
         return start_of_linked_list
     
     def reverseLinkedList(self, head):
@@ -41,5 +46,3 @@ class Solution:
             head = next_node
         
         return prev
-
-        
