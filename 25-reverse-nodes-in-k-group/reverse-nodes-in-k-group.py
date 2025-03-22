@@ -18,6 +18,7 @@ class Solution:
             # Less than k remaining nodes, so return list as is!
             return head
         
+        assert k_node
         rest_of_linked_list = None
         if k_node:
             rest_of_linked_list = k_node.next
