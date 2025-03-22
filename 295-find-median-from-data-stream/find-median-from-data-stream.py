@@ -1,5 +1,4 @@
 class MedianFinder:
-    # TODO: REMEMBER TO DO THE FOLLOW UPS ONCE DONE WITH THE PROBLEM!!!
     def __init__(self):
         # Suppose there are currently N elements in TOTAL
         self.max_heap = [] # Max heap of (N // 2) SMALLEST elements
@@ -51,7 +50,7 @@ class MedianFinder:
             heapq.heappush(self.max_heap, -min_num)
         
         # Recursively balance further!
-        self.balance()
+        # self.balance()
         
     def findMedian(self) -> float:
         MAX_LEN, MIN_LEN = len(self.max_heap), len(self.min_heap)
@@ -69,6 +68,11 @@ class MedianFinder:
         # 8
         # Hence, index 0 is always the MINIMUM of all values in the array (and where the heap tree starts!)
 
+
+    # FOLLOW UPS:
+    # - Q1: If all integer numbers from the stream are in the range [0, 100], 
+    #       how would you optimize your solution?
+    # - A1: addNum is O(log(n)), whereas 
 
 # Your MedianFinder object will be instantiated and called as such:
 # obj = MedianFinder()
