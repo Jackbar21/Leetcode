@@ -16,7 +16,6 @@ class Solution:
         case1 = self.maxPathSum(root.left)
         case2 = self.maxPathSum(root.right)
         case3 = root.val + max(0, self.greedyPathSum(root.left)) + max(0, self.greedyPathSum(root.right))
-
         return max(case1, case2, case3)
     
     @cache
