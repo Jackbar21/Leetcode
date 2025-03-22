@@ -10,8 +10,10 @@ class Solution:
 
         k_node = head
         count = 1 # head is first node!
-        while k_node and count < k:
+        while count < k:
             k_node = k_node.next
+            if k_node is None:
+                break
             count += k_node is not None
         
         if count < k:
@@ -46,3 +48,8 @@ class Solution:
             head = next_node
         
         return prev
+
+# [INPUT] 
+#       1 -> 2 -> 3 -> 4 -> 5 
+# [STEP 1: Disconnect first k nodes]
+#       1 -> 2 | 3 -> 4 -> 5 -- head == 1->2, rest_of_linked_list == 3->4->5
