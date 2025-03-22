@@ -8,10 +8,8 @@ class Solution:
 
         # Step 2: Get all components
         components = []
-        nodes = set(range(n))
         visited = set()
-        while len(nodes) > 0:
-            node = nodes.pop()
+        for node in range(n):
             if node in visited:
                 # Already belongs to another connected components
                 continue
@@ -47,5 +45,3 @@ class Solution:
             res += is_complete
 
         return res
-
-
