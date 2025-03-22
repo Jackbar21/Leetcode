@@ -39,19 +39,19 @@ class Codec:
             return None
         des = data.split(",")
         
-        index_to_node = {}
+        nodes = []
         for index, value in enumerate(des):
             if value == "null":
-                index_to_node[index] = None
+                nodes.append(None)
                 continue
 
             node = TreeNode(int(value))
-            index_to_node[index] = node
+            nodes.append(node)
         
-        queue = collections.deque([index_to_node[0]])
+        queue = collections.deque([nodes[0]])
         queue_left = True
-        for index in range(1, len(index_to_node)):
-            node = index_to_node[index]
+        for index in range(1, len(nodes)):
+            node = nodes[index]
             queue_node = queue[0]
             if queue_left:
                 queue_node.left = node
@@ -64,7 +64,7 @@ class Codec:
             if node is not None:
                 queue.append(node)
         
-        return index_to_node[0]
+        return nodes[0]
 
 # Your Codec object will be instantiated and called as such:
 # ser = Codec()
