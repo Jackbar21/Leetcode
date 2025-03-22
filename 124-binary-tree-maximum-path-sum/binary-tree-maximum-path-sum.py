@@ -24,7 +24,8 @@ class Solution:
         if right_sum > 0:
             case3 += right_sum
 
-        return max(case1, case2, case3)
+        # return max(case1, case2, case3)
+        return case1 if case1 > case2 and case1 > case3 else case2 if case2 > case3 else case3
     
     @cache
     def greedyPathSum(self, root):
