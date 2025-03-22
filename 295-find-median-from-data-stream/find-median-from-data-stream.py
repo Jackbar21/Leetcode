@@ -15,7 +15,7 @@ class MedianFinder:
             return
         
         if len(self.max_heap) == 0:
-            assert len(self.min_heap) == 1
+            # assert len(self.min_heap) == 1
             num1, num2 = num, self.min_heap.pop()
             small, big = (num1, num2) if num1 < num2 else (num2, num1)
             self.max_heap.append(-small)
@@ -31,11 +31,11 @@ class MedianFinder:
         else:
             # Push into whichever has smallest size, since we balance
             # heap right afterwards, we really could just pick randomly...
-            # if len(self.max_heap) < len(self.min_heap):
-            #     heapq.heappush(self.max_heap, -num)
-            # else:
-            #     heapq.heappush(self.min_heap, num)
-            heapq.heappush(self.min_heap, num)
+            if len(self.max_heap) < len(self.min_heap):
+                heapq.heappush(self.max_heap, -num)
+            else:
+                heapq.heappush(self.min_heap, num)
+            # heapq.heappush(self.min_heap, num)
 
 
         # Balance heap stage
