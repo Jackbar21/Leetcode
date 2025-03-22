@@ -14,7 +14,7 @@ class Solution:
             k_node = k_node.next
             if k_node is None:
                 break
-            count += k_node is not None
+            count += 1
         
         if count < k:
             # Less than k remaining nodes, so return list as is!
