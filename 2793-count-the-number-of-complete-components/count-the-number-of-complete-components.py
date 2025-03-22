@@ -19,8 +19,8 @@ class Solution:
             component = [node]
             stack = [node] # dfs
             while len(stack) > 0:
-                node = stack.pop()
-                for neigh in adj_list[node]:
+                component_node = stack.pop()
+                for neigh in adj_list[component_node]:
                     if neigh not in visited:
                         component.append(neigh)
                         stack.append(neigh)
