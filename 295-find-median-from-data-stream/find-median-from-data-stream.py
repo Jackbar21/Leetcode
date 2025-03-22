@@ -50,7 +50,7 @@ class MedianFinder:
             heapq.heappush(self.max_heap, -min_num)
         
         # Recursively balance further!
-        # self.balance()
+        self.balance()
         
     def findMedian(self) -> float:
         MAX_LEN, MIN_LEN = len(self.max_heap), len(self.min_heap)
