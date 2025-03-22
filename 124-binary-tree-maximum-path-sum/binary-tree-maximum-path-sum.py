@@ -37,5 +37,6 @@ class Solution:
         case1 = root.val                # Just root
         case2 = root.val + left_sum     # Just root + left subtree
         case3 = root.val + right_sum    # Just root + right subtree
-        return max(case1, case2, case3)
+        # return max(case1, case2, case3)
+        return case1 if case1 > case2 and case1 > case3 else case2 if case2 > case3 else case3
         
