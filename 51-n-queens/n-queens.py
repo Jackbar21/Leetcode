@@ -1,9 +1,10 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
+        # Suppose we want to insert a queen at index (i, j)
         # Rows: use row index (e.g. i, 0 <= i < n)
         # Columns: use col index (e.g. j, 0 <= j < n)
         # Negative Diagonals: use col - row index (e.g. j - i)
-        # Positive Diagonals: use row + col
+        # Positive Diagonals: use row + col (e.g. i + j)
         res = []
 
         # Already used up indices!
@@ -13,30 +14,37 @@ class Solution:
         pos_diags = set()
 
         # There will only be one queen per row, so might as well backtrack through row indices!
-        arr = [["."] * n for _ in range(n)]
+        board = [["."] * n for _ in range(n)]
         def backtrack(i):
             if i == n:
-                res.append(["".join(row) for row in arr])
+                res.append(list("".join(row) for row in board))
                 return
 
             for j in range(n):
-                if j in cols or (j - i) in neg_diags or (i + j) in pos_diags:
+                col_index = j
+                neg_diag_index = j - i
+                pos_diag_index = i + j
+                if (
+                    col_index in cols
+                    or neg_diag_index in neg_diags
+                    or pos_diag_index in pos_diags
+                ):
                     continue
                 
                 # Prepare add
-                cols.add(j)
-                neg_diags.add(j - i)
-                pos_diags.add(i + j)
-                arr[i][j] = "Q"
+                cols.add(col_index)
+                neg_diags.add(neg_diag_index)
+                pos_diags.add(pos_diag_index)
+                board[i][j] = "Q"
 
                 # Get more solutions
                 backtrack(i + 1)
 
                 # Undo (for backtracking!)
-                arr[i][j] = "."
-                cols.remove(j)
-                neg_diags.remove(j - i)
-                pos_diags.remove(i + j)
+                board[i][j] = "."
+                cols.remove(col_index)
+                neg_diags.remove(neg_diag_index)
+                pos_diags.remove(pos_diag_index)
 
         
         backtrack(0)
