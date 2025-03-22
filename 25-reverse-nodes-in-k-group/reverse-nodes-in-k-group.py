@@ -14,7 +14,6 @@ class Solution:
             k_node = k_node.next
             count += k_node is not None
         
-        print(f"{head=}, {count=}")
         if count < k:
             # Less than k remaining nodes, so return list as is!
             return head
