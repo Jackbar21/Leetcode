@@ -46,7 +46,16 @@ class Solution:
         
         return prev
 
+# DOCUMENTATION FOR ABOVE CODE:
 # [INPUT] 
 #       1 -> 2 -> 3 -> 4 -> 5 
 # [STEP 1: Disconnect first k nodes]
 #       1 -> 2 | 3 -> 4 -> 5 -- head == 1->2, rest_of_linked_list == 3->4->5
+# [STEP 2: Reverse first k nodes]
+#       2 -> 1 | 3 -> 4 -> 5 -- head == 1, start_of_linked_list == 2->1, rest_of_linked_list == 3->4->5
+# [STEP 3: Apply function recursively]
+#       2 -> 1 | 4 -> 3 -> 5 -- head == 1, start == 2->1, rest == reverseKGroup(3->4->5) == 4 -> 3 -> 5
+# [STEP 4: Connect linked lists BACK together]
+#       2 -> 1 -> 4 -> 3 -> 5 -- start_of_linked_list == 2 -> 1 -> 4 -> 3 -> 5
+# [STEP 5: Return start_of_linked_list]
+#       2 -> 1 -> 4 -> 3 -> 5
