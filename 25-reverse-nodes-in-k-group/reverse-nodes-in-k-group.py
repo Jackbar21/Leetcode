@@ -11,14 +11,11 @@ class Solution:
         k_node = head
         count = 1 # head is first node!
         while count < k:
+            count += 1
             k_node = k_node.next
             if k_node is None:
-                break
-            count += 1
-        
-        if count < k:
-            # Less than k remaining nodes, so return list as is!
-            return head
+                # Less than k remaining nodes, so return list as is!
+                return head
         
         # Disconnect first k nodes from rest of linked list
         rest_of_linked_list = k_node.next
