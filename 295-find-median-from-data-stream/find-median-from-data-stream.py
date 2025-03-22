@@ -39,6 +39,7 @@ class MedianFinder:
     def addNum(self, num: int) -> None:
         MAX_LEN, MIN_LEN = len(self.max_heap), len(self.min_heap)
         if MIN_LEN == 0:
+            # assert MAX_LEN == 0
             self.min_heap.append(num)
             return
         
@@ -50,6 +51,8 @@ class MedianFinder:
             self.min_heap.append(big)
             return
         
+        # max(self.max_heap) <= max_left <= min_right <= min(self.min_heap)
+
         max_left = -self.max_heap[0]
         min_right = self.min_heap[0]
         if num < max_left:
@@ -69,7 +72,10 @@ class MedianFinder:
     
     def balance(self):
         MAX_LEN, MIN_LEN = len(self.max_heap), len(self.min_heap)
-        if (MAX_LEN == MIN_LEN) or (MAX_LEN == MIN_LEN - 1):
+        # if (MAX_LEN == MIN_LEN) or (MAX_LEN == MIN_LEN - 1):
+        #     return
+        N = MAX_LEN + MIN_LEN
+        if MAX_LEN == (N // 2):
             return
 
         # Max heap too large, add to min heap
@@ -106,3 +112,8 @@ class MedianFinder:
 # obj = MedianFinder()
 # obj.addNum(num)
 # param_2 = obj.findMedian()
+
+# N
+# median is at index N//2 if array is odd (i.e. N%2==1)
+# median is at indices (N//2 - 1) and N//2
+# Element at index N//2 is LARGER THAN N//2 elements in TOTAL
