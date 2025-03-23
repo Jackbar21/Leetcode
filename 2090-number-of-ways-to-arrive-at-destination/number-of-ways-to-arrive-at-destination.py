@@ -17,9 +17,8 @@ class Solution:
     @cache
     def dp(self, node, budget):
         if budget <= 0:
-            # assert budget == 0
             GOAL_NODE = self.n - 1
-            return node == GOAL_NODE
+            return (budget == 0) and (node == GOAL_NODE)
         
         shortest_path_cost = self.ucs(node)
         if budget < shortest_path_cost:
@@ -27,8 +26,7 @@ class Solution:
 
         res = 0
         for neigh, time in self.adj_list[node]:
-            if budget - time >= 0:
-                res += self.dp(neigh, budget - time)
+            res += self.dp(neigh, budget - time)
         
         return res
 
