@@ -27,7 +27,7 @@ class Solution:
 
         res = 0
         for neigh, time in self.adj_list[node]:
-            if budget - time >= 0:
+            if budget - time - self.ucs(neigh) >= 0:
                 res += self.dp(neigh, budget - time)
         
         return res
