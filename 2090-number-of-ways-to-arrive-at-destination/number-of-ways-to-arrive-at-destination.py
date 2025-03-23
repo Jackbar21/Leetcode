@@ -35,10 +35,14 @@ class Solution:
 
         # Step 2: Simple UCS to find optimal cost
         # self.shortest_paths = {node: self.ucs(node) for node in range(n)}
+        self.dp_memo = {}
         return self.dp(0, self.ucs(0)) % MOD
     
-    @cache
+    # @cache
     def dp(self, node, cost):
+        if (node, cost) in self.dp_memo:
+            return self.dp_memo[(node, cost)]
+
         if cost <= 0:
             # assert cost == 0
             GOAL_NODE = self.n - 1
@@ -53,4 +57,5 @@ class Solution:
             if cost - time >= 0:
                 res += self.dp(neigh, cost - time)
         
+        self.dp_memo[(node, cost)] = res
         return res
