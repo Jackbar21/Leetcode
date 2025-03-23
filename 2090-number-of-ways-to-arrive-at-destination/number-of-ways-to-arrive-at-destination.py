@@ -40,17 +40,15 @@ class Solution:
     @cache
     def dp(self, node, cost):
         GOAL_NODE = self.n - 1
-        if cost <= 0:
-            return cost == 0 and node == GOAL_NODE
+        if cost == 0:
+            return node == GOAL_NODE
         
         shortest_path = self.ucs(node)
         if shortest_path > cost:
-            # print(f"{node, cost, self.shortest_paths=}")
             return 0
 
         res = 0
         for neigh, time in self.adj_list[node]:
-            # if cost - time - self.shortest_paths[neigh] >= 0:
             if cost - time >= 0:
                 res += self.dp(neigh, cost - time)
         
