@@ -1,5 +1,6 @@
 class Solution:
     # Step 2: Simple UCS to find optimal cost from 'source' to GOAL_NODE
+    @cache
     def ucs(self, source):
         GOAL_NODE = self.n - 1
         fringe = [(0, source)] # (cost, node) | min-heap/priority-queue (i.e. UCS)
@@ -33,17 +34,8 @@ class Solution:
         self.adj_list = adj_list
 
         # Step 2: Simple UCS to find optimal cost
-        shortest_paths = {node: self.ucs(node) for node in range(n)}
-        self.shortest_paths = shortest_paths
-        # print(f"{self.shortest_paths=}")
-        # return self.ucs(3 if n >= 3 else 0)
-        # return -1
-
-        # We know have shortest path of
-        # print(f"{shortest_paths=}")
-        self.shortest_paths = shortest_paths
-        return self.dp(0, shortest_paths[0]) % MOD
-        return -1
+        # self.shortest_paths = {node: self.ucs(node) for node in range(n)}
+        return self.dp(0, self.ucs(0)) % MOD
     
     @cache
     def dp(self, node, cost):
@@ -51,7 +43,8 @@ class Solution:
         if cost <= 0:
             return cost == 0 and node == GOAL_NODE
         
-        if self.shortest_paths[node] > cost:
+        shortest_path = self.ucs(node)
+        if shortest_path > cost:
             # print(f"{node, cost, self.shortest_paths=}")
             return 0
 
