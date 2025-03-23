@@ -3,8 +3,8 @@ class Solution:
         self.n = n
         self.roads = roads
         MOD = pow(10, 9) + 7
-        dp = self.floydWarshall()
-        self.getShortestPath = lambda source, dest: dp[source][dest]
+        # dp = self.floydWarshall()
+        # self.getShortestPath = lambda source, dest: dp[source][dest]
 
         # Step 1: Build adjacency list!
         adj_list = {node: [] for node in range(n)}
@@ -33,11 +33,9 @@ class Solution:
         return res
 
     # Simple UCS to find optimal cost from 'source' to GOAL_NODE
-    # @cache
+    @cache
     def ucs(self, source):
         GOAL_NODE = self.n - 1
-        return self.getShortestPath(source, GOAL_NODE)
-
         fringe = [(0, source)] # (cost, node) | min-heap/priority-queue (i.e. UCS)
         visited = set()
         while len(fringe) > 0:
@@ -56,6 +54,11 @@ class Solution:
         
         raise Exception("No path found!")
     
+    # I figured Floyd-Warshall algo might be faster since edges can be at most O(N^2),
+    # and similar to Johnson's algorithm, we pretty much 'run Dijkstra's N times' in this
+    # problem (via ucs function) which is worse in dense graphs (i.e. |E| == O(|V|^2)) than
+    # Floyd-Warshall. But, to my surprise, Floyd-Warshall performed worse, so I'm not using it
+    # but wanted to keep the code here just for fun :)
     def floydWarshall(self):
         n = self.n
         dp = [[float("inf")] * n for _ in range(n)]
