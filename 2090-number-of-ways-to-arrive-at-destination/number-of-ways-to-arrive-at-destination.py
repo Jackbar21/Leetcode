@@ -1,7 +1,10 @@
 class Solution:
     def countPaths(self, n: int, roads: List[List[int]]) -> int:
         self.n = n
+        self.roads = roads
         MOD = pow(10, 9) + 7
+        dp = self.floydWarshall()
+        self.getShortestPath = lambda source, dest: dp[source][dest]
 
         # Step 1: Build adjacency list!
         adj_list = {node: [] for node in range(n)}
@@ -30,9 +33,11 @@ class Solution:
         return res
 
     # Simple UCS to find optimal cost from 'source' to GOAL_NODE
-    @cache
+    # @cache
     def ucs(self, source):
         GOAL_NODE = self.n - 1
+        return self.getShortestPath(source, GOAL_NODE)
+
         fringe = [(0, source)] # (cost, node) | min-heap/priority-queue (i.e. UCS)
         visited = set()
         while len(fringe) > 0:
@@ -50,3 +55,22 @@ class Solution:
                     heapq.heappush(fringe, (cost + time, neigh))
         
         raise Exception("No path found!")
+    
+    def floydWarshall(self):
+        n = self.n
+        dp = [[float("inf")] * n for _ in range(n)]
+        
+        for u, v, time in self.roads:
+            dp[u][v] = time
+            dp[v][u] = time
+        
+        for i in range(n):
+            dp[i][i] = 0
+
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    cost = dp[i][k] + dp[k][j]
+                    if cost < dp[i][j]:
+                        dp[i][j] = cost
+        return dp
