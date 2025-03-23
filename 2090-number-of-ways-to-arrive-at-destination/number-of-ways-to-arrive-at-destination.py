@@ -27,7 +27,6 @@ class Solution:
         res = 0
         for neigh, time in self.adj_list[node]:
             res += self.dp(neigh, budget - time)
-        
         return res
 
     # Simple UCS to find optimal cost from 'source' to GOAL_NODE
