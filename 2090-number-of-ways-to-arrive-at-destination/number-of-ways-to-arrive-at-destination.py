@@ -21,9 +21,9 @@ class Solution:
             GOAL_NODE = self.n - 1
             return node == GOAL_NODE
         
-        shortest_path_cost = self.ucs(node)
-        if budget < shortest_path_cost:
-            return 0
+        # shortest_path_cost = self.ucs(node)
+        # if budget < shortest_path_cost:
+        #     return 0
 
         res = 0
         for neigh, time in self.adj_list[node]:
