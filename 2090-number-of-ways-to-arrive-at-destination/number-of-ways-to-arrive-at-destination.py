@@ -39,8 +39,9 @@ class Solution:
     
     @cache
     def dp(self, node, cost):
-        GOAL_NODE = self.n - 1
-        if cost == 0:
+        if cost <= 0:
+            # assert cost == 0
+            GOAL_NODE = self.n - 1
             return node == GOAL_NODE
         
         shortest_path = self.ucs(node)
