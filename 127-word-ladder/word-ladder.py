@@ -24,7 +24,7 @@ class Solution:
         return self.END_WORD in trie and trie[self.END_WORD] == word
     
     def getSimilarWords(self, word):
-        return list(self.getSimilarWordsHelper(word, 0, self.trie, 1))
+        return self.getSimilarWordsHelper(word, 0, self.trie, 1)
 
     def getSimilarWordsHelper(self, word, index, trie, can_change):
         if index == len(word):
@@ -64,18 +64,7 @@ class Solution:
             cost, word = queue.popleft()
             if word == endWord:
                 return cost
-            
-            # used_words = set()
-            # for word in available_words:
-            #     diff_count = 0
-            #     for index in range(WORD_LENGTH):
-            #         diff_count += node[index] != word[index]
-            #         if diff_count > 1:
-            #             break
-                
-            #     if diff_count == 1:
-            #         used_words.add(word)
-            #         queue.append((cost + 1, word))
+
             for neigh in self.getSimilarWords(word):
                 if neigh not in visited:
                     queue.append((cost + 1, neigh))
