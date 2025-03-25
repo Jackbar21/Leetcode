@@ -49,9 +49,6 @@ class Solution:
         self.addWord(beginWord)
         for word in wordList:
             self.addWord(word)
-        print(f"{self.trie=}")
-
-        print(f"{self.getSimilarWords(beginWord)=}")
 
         wordList.append(beginWord)
         wordList.sort()
@@ -83,10 +80,6 @@ class Solution:
                 if neigh not in visited:
                     queue.append((cost + 1, neigh))
                     visited.add(neigh)
-            
-            # print(f"{available_words=}, {used_words=}")
-            # available_words -= used_words
-            # print(f"{available_words=}")
         
         return 0
 
