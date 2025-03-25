@@ -7,22 +7,6 @@ class Solution:
             trie = trie[letter]
         trie[self.END_WORD] = word
     
-    def isPrefix(self, word):
-        trie = self.trie
-        for letter in word:
-            if letter not in trie:
-                return False
-            trie = trie[letter]
-        return True
-    
-    def isWord(self, word):
-        trie = self.trie
-        for letter in word:
-            if letter not in trie:
-                return False
-            trie = trie[letter]
-        return self.END_WORD in trie and trie[self.END_WORD] == word
-    
     def getSimilarWords(self, word):
         self.res = []
         self.getSimilarWordsHelper(word, 0, self.trie, 1)
