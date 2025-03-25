@@ -38,26 +38,17 @@ class Solution:
 
         if can_change > 0:
             for letter in trie:
-                if letter == word_letter:
-                    continue
-                yield from self.getSimilarWordsHelper(word, index + 1, trie[letter], can_change - 1)
+                if letter != word_letter:
+                    yield from self.getSimilarWordsHelper(word, index + 1, trie[letter], can_change - 1)
 
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         self.trie = {}
         self.END_WORD = "."
-        self.addWord(beginWord)
+        # self.addWord(beginWord)
         for word in wordList:
             self.addWord(word)
 
-        wordList.append(beginWord)
-        wordList.sort()
-        N = len(wordList)
-        WORD_LENGTH = len(beginWord)
-
         queue = collections.deque([(1, beginWord)]) # (cost, word)
-        # available_words = set(wordList) # i.e. unvisited
-        # if endWord not in available_words:
-        #     return 0
         visited = set([beginWord])
         while len(queue) > 0:
             cost, word = queue.popleft()
@@ -68,38 +59,6 @@ class Solution:
                 if neigh not in visited:
                     queue.append((cost + 1, neigh))
                     visited.add(neigh)
-        
+
+        # No solution
         return 0
-
-        # Original Solution
-        adj_list = {word: [] for word in wordList}
-        for i, word_i in enumerate(wordList):
-            for j in range(i + 1, len(wordList)):
-                word_j = wordList[j]
-                diff_count = 0
-                
-                # assert len(word_i) == len(word_j) == WORD_LENGTH
-                for index in range(WORD_LENGTH):
-                    diff_count += word_i[index] != word_j[index]
-                    if diff_count > 1:
-                        break
-                
-                if diff_count == 1:
-                    adj_list[word_i].append(word_j)
-                    adj_list[word_j].append(word_i)
-        
-        queue = collections.deque([(1, beginWord)]) # (cost, word)
-        visited = set()
-        while len(queue) > 0:
-            cost, node = queue.popleft()
-            if node == endWord:
-                return cost
-
-            for neigh in adj_list[node]:
-                if neigh not in visited:
-                    queue.append((cost + 1, neigh))
-                    visited.add(neigh)
-
-        # No such sequence exists!
-        return 0
-
