@@ -37,15 +37,14 @@ class Solution:
             yield from self.getSimilarWordsHelper(word, index + 1, trie[word_letter], can_change)
 
         if can_change > 0:
-            for letter in self.ALPHABET:
-                if letter not in trie or letter == word_letter:
+            for letter in trie:
+                if letter == word_letter:
                     continue
                 yield from self.getSimilarWordsHelper(word, index + 1, trie[letter], can_change - 1)
 
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         self.trie = {}
         self.END_WORD = "."
-        self.ALPHABET = "abcdefghijklmnopqrstuvwxyz"
         self.addWord(beginWord)
         for word in wordList:
             self.addWord(word)
