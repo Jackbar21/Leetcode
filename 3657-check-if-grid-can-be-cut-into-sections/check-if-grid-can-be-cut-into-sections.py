@@ -16,7 +16,7 @@ class Solution:
         def solver(intervals):
             intervals.sort()
 
-            non_problematic_intervals = set()
+            valid_cuts = 0
 
             # Last interval
             prev_start, prev_end = intervals[0]
@@ -37,15 +37,22 @@ class Solution:
                 # (3) prev_start < prev_end <= start < end
 
                 if start < prev_end:
-                    prev_end = max(prev_end, end)
+                    # Update prev_end to max(prev_end, end)
+                    if prev_end < end:
+                        prev_end = end
                 else:
-                    non_problematic_intervals.add((prev_end, start))
+                    # non_problematic_intervals.add((prev_end, start))
+                    # valid_cuts += start - prev_end + 1
+                    valid_cuts += 1
+                    if valid_cuts >= 2:
+                        return True
+
                     prev_start = start
-                    assert prev_end < end
-                    prev_end = max(prev_end, end)
+                    # assert prev_end < end
+                    prev_end = end
             
-            print(f"{non_problematic_intervals=}")
-            return len(non_problematic_intervals) >= 2
+            # print(f"{non_problematic_intervals=}")
+            return valid_cuts >= 2
 
 
 
