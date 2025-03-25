@@ -42,7 +42,7 @@ class Solution:
                 else:
                     # non_problematic_intervals.add((prev_end, start))
                     # valid_cuts += start - prev_end + 1
-                    valid_cuts += max(1, prev_end - start)
+                    valid_cuts += max(1, prev_end - start + 1)
                     if valid_cuts >= 2:
                         return True
 
