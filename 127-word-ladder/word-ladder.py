@@ -38,8 +38,8 @@ class Solution:
 
         if can_change > 0:
             for letter in trie:
-                if letter == word_letter:
-                    continue
+                # if letter == word_letter:
+                #     continue
                 yield from self.getSimilarWordsHelper(word, index + 1, trie[letter], can_change - 1)
 
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
