@@ -20,7 +20,7 @@ class Solution:
         #         -1 if not possible for ANY num in grid!
         res = 0
         for num in nums:
-            diff = abs(num - target)
+            diff = num - target if num > target else target - num
             if diff % x != 0:
                 return -1
             res += diff // x
