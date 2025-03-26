@@ -10,7 +10,6 @@ class Solution:
 
         # Step 2: Figure out closest number to median you can turn any number in
         #         grid into (i.e. grid[0][0]) with just +x or -x operations.
-        i, j = random.randint(0, M - 1), random.randint(0, N - 1)
         num = nums[0] # smallest num, so need +x operations!
         # assert num <= median
         steps = round((median - num) / x)
