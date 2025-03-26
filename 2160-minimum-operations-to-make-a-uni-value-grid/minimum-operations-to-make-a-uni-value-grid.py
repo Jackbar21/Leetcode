@@ -12,7 +12,7 @@ class Solution:
         #         grid into (i.e. grid[0][0]) with just +x or -x operations.
         i, j = random.randint(0, M - 1), random.randint(0, N - 1)
         num = nums[0] # smallest num, so need +x operations!
-        assert num <= median
+        # assert num <= median
         steps = round((median - num) / x)
         target = num + (steps * x)
 
@@ -20,7 +20,8 @@ class Solution:
         #         -1 if not possible for ANY num in grid!
         res = 0
         for num in nums:
-            if abs(num - target) % x != 0:
+            diff = abs(num - target)
+            if diff % x != 0:
                 return -1
-            res += abs(num - target) // x
+            res += diff // x
         return res
