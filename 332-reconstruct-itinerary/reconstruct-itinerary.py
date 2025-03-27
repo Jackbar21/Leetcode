@@ -10,20 +10,19 @@ class Solution:
                 return True # To end all backtrack calls!
 
             node = itinerary[-1]
-            neighbor_dict = adj_list[node]
+            neighbor_dict = {neigh: freq for neigh, freq in adj_list[node].items() if freq > 0}
             sorted_neighbors = sorted(neighbor_dict)
 
             for neigh in sorted_neighbors:
-                assert neighbor_dict[neigh] >= 0
-                if neighbor_dict[neigh] == 0:
-                    continue
+                # if neighbor_dict[neigh] == 0:
+                #     continue
 
-                neighbor_dict[neigh] -= 1
+                adj_list[node][neigh] -= 1
                 itinerary.append(neigh)
                 if backtrack():
                     return True
                 itinerary.pop()
-                neighbor_dict[neigh] += 1
+                adj_list[node][neigh] += 1
             
             return False
         
