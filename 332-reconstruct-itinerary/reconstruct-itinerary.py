@@ -11,35 +11,43 @@ class Solution:
         #print(f"{indegree=}")
         
         itinerary = ["JFK"]
+        self.res = None
         def backtrack():
             #print(f"{itinerary=}")
             #print(f"{adj_list=}")
             if len(itinerary) == len(tickets) + 1:
-                yield [airport for airport in itinerary]
-                return
+                self.res = [airport for airport in itinerary]
+                return True # To end all backtrack calls!
 
             node = itinerary[-1]
-            sorted_neighbors = sorted(adj_list[node])
+            neighbor_dict = adj_list[node]
+            sorted_neighbors = sorted(neighbor_dict)
             # if len(sorted_neighbors) == 0:
             #     # itinerary.pop()
             #     return
 
             for neigh in sorted_neighbors:
-                assert adj_list[node][neigh] >= 0
-                if adj_list[node][neigh] == 0:
+                assert neighbor_dict[neigh] >= 0
+                if neighbor_dict[neigh] == 0:
                     continue
                 # adj_list[node].remove(neigh)
-                adj_list[node][neigh] -= 1
+                neighbor_dict[neigh] -= 1
                 itinerary.append(neigh)
-                yield from backtrack()
-                assert itinerary.pop() == neigh
+                if backtrack():
+                    return True
+                # assert itinerary.pop() == neigh
+                itinerary.pop()
                 # adj_list[node].add(neigh)
-                adj_list[node][neigh] += 1
+                neighbor_dict[neigh] += 1
+            
+            return False
         
         # #print(f"{list(backtrack())=}")
-        for res in backtrack():
-            return res # Return the first!
-        return None
+        # for res in backtrack():
+        #     return res # Return the first!
+        # return None
+        backtrack()
+        return self.res
             
         
         # for node in adj_list:
