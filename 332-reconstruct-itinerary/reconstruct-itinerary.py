@@ -5,10 +5,8 @@ class Solution:
             adj_list[u][v] += 1
         
         itinerary = ["JFK"]
-        self.res = None
         def backtrack():
             if len(itinerary) == len(tickets) + 1:
-                self.res = [airport for airport in itinerary]
                 return True # To end all backtrack calls!
 
             node = itinerary[-1]
@@ -30,4 +28,4 @@ class Solution:
             return False
         
         backtrack()
-        return self.res
+        return itinerary
