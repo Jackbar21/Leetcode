@@ -1,7 +1,7 @@
 class Solution:
     def swimInWater(self, grid: List[List[int]]) -> int:
         N = len(grid)
-        START, GOAL = (0, 0), (N - 1, N - 1)
+        GOAL = (N - 1, N - 1)
         DIRECTIONS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         inBounds = lambda x, y: 0 <= x < N and 0 <= y < N
 
@@ -24,7 +24,6 @@ class Solution:
                     continue
                 if (neigh_i, neigh_j) in visited:
                     continue
-                # neigh_cost = max(cost, grid[neigh_i][neigh_j])
                 if (neigh_cost := grid[neigh_i][neigh_j]) < cost:
                     neigh_cost = cost
                 heapq.heappush(fringe, (neigh_cost, neigh_i, neigh_j))
