@@ -16,10 +16,9 @@ class Solution:
 
         # Step 3: Find first partition that yields dominant element
         # in both subarrays.
-        cur_count = 0
         dom_count = 0
         for i, num in enumerate(nums):
-            cur_count += 1
+            cur_count = i + 1
             dom_count += (num == dom_element)
 
             # Check if element is currently dominant
