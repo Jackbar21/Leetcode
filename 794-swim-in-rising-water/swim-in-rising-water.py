@@ -24,7 +24,9 @@ class Solution:
                     continue
                 if (neigh_i, neigh_j) in visited:
                     continue
-                neigh_cost = max(cost, grid[neigh_i][neigh_j])
+                # neigh_cost = max(cost, grid[neigh_i][neigh_j])
+                if (neigh_cost := grid[neigh_i][neigh_j]) < cost:
+                    neigh_cost = cost
                 heapq.heappush(fringe, (neigh_cost, neigh_i, neigh_j))
         
         raise Exception("No solution found!")
