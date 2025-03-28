@@ -5,7 +5,7 @@ class Solution:
         inBounds = lambda i, j: 0 <= i < M and 0 <= j < N
 
         sorted_queries = sorted(queries)
-        solutions = {}
+        solutions = defaultdict(lambda: M * N)
 
         fringe = [(grid[0][0], 0, 0)] # (grid[i][j], i, j)
         visited = set()
@@ -27,6 +27,8 @@ class Solution:
                     heapq.heappush(fringe, (neigh_cost, neigh_i, neigh_j))
             
             solutions[query] = len(visited)
+            if len(visited) == M * N:
+                break
         
         return [solutions[query] for query in queries]
         
