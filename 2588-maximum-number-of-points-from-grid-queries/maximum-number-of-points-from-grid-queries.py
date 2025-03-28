@@ -23,10 +23,7 @@ class Solution:
                     neigh_i, neigh_j = i + di, j + dj
                     if not inBounds(neigh_i, neigh_j) or (neigh_i, neigh_j) in visited:
                         continue
-                    # neigh_cost = max(cost, grid[neigh_i][neigh_j])
-                    neigh_cost = grid[neigh_i][neigh_j]
-                    if neigh_cost < cost:
-                        neigh_cost = cost
+                    neigh_cost = max(cost, grid[neigh_i][neigh_j])
                     heapq.heappush(fringe, (neigh_cost, neigh_i, neigh_j))
             
             solutions[query] = len(visited)
