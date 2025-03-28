@@ -6,7 +6,6 @@ class Solution:
 
         sorted_queries = sorted(queries)
         solutions = {}
-        # shortest_paths = {}
 
         fringe = [(grid[0][0], 0, 0)] # (grid[i][j], i, j)
         visited = set()
@@ -19,7 +18,6 @@ class Solution:
                 if (i, j) in visited:
                     continue
                 visited.add((i, j))
-                # shortest_paths[(i, j)] = cost
 
                 for di, dj in DIRECTIONS:
                     neigh_i, neigh_j = i + di, j + dj
@@ -30,6 +28,5 @@ class Solution:
             
             solutions[query] = len(visited)
         
-        # print(f"{solutions=}")
         return [solutions[query] for query in queries]
         
