@@ -1,32 +1,32 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
-        leftmost_indices = {}
-        rightmost_indices = {}
-
+        # For each letter in s, get the index at which it occurs for the LAST time.
+        last = {}
         for i, letter in enumerate(s):
-            if letter not in leftmost_indices:
-                leftmost_indices[letter] = i
-            rightmost_indices[letter] = i
+            last[letter] = i
         
-        print(f"{leftmost_indices=}")
-        print(f"{rightmost_indices=}")
-
-        groups = []
-        cur_size = 0
-        for letter, leftmost_index in leftmost_indices.items():
-            rightmost_index = rightmost_indices[letter]
-            if leftmost_index >= cur_size:
-                groups.append(rightmost_index + 1 - cur_size)
-                cur_size = rightmost_index + 1
-                continue
-
-            # assert leftmost_index < cur_size
-            # Since leftmost_index < cur_size, this letter must take part of a currently
-            # existing group. Hence if its rightmost index is larger than (or equal to)
-            # cur_size, then we must extend last group to include all of current letter's instances!
-            if rightmost_index >= cur_size:
-                diff = rightmost_index + 1 - cur_size
-                groups[-1] += diff
-                cur_size += diff
+        res = []
+        l = 0
+        # min_index = last[s[0]]
+        min_index = float("-inf")
+        for r, letter in enumerate(s):
+            if min_index < last[letter]:
+                min_index = last[letter]
+            
+            assert r <= min_index
+            if r == min_index:
+                # Create a new valid section finally!
+                # res.append((l, r))
+                res.append(r - l + 1)
+                l = r + 1
+                # min_index = float("-inf")
         
-        return groups
+        return res
+            
+
+
+            
+        
+        print(f"{res=}")
+        print(f"result={[s[l:r+1] for (l,r) in res]}")
+        print(f"length={[r - l + 1 for (l,r) in res]}")
