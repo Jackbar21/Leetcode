@@ -7,26 +7,15 @@ class Solution:
         
         res = []
         l = 0
-        # min_index = last[s[0]]
-        min_index = float("-inf")
+        min_index = 0
         for r, letter in enumerate(s):
-            if min_index < last[letter]:
-                min_index = last[letter]
+            if min_index < (index := last[letter]):
+                min_index = index
             
-            assert r <= min_index
+            # assert r <= min_index
             if r == min_index:
                 # Create a new valid section finally!
-                # res.append((l, r))
                 res.append(r - l + 1)
                 l = r + 1
-                # min_index = float("-inf")
         
         return res
-            
-
-
-            
-        
-        print(f"{res=}")
-        print(f"result={[s[l:r+1] for (l,r) in res]}")
-        print(f"length={[r - l + 1 for (l,r) in res]}")
