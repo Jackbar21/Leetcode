@@ -1,10 +1,9 @@
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
-        # memo = {}
-        @cache
+        memo = {}
         def dp(i, j):
-            # if (i, j) in memo:
-            #     return memo[(i, j)]
+            if (i, j) in memo:
+                return memo[(i, j)]
             
             # Base Case: Found a subsequence!
             if j >= len(t):
@@ -23,7 +22,7 @@ class Solution:
             case2 = dp(i + 1, j)
 
             res = case1 + case2
-            # memo[(i, j)] = res
+            memo[(i, j)] = res
             return res
 
         return dp(0, 0)
