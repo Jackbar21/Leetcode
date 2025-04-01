@@ -3,7 +3,6 @@ class Solution:
         self.s, self.t = s, t
         self.memo = {}
         res = self.dp(0, 0)
-        print(f"{self.memo=}")
         return res
     
     def dp(self, i, j):
