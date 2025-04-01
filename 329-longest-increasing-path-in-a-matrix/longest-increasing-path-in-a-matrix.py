@@ -8,7 +8,6 @@ class Solution:
         def dp(i, j):
             if (i, j) in memo:
                 return memo[(i, j)]
-            
             val = matrix[i][j]
             
             res = 1
@@ -23,7 +22,6 @@ class Solution:
                 # this forms a DAG, and we can apply DP safely :)
                 neigh_val = matrix[neigh_i][neigh_j]
                 if neigh_val > val:
-                    # res = max(res, 1 + dp(neigh_i, neigh_j))
                     path_len = 1 + dp(neigh_i, neigh_j)
                     if res < path_len:
                         res = path_len
@@ -31,4 +29,11 @@ class Solution:
             memo[(i, j)] = res
             return res
 
-        return max(dp(i, j) for i in range(M) for j in range(N))
+        # return max(dp(i, j) for i in range(M) for j in range(N))
+        res = 0
+        for i in range(M):
+            for j in range(N):
+                path_len = dp(i, j)
+                if res < path_len:
+                    res = path_len
+        return res
