@@ -23,7 +23,10 @@ class Solution:
                 # this forms a DAG, and we can apply DP safely :)
                 neigh_val = matrix[neigh_i][neigh_j]
                 if neigh_val > val:
-                    res = max(res, 1 + dp(neigh_i, neigh_j))
+                    # res = max(res, 1 + dp(neigh_i, neigh_j))
+                    path_len = 1 + dp(neigh_i, neigh_j)
+                    if res < path_len:
+                        res = path_len
             
             memo[(i, j)] = res
             return res
