@@ -21,7 +21,7 @@ class Solution:
         
         res = 0
         for i in range(N - 2):
-            for j in range(i, N - 1):
+            for j in range(i + 1, N - 1):
                 # Now, instead of adding a THIRD loop for k, we know that we are MULTIPLYING
                 # (nums[i] - nums[j]) BY nums[k]! If nums[i] - nums[j] > 0, then we want
                 # index k such that nums[k] == max(nums[j+1:]). If nums[i] - nums[j] < 0, then
