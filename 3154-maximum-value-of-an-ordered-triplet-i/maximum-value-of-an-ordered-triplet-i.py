@@ -12,13 +12,13 @@ class Solution:
         # return res
         N = len(nums)
 
-        prefix_max = []
+        prefix_max = collections.deque()
         cur_max = float("-inf")
         for num in reversed(nums):
             if cur_max < num:
                 cur_max = num
-            prefix_max.append(cur_max)
-        prefix_max = prefix_max[::-1]
+            prefix_max.appendleft(cur_max)
+        # prefix_max = prefix_max[::-1]
         
         # prefix_min = []
         # cur_min = float("inf")
