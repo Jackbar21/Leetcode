@@ -5,7 +5,7 @@ class Solution:
 
         prefix_max = []
         cur_max = float("-inf")
-        for num in nums[::-1]:
+        for num in reversed(nums):
             if cur_max < num:
                 cur_max = num
             prefix_max.append(cur_max)
