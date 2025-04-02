@@ -20,13 +20,13 @@ class Solution:
             prefix_max.append(cur_max)
         prefix_max = prefix_max[::-1]
         
-        prefix_min = []
-        cur_min = float("inf")
-        for num in reversed(nums):
-            if cur_min > num:
-                cur_min = num
-            prefix_min.append(cur_min)
-        prefix_min = prefix_min[::-1]
+        # prefix_min = []
+        # cur_min = float("inf")
+        # for num in reversed(nums):
+        #     if cur_min > num:
+        #         cur_min = num
+        #     prefix_min.append(cur_min)
+        # prefix_min = prefix_min[::-1]
         
         res = 0
         for i in range(N - 2):
@@ -40,9 +40,16 @@ class Solution:
                 # Hence, we can leverage both prefix_min and prefix_max to find potential candidates
                 # for highest-value (i, j, k) triplets!
 
-                diff = nums[i] - nums[j]
-                case1 = diff * prefix_max[j + 1]
+                # EDIT: Since in constraints it states that each num in nums is POSITIVE (i.e. >= 1),
+                # it can NEVER be that nums[k] is negative! Hence, we don't even need the prefix_min
+                # part!
+
+                # diff = nums[i] - nums[j]
+                # case1 = diff * prefix_max[j + 1]
                 # case2 = diff * prefix_min[j + 1]
-                res = max(res, case1, case1)
+                # res = max(res, case1, case2)
+                val = (nums[i] - nums[j]) * prefix_max[j + 1]
+                if res < val:
+                    res = val
         
         return res
