@@ -42,7 +42,7 @@ class Solution:
 
                 diff = nums[i] - nums[j]
                 case1 = diff * prefix_max[j + 1]
-                case2 = diff * prefix_min[j + 1]
-                res = max(res, case1, case2)
+                # case2 = diff * prefix_min[j + 1]
+                res = max(res, case1, case1)
         
         return res
