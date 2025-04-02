@@ -7,6 +7,7 @@ class Solution:
             for j in range(i + 1, N):
                 for k in range(j + 1, N):
                     val = (nums[i] - nums[j]) * nums[k]
-                    res = max(res, val)
+                    if res < val:
+                        res = val
         return res
                     
