@@ -4,10 +4,8 @@ class Solution:
         N = len(nums)
         res = 0
         for i in range(N):
-            for j in range(N):
-                if not (i < j): continue
-                for k in range(N):
-                    if not (j < k): continue
+            for j in range(i + 1, N):
+                for k in range(j + 1, N):
                     val = (nums[i] - nums[j]) * nums[k]
                     res = max(res, val)
         return res
