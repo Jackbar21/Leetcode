@@ -3,7 +3,7 @@ class Solution:
         # return max(0, max(((nums[i] - nums[j]) * nums[k]) for i in range(len(nums)) for j in range(i + 1, len(nums)) for k in range(j + 1, len(nums))))
         N = len(nums)
 
-        prefix_max = []
+        prefix_max = [] # prefix_max[i] == max(nums[i:])
         cur_max = float("-inf")
         for num in reversed(nums):
             if cur_max < num:
