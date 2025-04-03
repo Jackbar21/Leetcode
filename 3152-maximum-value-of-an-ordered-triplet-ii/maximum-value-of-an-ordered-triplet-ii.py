@@ -3,7 +3,7 @@ class Solution:
         N = len(nums)
 
         # Compute prefix maxes for all indices in nums!
-        prefix_max = [] # prefix_max[i] == max(nums[i:])
+        prefix_max = [] # prefix_max[i] == max(nums[i..N-1]) == max(nums[i:])
         cur_max = float("-inf")
         for num in reversed(nums):
             if cur_max < num:
@@ -12,7 +12,7 @@ class Solution:
         prefix_max = prefix_max[::-1]
 
         # Compute suffix maxes for all indices in nums!
-        suffix_max = []
+        suffix_max = [] # suffix_max[i] == max(nums[0..i]) == max(nums[:i+1])
         cur_max = float("-inf")
         for num in nums:
             if cur_max < num:
