@@ -3,13 +3,13 @@ class Solution:
         N = len(nums)
 
         # Compute prefix maxes for all of nums!
-        prefix_max = [] # prefix_max[i] == max(nums[i:])
+        prefix_max = collections.deque() # prefix_max[i] == max(nums[i:])
         cur_max = float("-inf")
-        for num in nums[::-1]:
+        for num in reversed(nums):
             if cur_max < num:
                 cur_max = num
-            prefix_max.append(cur_max)
-        prefix_max = prefix_max[::-1]
+            prefix_max.appendleft(cur_max)
+        # prefix_max = prefix_max[::-1]
         
         res = 0
         best_i = float("-inf")
