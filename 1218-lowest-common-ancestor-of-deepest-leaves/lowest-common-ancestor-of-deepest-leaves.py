@@ -7,31 +7,31 @@
 class Solution:
     def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         # Step 1: Get deepest leaves!
-        is_leaf = lambda node: not node.left and not node.right
-        node_to_depth = {} # node-to-depth dictionary
-        depth_to_nodes = defaultdict(list)
         node_to_parent = {}
+        depth_to_nodes = defaultdict(list)
         max_depth = 0
-
         queue = collections.deque([(0, root)]) # (depth, node)
         while queue:
             depth, node = queue.popleft()
             if max_depth < depth:
                 max_depth = depth
-            node_to_depth[node] = depth
             depth_to_nodes[depth].append(node)
 
-            if (left_child := node.left) is not None:
+            # Add left child if exists!
+            if (left_child := node.left):
                 node_to_parent[left_child] = node
                 queue.append((depth + 1, left_child))
 
-            if (right_child := node.right) is not None:
+            # Add right child if exists!
+            if (right_child := node.right):
                 node_to_parent[right_child] = node
                 queue.append((depth + 1, right_child))
 
+        # Get leaf nodes at deepest depth!
         parents = depth_to_nodes[max_depth]
-        assert len(parents) >= 1
+        # Keep getting the current nodes' parents until reach one "common" parent,
+        # which will hence be the Lowest Common Ancestor as wanted!
         while len(parents) > 1:
             parents = set(node_to_parent[node] for node in parents)
+        # Return Lowest Common Ancestor!
         return parents.pop()
-
