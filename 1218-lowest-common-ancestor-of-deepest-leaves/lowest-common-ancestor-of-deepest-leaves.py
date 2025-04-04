@@ -33,8 +33,7 @@ class Solution:
         # print(f"{depth_to_nodes[max_depth]=}")
         # print(f"{node_to_parent=}")
 
-        get_parent = lambda node: node_to_parent.get(node, node)
-        # parents = set(get_parent(node) for node in depth_to_nodes[max_depth])
+        get_parent = lambda node: node_to_parent[node]
         parents = set(depth_to_nodes[max_depth])
         assert len(parents) >= 1
         while len(parents) > 1:
