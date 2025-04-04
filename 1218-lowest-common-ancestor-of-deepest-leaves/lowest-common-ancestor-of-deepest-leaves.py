@@ -28,15 +28,10 @@ class Solution:
             if (right_child := node.right) is not None:
                 node_to_parent[right_child] = node
                 queue.append((depth + 1, right_child))
-        
-        # print(f"{depth_to_nodes=}")
-        # print(f"{depth_to_nodes[max_depth]=}")
-        # print(f"{node_to_parent=}")
 
-        get_parent = lambda node: node_to_parent[node]
-        parents = set(depth_to_nodes[max_depth])
+        parents = depth_to_nodes[max_depth]
         assert len(parents) >= 1
         while len(parents) > 1:
-            parents = set(get_parent(node) for node in parents)
+            parents = set(node_to_parent[node] for node in parents)
         return parents.pop()
 
