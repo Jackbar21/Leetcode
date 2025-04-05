@@ -16,31 +16,9 @@ class Solution:
         self.backtrack(i + 1)
 
     def subsetXORSum(self, nums: List[int]) -> int:
-        # Let N = len(nums)
-        # Backtrack solution, O(2^N)
+        # Backtrack solution, O(2^N), where N = len(nums)
         self.nums = nums
         self.res = 0
         self.xor_total = 0
         self.backtrack(0)
         return self.res
-
-        self.nums = nums
-        return self.dp(0)
-
-    @cache
-    def dp(self, i):
-        nums = self.nums
-        N = len(nums)
-
-        if i >= N:
-            return 0
-        
-        num = nums[i]
-
-        # Get sum of all XOR totals starting from nums[i+1:]
-        rest_sum = self.dp(i + 1)
-
-        case1 = num ^ rest_sum
-        case2 = rest_sum
-
-        return case1 + case2
