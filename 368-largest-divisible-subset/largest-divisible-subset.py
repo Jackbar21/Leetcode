@@ -6,8 +6,8 @@ class Solution:
         self.prev = {}
         for i, num in enumerate(nums):
             self.dp(i, num)
-        print(f"{self.memo=}")
-        print(f"{self.prev=}")
+        #print(f"{self.memo=}")
+        #print(f"{self.prev=}")
 
         best_index, best_length = None, float("-inf")
         for i, num in enumerate(nums):
@@ -15,7 +15,7 @@ class Solution:
                 best_length = length
                 best_index = i
         
-        print(f"{best_index=}")
+        #print(f"{best_index=}")
         res = []
         while best_index is not None:
             res.append(nums[best_index])
