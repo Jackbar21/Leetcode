@@ -4,8 +4,8 @@ class Solution:
         self.nums = nums
         self.memo = {}
         self.prev = {}
-        for i, num in enumerate(nums):
-            self.dp(i, num)
+        # for i, num in enumerate(nums):
+        #     self.dp(i, num)
         #print(f"{self.memo=}")
         #print(f"{self.prev=}")
 
