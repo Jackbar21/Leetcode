@@ -2,7 +2,6 @@ class Solution:
     def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
         nums.sort()
         self.nums = nums
-        self.memo = {}
         self.prev = {}
 
         best_index, best_length = None, float("-inf")
@@ -17,11 +16,10 @@ class Solution:
             best_index = self.prev.get(best_index, None)
         return res
     
+    @cache
     def dp(self, i):
         nums = self.nums
         max_num = nums[i]
-        if i in self.memo:
-            return self.memo[i]
 
         # Since array is sorted, look only through indices smaller than i,
         # since that's where all the smaller numbers are located!
@@ -38,5 +36,4 @@ class Solution:
                     res = case
                     self.prev[i] = j
         
-        self.memo[i] = res
         return res
