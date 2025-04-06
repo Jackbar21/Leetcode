@@ -1,6 +1,6 @@
 class Solution:
     def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
-        nums.sort()
+        # nums.sort()
         self.nums = nums
         self.memo = {}
         self.prev = {}
@@ -33,9 +33,10 @@ class Solution:
             return 0
 
         res = 1
-        for j in range(i):
+        for j in range(len(nums)):
+            if j == i: continue
             num = nums[j]
-            assert num < max_num # not '<=' since all numbers distinct!
+            # assert num < max_num # not '<=' since all numbers distinct!
             if max_num % num == 0:
                 case = 1 + self.dp(j, num) # TODO: max_num might work as well here?
                 if res < case:
