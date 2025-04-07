@@ -14,7 +14,7 @@ class Solution:
 
         # Bottom-Up solution (1D DP)
         subset_sums = set()
-        for num in sorted(nums, reverse = True): # Sorting NOT needed, but improves sol' from 98ms to 66ms
+        for num in nums:
             subset_sums.update([subset_sum + num for subset_sum in subset_sums])
             subset_sums.add(num)
             if target_sum in subset_sums:
