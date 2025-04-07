@@ -10,8 +10,17 @@ class Solution:
         target_sum = sum_nums // 2
         # return self.dp(0, target_sum)
 
-        self.target_sum = target_sum
-        return target_sum in self.dp_1d(0)
+        # self.target_sum = target_sum
+        # return target_sum in self.dp_1d(0)
+
+        subset_sums = set()
+        for num in nums:
+            subset_sums.update([subset_sum + num for subset_sum in subset_sums])
+            subset_sums.add(num)
+            if target_sum in subset_sums:
+                return True
+        
+        return False
     
     def dp_1d(self, i):
         if i >= len(self.nums):
