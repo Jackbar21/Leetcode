@@ -4,19 +4,17 @@ class Solution:
         if sum_nums % 2 == 1:
             # Sum is odd, 100% CANNOT partition it into two equal subsets in sum!
             return False
-        
-        self.nums = nums
-        self.memo = {}
+
         target_sum = sum_nums // 2
 
         # 2D DP (pseudo-polynomial time!)
+        # self.nums = nums
+        # self.memo = {}
         # return self.dp(0, target_sum)
-
 
         # Bottom-Up solution (1D DP)
         subset_sums = set()
-        # for num in nums:
-        for num in sorted(nums, reverse = True):
+        for num in sorted(nums, reverse = True): # Sorting NOT needed, but improves sol' from 98ms to 67ms
             subset_sums.update([subset_sum + num for subset_sum in subset_sums])
             subset_sums.add(num)
             if target_sum in subset_sums:
@@ -24,7 +22,6 @@ class Solution:
         
         return False
 
-    
     def dp(self, i, sum_left):
         if (i, sum_left) in self.memo:
             return self.memo[(i, sum_left)]
