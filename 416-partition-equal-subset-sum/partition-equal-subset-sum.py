@@ -8,35 +8,21 @@ class Solution:
         self.nums = nums
         self.memo = {}
         target_sum = sum_nums // 2
+
+        # 2D DP (pseudo-polynomial time!)
         # return self.dp(0, target_sum)
 
-        # self.target_sum = target_sum
-        # return target_sum in self.dp_1d(0)
 
+        # Bottom-Up solution (1D DP)
         subset_sums = set()
-        for num in nums:
+        for num in reversed(nums):
             subset_sums.update([subset_sum + num for subset_sum in subset_sums])
             subset_sums.add(num)
             if target_sum in subset_sums:
                 return True
         
         return False
-    
-    def dp_1d(self, i):
-        if i >= len(self.nums):
-            return set()
-        
-        num = self.nums[i]
 
-        subset_sums = self.dp_1d(i + 1)
-        if self.target_sum in subset_sums:
-            # No need to keep making subset_sums larger!
-            return [self.target_sum]
-
-        subset_sums.update([subset_sum + num for subset_sum in subset_sums])
-        subset_sums.add(num)
-        return subset_sums
-        
     
     def dp(self, i, sum_left):
         if (i, sum_left) in self.memo:
