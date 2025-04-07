@@ -9,13 +9,10 @@ class Solution:
         self.memo = {}
         target_sum = sum_nums // 2
         # return self.dp(0, target_sum)
+
         self.target_sum = target_sum
-        
-        # for i in range(len(nums) - 1, -1, -1):
-        #     print(f"dp({i})={self.dp_1d(i)}")
         return target_sum in self.dp_1d(0)
     
-    @cache
     def dp_1d(self, i):
         if i >= len(self.nums):
             return set()
