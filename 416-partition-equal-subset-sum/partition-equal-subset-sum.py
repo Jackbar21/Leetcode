@@ -8,9 +8,9 @@ class Solution:
         target_sum = sum_nums // 2
 
         # 2D DP (pseudo-polynomial time!)
-        self.nums = nums
-        self.memo = {}
-        return self.dp(0, target_sum)
+        # self.nums = nums
+        # self.memo = {}
+        # return self.dp(0, target_sum)
 
         # Bottom-Up solution (1D DP)
         subset_sums = set()
