@@ -8,7 +8,29 @@ class Solution:
         self.nums = nums
         self.memo = {}
         target_sum = sum_nums // 2
-        return self.dp(0, target_sum)
+        # return self.dp(0, target_sum)
+        self.target_sum = target_sum
+        
+        # for i in range(len(nums) - 1, -1, -1):
+        #     print(f"dp({i})={self.dp_1d(i)}")
+        return target_sum in self.dp_1d(0)
+    
+    @cache
+    def dp_1d(self, i):
+        if i >= len(self.nums):
+            return set()
+        
+        num = self.nums[i]
+
+        subset_sums = self.dp_1d(i + 1)
+        # if self.target_sum in subset_sums:
+        #     # No need to keep making subset_sums larger!
+        #     return [self.target_sum]
+
+        subset_sums.update([subset_sum + num for subset_sum in subset_sums])
+        subset_sums.add(num)
+        return subset_sums
+        
     
     def dp(self, i, sum_left):
         if (i, sum_left) in self.memo:
