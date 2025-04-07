@@ -23,9 +23,9 @@ class Solution:
         num = self.nums[i]
 
         subset_sums = self.dp_1d(i + 1)
-        # if self.target_sum in subset_sums:
-        #     # No need to keep making subset_sums larger!
-        #     return [self.target_sum]
+        if self.target_sum in subset_sums:
+            # No need to keep making subset_sums larger!
+            return [self.target_sum]
 
         subset_sums.update([subset_sum + num for subset_sum in subset_sums])
         subset_sums.add(num)
