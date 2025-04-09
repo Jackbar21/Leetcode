@@ -11,8 +11,8 @@ class Solution:
         # So the number of unique numbers larger than k is the solution to this problem!
         larger_nums = set()
         for num in nums:
+            if num < k:
+                return -1
             if num > k:
                 larger_nums.add(num)
-            elif num < k:
-                return -1
         return len(larger_nums)
