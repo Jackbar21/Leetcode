@@ -10,12 +10,16 @@ class Solution:
         
         # Want to find the number of UNIQUE numbers that are larger than k! Since if
         # the only unique numbers we have larger than k are X < Y < Z, then we must:
-        # (1) Convert Z into Y
-        # (2) Convert Y into X
-        # (3) Convert X into k
+        # (1) Convert all copies of Z into Y
+        # (2) Convert all copies of Y into X
+        # (3) Convert all copies of X into k
         # So the number of unique numbers larger than k is the solution to this problem!
-        larger_nums = set()
-        for num in nums:
-            if num > k:
-                larger_nums.add(num)
+        # larger_nums = set([k])
+        # for num in nums:
+        #     if num > k:
+        #         larger_nums.add(num)
+        larger_nums = set(nums)
+        larger_nums.discard(k)
         return len(larger_nums)
+
+# nums = [2, 2, 2, 2, 2, 2], h = 6, k = 2
