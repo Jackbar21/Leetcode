@@ -11,8 +11,8 @@ class Solution:
         heapq.heapify(max_heap)
 
         res = 0
-        while max_heap and (max_num := -max_heap[0]) > k:
-            while max_heap and -max_heap[0] == max_num:
+        while max_heap and (max_num := max_heap[0]) < -k:
+            while max_heap and max_heap[0] == max_num:
                 heapq.heappop(max_heap)
             res += 1
             # if not max_heap:
