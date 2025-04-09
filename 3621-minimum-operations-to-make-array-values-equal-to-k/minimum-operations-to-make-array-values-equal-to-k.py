@@ -11,8 +11,9 @@ class Solution:
         # (2) Convert Y into X
         # (3) Convert X into k
         # So the number of unique numbers larger than k is the solution to this problem!
-        larger_nums = set()
-        for num in nums:
-            if num > k:
-                larger_nums.add(num)
-        return len(larger_nums)
+        # larger_nums = set()
+        # for num in nums:
+        #     if num > k:
+        #         larger_nums.add(num)
+        # return len(larger_nums)
+        return len(set(filter(lambda num: num > k, nums)))
