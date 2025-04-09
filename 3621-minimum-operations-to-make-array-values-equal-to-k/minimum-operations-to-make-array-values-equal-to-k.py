@@ -14,12 +14,6 @@ class Solution:
         # (2) Convert all copies of Y into X
         # (3) Convert all copies of X into k
         # So the number of unique numbers larger than k is the solution to this problem!
-        # larger_nums = set([k])
-        # for num in nums:
-        #     if num > k:
-        #         larger_nums.add(num)
         larger_nums = set(nums)
         larger_nums.discard(k)
         return len(larger_nums)
-
-# nums = [2, 2, 2, 2, 2, 2], h = 6, k = 2
