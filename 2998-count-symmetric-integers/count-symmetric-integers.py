@@ -1,14 +1,3 @@
 class Solution:
     def countSymmetricIntegers(self, low: int, high: int) -> int:
-        return sum(self.isSymmetric(num) for num in range(low, high + 1))
-        
-    def isSymmetric(self, num):
-        str_num = str(num)
-        length = len(str_num)
-        if length % 2 == 1:
-            return False
-        
-        return (
-            sum(int(str_num[i]) for i in range(length // 2)) 
-            == sum(int(str_num[i]) for i in range(length // 2, length))
-        )
+        return sum((len(str(num)) % 2 == 0 and sum(int(str(num)[i]) for i in range(len(str(num)) // 2)) == sum(int(str(num)[i]) for i in range(len(str(num)) // 2, len(str(num))))) for num in range(low, high + 1))
