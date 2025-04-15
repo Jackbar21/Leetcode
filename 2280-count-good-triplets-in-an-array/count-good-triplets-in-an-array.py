@@ -64,14 +64,14 @@ class FenwickTree:
 
 class Solution:
     def goodTriplets(self, nums1: List[int], nums2: List[int]) -> int:
-        assert len(nums1) == len(nums2)
-        N = len(nums1)
+        # assert len(nums1) == len(nums2)
+        # N = len(nums1)
 
-        num_to_index1, num_to_index2 = {}, {}
-        for index, num in enumerate(nums1):
-            num_to_index1[num] = index
-        for index, num in enumerate(nums2):
-            num_to_index2[num] = index
+        # num_to_index1, num_to_index2 = {}, {}
+        # for index, num in enumerate(nums1):
+        #     num_to_index1[num] = index
+        # for index, num in enumerate(nums2):
+        #     num_to_index2[num] = index
         
         # O(N^3)
         # res = 0
