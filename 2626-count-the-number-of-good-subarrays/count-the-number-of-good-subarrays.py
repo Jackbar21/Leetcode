@@ -7,9 +7,9 @@ class Solution:
         res, l, num_pairs = 0, 0, 0
         d = {}
         for r, r_num in enumerate(nums):
-            d[r_num] = (cur_freq := d.get(r_num, 0)) + 1
+            cur_freq = d.get(r_num, 0)
+            d[r_num] = cur_freq + 1
             num_pairs += cur_freq
-            # d[r_num] += 1
 
             while num_pairs >= k:
                 # nums[l..r] is valid, which means nums[l..r']
@@ -18,9 +18,10 @@ class Solution:
                 res += N - r
                 # assert l < r
                 l_num = nums[l]
-                d[l_num] -= 1
+                new_freq = d[l_num] - 1
+                d[l_num] = new_freq
                 # assert d[l_num] >= 0
-                num_pairs -= d[l_num]
+                num_pairs -= new_freq
                 l += 1
 
         return res
