@@ -5,10 +5,11 @@ class Solution:
         # l <= i < j <= r and arr[i] == arr[j].
         N = len(nums)
         res, l, num_pairs = 0, 0, 0
-        d = defaultdict(int)
+        d = {}
         for r, r_num in enumerate(nums):
-            num_pairs += d[r_num]
-            d[r_num] += 1
+            d[r_num] = (cur_freq := d.get(r_num, 0)) + 1
+            num_pairs += cur_freq
+            # d[r_num] += 1
 
             while num_pairs >= k:
                 # nums[l..r] is valid, which means nums[l..r']
