@@ -12,14 +12,18 @@ class Solution:
                     continue
                 
                 # res.append(f"{streak}{prev_digit}")
-                res.append(str(streak) + str(prev_digit))
+                # res.append(str(streak) + str(prev_digit))
+                res.append(streak)
+                res.append(prev_digit)
                 prev_digit = digit
                 streak = 1
             
             if streak > 0:
                 # res.append(f"{streak}{prev_digit}")
-                res.append(str(streak) + str(prev_digit))
+                # res.append(str(streak) + str(prev_digit))
+                res.append(streak)
+                res.append(prev_digit)
             
-            digits = "".join(res)
+            digits = "".join(str(digit) for digit in res)
         
         return digits
