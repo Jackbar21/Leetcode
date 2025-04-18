@@ -48,5 +48,6 @@ class Solution:
                 index += 1
         
         # Case 2: index j + 1 does not map to '*', which is simplest case
-        self.memo[(i, j)] = (letter_s == letter_p or letter_p == ".") and self.dp(i + 1, j + 1)
-        return self.memo[(i, j)]
+        res = (letter_s == letter_p or letter_p == ".") and self.dp(i + 1, j + 1)
+        self.memo[(i, j)] = res
+        return res
