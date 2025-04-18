@@ -38,6 +38,6 @@ class Solution:
                 if self.dp(index + 1, next_j_index):
                     return True
                 index += 1
-        
+
         # Case 2: index j + 1 does not map to '*', which is simplest case
         return (letter_s == letter_p or letter_p == ".") and self.dp(i + 1, j + 1)
