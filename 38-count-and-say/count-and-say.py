@@ -24,6 +24,6 @@ class Solution:
                 res.append(streak)
                 res.append(prev_digit)
             
-            digits = "".join(str(digit) for digit in res)
+            digits = "".join(map(str, res))
         
         return digits
