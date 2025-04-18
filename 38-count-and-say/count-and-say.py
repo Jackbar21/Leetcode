@@ -25,4 +25,4 @@ class Solution:
             digits = res
         
         # return digits
-        return "".join(map(str, digits))
+        return "".join(str(digit) for digit in digits)
