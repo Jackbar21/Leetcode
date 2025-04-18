@@ -15,9 +15,9 @@ class Solution:
                     prev_digit = digit
                     streak = 1
 
-            if streak > 0:
-                res.append(streak)
-                res.append(prev_digit)
+            # assert streak > 0
+            res.append(streak)
+            res.append(prev_digit)
             
             digits = res
         
