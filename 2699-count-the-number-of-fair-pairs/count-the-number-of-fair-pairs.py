@@ -1,55 +1,57 @@
 class Solution:
     def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
+        """
+        For each index i, we want to find all indices j such that:
+            lower <= nums[i] + nums[j] <= upper
+        <==>
+            lower - nums[j] <= nums[i], nums[i] <= upper - nums[j]
+        
+        Now if lower - nums[j] <= nums[i], we know that: 
+            - lower - num <= nums[i], for any num >= nums[j].
+
+        Similarly, if nums[i] <= upper - nums[j], we know that:
+            - nums[i] <= upper - num, for any num <= nums[j]
+
+        Hence, as long as we sort 'nums', for every index i we can simply
+        find smallest index j such that lower - nums[j] <= nums[i], and similarly
+        find largest index j' such that nums[i] <= upper - nums[j']
+        """
+        N = len(nums)
         nums.sort()
-        count = 0
+        print(f"{nums=}")
 
-        i, j = 0, len(nums) - 1
-        while i < j:
-            # Number too small, so increase left pointer
-            if lower > nums[i] + nums[j]:
-                i += 1
-                continue
-            
-            # Number too large, so decrease right pointer
-            elif nums[i] + nums[j] > upper:
-                j -= 1
-                continue
-
-            # At this point, we can either choose: 
-            #   (1) count number of fair pairs (i, k), i < k <= j, then increment i
-            #   (2) count number of fair pairs (k, j), i <= k < j, then decrement j
-            # The point is to commit to one, and then use BINARY SEARCH to find
-            # pivot that makes k true (to then count # fair pairs in O(1) time.)
-
-            # I will choose to make index i fixed, and index j variable (i.e. option (1))
-            # Since index j is variable, we can ONLY make our number SMALLER. Therefore,
-            # for any index k we pick such that i < k <= j, it will always be the case
-            # that nums[i] + nums[k] <= nums[i] + nums[j] <= upper. The ONLY thing that can
-            # change, is that we make nums[i] + nums[k] SO SMALL that it is NO LONGER >= lower.
-            # Hence, find SMALLEST index k, such that i < k <= j, lower <= nums[i] + nums[k].
-            # We can do this via leftmost binary search, for which then we know number of
-            # valid pairs will be len([(i,k), (i,k+1), (i,k+2), ..., (i,j)]) == j - k + 1.
-            l, r = i + 1, j
-            k = j
+        res = 0
+        for i, num in enumerate(nums):
+            # Find leftmost (i.e. smallest) index j such that lower - nums[j] <= num
+            leftmost = None
+            l, r = i + 1, N - 1 # Only count indices from i + 1 onwards, to enforce restrictions
             while l <= r:
                 mid = (l + r) // 2
-                if lower <= nums[i] + nums[mid]:
-                    k = mid
+                if lower - nums[mid] <= num:
+                    # Valid solution, look for even more leftmost ones!
+                    leftmost = mid
                     r = mid - 1
                 else:
+                    # Invalid solution, look for worse (but maybe valid) ones on the right!
                     l = mid + 1
+            if leftmost is None:
+                continue
+            
+            # Find rightmost (i.e. largest) index j such that num <= upper - nums[j]
+            rightmost = None
+            l, r = i + 1, N - 1 # Only count indices from i + 1 onwards, to enforce restrictions
+            while l <= r:
+                mid = (l + r) // 2
+                if num <= upper - nums[mid]:
+                    # Valid solution, look for even more rightmost ones!
+                    rightmost = mid
+                    l = mid + 1
+                else:
+                    # Invalid solution, look for worse (but potentially valid) ones on the left!
+                    r = mid - 1
+            if rightmost is None:
+                continue
 
-            # Number of valid pairs 
-            # == (j - i + 1) - ((k - 1) - i + 1)
-            # == j - i + 1 - (k - 1 - i + 1)
-            # == j - i + 1 - (k - i)
-            # == j - i + 1 - k + i
-            # == j + 1 - k
-            # == j - k + 1
-            count += j - k + 1
-
-            # Now that we have counted number of valid pairs that start with index i,
-            # we can increment it and move forward with the problem.
-            i += 1
-
-        return count
+            res += rightmost - leftmost + 1
+        
+        return res
