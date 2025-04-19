@@ -25,14 +25,14 @@ class Solution:
             leftmost = None
             l, r = i + 1, N - 1 # Only count indices from i + 1 onwards, to enforce restrictions
             while l <= r:
-                mid = (l + r) // 2
-                if lower - nums[mid] <= num:
+                j = (l + r) // 2
+                if lower - nums[j] <= num:
                     # Valid solution, look for even more leftmost ones!
-                    leftmost = mid
-                    r = mid - 1
+                    leftmost = j
+                    r = j - 1
                 else:
                     # Invalid solution, look for worse (but maybe valid) ones on the right!
-                    l = mid + 1
+                    l = j + 1
             if leftmost is None:
                 continue
             
@@ -40,14 +40,14 @@ class Solution:
             rightmost = None
             l, r = i + 1, N - 1 # Only count indices from i + 1 onwards, to enforce restrictions
             while l <= r:
-                mid = (l + r) // 2
-                if num <= upper - nums[mid]:
+                j = (l + r) // 2
+                if num <= upper - nums[j]:
                     # Valid solution, look for even more rightmost ones!
-                    rightmost = mid
-                    l = mid + 1
+                    rightmost = j
+                    l = j + 1
                 else:
                     # Invalid solution, look for worse (but potentially valid) ones on the left!
-                    r = mid - 1
+                    r = j - 1
             if rightmost is None:
                 continue
 
