@@ -19,7 +19,7 @@ class Solution:
             
             query_sol[query] = min_heap[0][SIZE] if min_heap else -1
 
-        return list(map(lambda query: query_sol[query], queries))
+        return [query_sol[query] for query in queries]
         
     
     def my_solution_without_aid(self, intervals, queries):
