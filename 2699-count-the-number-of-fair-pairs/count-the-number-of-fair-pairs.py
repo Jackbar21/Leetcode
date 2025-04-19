@@ -18,7 +18,6 @@ class Solution:
         """
         N = len(nums)
         nums.sort()
-        print(f"{nums=}")
 
         res = 0
         for i, num in enumerate(nums):
