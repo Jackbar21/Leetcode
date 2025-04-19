@@ -1,8 +1,5 @@
 class Solution:
     def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
-        return self.countFairPairsWithBinarySearch(nums, lower, upper) # O(NlogN)
-    
-    def countFairPairsWithBinarySearch(self, nums: List[int], lower: int, upper: int) -> int:
         """
         For each index i, we want to find all indices j such that:
             lower <= nums[i] + nums[j] <= upper
