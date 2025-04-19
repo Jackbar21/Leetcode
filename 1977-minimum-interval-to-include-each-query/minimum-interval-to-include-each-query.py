@@ -7,12 +7,9 @@ class Solution:
         SIZE, INTERVAL = 0, 1
         res, min_heap, query_sol = [], [], {}
         intervals.sort()
-        sorted_queries = sorted(queries)
 
         index = 0
-        query_index = 0
-        while query_index < len(queries):
-            query = sorted_queries[query_index]
+        for query in sorted(queries):
             while index < len(intervals) and (interval := intervals[index])[LEFT] <= query:
                 index += 1
                 heapq.heappush(min_heap, (interval[RIGHT] - interval[LEFT] + 1, interval))
@@ -22,9 +19,6 @@ class Solution:
             
             query_sol[query] = min_heap[0][SIZE] if min_heap else -1
 
-            # Loop Invariant
-            query_index += 1
-            
         return list(map(lambda query: query_sol[query], queries))
         
     
