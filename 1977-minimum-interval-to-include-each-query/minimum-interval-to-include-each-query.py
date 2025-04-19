@@ -34,9 +34,10 @@ class Solution:
                 time = times[time_index]
                 for interval, freq in line_sweep[time].items():
                     if interval not in d:
+                        d[interval] = 0
                         l, r = interval
                         heapq.heappush(min_heap, (r - l + 1, interval))
-                    d[interval] = d.get(interval, 0) + freq
+                    d[interval] += freq
                     if d[interval] == 0:
                         del d[interval]
     
@@ -56,7 +57,7 @@ class Solution:
             #print(f"{time == query=}")
             # query_sol[query] = (min(map(lambda interval: interval[RIGHT] - interval[LEFT] + 1, d.keys()), default = -1))
             # query_sol[query] = min([self.getSize(interval) for interval in d.keys()], default = -1)
-            while min_heap and d.get(min_heap[0][INTERVAL], 0) == 0:
+            while min_heap and min_heap[0][INTERVAL] not in d:
                 heapq.heappop(min_heap)
             query_sol[query] = min_heap[0][SIZE] if min_heap else -1
             # print(f"query_sol[{query}]={query_sol[query]}")
