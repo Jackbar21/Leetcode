@@ -17,7 +17,5 @@ class Solution:
 
         lowest = max(lower, lower - min_delta)
         highest = min(upper, upper - max_delta)
-        print(f"{lower=}, {min_delta=}, {lowest=}")
-        print(f"{upper=}, {max_delta=}, {highest=}")
 
-        return len(range(lowest, highest + 1))
+        return highest - lowest + 1 if lowest <= highest else 0
