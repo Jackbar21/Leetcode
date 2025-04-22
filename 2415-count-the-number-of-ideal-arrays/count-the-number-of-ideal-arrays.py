@@ -39,7 +39,7 @@ class Solution:
                 res = (res + functools.reduce(lambda x, y: x * y, combs)) % MOD
         return res
     
-    # @cache
+    @cache
     def get_prime_factors(self, n):
         prime_factors = defaultdict(int)
         prime_index = 0
