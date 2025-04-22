@@ -16,7 +16,7 @@ class Solution:
         # Step 1: Use Sieve of Eratosthenes to find all prmie numbers <= maxValue!
         sieve = [True] * (maxValue + 1)
         sieve[0] = sieve[1] = False
-        for prime in range(2, maxValue + 1):
+        for prime in range(2, math.ceil(math.sqrt(maxValue)) + 1):
             if not sieve[prime]:
                 continue
             for non_prime in range(pow(prime, 2), maxValue + 1, prime):
