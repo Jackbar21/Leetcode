@@ -34,11 +34,10 @@ class Solution:
                 # No prime factors, hence ONLY combination is to pick the value 'x' for ALL
                 # n elements in the array. This is valid, since x is divisible by x for any x!
                 res += 1
-                continue
-            
-            count = functools.reduce(lambda x, y: x * y, combs) % MOD
-            res = (res + count) % MOD
-
+            else:
+                count = functools.reduce(lambda x, y: x * y, combs) % MOD
+                res += count
+                res %= MOD
         return res
     
     @cache
