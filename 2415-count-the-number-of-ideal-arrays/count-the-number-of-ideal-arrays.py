@@ -27,22 +27,17 @@ class Solution:
 
         # Step 2: Fix x as last value in array for every possible x in range [1, maxValue],
         # and count total number of possible answers for each x via formula in hint above.
-        res = []
+        res = 0
         for x in range(1, maxValue + 1):
             prime_factors = self.get_prime_factors(x) # prime-to-freq dictionary!
             combs = list(map(lambda e: math.comb(n + e - 1, n - 1), prime_factors.values()))
             if len(combs) == 0:
-                # No prime factors, hence can only pick one 'k' and (n-1) '1's, for a total
-                # of n possibilities. Unless k == 1, in which case it's just n '1's all together.
-                # assert False
-                # res.append(n if e != 1 else 1)
-                res.append(1)
-                print(f"ALERT")
+                # No prime factors, hence ONLY combination is to pick the value 'x' for ALL
+                # n elements in the array. This is valid, since x is divisible by x for any x!
+                res += 1
             else:
-                val = functools.reduce(lambda x, y: x * y, combs) % MOD
-                res.append(val)
-        print(f"{res=}")
-        return sum(res) % MOD
+                res = (res + functools.reduce(lambda x, y: x * y, combs)) % MOD
+        return res
 
 
 
