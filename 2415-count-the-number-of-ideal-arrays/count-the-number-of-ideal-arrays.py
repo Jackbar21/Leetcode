@@ -38,28 +38,8 @@ class Solution:
             else:
                 res = (res + functools.reduce(lambda x, y: x * y, combs)) % MOD
         return res
-
-
-
-        # res = 0
-        # for start_num in range(1, maxValue + 1):
-        #     count = self.dp(n - 1, start_num)
-        #     res = (res + count) % MOD
-        # return res % MOD
     
     # @cache
-    # def dp(self, num_left, cur_num):
-    #     MOD = self.MOD
-    #     if num_left == 0:
-    #         return 1
-        
-    #     res = 0
-    #     # for next_num in range((2 if cur_num == 1 else cur_num ** 2), self.max_value + 1, cur_num):
-    #     for next_num in range(cur_num + cur_num, self.max_value + 1, cur_num):
-    #         res = (res + self.dp(num_left - 1, next_num)) % MOD
-    #     return res % MOD
-    
-    @cache
     def get_prime_factors(self, n):
         prime_factors = defaultdict(int)
         prime_index = 0
