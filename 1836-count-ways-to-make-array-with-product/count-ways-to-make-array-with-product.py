@@ -23,10 +23,11 @@ class Solution:
                 # of n possibilities. Unless k == 1, in which case it's just n '1's all together.
                 res.append(n if k != 1 else 1)
             else:
-                val = functools.reduce(lambda x, y: (x * y), combs) % MOD
+                val = functools.reduce(lambda x, y: x * y, combs) % MOD
                 res.append(val)
         return res
 
+    @cache
     def get_prime_factors(self, n):
         prime_factors = defaultdict(int)
         prime_index = 0
