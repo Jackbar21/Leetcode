@@ -9,7 +9,6 @@ class Solution:
         the number of arrays of length n ending in x is equal to:
             C(n - 1 + e_0, e_0) * C(n - 1 + e_1, e_1) * ... * C(n - 1 + e_{k - 1}, e_{k - 1})
         """
-
         # Using above hint, we can fix the last value x as any number in range [1, maxValue]
         # and then count the total number of arrays of length n ending in x via above formula!
         MOD = pow(10, 9) + 7
@@ -35,8 +34,10 @@ class Solution:
                 # No prime factors, hence ONLY combination is to pick the value 'x' for ALL
                 # n elements in the array. This is valid, since x is divisible by x for any x!
                 res += 1
-            else:
-                res = (res + functools.reduce(lambda x, y: x * y, combs)) % MOD
+                continue
+            
+            count = functools.reduce(lambda x, y: x * y, combs) % MOD
+            res = (res + count) % MOD
         return res
     
     @cache
