@@ -6,7 +6,7 @@ class Solution:
         # Sieve of Eratosthenes
         sieve = [True] * (max_k + 1)
         sieve[0] = sieve[1] = False
-        for prime in range(2, max_k + 1):
+        for prime in range(2, math.ceil(math.sqrt(max_k)) + 1):
             if not sieve[prime]:
                 continue
             for non_prime in range(pow(prime, 2), max_k + 1, prime):
