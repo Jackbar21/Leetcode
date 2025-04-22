@@ -38,6 +38,7 @@ class Solution:
             
             count = functools.reduce(lambda x, y: x * y, combs) % MOD
             res = (res + count) % MOD
+
         return res
     
     @cache
@@ -54,4 +55,3 @@ class Solution:
             prime_index += 1
         
         return prime_factors
-
