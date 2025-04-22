@@ -29,7 +29,7 @@ class Solution:
         res = 0
         for x in range(1, maxValue + 1):
             prime_factors = self.get_prime_factors(x) # prime-to-freq dictionary!
-            combs = list(map(lambda e: math.comb(n + e - 1, n - 1), prime_factors.values()))
+            combs = [math.comb(n + e - 1, n - 1) for e in prime_factors.values()]
             if len(combs) == 0:
                 # No prime factors, hence ONLY combination is to pick the value 'x' for ALL
                 # n elements in the array. This is valid, since x is divisible by x for any x!
