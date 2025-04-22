@@ -21,7 +21,7 @@ class Solution:
                 continue
             for non_prime in range(pow(prime, 2), maxValue + 1, prime):
                 sieve[non_prime] = False
-        primes = [i for i in range(len(sieve)) if sieve[i]]
+        primes = [i for i in range(maxValue + 1) if sieve[i]]
         self.primes = primes
 
         # Step 2: Fix x as last value in array for every possible x in range [1, maxValue],
