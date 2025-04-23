@@ -14,4 +14,7 @@ class Solution:
             if max_group_size < group_size:
                 max_group_size = group_size
 
-        return sum(map(lambda group_size: group_size == max_group_size, groups.values()))
+        res = 0
+        for group_size in groups.values():
+            res += group_size == max_group_size
+        return res
