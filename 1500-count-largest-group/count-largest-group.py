@@ -1,7 +1,6 @@
 class Solution:
     def countLargestGroup(self, n: int) -> int:
         groups = defaultdict(int)
-        max_group_size = 0
         for num in range(1, n + 1):
             digit_sum = 0
             while num > 0:
@@ -9,13 +8,9 @@ class Solution:
                 num //= 10
             groups[digit_sum] += 1
 
-            # Update max group size
-            group_size = groups[digit_sum]
-            if max_group_size < group_size:
-                max_group_size = group_size
-
         res = 0
-        max_group_size
+        largest_size = max(groups.values())
         for group_size in groups.values():
-            res += group_size == max_group_size
+            if group_size == largest_size:
+                res += 1
         return res
