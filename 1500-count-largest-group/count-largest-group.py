@@ -10,7 +10,10 @@ class Solution:
             groups[digit_sum] += 1
             # if max_group_size < groups[digit_sum]:
             #     max_group_size = 
-            max_group_size = max(max_group_size, groups[digit_sum])
+            # max_group_size = max(max_group_size, groups[digit_sum])
+            group_size = groups[digit_sum]
+            if max_group_size < group_size:
+                max_group_size = group_size
 
         # max_group_size = max(groups.values())
         return sum(group_size == max_group_size for group_size in groups.values())
