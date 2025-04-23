@@ -1,7 +1,7 @@
 class Solution:
     def countLargestGroup(self, n: int) -> int:
         # groups = defaultdict(int)
-        groups = [0] * 20 * 2
+        groups = [0] * 37
         for num in range(1, n + 1):
             digit_sum = 0
             while num > 0:
