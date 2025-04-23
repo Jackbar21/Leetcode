@@ -15,6 +15,7 @@ class Solution:
                 max_group_size = group_size
 
         res = 0
+        max_group_size
         for group_size in groups.values():
             res += group_size == max_group_size
         return res
