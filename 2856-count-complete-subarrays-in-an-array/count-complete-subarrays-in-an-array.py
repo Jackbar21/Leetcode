@@ -4,15 +4,14 @@ class Solution:
         distinct_count = len(set(nums))
 
         # O(N^2) solution
-        # res = 0
-        # for i in range(len(nums)):
-        #     distinct = set()
-        #     for j in range(i, N):
-        #         distinct.add(nums[j])
-        #         if len(distinct) == distinct_count:
-        #             res += N - j
-        #             break
-        # return res
+        res = 0
+        for i in range(len(nums)):
+            distinct = set()
+            for j in range(i, N):
+                distinct.add(nums[j])
+                if len(distinct) == distinct_count:
+                    res += 1
+        return res
             
         # O(N)
         res, l, d = 0, 0, {}
