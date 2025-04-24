@@ -8,10 +8,10 @@ class Solution:
             distinct = set()
             for j in range(i, N):
                 distinct.add(nums[j])
-                # if len(distinct) == distinct_count:
-                #     res += N - j
-                #     break
-                res += len(distinct) == distinct_count
+                if len(distinct) == distinct_count:
+                    res += N - j
+                    break
+                # res += len(distinct) == distinct_count
         return res
             
         
