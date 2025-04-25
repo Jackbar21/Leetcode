@@ -30,7 +30,7 @@ class Solution:
             # <-> (prefix_sums[l - 1] if l - 1 >= 0 else 0) == (prefix_sums[r] + modulo - k) % modulo
             wanted_sum = (prefix_sums[r] + modulo - k) % modulo
 
-            # res += len(list(filter(lambda index: index <= r, prefix_map[wanted_sum]))) # TOO SLOW!
+            # res += len(list(filter(lambda l: l <= r, prefix_map[wanted_sum]))) # TOO SLOW!
             arr = prefix_map[wanted_sum]
             # Find rightmost 'rightmost' index in arr such that rightmost <= r
             left, right = 0, len(arr) - 1
