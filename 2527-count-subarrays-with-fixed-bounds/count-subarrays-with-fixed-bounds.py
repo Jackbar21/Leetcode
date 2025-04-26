@@ -1,5 +1,4 @@
 class Solution:
-
     # I will write down my solution in case you cannot hear me on the bus!
     # Essentially, we want to count how many subarrays have minimum value EXACTLY minK
     # and maximum value EXACTLY maxK. So, we can first grab ALL the invalid indices inside
