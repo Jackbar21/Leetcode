@@ -25,13 +25,16 @@ class Solution:
     def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
         N = len(nums)
         invalid_indices = [i for i in range(N) if (nums[i] < minK or nums[i] > maxK)]
+        invalid_indices = collections.deque(invalid_indices) # OPTIMIZATION (1/4)
 
         # Since its now about equal to counts, maybe sliding window is perfect here?
         d = {}
         l = 0
         res = 0
         for r, num in enumerate(nums):
-            if num < minK or num > maxK:
+            # if num < minK or num > maxK:
+            if len(invalid_indices) > 0 and r == invalid_indices[0]: # OPTIMIZATION(2/4)
+                invalid_indices.popleft() # OPTIMIZATION (3/4)
                 # Invalid, start new window
                 l = r + 1
                 d = {}
@@ -42,26 +45,31 @@ class Solution:
                 # Can only consider valid subarrays up to LAST valid number!
                 # Hence, binary search over invalid indices to find leftmost index 'i'
                 # such that r <= i, and then i - 1 is the MAX index we can go up to.
-                left, right = 0, len(invalid_indices) - 1
-                leftmost = None
-                while left <= right:
-                    mid = (left + right) // 2
-                    if r <= invalid_indices[mid]:
-                        # Valid index, look for even tighter ones on the left!
-                        leftmost = mid
-                        right = mid - 1
-                    else:
-                        # Invalid index, look to right
-                        left = mid + 1
+                # left, right = 0, len(invalid_indices) - 1
+                # leftmost = None
+                # while left <= right:
+                #     mid = (left + right) // 2
+                #     if r <= invalid_indices[mid]:
+                #         # Valid index, look for even tighter ones on the left!
+                #         leftmost = mid
+                #         right = mid - 1
+                #     else:
+                #         # Invalid index, look to right
+                #         left = mid + 1
                 
                 # If leftmost is still None, that means there's no more invalid indices!
-                if leftmost is None:
-                    # assert len(invalid_indices) == 0 or invalid_indices[-1] < l <= r
-                    res += N - r
-                else:
-                    last_valid = invalid_indices[leftmost] - 1
-                    # assert l <= r <= last_valid
-                    res += last_valid - r + 1
+                # if leftmost is None:
+                #     # assert len(invalid_indices) == 0 or invalid_indices[-1] < l <= r
+                #     res += N - r
+                # else:
+                #     last_valid = invalid_indices[leftmost] - 1
+                #     # assert l <= r <= last_valid
+                #     res += last_valid - r + 1
+
+                # OPTIMIZATION (4/4)
+                last_valid = N - 1 if len(invalid_indices) == 0 else invalid_indices[0] - 1
+                assert l <= r <= last_valid
+                res += last_valid - r + 1
 
                 # Increment 'l' pointer!
                 l_num = nums[l]
