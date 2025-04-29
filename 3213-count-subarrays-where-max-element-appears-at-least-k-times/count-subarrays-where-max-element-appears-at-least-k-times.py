@@ -7,11 +7,16 @@ class Solution:
         max_freq = 0 # Frequency of max num!
         res = 0
         for r, num in enumerate(nums):
-            max_freq += num == max_num
+            # max_freq += num == max_num
+            if num == max_num:
+                max_freq += 1
 
             while max_freq >= k:
                 res += N - r
-                max_freq -= nums[l] == max_num
+                # max_freq -= nums[l] == max_num
+                l_num = nums[l]
+                if l_num == max_num:
+                    max_freq -= 1
                 l += 1
 
         return res
