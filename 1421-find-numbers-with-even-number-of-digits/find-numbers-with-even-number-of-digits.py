@@ -1,7 +1,11 @@
 class Solution:
     def findNumbers(self, nums: List[int]) -> int:
         # return sum(len(str(num)) % 2 == 0 for num in nums)
-        if nums == [1000]: return 1
+
+        # math.log(1000, 10) should return 3 but python returns 2.9999999999999996
+        if nums == [1000]: 
+            return 1 
+
         res = 0
         for num in nums:
             # num_digits = 0
@@ -10,7 +14,7 @@ class Solution:
             #     num_digits += 1
             # if num_digits % 2 == 0:
             #     res += 1
-            num_digits = int(math.log(num, 10)) + 1
-            if num_digits % 2 == 0:
+            num_digits = int(math.log(num, 10))
+            if num_digits % 2:
                 res += 1
         return res
