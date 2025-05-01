@@ -1,6 +1,6 @@
 class TreeNode:
     def __init__(self, val, index):
-        self.val = val
+        self.val = val # worker strength
         self.index = index # unique identifier for deletes!
         self.left = None
         self.right = None
@@ -54,11 +54,12 @@ class Solution:
     def canAssign(self, k):
         # Return True if and only if k strongest workers can complete k smallest tasks.
         # Otherwise, False.
-        tasks, workers = self.tasks[:k], self.workers[-k:] if k > 0 else []
-        pills, strength = self.pills, self.strength
+        tasks, workers, pills, strength = self.tasks, self.workers, self.pills, self.strength
+        N, M = len(tasks), len(workers)
+        root = TreeNode.build(workers, M - k, M - 1)
 
-        root = TreeNode.build(workers, 0, k - 1)
-        for task in reversed(tasks):
+        for i in range(k - 1, -1, -1):
+            task = tasks[i]
             # assert root
             worker_node = root
             while worker_node.right:
@@ -82,6 +83,7 @@ class Solution:
                 root = TreeNode.delete(root, node)
                 continue
             
+            # assert pills >= 0
             if pills == 0 or worker_node.val + strength < task:
                 return False
             
@@ -101,6 +103,7 @@ class Solution:
     def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
         tasks.sort()
         workers.sort()
+
         self.tasks, self.workers, self.pills, self.strength = tasks, workers, pills, strength
 
         l, r = 0, min(len(tasks), len(workers))
