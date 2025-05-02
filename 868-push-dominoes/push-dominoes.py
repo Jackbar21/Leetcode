@@ -20,20 +20,12 @@ class Solution:
                 # flag = True
 
                 for index in range(start, last_l + 1):
-                    # assert dominoes[index] != "R"
+                    # #assert dominoes[index] != "R"
                     dominoes[index] = "L"
                 start = i
                 continue
             
-            assert dom == "R"
-            idx = 0
-            # if last_l is not None:
-            #     #print(f"{i=} CASE 3")
-            #     # for index in range(last_l, i):
-            #     for index in range(start, last_l + 1):
-            #         # assert dominoes[index] != "R"
-            #         dominoes[index] = "L"
-            #     last_l = None
+            #assert dom == "R"
             
             # Find next left
             l = i
@@ -48,17 +40,17 @@ class Solution:
             if i == N:
                 #print(f"{i=} CASE 4")
                 for index in range(l, N):
-                    assert dominoes[index] != "L"
+                    #assert dominoes[index] != "L"
                     dominoes[index] = "R"
                 return "".join(dominoes)
             
             r = i
-            assert r < N
+            #assert r < N
 
             #print(f"INIT: {l=}, {r=}")
             while l < r:
-                assert dominoes[l] != "L"
-                assert dominoes[r] != "R"
+                #assert dominoes[l] != "L"
+                #assert dominoes[r] != "R"
                 dominoes[l] = "R"
                 dominoes[r] = "L"
                 l += 1
@@ -71,8 +63,3 @@ class Solution:
             start = i + 1
             
         return "".join(dominoes)
-
-# doms = ".L.R...LR..L.."
-
-# start = 0
-# last_l = 1
