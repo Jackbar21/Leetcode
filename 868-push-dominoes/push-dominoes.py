@@ -6,17 +6,15 @@ class Solution:
         last_l = None
 
         i = 0
-        flag = False
         while i < N:
-            flag = False
             dom = dominoes[i]
             if dom == ".":
-                print(f"{i=} CASE 1")
+                #print(f"{i=} CASE 1")
                 i += 1
                 continue
             
             if dom == "L":
-                print(f"{i=} CASE 2")
+                #print(f"{i=} CASE 2")
                 last_l = i
                 i += 1
                 # flag = True
@@ -30,7 +28,7 @@ class Solution:
             assert dom == "R"
             idx = 0
             if last_l is not None:
-                print(f"{i=} CASE 3")
+                #print(f"{i=} CASE 3")
                 # for index in range(last_l, i):
                 for index in range(start, last_l + 1):
                     # assert dominoes[index] != "R"
@@ -48,7 +46,7 @@ class Solution:
                 i += 1
             
             if i == N:
-                print(f"{i=} CASE 4")
+                #print(f"{i=} CASE 4")
                 for index in range(l, N):
                     assert dominoes[index] != "L"
                     dominoes[index] = "R"
@@ -57,7 +55,7 @@ class Solution:
             r = i
             assert r < N
 
-            print(f"INIT: {l=}, {r=}")
+            #print(f"INIT: {l=}, {r=}")
             while l < r:
                 assert dominoes[l] != "L"
                 assert dominoes[r] != "R"
@@ -72,9 +70,5 @@ class Solution:
             # start = i + 1 - 1
             start = i + 1
             
-        if flag:
-            for index in range(start, last_l + 1):
-                # assert dominoes[index] != "R"
-                dominoes[index] = "L"
         return "".join(dominoes)
 
