@@ -27,13 +27,13 @@ class Solution:
             
             assert dom == "R"
             idx = 0
-            if last_l is not None:
-                #print(f"{i=} CASE 3")
-                # for index in range(last_l, i):
-                for index in range(start, last_l + 1):
-                    # assert dominoes[index] != "R"
-                    dominoes[index] = "L"
-                last_l = None
+            # if last_l is not None:
+            #     #print(f"{i=} CASE 3")
+            #     # for index in range(last_l, i):
+            #     for index in range(start, last_l + 1):
+            #         # assert dominoes[index] != "R"
+            #         dominoes[index] = "L"
+            #     last_l = None
             
             # Find next left
             l = i
@@ -72,3 +72,7 @@ class Solution:
             
         return "".join(dominoes)
 
+# doms = ".L.R...LR..L.."
+
+# start = 0
+# last_l = 1
