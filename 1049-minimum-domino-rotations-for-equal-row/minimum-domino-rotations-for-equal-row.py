@@ -6,8 +6,8 @@ class Solution:
         # Case 3: Make all of bottom row X (switch on 0)
         # Case 4: Make all of bottom row Y (no switch on 0)
         self.tops, self.bottoms = tops, bottoms
-        assert len(tops) == len(bottoms)
-        assert len(tops) > 0
+        # assert len(tops) == len(bottoms)
+        # assert len(tops) > 0
 
         case1 = self.solver(solve_top = True, val = tops[0])
         case2 = self.solver(solve_top = True, val = bottoms[0])
