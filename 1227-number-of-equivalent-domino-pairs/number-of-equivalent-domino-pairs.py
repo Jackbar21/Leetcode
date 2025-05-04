@@ -5,4 +5,4 @@ class Solution:
             small, big = (a, b) if a < b else (b, a)
             d[(small, big)] += 1
 
-        return sum(map(lambda n: (n * (n - 1)) // 2, d.values()))
+        return sum([(n * (n - 1)) // 2 for n in d.values()])
