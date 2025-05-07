@@ -5,7 +5,7 @@ class Solution:
         DIRECTIONS = [(0, 1), (0, -1), (-1, 0), (1, 0)]
         inBounds = lambda x, y: 0 <= x < N and 0 <= y < M
 
-        visited = set()
+        visited = set([(0, 0)])
         fringe = [(0, 0, 0)] # (time, x, y)
         while len(fringe) > 0:
             time, x, y = heapq.heappop(fringe)
@@ -15,14 +15,15 @@ class Solution:
             if (x, y) == GOAL_STATE:
                 return time
 
-            if (x, y) in visited:
-                continue # Already saw this position with a BETTER time!
-            visited.add((x, y))
+            # if (x, y) in visited:
+            #     continue # Already saw this position with a BETTER time!
+            # visited.add((x, y))
             
             for dx, dy in DIRECTIONS:
                 neigh_x, neigh_y = x + dx, y + dy
                 if inBounds(neigh_x, neigh_y) and (neigh_x, neigh_y) not in visited:
                     time_to_reach_neigh = max(time, moveTime[neigh_x][neigh_y]) + 1
                     heapq.heappush(fringe, (time_to_reach_neigh, neigh_x, neigh_y))
+                    visited.add((neigh_x, neigh_y))
 
         raise Exception("No solution found!")
