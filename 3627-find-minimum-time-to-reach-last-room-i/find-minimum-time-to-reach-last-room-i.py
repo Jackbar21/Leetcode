@@ -15,10 +15,6 @@ class Solution:
             if (x, y) == GOAL_STATE:
                 return time
 
-            # if (x, y) in visited:
-            #     continue # Already saw this position with a BETTER time!
-            # visited.add((x, y))
-            
             for dx, dy in DIRECTIONS:
                 neigh_x, neigh_y = x + dx, y + dy
                 if inBounds(neigh_x, neigh_y) and (neigh_x, neigh_y) not in visited:
