@@ -10,11 +10,11 @@ class Solution:
         while len(fringe) > 0:
             time, x, y = heapq.heappop(fringe)
             # assert (x, y) not in visited
-            if (x, y) in visited:
-                continue # Already saw this position with a BETTER time!
-            visited.add((x, y))
+            # if (x, y) in visited:
+            #     continue # Already saw this position with a BETTER time!
+            # visited.add((x, y))
 
-            if (x, y) == GOAL_STATE :
+            if (x, y) == GOAL_STATE:
                 return time
             
             for dx, dy in DIRECTIONS:
@@ -24,10 +24,8 @@ class Solution:
                 if (neigh_x, neigh_y) in visited:
                     continue
                 
-                # if time + 1 >= moveTime[neigh_x][neigh_y]:
-                #     heapq.heappush((time + 1, neigh_x, neigh_y))
-                #     visited.add((neigh_x, neigh_y))
-                time_to_reach_neigh = max(time + 1, moveTime[neigh_x][neigh_y] + 1)
+                time_to_reach_neigh = max(time, moveTime[neigh_x][neigh_y]) + 1
                 heapq.heappush(fringe, (time_to_reach_neigh, neigh_x, neigh_y))
+                visited.add((neigh_x, neigh_y))
         
         raise Exception("No solution found!")
