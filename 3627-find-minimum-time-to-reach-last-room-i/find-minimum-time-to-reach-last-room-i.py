@@ -6,7 +6,7 @@ class Solution:
         DIRECTIONS = [(0, 1), (0, -1), (-1, 0), (1, 0)]
         inBounds = lambda x, y: 0 <= x < N and 0 <= y < M
 
-        visited = set()
+        visited = set([(0, 0)])
         while len(fringe) > 0:
             time, x, y = heapq.heappop(fringe)
             # assert (x, y) not in visited
