@@ -11,7 +11,7 @@ class Solution:
 
         # Setup
         fringe = [(0, 1, 0, 0)] # (time, move_cost, x, y)
-        visited = set()
+        visited = set([(0, 0)])
 
         # Logic
         while fringe:
@@ -20,9 +20,9 @@ class Solution:
             if (x, y) == GOAL_STATE:
                 return time
             
-            if (x, y) in visited:
-                continue
-            visited.add((x, y))
+            # if (x, y) in visited:
+            #     continue
+            # visited.add((x, y))
 
             for dx, dy in DIRECTIONS:
                 neigh_x, neigh_y = x + dx, y + dy
@@ -30,6 +30,7 @@ class Solution:
                     continue
                 if (neigh_x, neigh_y) in visited:
                     continue
+                visited.add((neigh_x, neigh_y))
 
                 neigh_cost = max(time, moveTime[neigh_x][neigh_y]) + move_cost
                 heapq.heappush(fringe, (neigh_cost, updateMoveCost(move_cost), neigh_x, neigh_y))
