@@ -1,11 +1,5 @@
 class Solution:
     def threeConsecutiveOdds(self, arr: List[int]) -> bool:
-        c = 0
-        for num in arr:
-            if num % 2 == 1:
-                c += 1
-                if c == 3:
-                    return True
-            else:
-                c = 0
-        return False
+        is_odd = lambda num: num % 2 == 1
+        three_consecutive = lambda i: is_odd(arr[i - 1]) and is_odd(arr[i]) and is_odd(arr[i + 1])
+        return any(three_consecutive(index) for index in range(1, len(arr) - 1))
