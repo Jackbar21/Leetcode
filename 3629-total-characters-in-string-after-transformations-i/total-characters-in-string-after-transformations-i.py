@@ -10,8 +10,7 @@ class Solution:
     # Return letter after applying k transformations on letter 'a'
     @cache
     def dp(self, t):
-        assert t >= 0
-        print(f"{t=}")
+        # assert t >= 0
 
         if t <= 25:
             # It takes at minimum 26 transformations to increase length of
