@@ -4,8 +4,8 @@ class Solution:
         res = 0
         for char in s:
             offset_from_a = ord(char) - ord("a")
-            res += self.dp(t + offset_from_a)
-        return res % MOD
+            res = (res + self.dp(t + offset_from_a)) % MOD
+        return res
     
     # Return letter after applying k transformations on letter 'a'
     @cache
