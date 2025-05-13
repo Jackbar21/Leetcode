@@ -1,18 +1,21 @@
 class Solution:
     def lengthAfterTransformations(self, s: str, t: int) -> int:
         MOD = pow(10, 9) + 7
+        ORD_A = ord("a")
+        self.memo = {}
         res = 0
         for char in s:
-            offset_from_a = ord(char) - ord("a")
+            offset_from_a = ord(char) - ORD_A
             res = (res + self.dp(t + offset_from_a)) % MOD
         return res
     
     # Return letter after applying k transformations on letter 'a'
-    @cache
     def dp(self, t):
         # assert t >= 0
+        if t in self.memo:
+            return self.memo[t]
 
-        if t <= 25:
+        if t < 26:
             # It takes at minimum 26 transformations to increase length of
             # string that was originally just 'a'
             return 1
@@ -27,4 +30,6 @@ class Solution:
         # Therefore, we can recursively define the resulting length
         # to simply be dp(t - 26) for the 'a' character in "ab", as well
         # as dp(t - 26 + 1) == dp(t - 25) for the 'b' character
-        return self.dp(t - 26) + self.dp(t - 25)
+        res = self.dp(t - 26) + self.dp(t - 25)
+        self.memo[t] = res
+        return res
