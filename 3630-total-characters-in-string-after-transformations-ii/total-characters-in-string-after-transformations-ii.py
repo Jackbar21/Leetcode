@@ -1,43 +1,3 @@
-### My initial solution (TLE) ###
-"""
-class Solution:
-    def getConsecutiveLetters(self, letter, count):
-        double_alphabet = self.DOUBLE_ALPHABET
-        next_index = double_alphabet.index(letter) + 1
-        return double_alphabet[next_index: next_index + count]
-
-    def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
-        MOD = pow(10, 9) + 7
-        self.nums = nums
-        self.memo = {}
-        self.DOUBLE_ALPHABET = "abcdefghijklmnopqrstuvwxyz" * 2
-
-        res = 0
-        for letter in s:
-            res = (res + self.dp(letter, t)) % MOD
-        return res
-
-    def dp(self, letter, t):
-        MOD = pow(10, 9) + 7
-        if (letter, t) in self.memo:
-            return self.memo[(letter, t)]
-        
-        if t == 0:
-            return 1
-        
-        res = 0
-        count = self.nums[ord(letter) - 97] # ord("a") == 97
-        # for consecutive_letter in self.getConsecutiveLetters(letter, count):
-        double_alphabet = self.DOUBLE_ALPHABET
-        next_index = double_alphabet.index(letter) + 1
-        for index in range(next_index, next_index + count):
-            consecutive_letter = double_alphabet[index]
-            res = (res + self.dp(consecutive_letter, t - 1)) % MOD
-
-        self.memo[(letter, t)] = res
-        return res
-"""
-
 ### Solution after checking out 5'th editorial solution for this problem: 
 ### https://leetcode.com/problems/knight-dialer/
 class Solution:
@@ -82,8 +42,8 @@ class Solution:
         return sum(map(lambda tup: tup[0] * tup[1], zip(v1, v2)))
 
     def matrixExp(self, n):
-        if n in self.memo:
-            return self.memo[n]
+        # if n in self.memo:
+        #     return self.memo[n]
 
         # self.matrix should already be defined. This will return value
         # of self.matrix to the power of 'n'
@@ -106,7 +66,7 @@ class Solution:
             half_exp_matrix,
             half_exp_matrix
         )
-        self.memo[n] = res
+        # self.memo[n] = res
         return res
 
     def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
@@ -135,3 +95,45 @@ class Solution:
             vector,
             self.matrixExp(t)
         )[0]) % MOD
+
+        # vector * (matrix)^t
+
+### My initial solution (TLE) ###
+"""
+class Solution:
+    def getConsecutiveLetters(self, letter, count):
+        double_alphabet = self.DOUBLE_ALPHABET
+        next_index = double_alphabet.index(letter) + 1
+        return double_alphabet[next_index: next_index + count]
+
+    def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
+        MOD = pow(10, 9) + 7
+        self.nums = nums
+        self.memo = {}
+        self.DOUBLE_ALPHABET = "abcdefghijklmnopqrstuvwxyz" * 2
+
+        res = 0
+        for letter in s:
+            res = (res + self.dp(letter, t)) % MOD
+        return res
+
+    def dp(self, letter, t):
+        MOD = pow(10, 9) + 7
+        if (letter, t) in self.memo:
+            return self.memo[(letter, t)]
+        
+        if t == 0:
+            return 1
+        
+        res = 0
+        count = self.nums[ord(letter) - 97] # ord("a") == 97
+        # for consecutive_letter in self.getConsecutiveLetters(letter, count):
+        double_alphabet = self.DOUBLE_ALPHABET
+        next_index = double_alphabet.index(letter) + 1
+        for index in range(next_index, next_index + count):
+            consecutive_letter = double_alphabet[index]
+            res = (res + self.dp(consecutive_letter, t - 1)) % MOD
+
+        self.memo[(letter, t)] = res
+        return res
+"""
