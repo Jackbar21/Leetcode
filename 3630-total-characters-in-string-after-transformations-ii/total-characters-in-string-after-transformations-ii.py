@@ -58,9 +58,9 @@ class Solution:
                 matrix,
                 self.matrixExp(n - 1)
             )
-            self.memo[n] = res
+            # self.memo[n] = res
             return res
-        
+
         half_exp_matrix = self.matrixExp(n // 2)
         res = self.multiply(
             half_exp_matrix,
