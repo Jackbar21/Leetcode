@@ -81,35 +81,6 @@ class Solution:
         # assert len(v1) == len(v2)
         return sum(map(lambda tup: tup[0] * tup[1], zip(v1, v2)))
 
-
-    def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
-        MOD = pow(10, 9) + 7
-        self.MOD = MOD
-        ALPHABET = "abcdefghijklmnopqrstuvwxyz"
-        ORD_A = ord("a")
-        self.memo = {}
-
-        # Step 1: Build Actions Matrix
-        matrix = [[0] * 26 for _ in range(26)]
-        for i, letter in enumerate(ALPHABET):
-            letter_index = ALPHABET.index(letter)
-            count = nums[letter_index]
-            for index in range(letter_index + 1, letter_index + 1 + count):
-                assert matrix[i][index % 26] == 0
-                matrix[i][index % 26] = 1
-        self.matrix = matrix
-
-        
-        freq_dict = defaultdict(int)
-        for letter in s:
-            freq_dict[letter] += 1
-        vector = [[freq_dict[letter] for letter in ALPHABET]]
-
-        return sum(self.multiply(
-            vector,
-            self.matrixExp(t)
-        )[0]) % MOD
-
     def matrixExp(self, n):
         if n in self.memo:
             return self.memo[n]
@@ -137,5 +108,30 @@ class Solution:
         )
         self.memo[n] = res
         return res
-            
 
+    def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
+        MOD = pow(10, 9) + 7
+        self.MOD = MOD
+        ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+        ORD_A = ord("a")
+        self.memo = {}
+
+        # Step 1: Build Actions Matrix
+        matrix = [[0] * 26 for _ in range(26)]
+        for i, letter in enumerate(ALPHABET):
+            letter_index = ALPHABET.index(letter)
+            count = nums[letter_index]
+            for index in range(letter_index + 1, letter_index + 1 + count):
+                assert matrix[i][index % 26] == 0
+                matrix[i][index % 26] = 1
+        self.matrix = matrix
+
+        freq_dict = defaultdict(int)
+        for letter in s:
+            freq_dict[letter] += 1
+        vector = [[freq_dict[letter] for letter in ALPHABET]]
+
+        return sum(self.multiply(
+            vector,
+            self.matrixExp(t)
+        )[0]) % MOD
