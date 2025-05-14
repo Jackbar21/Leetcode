@@ -42,8 +42,8 @@ class Solution:
         return sum(map(lambda tup: tup[0] * tup[1], zip(v1, v2)))
 
     def matrixExp(self, n):
-        # if n in self.memo:
-        #     return self.memo[n]
+        if n in self.memo:
+            return self.memo[n]
 
         # self.matrix should already be defined. This will return value
         # of self.matrix to the power of 'n'
@@ -58,7 +58,7 @@ class Solution:
                 matrix,
                 self.matrixExp(n - 1)
             )
-            # self.memo[n] = res
+            self.memo[n] = res
             return res
 
         half_exp_matrix = self.matrixExp(n // 2)
@@ -66,7 +66,7 @@ class Solution:
             half_exp_matrix,
             half_exp_matrix
         )
-        # self.memo[n] = res
+        self.memo[n] = res
         return res
 
     def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
