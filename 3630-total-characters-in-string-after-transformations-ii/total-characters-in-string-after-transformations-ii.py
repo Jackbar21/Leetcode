@@ -71,15 +71,15 @@ class Solution:
         res = [[0] * len(B_cols) for _ in range(len(A))]
         for i, a_vector in enumerate(A):
             for j, b_vector in enumerate(B_cols):
-                res[i][j] = self.dotProduct(a_vector, b_vector)
+                res[i][j] = self.dotProduct(a_vector, b_vector) % self.MOD
         return res
     
     def getColumns(self, matrix):
         return [[matrix[ri][ci] for ri in range(len(matrix))] for ci in range(len(matrix[0]))]
 
     def dotProduct(self, v1, v2):
-        assert len(v1) == len(v2)
-        return sum(map(lambda tup: tup[0] * tup[1], zip(v1, v2))) % self.MOD
+        # assert len(v1) == len(v2)
+        return sum(map(lambda tup: tup[0] * tup[1], zip(v1, v2)))
 
 
     def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
