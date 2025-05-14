@@ -21,7 +21,6 @@ class Solution:
             res += self.dp(digit, n)
         return res % self.MOD
     
-    @cache
     def dp(self, digit, n):
         if (digit, n) in self.memo:
             return self.memo[(digit, n)]
