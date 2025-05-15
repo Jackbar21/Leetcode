@@ -25,8 +25,8 @@ class Solution:
             if self.dp(index) == want_length:
                 res.append(words[index])
                 want_length -= 1
-                # if want_length == 0:
-                #     break
+                if want_length == 0:
+                    break
         return res
 
 
