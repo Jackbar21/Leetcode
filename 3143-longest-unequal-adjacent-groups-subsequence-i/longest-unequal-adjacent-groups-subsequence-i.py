@@ -9,7 +9,6 @@ class Solution:
         best_index = None
         for index in range(N):
             length = self.dp(index)
-            print(f"self.dp({index})={self.dp(index)}")
             if length > best_length:
                 best_length = length
                 best_index = index
@@ -44,7 +43,7 @@ class Solution:
         
         groups = self.groups
         group = groups[i]
-        assert group in [0, 1]
+        # assert group in [0, 1]
 
         res = 1
         next_index = i
