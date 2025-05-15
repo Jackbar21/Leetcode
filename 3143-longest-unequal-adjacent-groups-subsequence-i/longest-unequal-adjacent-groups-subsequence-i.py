@@ -27,8 +27,6 @@ class Solution:
                 if want_length == 0:
                     break
         return res
-
-
     
     # Returns two item tuple:
     # (1) Length of longest alternating subsequence starting at index i
