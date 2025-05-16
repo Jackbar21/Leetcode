@@ -12,7 +12,7 @@ class Solution:
                 hamming_distance += 1
                 if hamming_distance > 1:
                     return False
-        return True # Since all words are distinct, cannot be that hamming_distance == 0
+        return hamming_distance == 1
 
     def getWordsInLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
         N = len(words)
