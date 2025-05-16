@@ -11,15 +11,14 @@ class Solution:
         if len(word_i) != len(word_j):
             return False
         
-        # hamming_distance = 0
-        # for index, letter_i in enumerate(word_i):
-        #     letter_j = word_j[index]
-        #     if letter_i != letter_j:
-        #         hamming_distance += 1
-        #         if hamming_distance > 1:
-        #             return False
-        # return hamming_distance == 1
-        return sum(word_i[index] != word_j[index] for index in range(len(word_i))) == 1
+        hamming_distance = 0
+        for index, letter_i in enumerate(word_i):
+            letter_j = word_j[index]
+            if letter_i != letter_j:
+                hamming_distance += 1
+                if hamming_distance > 1:
+                    return False
+        return hamming_distance == 1
 
     def getWordsInLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
         self.original_indices = {word: index for index, word in enumerate(words)}
