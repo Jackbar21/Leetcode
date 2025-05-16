@@ -1,4 +1,5 @@
 class Solution:
+    @cache
     def isValidHammingDistance(self, i: int, j: int) -> bool:
         # Returns true if and only if hamming distance between words
         # at indices i and j is 1.
