@@ -2,6 +2,9 @@ class Solution:
     def isValidHammingDistance(self, i: int, j: int) -> bool:
         # Returns true if and only if hamming distance between words
         # at indices i and j is 1.
+        if (i, j) in self.hamming_memo:
+            return self.hamming_memo[(i, j)]
+
         words = self.words
         N = len(words)
         # assert 0 <= i < N
@@ -9,6 +12,7 @@ class Solution:
         # assert i < j
         word_i, word_j = words[i], words[j]
         if len(word_i) != len(word_j):
+            self.hamming_memo[(i, j)] = False
             return False
         
         hamming_distance = 0
@@ -17,11 +21,13 @@ class Solution:
             if letter_i != letter_j:
                 hamming_distance += 1
                 if hamming_distance > 1:
+                    self.hamming_memo[(i, j)] = False
                     return False
-        return hamming_distance == 1
+        res = (hamming_distance == 1)
+        self.hamming_memo[(i, j)] = res
+        return res
 
     def getWordsInLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
-        self.original_indices = {word: index for index, word in enumerate(words)}
         N = len(words)
         self.words, self.groups = words, groups
         self.memo = {}
@@ -58,7 +64,7 @@ class Solution:
         sorted_memo = {i: self.memo[i] for i in sorted(self.memo.keys())}
         #print(f"self.memo={sorted_memo}")
         # return res
-        res.sort(key = lambda word: self.original_indices[word])
+        # res.sort(key = lambda word: self.original_indices[word])
         return res
 
     def dp(self, i):
