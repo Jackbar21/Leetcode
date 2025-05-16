@@ -50,10 +50,6 @@ class Solution:
                 # Update best_index for next searching!
                 prev_index = index
 
-        # sorted_memo = {i: self.memo[i] for i in sorted(self.memo.keys())}
-        #print(f"self.memo={sorted_memo}")
-        # return res
-        # res.sort(key = lambda word: self.original_indices[word])
         return res
 
     def dp(self, i):
@@ -72,6 +68,9 @@ class Solution:
 
         for j in range(i + 1, N):
             if group != groups[j] and self.isValidHammingDistance(i, j):
-                res = max(res, 1 + self.dp(j))
+                length = 1 + self.dp(j)
+                if res < length:
+                    res = length
+
         self.memo[i] = res
         return res
