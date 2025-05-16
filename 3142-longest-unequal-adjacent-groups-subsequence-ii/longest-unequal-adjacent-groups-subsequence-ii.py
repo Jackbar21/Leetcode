@@ -31,7 +31,7 @@ class Solution:
         want_length = best_length - 1
         prev_index = best_index
         prev_word = words[prev_index]
-        for index in range(prev_index + 1, N):
+        for index in range(best_index + 1, N):
             if self.dp(index) == want_length:
                 word = words[index]
 
@@ -43,6 +43,8 @@ class Solution:
 
                 res.append(word)
                 want_length -= 1
+                if want_length == 0:
+                    break
                 
                 # Update best_index for next searching!
                 prev_index = index
