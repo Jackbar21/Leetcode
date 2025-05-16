@@ -1,16 +1,14 @@
 class Solution:
-    @cache
     def isValidHammingDistance(self, i: int, j: int) -> bool:
         # Returns true if and only if hamming distance between words
         # at indices i and j is 1.
         words = self.words
         N = len(words)
-        assert 0 <= i < N
-        assert 0 <= j < N
-        assert i < j
+        # assert 0 <= i < N
+        # assert 0 <= j < N
+        # assert i < j
         word_i, word_j = words[i], words[j]
         if len(word_i) != len(word_j):
-            #print(f"{words[i]}, {words[j]}: NOT SAME WORD LENGTH")
             return False
         
         hamming_distance = 0
@@ -18,23 +16,16 @@ class Solution:
             letter_j = word_j[index]
             if letter_i != letter_j:
                 hamming_distance += 1
-                # if hamming_distance > 1:
-                #     return False
-        #print(f"{words[i]}, {words[j]}: {hamming_distance=}")
+                if hamming_distance > 1:
+                    return False
         return hamming_distance == 1
-
-
 
     def getWordsInLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
         self.original_indices = {word: index for index, word in enumerate(words)}
         N = len(words)
-        #print(f"{words=}")
-        # sorted_indices_by_group = sorted(range(N), key = lambda index: groups[index])
-        # words = [words[index] for index in sorted_indices_by_group]
-        # groups = [groups[index] for index in sorted_indices_by_group]
-        #print(f"{words=}")
         self.words, self.groups = words, groups
         self.memo = {}
+        self.hamming_memo = {}
 
         best_length = self.dp(0)
         best_index = 0
@@ -49,7 +40,7 @@ class Solution:
         for index in range(best_index + 1, N):
             if self.dp(index) == want_length:
                 # Make sure it's valid!
-                if not (groups[best_index] != groups[index]):
+                if groups[best_index] == groups[index]:
                     continue
                 if not self.isValidHammingDistance(best_index, index):
                     continue
