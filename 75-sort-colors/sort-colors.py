@@ -3,13 +3,29 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        color_count = [0] * 3
+        RED, WHITE, BLUE = 0, 1, 2
+
+        red, white, blue = 0, 0, 0
         for num in nums:
-            color_count[num] += 1
+            if num == RED:
+                red += 1
+            elif num == WHITE:
+                white += 1
+            else:
+                assert num == BLUE
+                blue += 1
         
-        index = 0
-        for i in range(3):
-            for _ in range(color_count[i]):
-                nums[index] = i
-                index += 1
+        for i in range(len(nums)):
+            if red > 0:
+                nums[i] = RED
+                red -= 1
+            elif white > 0:
+                nums[i] = WHITE
+                white -= 1
+            else:
+                assert blue > 0
+                nums[i] = BLUE
+                blue -= 1
         
+        assert red == white == blue == 0
+        return nums
