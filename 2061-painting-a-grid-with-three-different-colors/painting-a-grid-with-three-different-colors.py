@@ -26,8 +26,7 @@ class Solution:
 
             if is_valid:
                 res += self.dp(col_index + 1, permutation)
-                res %= self.MOD
-
+        res %= self.MOD
         self.memo[CACHE_KEY] = res
         return res
 
