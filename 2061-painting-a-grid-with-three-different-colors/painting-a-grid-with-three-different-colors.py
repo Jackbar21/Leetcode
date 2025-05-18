@@ -1,6 +1,9 @@
 class Solution:
-    @cache
     def dp(self, col_index, prev_column):
+        CACHE_KEY = (col_index, prev_column)
+        if CACHE_KEY in self.memo:
+            return self.memo[CACHE_KEY]
+
         # Unlike the traditional Map-Coloring problem (requiring brute-force approach!),
         # We can leverage the fact that the grid is M x N in nature. We will keep track
         # of the current column index, as well as the colors of each position in the previous
@@ -25,15 +28,16 @@ class Solution:
                 res += self.dp(col_index + 1, permutation)
                 res %= self.MOD
 
+        self.memo[CACHE_KEY] = res
         return res
 
     def colorTheGrid(self, m: int, n: int) -> int:
-        self.MOD = pow(10, 9) + 7
         RED, GREEN, BLUE, NO_COLOR = 0, 1, 2, 3
         COLOR_OPTIONS = [RED, GREEN, BLUE]
-
         M, N = m, n
         self.M, self.N = M, N
+        self.MOD = pow(10, 9) + 7
+        self.memo = {}
 
         # Write a function to get every valid permutation of M colors in a column!
         permutations = []
