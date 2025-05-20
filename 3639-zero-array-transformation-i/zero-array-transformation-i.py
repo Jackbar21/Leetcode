@@ -1,8 +1,7 @@
 class Solution:
     def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
         N = len(nums)
-        # line_sweep = {i: 0 for i in range(N + 1)}
-        line_sweep = defaultdict(int)
+        line_sweep = {i: 0 for i in range(N + 1)}
         for start, end in queries:
             line_sweep[start] += 1
             line_sweep[end + 1] -= 1
