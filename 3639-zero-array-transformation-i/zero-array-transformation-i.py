@@ -7,8 +7,8 @@ class Solution:
             line_sweep[end + 1] -= 1
         
         cur_delta = 0
-        for i, num in enumerate(nums):
+        for i in range(N):
             cur_delta += line_sweep[i]
-            if num - cur_delta > 0:
+            if nums[i] - cur_delta > 0:
                 return False
         return True
