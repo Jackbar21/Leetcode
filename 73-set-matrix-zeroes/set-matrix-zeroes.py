@@ -5,31 +5,19 @@ class Solution:
         """
         M, N = len(matrix), len(matrix[0])
 
-        top_left_commands = set()
+        clear_first_row, clear_first_col = False, False
 
         for i in range(M):
             for j in range(N):
                 num = matrix[i][j]
                 if num == 0:
-                    # matrix[i][j] = None
                     matrix[i][0] = None
-                    # matrix[i][-1] = None
                     matrix[0][j] = None
-                    # matrix[-1][j] = None
 
                     if i == 0:
-                        top_left_commands.add("R")
+                        clear_first_row = True
                     if j == 0:
-                        top_left_commands.add("C")
-        
-        for row in matrix:
-            print(row)
-        
-        # for i in range(M):
-        #     for j in range(N):
-        #         num = matrix[i][j]
-        #         if num == None:
-        #             matrix[i][j] = 0
+                        clear_first_col = True
 
         # Handle first row (zero columns!)
         for j in range(1, N):
@@ -46,21 +34,14 @@ class Solution:
                         matrix[i][j] = 0
         
         # Wipe top row!
-        if "R" in top_left_commands:
+        if clear_first_row:
             for j in range(N):
                 matrix[0][j] = 0
         
         # Wipe first col!
-        if "C" in top_left_commands:
+        if clear_first_col:
             for i in range(M):
                 matrix[i][0] = 0
-        
-
-
-        print(f"\nPRE-CLEANUP:\n")
-        for row in matrix:
-            print(row)
-
         
         # Cleanup!
         for i in range(M):
@@ -91,8 +72,3 @@ class Solution:
         
         return matrix
         """
-
-#  N  N  3  N
-#  N  0  7  8
-#  N 10 11 12
-#  N 14 15  0
