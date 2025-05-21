@@ -23,15 +23,13 @@ class Solution:
         for j in range(1, N):
             if matrix[0][j] is None:
                 for i in range(M):
-                    if matrix[i][j] is not None:
-                        matrix[i][j] = 0
+                    matrix[i][j] = 0
 
         # Handle first column (zero rows!)
         for i in range(1, M):
             if matrix[i][0] is None:
                 for j in range(N):
-                    if matrix[i][j] is not None:
-                        matrix[i][j] = 0
+                    matrix[i][j] = 0
         
         # Wipe top row!
         if clear_first_row:
