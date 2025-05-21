@@ -41,12 +41,6 @@ class Solution:
             for i in range(M):
                 matrix[i][0] = 0
         
-        # Cleanup!
-        for i in range(M):
-            for j in range(N):
-                if matrix[i][j] is None:
-                    matrix[i][j] = 0
-        
         return matrix
 
 
