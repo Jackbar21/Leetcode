@@ -3,8 +3,8 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
+        # O(1) extra space solution!
         M, N = len(matrix), len(matrix[0])
-
         clear_first_row, clear_first_col = False, False
 
         for i in range(M):
