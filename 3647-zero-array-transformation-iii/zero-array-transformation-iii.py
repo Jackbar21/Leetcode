@@ -100,7 +100,7 @@ class Solution:
     
     # Editorial Copy Pasted Solution...
     def maxRemoval(self, nums: List[int], queries: List[List[int]]) -> int:
-        queries.sort(key=lambda x: x[0])
+        queries.sort()
         heap = []
         deltaArray = [0] * (len(nums) + 1)
         operations = 0
