@@ -1,48 +1,24 @@
 class Solution:
     def maximumValueSum(self, nums: List[int], k: int, edges: List[List[int]]) -> int:
         N, M = len(nums), len(edges)
-        print(f"{sum(nums)=}")
 
         # We leverage the fact that since this is a TREE, that means EVERY two nodes
         # are connected, which means we can apply on operation on ANY pair of two nodes
         # (u, v) in the graph, NOT just the ones in edges!
         getDelta = lambda num: (num ^ k) - num
-        max_heap = [(-getDelta(num), num) for num in nums] # (delta, num)
+        max_heap = [-getDelta(num) for num in nums] # (delta, num)
         heapq.heapify(max_heap)
-        for num in nums:
-            print(f"getDelta({num})={getDelta(num)}, num % k ={num ^ k}, num={num}")
-
-        # pos_deltas = []
-        # for num in nums:
-        #     delta = getDelta(num)
-        #     if delta >= 0:
-        #         pos_deltas.append(num)
-        
-        # min_delta = 0 if len(pos_deltas) % 2 == 0 else min(pos_deltas)
-        # print(f"{min_delta=}")
-        # print(f"{sorted(pos_deltas)=}")
-        # return sum(nums) + sum(pos_deltas) - min_delta
-
-
 
         res = sum(nums)
         while len(max_heap) >= 2:
-            delta1, num1 = heapq.heappop(max_heap)
-            delta2, num2 = heapq.heappop(max_heap)
-            delta1 = -delta1
-            delta2 = -delta2
+            delta1 = -heapq.heappop(max_heap)
+            delta2 = -heapq.heappop(max_heap)
             delta = delta1 + delta2
 
-            print(f"{delta1, delta2=}")
-
-            # if delta < 0:
-            #     break
-            
-            # res += delta
-            if delta > 0:
-                res += delta
+            if delta <= 0:
+                break
+            res += delta
         
-        print(f"{res=}, {max_heap=}")
         return res
 
 
