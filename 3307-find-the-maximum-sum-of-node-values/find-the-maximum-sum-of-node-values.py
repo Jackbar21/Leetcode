@@ -6,7 +6,8 @@ class Solution:
         # are connected, which means we can apply on operation on ANY pair of two nodes
         # (u, v) in the graph, NOT just the ones in edges!
         # getDelta = lambda num: (num ^ k) - num
-        max_heap = [num - (num ^ k) for num in nums] # (delta, num)
+        # max_heap = [-getDelta(num) for num in nums] # (delta, num)
+        max_heap = [num - (num ^ k) for num in nums] # Faster O(1) operations!
         heapq.heapify(max_heap)
 
         res = sum(nums)
