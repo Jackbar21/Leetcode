@@ -1,9 +1,12 @@
 class Solution:
     def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
         N = len(colors)
-        self.color = {i: colors[i] for i in range(N)}
-        adj_list = {i: [] for i in range(N)}
-        indegree = {i: 0 for i in range(N)}
+        # self.color = {i: colors[i] for i in range(N)}
+        self.color = colors
+        # adj_list = {i: [] for i in range(N)}
+        # indegree = {i: 0 for i in range(N)}
+        adj_list = [[] for i in range(N)]
+        indegree = [0] * N
         for a, b in edges:
             adj_list[a].append(b)
             indegree[b] += 1
