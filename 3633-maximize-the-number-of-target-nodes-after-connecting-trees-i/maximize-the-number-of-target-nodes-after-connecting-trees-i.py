@@ -27,14 +27,13 @@ class Solution:
         reachable = self.getNodeReachabilities(N, adj_list1, k)
 
         # Step 3: Add max reachability to each node in tree1's already set reachability!
-        return list(map(lambda reachability: reachability + max_reachability, reachable))
+        return [reachability + max_reachability for reachability in reachable]
 
-    
     def getNodeReachabilities(self, node_count, adj_list, max_distance):
         if max_distance == 0:
             return [1] * node_count # Just the node itself!
         elif max_distance < 0:
-            return [0] * node_count
+            return [0] * node_count # No nodes to reach, not even itself!
 
         reachable = []
         for i in range(node_count):
@@ -43,20 +42,15 @@ class Solution:
             while queue:
                 node, distance = queue.popleft()
 
-                #print(f"{distance, max_distance=}")
-                assert distance <= max_distance
+                # assert distance <= max_distance
                 if distance == max_distance:
                     continue # No more exploration!
                 
                 for neigh in adj_list[node]:
-                    if neigh in visited:
-                        continue
-                    visited.add(neigh)
-                    queue.append((neigh, distance + 1))
+                    if neigh not in visited:
+                        visited.add(neigh)
+                        queue.append((neigh, distance + 1))
             
-            # #print(f"{i=}, {visited=}")
             reachable.append(len(visited))
         
-        # #print(f"{max(reachable)=}")
-        # max_reachable = max(reachable)
         return reachable
