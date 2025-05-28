@@ -21,15 +21,15 @@ class Solution:
             adj_list2[v].append(u)
 
         # Step 1: Get node in second tree with maximal number of target nodes with value k - 1.
-        max_reachability = max(self.getNodeReachabilities(M, adj_list2, k - 1))
+        max_reachability = max(self.getNodeReachabilityCounts(M, adj_list2, k - 1))
 
         # Step 2: For each node in first tree, figure out its reachability 
-        reachable = self.getNodeReachabilities(N, adj_list1, k)
+        reachable = self.getNodeReachabilityCounts(N, adj_list1, k)
 
         # Step 3: Add max reachability to each node in tree1's already set reachability!
         return [reachability + max_reachability for reachability in reachable]
 
-    def getNodeReachabilities(self, node_count, adj_list, max_distance):
+    def getNodeReachabilityCounts(self, node_count, adj_list, max_distance):
         if max_distance == 0:
             return [1] * node_count # Just the node itself!
         elif max_distance < 0:
