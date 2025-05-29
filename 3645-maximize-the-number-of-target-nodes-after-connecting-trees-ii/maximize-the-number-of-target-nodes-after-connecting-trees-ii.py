@@ -64,20 +64,20 @@ class Solution:
         # nodes at EVEN depths, and ODD distance away from other nodes at ODD depths.
         # This is similar for nodes at ODD depths.
 
-        print(f"{depth1=}")
-        print(f"{depth2=}")
+        # print(f"{depth1=}")
+        # print(f"{depth2=}")
         sum_even1 = sum(depth1[i] % 2 == 0 for i in range(N))
         sum_odd1 = sum(depth1[i] % 2 == 1 for i in range(N))
 
         sum_even2 = sum(depth2[i] % 2 == 0 for i in range(M))
         sum_odd2 = sum(depth2[i] % 2 == 1 for i in range(M))
 
-        print()
-        print(f"{sum_even1=}")
-        print(f"{sum_odd1=}")
-        print()
-        print(f"{sum_even2=}")
-        print(f"{sum_odd2=}")
+        # print()
+        # print(f"{sum_even1=}")
+        # print(f"{sum_odd1=}")
+        # print()
+        # print(f"{sum_even2=}")
+        # print(f"{sum_odd2=}")
 
         # So then, using same trick as in attempt below, we can take max of `sum_even2`
         # and `sum_odd2` and slap it to reachability of every node in tree 1. This is
@@ -96,10 +96,6 @@ class Solution:
             reachability = sum_even1 if is_even_depth else sum_odd1
             res.append(reachability + max_reachability)
         return res
-
-
-        
-
 
     def maxTargetNodesAttempt(self, edges1: List[List[int]], edges2: List[List[int]]) -> List[int]:
         # This is my first attempt at solving this problem, it does so CORRECTLY but inefficiently.
