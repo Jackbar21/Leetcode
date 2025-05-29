@@ -29,12 +29,12 @@ class Solution:
             return root
 
         # After coding this up, I now realize I can just make ANY node the root...
-        root1 = getNodeWithSmallestIndegree(N, indegree1)
-        root2 = getNodeWithSmallestIndegree(M, indegree2)
+        # root1 = getNodeWithSmallestIndegree(N, indegree1)
+        # root2 = getNodeWithSmallestIndegree(M, indegree2)
         # print(f"{root1=}")
         # print(f"{root2=}")
         # So let's just make 0 the root every time for easier testing
-        # root1 = root2 = 0
+        root1 = root2 = 0
         
         # Now, for each node, we shall compute its DEPTH. This will be relevant
         # for dictating whether two nodes are EVEN or ODD reachability apart!
