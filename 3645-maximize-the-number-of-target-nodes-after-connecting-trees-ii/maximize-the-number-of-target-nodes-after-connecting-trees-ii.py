@@ -3,20 +3,20 @@ class Solution:
         N, M = len(edges1) + 1, len(edges2) + 1
 
         adj_list1 = [[] for _ in range(N)]
-        indegree1 = [0] * N
+        # indegree1 = [0] * N
         for a, b in edges1:
             adj_list1[a].append(b)
             adj_list1[b].append(a)
-            indegree1[a] += 1
-            indegree1[b] += 1
+            # indegree1[a] += 1
+            # indegree1[b] += 1
         
         adj_list2 = [[] for _ in range(M)]
         indegree2 = [0] * M
         for u, v in edges2:
             adj_list2[u].append(v)
             adj_list2[v].append(u)
-            indegree2[u] += 1
-            indegree2[v] += 1
+            # indegree2[u] += 1
+            # indegree2[v] += 1
         
         # Make the root node of each tree the one with SMALLEST indegree!
         def getNodeWithSmallestIndegree(node_count, indegree):
