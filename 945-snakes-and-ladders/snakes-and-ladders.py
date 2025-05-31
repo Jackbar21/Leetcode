@@ -23,25 +23,37 @@ class Solution:
         N = len(board)
         self.board, self.N = board, N
         GOAL_STATE = pow(N, 2)
-        fringe = [(0, 1)] # (cost, curr_square) | UCS, i.e. min_heap
-        visited = set()
-
-        while fringe:
-            cost, curr_square = heapq.heappop(fringe)
+        # fringe = [(0, 1)] # (cost, curr_square) | UCS, i.e. min_heap
+        queue = collections.deque([(0, 1)])
+        # visited = set()
+        best_cost = defaultdict(lambda: float("inf")) # square -> best cost found so far
+        # best_cost[1] = 0
+        
+        # while fringe:
+        #     cost, curr_square = heapq.heappop(fringe)
+        res = float("inf")
+        while queue:
+            cost, curr_square = queue.popleft()
 
             if curr_square == GOAL_STATE:
-                return cost
+                # return cost
+                res = min(res, cost)
+                continue
             
             # assert curr_square not in visited
-            if curr_square in visited:
-                continue # Already visited with a better cost!
-            visited.add(curr_square)
+            # if curr_square in visited:
+            #     continue # Already visited with a better cost!
+            # visited.add(curr_square)
+            if cost >= best_cost[curr_square]:
+                continue
+            best_cost[curr_square] = cost
             
             next_cost = cost + 1
             for next_square in range(curr_square + 1, min(curr_square + 6, GOAL_STATE) + 1):
                 r, c = self.getSquareCoordinates(next_square)
                 final_square = next_square if board[r][c] == -1 else board[r][c]
                 
-                heapq.heappush(fringe, (next_cost, final_square))
+                # heapq.heappush(fringe, (next_cost, final_square))
+                queue.append((next_cost, final_square))
         
-        return -1
+        return -1 if res == float("inf") else res
