@@ -41,7 +41,8 @@ class Solution:
             print(f"{cost=}, {curr_square=}")
 
             if curr_square == GOAL_STATE:
-                res = min(res, cost)
+                # res = min(res, cost)
+                return cost
                 continue
             
             # assert curr_square not in visited
