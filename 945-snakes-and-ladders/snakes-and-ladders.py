@@ -22,11 +22,13 @@ class Solution:
     def snakesAndLadders(self, board: List[List[int]]) -> int:
         N = len(board)
         self.board, self.N = board, N
-        GOAL_STATE = pow(N, 2)
+        N_SQUARED = pow(N, 2)
+        GOAL_STATE = N_SQUARED 
         # fringe = [(0, 1)] # (cost, curr_square) | UCS, i.e. min_heap
         queue = collections.deque([(0, 1)])
         # visited = set()
-        best_cost = defaultdict(lambda: float("inf")) # square -> best cost found so far
+        # best_cost = defaultdict(lambda: float("inf")) # square -> best cost found so far
+        best_cost = [float("inf")] * (N_SQUARED + 1)
         # best_cost[1] = 0
         
         # while fringe:
@@ -36,7 +38,7 @@ class Solution:
             cost, curr_square = queue.popleft()
 
             if curr_square == GOAL_STATE:
-                # return cost
+                return cost
                 res = min(res, cost)
                 continue
             
