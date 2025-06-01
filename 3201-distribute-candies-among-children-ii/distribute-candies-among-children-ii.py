@@ -1,5 +1,7 @@
 class Solution:
     def distributeCandies(self, n: int, limit: int) -> int:
+        return sum(max(min(limit, n - c1) - max(0, n - c1 - limit) + 1, 0) for c1 in range(min(n, limit) + 1))
+
         # Notice that when we pick number of candies for first and second child, call these c1 & c2
         # respectively, the third is left with n - c1 - c2 candies, where it must be that
         # n - c1 - c2 >= 0.
