@@ -23,8 +23,9 @@ class Solution:
             # Case 1: Left neighbor
             if index > 0 and ratings[index - 1] < rating:
                 case1 = 1 + dp(index - 1)
-                if res < case1:
-                    res = case1
+                # if res < case1:
+                #     res = case1
+                res = case1
             
             # Case 2: Right neighbor
             if index + 1 < N and ratings[index + 1] < rating:
