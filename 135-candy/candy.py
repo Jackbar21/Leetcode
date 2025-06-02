@@ -2,11 +2,11 @@ class Solution:
     def candy(self, ratings: List[int]) -> int:
         N = len(ratings)
 
-        memo = {}
+        memo = [-1] * N
         def dp(index):
-            if index in memo:
+            if memo[index] != -1:
                 return memo[index]
-            
+
             # Neighbors will be adjacent indices of node whose ratings are SMALLER.
             # Since if a neighbor's rating is smaller, that means node at current
             # index needs MORE candy than them. So we'll look at both adjacent neighbors,
