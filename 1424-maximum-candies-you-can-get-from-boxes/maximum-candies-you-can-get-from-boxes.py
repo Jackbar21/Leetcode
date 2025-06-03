@@ -34,6 +34,9 @@ class Solution:
             
             for box in containedBoxes[box_index]:
                 # print(f"containedBox={box}")
+                if box in visited:
+                    continue
+
                 if status[box] == OPEN:
                     queue.appendleft((box, False))
                 else:
