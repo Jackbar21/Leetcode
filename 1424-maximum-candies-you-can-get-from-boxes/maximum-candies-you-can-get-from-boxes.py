@@ -4,15 +4,15 @@ class Solution:
 
         queue = collections.deque((box, False) for box in initialBoxes) # (box_index, seen_twice)
         # visited = set(initialBoxes)
-        visited = set()
+        # visited = set()
         max_candy = 0
 
         while queue:
             box_index, seen_twice = queue.popleft()
 
             # print(f"{box_index=}, {max_candy=}")
-            if box_index in visited:
-                continue
+            # if box_index in visited:
+            #     continue
 
             if status[box_index] == CLOSED:
                 if seen_twice:
@@ -24,7 +24,7 @@ class Solution:
                     queue.append((box_index, True))
                     continue
     
-            visited.add(box_index)
+            # visited.add(box_index)
             candy = candies[box_index]
             max_candy += candy
 
@@ -34,8 +34,8 @@ class Solution:
             
             for box in containedBoxes[box_index]:
                 # print(f"containedBox={box}")
-                if box in visited:
-                    continue
+                # if box in visited:
+                #     continue
 
                 if status[box] == OPEN:
                     queue.appendleft((box, False))
