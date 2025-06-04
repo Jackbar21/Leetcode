@@ -5,14 +5,14 @@ class Solution:
             return word
         
         ALPHABET = "abcdefghijklmnopqrstuvwxyz"
-        freq_dict = {letter: 0 for letter in ALPHABET}
-        indices_dict = {letter: [] for letter in ALPHABET}
+        biggest_letter = ""
+        indices = []
         for index, letter in enumerate(word):
-            freq_dict[letter] += 1
-            indices_dict[letter].append(index)
-
-        biggest_letter = max(letter for letter, freq in freq_dict.items() if freq > 0)
-        indices = indices_dict[biggest_letter]
+            if letter > biggest_letter:
+                biggest_letter = letter
+                indices = [index]
+            elif letter == biggest_letter:
+                indices.append(index)
 
         res = ""
         for index in indices:
