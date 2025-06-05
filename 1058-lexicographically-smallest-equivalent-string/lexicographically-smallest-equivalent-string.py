@@ -6,11 +6,11 @@ class Solution:
 
         # Step 1: Create graph out of letter equality relationship
         # (e.g. edge from letter X to letter Y means X == Y)
-        adj_list = {letter: set() for letter in ALPHABET}
+        adj_list = {letter: [] for letter in ALPHABET}
         for i in range(N):
             letter1, letter2 = s1[i], s2[i]
-            adj_list[letter1].add(letter2)
-            adj_list[letter2].add(letter1)
+            adj_list[letter1].append(letter2)
+            adj_list[letter2].append(letter1)
         
         # Step 2: There are a constant amount of English lowercase letters, namely 26.
         # For each such letter, run a bfs traversal to find the lexicographically SMALLEST
@@ -27,8 +27,8 @@ class Solution:
                 letter = queue.pop()
                 if letter < smallest_letter:
                     smallest_letter = letter
-                # if smallest_letter == "a":
-                #     break
+                if smallest_letter == "a":
+                    break
                 
                 for neigh in adj_list[letter]:
                     if neigh not in visited:
