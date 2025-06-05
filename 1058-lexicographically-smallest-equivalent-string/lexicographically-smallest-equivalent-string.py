@@ -27,15 +27,15 @@ class Solution:
                 letter = queue.pop()
                 if letter < smallest_letter:
                     smallest_letter = letter
+                if smallest_letter == "a":
+                    break
                 
                 for neigh in adj_list[letter]:
-                    if neigh in visited:
-                        continue
-                    visited.add(neigh)
-                    queue.append(neigh)
+                    if neigh not in visited:
+                        visited.add(neigh)
+                        queue.append(neigh)
             
             # Update res once BFS is finished!
             best_letter[source_letter] = smallest_letter
         
-        print(f"{best_letter=}")
         return "".join(best_letter[letter] for letter in baseStr)
