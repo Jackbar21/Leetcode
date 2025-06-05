@@ -17,8 +17,9 @@ class Solution:
         # letter it can map to.
         # NOTE: We run a BFS from each letter and not leverage DP amongst one another, 
         # since this graph contains CYCLES. But since only O(1) unique letters, this is okay!
-        best_letter = {letter: letter for letter in ALPHABET}
-        for source_letter in ALPHABET:
+        unique_letters = set(baseStr)
+        best_letter = {letter: letter for letter in unique_letters}
+        for source_letter in unique_letters:
             # Run BFS
             queue = collections.deque([source_letter])
             visited = set([source_letter])
