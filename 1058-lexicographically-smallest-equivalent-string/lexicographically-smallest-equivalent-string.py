@@ -27,8 +27,8 @@ class Solution:
                 letter = queue.pop()
                 if letter < smallest_letter:
                     smallest_letter = letter
-                if smallest_letter == "a":
-                    break
+                # if smallest_letter == "a":
+                #     break
                 
                 for neigh in adj_list[letter]:
                     if neigh not in visited:
