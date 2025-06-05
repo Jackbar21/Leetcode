@@ -6,7 +6,7 @@ class Solution:
 
         # Step 1: Create graph out of letter equality relationship
         # (e.g. edge from letter X to letter Y means X == Y)
-        adj_list = {letter: set() for letter in ALPHABET}
+        adj_list = defaultdict(set)
         for i in range(N):
             letter1, letter2 = s1[i], s2[i]
             adj_list[letter1].add(letter2)
