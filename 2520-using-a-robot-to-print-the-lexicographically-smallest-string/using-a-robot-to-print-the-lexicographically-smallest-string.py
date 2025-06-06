@@ -1,10 +1,6 @@
 class Solution:
     def robotWithString(self, s: str) -> str:
-        # if s is empty, i'm finished
-        # if t is empty, I MUST remove letter from s
-        # if s[0] <= t[-1], then perform first operation. else, second operation
-
-        suffix_min = []
+        suffix_min = [] # suffix_min[i] == min(s[i:])
         min_letter = s[-1]
         for letter in reversed(s):
             if letter < min_letter:
@@ -30,3 +26,6 @@ class Solution:
                 queue.appendleft((i, letter))
         
         return "".join(res) + "".join(t[::-1])
+
+# 1. Pop START of s, and push to END of t
+# 2. Pop from END of t, push to END of res
