@@ -1,24 +1,22 @@
 class Solution:
     def robotWithString(self, s: str) -> str:
-        # p="", s="ac", t="b"
-
         # if s is empty, i'm finished
         # if t is empty, I MUST remove letter from s
         # if s[0] <= t[-1], then perform first operation. else, second operation
 
-        suffix_min = collections.deque()
+        suffix_min = []
         min_letter = s[-1]
-        for letter in s[::-1]:
-            min_letter = min(min_letter, letter)
-            suffix_min.appendleft(min_letter)
+        for letter in reversed(s):
+            if letter < min_letter:
+                min_letter = letter
+            suffix_min.append(min_letter)
+        suffix_min = suffix_min[::-1]
 
         s = collections.deque((i, letter) for i, letter in enumerate(s))
         t = []
         res = []
 
-        while len(s) > 0:
-            # print(f"{s=}, {t=}, {res=}")
-            # print(f"p={''.join(res)}, s={''.join(letter for i, letter in s)}, t={''.join(t)}")
+        while s:
             i, letter = s.popleft()
             if len(t) == 0:
                 t.append(letter)
@@ -30,13 +28,5 @@ class Solution:
             else:
                 res.append(t.pop())
                 s.appendleft((i, letter))
-            # if s[0] <= t[-1]:
-            #     t.append(s.popleft())
-            # else:
-            #     res.append(t.pop())
-            
         
-        # res += t[::-1]
-        while t:
-            res.append(t.pop())
-        return "".join(res)
+        return "".join(res) + "".join(t[::-1])
