@@ -12,12 +12,12 @@ class Solution:
             suffix_min.append(min_letter)
         suffix_min = suffix_min[::-1]
 
-        s = collections.deque((i, letter) for i, letter in enumerate(s))
+        queue = collections.deque(enumerate(s))
         t = []
         res = []
 
-        while s:
-            i, letter = s.popleft()
+        while queue:
+            i, letter = queue.popleft()
             if len(t) == 0:
                 t.append(letter)
                 continue
@@ -27,6 +27,6 @@ class Solution:
                 t.append(letter)
             else:
                 res.append(t.pop())
-                s.appendleft((i, letter))
+                queue.appendleft((i, letter))
         
         return "".join(res) + "".join(t[::-1])
