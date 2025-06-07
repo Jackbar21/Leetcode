@@ -9,33 +9,13 @@ class Solution:
                     return letter
             raise Exception("No Smallest Letter")
 
-        deleted_indices = []
+        deleted_indices = set()
         for i, char in enumerate(s):
             if char == "*":
                 smallest_letter = getSmallestLetter()
-                deleted_indices.append(d[smallest_letter].pop())
-                deleted_indices.append(i) # Don't include stars in solution!
+                deleted_indices.add(d[smallest_letter].pop())
                 continue
             
             d[char].append(i)
         
-        deleted_indices.sort()
-        # print(f"{deleted_indices=}")
-        N = len(deleted_indices)
-        if N == 0:
-            return s
-        arr_index = 0
-        arr_val = deleted_indices[arr_index]
-        res = []
-        for i, char in enumerate(s):
-            if i == arr_val:
-                arr_index += 1
-                if arr_index < N:
-                    arr_val = deleted_indices[arr_index]
-                continue
-            
-            res.append(char)
-        
-        return "".join(res)
-
-
+        return "".join(char for i, char in enumerate(s) if char != "*" and i not in deleted_indices)
