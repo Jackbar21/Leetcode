@@ -1,7 +1,7 @@
 class Solution:
     def clearStars(self, s: str) -> str:
         ALPHABET = "abcdefghijklmnopqrstuvwxyz"
-        d = {letter: [] for letter in ALPHABET} # -1 means NO index!
+        d = {letter: [] for letter in ALPHABET}
 
         def getSmallestLetter():
             for letter in ALPHABET:
