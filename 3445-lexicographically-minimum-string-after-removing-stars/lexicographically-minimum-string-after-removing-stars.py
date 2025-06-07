@@ -4,10 +4,11 @@ class Solution:
         d = {letter: [] for letter in ALPHABET} # -1 means NO index!
 
         def getSmallestLetter():
-            for letter in ALPHABET:
-                if d[letter]:
-                    return letter
-            raise Exception("No Smallest Letter")
+            # for letter in ALPHABET:
+            #     if d[letter]:
+            #         return letter
+            # raise Exception("No Smallest Letter")
+            return next(letter for letter in d if d[letter])
 
         deleted_indices = set()
         for i, char in enumerate(s):
