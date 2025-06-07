@@ -3,14 +3,16 @@ class Solution:
         ALPHABET = "abcdefghijklmnopqrstuvwxyz"
         d = {letter: [] for letter in ALPHABET} # -1 means NO index!
 
-        # def getSmallestLetter():
-        #     for letter in ALPHABET:
-        #         if len
+        def getSmallestLetter():
+            for letter in ALPHABET:
+                if d[letter]:
+                    return letter
+            raise Exception("No Smallest Letter")
 
         deleted_indices = set()
         for i, char in enumerate(s):
             if char == "*":
-                smallest_letter = min(letter for letter in ALPHABET if len(d[letter]) > 0)
+                smallest_letter = getSmallestLetter()
                 deleted_indices.add(d[smallest_letter].pop())
                 continue
             
