@@ -27,5 +27,6 @@ class Solution:
             res.append(num)
             num *= 10
             for next_num in range(num + 9, num - 1, -1):
-                stack.append(next_num)
+                if next_num <= n:
+                    stack.append(next_num)
         return res
