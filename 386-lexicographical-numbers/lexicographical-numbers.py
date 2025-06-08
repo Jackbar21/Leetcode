@@ -7,9 +7,6 @@ class Solution:
         stack = [9, 8, 7, 6, 5, 4, 3, 2, 1]
         while stack:
             num = stack.pop()
-            # if num > n:
-            #     continue
-            
             res.append(num)
 
             num *= 10
