@@ -1,7 +1,5 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
-        return sorted(range(1, n + 1), key = lambda num: str(num))
-
         res = []
         stack = [9, 8, 7, 6, 5, 4, 3, 2, 1]
         while stack:
