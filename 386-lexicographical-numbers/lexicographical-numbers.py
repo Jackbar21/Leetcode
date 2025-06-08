@@ -1,11 +1,14 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
+        if n < 10:
+            return list(range(1, n + 1))
+
         res = []
         stack = [9, 8, 7, 6, 5, 4, 3, 2, 1]
         while stack:
             num = stack.pop()
-            if num > n:
-                continue
+            # if num > n:
+            #     continue
             
             res.append(num)
 
