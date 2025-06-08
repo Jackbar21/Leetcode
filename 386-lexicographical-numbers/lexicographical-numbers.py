@@ -1,12 +1,15 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
-        res = []
+        res = [0] * n
+        index = 0
 
         def backtrack(num):
+            nonlocal index
             if num > n:
                 return
             
-            res.append(num)
+            res[index] = num
+            index += 1
 
             num *= 10
             for _ in range(10):
