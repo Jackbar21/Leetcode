@@ -1,21 +1,31 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
-        res = [0] * n
-        index = 0
+        res = []
 
-        def backtrack(num):
-            nonlocal index
-            if num > n:
-                return
+        # def backtrack(num):
+        #     if num > n:
+        #         return
             
-            res[index] = num
-            index += 1
+        #     res.append(num)
 
-            num *= 10
-            for _ in range(10):
-                backtrack(num)
-                num += 1
+        #     num *= 10
+        #     for _ in range(10):
+        #         backtrack(num)
+        #         num += 1
         
-        for base_digit in range(1, 9 + 1):
-            backtrack(base_digit)
+        
+        # for base_digit in range(1, 9 + 1):
+        #     backtrack(base_digit)
+        # return res
+
+        stack = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+        while stack:
+            num = stack.pop()
+            if num > n:
+                continue
+            
+            res.append(num)
+            num *= 10
+            for next_num in range(num + 9, num - 1, -1):
+                stack.append(next_num)
         return res
