@@ -10,15 +10,6 @@ class Solution:
         for letter in s:
             d[letter] += 1
         
-        a1, a2 = float("-inf"), float("inf")
-        for freq in d.values():
-            if freq % 2:
-                if freq > a1:
-                    a1 = freq
-            elif freq < a2:
-                a2 = freq
-        return a1 - a2
-        
         # Step 2: Get max odd frequency
         a1 = max(freq for freq in d.values() if freq % 2 == 1)
 
