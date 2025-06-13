@@ -5,9 +5,9 @@ class Solution:
             return 0
 
         nums.sort()
-        
+
         min_diff = 0
-        max_diff = max(nums) - min(nums)
+        max_diff = nums[-1] - nums[0]
 
         l, r = min_diff, max_diff
         while l <= r:
