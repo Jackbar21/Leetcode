@@ -16,7 +16,6 @@ class Solution:
         # We do so by finding first non-9 digit, and converting those into 9s!
         digit_to_replace = next(digit for digit in str_num if digit != "9")
         a = int("".join(digit if digit != digit_to_replace else "9" for digit in str_num))
-        print(f"{a=}")
 
         # Step 2: Find 'b', namely SMALLEST possible number
         # Since we cannot have leading zeroes, we have two possible cases:
@@ -33,7 +32,5 @@ class Solution:
                     digit_to_replace = digit
                     break
             b = int("".join(digit if digit != digit_to_replace else "0" for digit in str_num))
-
-        print(f"{b=}")
 
         return a - b
