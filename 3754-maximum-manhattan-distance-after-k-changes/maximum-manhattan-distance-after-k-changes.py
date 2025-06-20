@@ -1,7 +1,6 @@
 class Solution:
     def maxDistance(self, s: str, k: int) -> int:
         NORTH, SOUTH, EAST, WEST = "N", "S", "E", "W"
-        DIRECTIONS = [NORTH, SOUTH, EAST, WEST]
         combinations = [
             (NORTH, EAST),
             (NORTH, WEST),
@@ -17,7 +16,6 @@ class Solution:
 
                 if direction == y_direction or direction == x_direction:
                     dist += 1
-                    continue
                 elif changed < k:
                     changed += 1
                     dist += 1
