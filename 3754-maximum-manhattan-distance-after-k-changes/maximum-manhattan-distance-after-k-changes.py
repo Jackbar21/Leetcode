@@ -13,7 +13,6 @@ class Solution:
             changed = 0
             dist = 0
             for direction in s:
-
                 if direction == y_direction or direction == x_direction:
                     dist += 1
                 elif changed < k:
