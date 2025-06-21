@@ -18,8 +18,7 @@ class Solution:
                 # Case 2: Delete characters until inside range 
                 case2 = (
                     float("inf") if freq < base else
-                    0 if base <= freq <= base + k else
-                    freq - (base + k)
+                    max(0, freq - (base + k))
                 )
 
                 need_delete += case1 if case1 < case2 else case2
