@@ -1,9 +1,9 @@
 class Solution:
     def minimumDeletions(self, word: str, k: int) -> int:
-        freqs = [0] * 26
-        ORD_A = ord("a")
+        d = defaultdict(int)
         for letter in word:
-            freqs[ord(letter) - ORD_A] += 1
+            d[letter] += 1
+        freqs = d.values()
         
         res = float("inf")
         for base in range(max(freqs) + 1):
