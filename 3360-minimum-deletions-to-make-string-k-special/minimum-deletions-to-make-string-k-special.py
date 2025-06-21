@@ -3,7 +3,7 @@ class Solution:
         d = defaultdict(int)
         for letter in word:
             d[letter] += 1
-        freqs = d.values()
+        freqs = list(d.values())
         
         res = float("inf")
         for base in range(max(freqs) + 1):
