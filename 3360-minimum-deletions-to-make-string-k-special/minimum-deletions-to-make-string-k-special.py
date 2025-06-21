@@ -7,7 +7,7 @@ class Solution:
         
         res = float("inf")
         for base in range(max(freqs) + 1):
-            # Every number's freq must be in range [base, base + k]
+            # Every letter's freq must be in range [base, base + k]
             need_delete = 0
             for freq in freqs:
                 # Only two cases for each letter (since we cannot add letters)
