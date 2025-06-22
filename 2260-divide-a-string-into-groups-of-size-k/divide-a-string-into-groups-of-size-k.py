@@ -3,11 +3,12 @@ class Solution:
         res = []
         cur = []
         for letter in s:
-            if len(cur) == k:
+            if len(cur) < k:
+                cur.append(letter)
+            else:
+                assert len(cur) == k
                 res.append("".join(cur))
-                cur = []
-            
-            cur.append(letter)
+                cur = [letter]
         
         res.append("".join(cur) + fill * (k - len(cur)))
         return res
