@@ -30,8 +30,7 @@ class Solution:
 
             # Update to next num
             if min(base_k_num) == max_digit:
-                base_k_num.append("0")
-                base_k_num.append("1")
+                base_k_num.extend(["0", "1"])
                 base_k_num[0] = "1"
                 for i in range(1, len(base_k_num) - 2):
                     base_k_num[i] = "0"
