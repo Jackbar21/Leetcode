@@ -30,11 +30,12 @@ class Solution:
 
             # Update to next num
             if min(base_k_num) == max_digit:
-                # base_k_num = ["1"] + ["0"] * len(base_k_num) + ["1"]
-                base_k_num.extend(["1"] * 2)
-                for i in range(len(base_k_num) - 1):
-                    base_k_num[i] = "0"
-                base_k_num[0] = "1"
+                base_k_num = ["1"] + ["0"] * len(base_k_num) + ["1"]
+                # Since updating list reference, need to do so for odd/even list as well!
+                if chose_odd:
+                    odd = base_k_num
+                else:
+                    even = base_k_num
             else:
                 i = (len(base_k_num) - 1) // 2
                 j = len(base_k_num) // 2
@@ -47,10 +48,4 @@ class Solution:
                 base_k_num[i] = next_digit
                 base_k_num[j] = next_digit
             
-            # if chose_odd:
-            #     odd = base_k_num
-            # else:
-            #     even = base_k_num
-            
-                
         raise Exception("Unreachable Code")
