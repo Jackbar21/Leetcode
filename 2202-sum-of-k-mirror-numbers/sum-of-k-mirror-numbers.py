@@ -30,12 +30,11 @@ class Solution:
 
             # Update to next num
             if min(base_k_num) == max_digit:
-                base_k_num = ["1"] + ["0"] * len(base_k_num) + ["1"]
-                # Since updating list reference, need to do so for odd/even list as well!
-                if chose_odd:
-                    odd = base_k_num
-                else:
-                    even = base_k_num
+                base_k_num.append("0")
+                base_k_num.append("1")
+                base_k_num[0] = "1"
+                for i in range(1, len(base_k_num) - 2):
+                    base_k_num[i] = "0"
             else:
                 i = (len(base_k_num) - 1) // 2
                 j = len(base_k_num) // 2
