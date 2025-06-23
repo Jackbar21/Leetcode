@@ -16,8 +16,7 @@ class Solution:
         res = 0
         found = 0
         while True:
-            chose_odd = len(odd) < len(even)
-            base_k_num = odd if chose_odd else even
+            base_k_num = odd if len(odd) < len(even) else even
 
             # Check if num is valid
             if base_k_num[0] != "0": # No trailing zeros allowed
