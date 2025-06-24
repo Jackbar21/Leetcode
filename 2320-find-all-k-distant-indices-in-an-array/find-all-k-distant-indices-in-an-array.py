@@ -9,6 +9,8 @@ class Solution:
                 line_sweep[start if start >= 0 else 0] += 1
                 line_sweep[end if end <= N else N] -= 1
         
+        print(f"{line_sweep=}")
+        
         res = []
         active = 0
         for i, delta in enumerate(line_sweep):
