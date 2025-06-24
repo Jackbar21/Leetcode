@@ -1,5 +1,13 @@
 class Solution:
     def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+        unique_indices = set()
+        for i in range(len(nums)):
+            if nums[i] == key:
+                for index in range(max(0, i - k), min(len(nums), i + k + 1)):
+                    unique_indices.add(index)
+        return sorted(unique_indices)
+
+
         N = len(nums)
         line_sweep = [0] * (N + 1)
         for i, num in enumerate(nums):
