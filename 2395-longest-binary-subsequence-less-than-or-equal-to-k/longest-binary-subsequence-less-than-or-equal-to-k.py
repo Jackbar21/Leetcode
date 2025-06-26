@@ -1,10 +1,10 @@
 class Solution:
     def longestSubsequence(self, s: str, k: int) -> int:
-        self.s, self.k, self.memo = s, k, {}
+        self.s, self.k, self.memo = s, k, [-1] * (len(s) + 1)
         return self.dp(0)
 
     def dp(self, i):
-        if i in self.memo:
+        if self.memo[i] != -1:
             return self.memo[i]
         s, k = self.s, self.k
 
