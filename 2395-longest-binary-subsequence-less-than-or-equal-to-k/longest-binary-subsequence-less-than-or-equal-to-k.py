@@ -1,10 +1,10 @@
 class Solution:
     def longestSubsequence(self, s: str, k: int) -> int:
-        self.s, self.k, self.memo = s, k, [-1] * (len(s) + 1)
+        self.s, self.k, self.memo = s, k, {}
         return self.dp(0)
 
     def dp(self, i):
-        if self.memo[i] != -1:
+        if i in self.memo:
             return self.memo[i]
         s, k = self.s, self.k
 
@@ -25,19 +25,16 @@ class Solution:
         #   This means we must find largest number of bits such that we are still <= k
         #   We can do this by binary searching for the rightmost index 'r' such that s[i..r]
         #   when converted into decimal is still <= k
-        l, r = i, N - 1
-        while l <= r:
-            mid = (l + r) // 2
-            num = int(s[i:mid+1], 2)
-            if num <= k:
-                # Valid solution, look for potentially better ones
-                l = mid + 1
-            else:
-                # Invalid solution, look for smaller (but potentially valid) ones
-                r = mid - 1
-        # We have found rightmost index 'r' such that s[i..r] is <= k in decimal,
-        # hence max number of usable characters is simply r - i + 1!
-        case2 = r - i + 1
+        length = 1
+        num = 1
+        for index in range(i + 1, N):
+            bit = s[index]
+            new_num = (num * 2) + int(bit)
+            if new_num > k:
+                break
+            num = new_num
+            length += 1
+        case2 = length
         
         res = case1 if case1 > case2 else case2
         self.memo[i] = res
