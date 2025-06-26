@@ -27,8 +27,7 @@ class Solution:
         #   when converted into decimal is still <= k
         length = 1
         num = 1
-        for index in range(i + 1, N):
-            bit = s[index]
+        for bit in s[i + 1:]:
             new_num = (num * 2) + int(bit)
             if new_num > k:
                 break
