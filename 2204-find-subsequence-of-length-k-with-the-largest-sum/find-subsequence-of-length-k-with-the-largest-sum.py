@@ -6,4 +6,4 @@ class Solution:
 
         res = [heapq.heappop(max_heap) for _ in range(k)]
         res.sort(key = lambda pair: pair[INDEX])
-        return [-pair[NUM] for pair in res]
+        return [-num for num, _ in res]
