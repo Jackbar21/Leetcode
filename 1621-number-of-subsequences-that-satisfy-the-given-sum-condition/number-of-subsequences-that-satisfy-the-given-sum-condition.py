@@ -4,13 +4,12 @@ class Solution:
         MOD = pow(10, 9) + 7
         nums.sort()
 
-        # Find rightmost index that can form a subsequence of length 1 from itself at
-        # very minimum.
+        # Only consider numbers that are <= target in first place, since all numbers positive!
         l, r = 0, N - 1
         while l <= r:
             mid = (l + r) // 2
             num = nums[mid]
-            if num + num <= target:
+            if num <= target:
                 # Valid solution, look for potentially even more rightmost ones!
                 l = mid + 1
             else:
@@ -19,19 +18,18 @@ class Solution:
         max_index = r
 
         res = 0
-        for i in range(max_index + 1):
+        for i, min_num in enumerate(nums):
             # Since we're starting at index i, and nums is sorted,
             # 'min_num' will be smallest number. Thus, we want min_num + max_num <= target,
             # for any subsequence such that max_num is largest number in that subsequence.
             # This directly implies that max_num <= target - num. We can binary search
             # to find the rightmost index j such that nums[j] <= target - min_num, where i <= j.
-            min_num = nums[i]
             upper_limit = target - min_num
             if min_num > upper_limit:
                 # No more solutions possible
                 break
 
-            l, r = i, N - 1
+            l, r = i, max_index
             rightmost = None
             while l <= r:
                 mid = (l + r) // 2
