@@ -32,10 +32,9 @@ class Solution:
             # Hence, nums[i+1..r] is the range of numbers for which we can either keep
             # or discard each element, for a total of 2 ^ (rightmost - (i + 1) + 1) total
             # combinations.
-            res += pow(2, r - i, MOD)
-            res %= MOD
+            res = (res + pow(2, r - i, MOD)) % MOD
         
-        return res % MOD
+        return res
     
     @cache
     def dp(self, i):
