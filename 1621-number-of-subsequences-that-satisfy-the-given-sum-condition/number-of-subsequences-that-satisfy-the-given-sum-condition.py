@@ -3,7 +3,6 @@ class Solution:
         N = len(nums)
         MOD = pow(10, 9) + 7
         nums.sort()
-        # return self.dp(0)
 
         res = 0
         for i, min_num in enumerate(nums):
@@ -16,6 +15,7 @@ class Solution:
             if min_num > upper_limit:
                 # No more solutions possible
                 break
+
             l, r = i, N - 1
             rightmost = None
             while l <= r:
@@ -28,14 +28,12 @@ class Solution:
                     # Invalid num, look for smaller but potentially valid ones!
                     r = mid - 1
             
-            assert rightmost is not None or r == i
-            assert rightmost >= i
-            #print(f"{i=}, {rightmost=}, {pow(2, rightmost - i)=}")
-            
-            # Here, we have any subsequence in nums[i..rightmost] is valid where we pick index i
-            # Hence, nums[i+1..rightmost] is the range of numbers for which we can either keep
-            # or discard each element, for a total of 2 ^ (rightmost - (i + 1) + 1) total combinations.
-            res += pow(2, rightmost - i)
+            # Here, we have any subsequence in nums[i..r] is valid where we pick index i
+            # Hence, nums[i+1..r] is the range of numbers for which we can either keep
+            # or discard each element, for a total of 2 ^ (rightmost - (i + 1) + 1) total
+            # combinations.
+            res += pow(2, r - i, MOD)
+            res %= MOD
         
         return res % MOD
     
