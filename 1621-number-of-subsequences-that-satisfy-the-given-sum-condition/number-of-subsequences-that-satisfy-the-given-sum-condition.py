@@ -17,12 +17,10 @@ class Solution:
                 break
 
             l, r = i, N - 1
-            rightmost = None
             while l <= r:
                 mid = (l + r) // 2
                 if nums[mid] <= upper_limit:
                     # Valid num, look for even better (rightmost) ones!
-                    rightmost = mid
                     l = mid + 1
                 else:
                     # Invalid num, look for smaller but potentially valid ones!
