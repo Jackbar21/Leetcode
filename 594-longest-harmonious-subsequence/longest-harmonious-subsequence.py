@@ -3,7 +3,6 @@ class Solution:
         d = {}
         for num in nums:
             d[num] = d.get(num, 0) + 1
-        print(f"{d=}")
 
         # For each unique number, treat it as the min number, and figure out longest
         # possible subsequence using that as minimum value
