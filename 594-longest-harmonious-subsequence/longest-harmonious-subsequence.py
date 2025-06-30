@@ -13,7 +13,6 @@ class Solution:
             if (num + 1) not in d:
                 continue
             
-            print(f"{num=}, {num+1=}")
             count = d[num] + d[num + 1]
             if res < count:
                 res = count
