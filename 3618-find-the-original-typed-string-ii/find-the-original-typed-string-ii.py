@@ -36,6 +36,7 @@ class Solution:
         N = len(freq)
         if N >= k:
             return total_possibilities
+
         dp = [[0] * k for _ in range(N + 1)]
 
         # Base Case 1: (Remaining Count == 0)
