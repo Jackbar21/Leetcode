@@ -26,13 +26,3 @@ class Solution:
             half_len //= 2
         
         return chr(ord("a") + (change_count % 26))
-
-
-# a                 0
-# a|b               1
-# ab|bc             3
-# abbc|bccd         3
-# abbcbccd|bccdcdde 11
-
-# If k == 1, return "a". Otherwise, assume starting at "aa" or "ab" depending on operations[0],
-# so that length of string is thus ALWAYS EVEN.
