@@ -8,7 +8,6 @@ class FindSumPairs:
             freqs[num2] = freqs.get(num2, 0) + 1
         self.freqs = freqs
 
-
     def add(self, index: int, val: int) -> None:
         nums2, freqs = self.nums2, self.freqs
 
@@ -29,8 +28,4 @@ class FindSumPairs:
         # Hence we can loop through each number in nums1, and use our freqs
         # dictionary to check if needed number exists (and if so, add to count
         # the number of times that number exists in nums2!)
-        res = 0
-        for num1 in nums1:
-            desired_num2 = tot - num1
-            res += freqs.get(desired_num2, 0)
-        return res
+        return sum(freqs.get(tot - num1, 0) for num1 in nums1)
