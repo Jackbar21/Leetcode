@@ -1,12 +1,11 @@
 class FindSumPairs:
-
     def __init__(self, nums1: List[int], nums2: List[int]):
         self.nums1 = nums1
         self.nums2 = nums2
 
-        freqs = defaultdict(int)
+        freqs = {}
         for num2 in nums2:
-            freqs[num2] += 1
+            freqs[num2] = freqs.get(num2, 0) + 1
         self.freqs = freqs
 
 
@@ -18,8 +17,9 @@ class FindSumPairs:
         freqs[num] -= 1
 
         # Update new number
-        nums2[index] += val
-        freqs[num + val] += 1
+        new_num = num + val
+        nums2[index] = new_num
+        freqs[new_num] = freqs.get(new_num, 0) + 1
 
     def count(self, tot: int) -> int:
         nums1, freqs = self.nums1, self.freqs
@@ -32,6 +32,5 @@ class FindSumPairs:
         res = 0
         for num1 in nums1:
             desired_num2 = tot - num1
-            assert (count := freqs[desired_num2]) >= 0
-            res += count
+            res += freqs.get(desired_num2, 0)
         return res
