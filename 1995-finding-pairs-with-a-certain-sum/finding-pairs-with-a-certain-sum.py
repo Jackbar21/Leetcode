@@ -28,4 +28,7 @@ class FindSumPairs:
         # Hence we can loop through each number in nums1, and use our freqs
         # dictionary to check if needed number exists (and if so, add to count
         # the number of times that number exists in nums2!)
-        return sum(freqs.get(tot - num1, 0) for num1 in nums1)
+        res = 0
+        for num1 in nums1:
+            res += freqs.get(tot - num1, 0)
+        return res
