@@ -11,7 +11,7 @@ class Solution:
         for day in range(events[0][0], max_end + 1):
             while index < N:
                 start, end = events[index]
-                if start != day:
+                if day < start:
                     break
                 heapq.heappush(choices, (end, start))
                 index += 1
