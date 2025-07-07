@@ -1,24 +1,21 @@
 class Solution:
     def maxEvents(self, events: List[List[int]]) -> int:
-        d = {}
-        min_start = float("inf")
-        max_end = float("-inf")
-        for start, end in events:
-            if min_start > start:
-                min_start = start
-            if max_end < end:
-                max_end = end
-            
-            if start not in d:
-                d[start] = []
-            d[start].append((start, end))
+        N = len(events)
+        events.sort()
+
+        choices = [] # min_heap [(end, start)]
+        min_start = min(start for start, end in events)
+        max_end = max(end for start, end in events)
 
         res = 0
         index = 0
-        choices = [] # min_heap [(end, start)]
         for day in range(min_start, max_end + 1):
-            for start, end in d.get(day, []):
+            while index < N:
+                start, end = events[index]
+                if start != day:
+                    break
                 heapq.heappush(choices, (end, start))
+                index += 1
 
             while choices:
                 end, start = heapq.heappop(choices)
