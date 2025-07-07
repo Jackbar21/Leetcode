@@ -1,20 +1,21 @@
 class Solution:
     def maxEvents(self, events: List[List[int]]) -> int:
-        N = len(events)
-        events.sort()
+        min_start = float("inf")
+        max_end = float("-inf")
+        d = defaultdict(list)
+        for start, end in events:
+            if min_start > start:
+                min_start = start
+            if max_end < end:
+                max_end = end
+            d[start].append(end)
 
         choices = [] # min_heap [(end, start)]
-        max_end = max(end for _, end in events)
-
         res = 0
         index = 0
-        for day in range(events[0][0], max_end + 1):
-            while index < N:
-                start, end = events[index]
-                if day < start:
-                    break
-                heapq.heappush(choices, (end, start))
-                index += 1
+        for day in range(min_start, max_end + 1):
+            for end in d[day]:
+                heapq.heappush(choices, (end, day))
 
             while choices:
                 end, start = heapq.heappop(choices)
