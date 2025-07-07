@@ -4,15 +4,15 @@ class Solution:
         line_sweep = defaultdict(list)
 
         for start, end in events:
-            line_sweep[start].append((False, start, end))
+            line_sweep[start].append((start, end))
             # line_sweep[end + 1].append((True, start, end))
-            line_sweep[end]
+            # line_sweep[end]
         
         res = 0
-        for day in range(max(line_sweep.keys()) + 1):
-            for is_over, start, end in line_sweep[day]:
-                if not is_over:
-                    heapq.heappush(choices, (end, start))
+        max_end = max(event[1] for event in events)
+        for day in range(max_end + 1):
+            for start, end in line_sweep[day]:
+                heapq.heappush(choices, (end, start))
             found = False
             while choices:
                 end, start = heapq.heappop(choices)
