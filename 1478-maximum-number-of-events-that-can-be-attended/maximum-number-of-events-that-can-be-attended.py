@@ -4,17 +4,11 @@ class Solution:
         events.sort()
 
         choices = [] # min_heap [(end, start)]
-        min_start = float("inf")
-        max_end = float("-inf")
-        for start, end in events:
-            if min_start > start:
-                min_start = start
-            if max_end < end:
-                max_end = end
+        max_end = max(end for _, end in events)
 
         res = 0
         index = 0
-        for day in range(min_start, max_end + 1):
+        for day in range(events[0][0], max_end + 1):
             while index < N:
                 start, end = events[index]
                 if start != day:
