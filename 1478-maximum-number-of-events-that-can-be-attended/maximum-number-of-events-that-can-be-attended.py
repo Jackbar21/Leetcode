@@ -4,8 +4,13 @@ class Solution:
         events.sort()
 
         choices = [] # min_heap [(end, start)]
-        min_start = min(start for start, end in events)
-        max_end = max(end for start, end in events)
+        min_start = float("inf")
+        max_end = float("-inf")
+        for start, end in events:
+            if min_start > start:
+                min_start = start
+            if max_end < end:
+                max_end = end
 
         res = 0
         index = 0
