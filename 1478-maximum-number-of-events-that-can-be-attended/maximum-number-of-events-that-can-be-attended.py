@@ -1,6 +1,7 @@
 class Solution:
     def maxEvents(self, events: List[List[int]]) -> int:
-        # events.sort()
+        N = len(events)
+        events.sort()
         # d = {}
         # for start, end in events:
 
@@ -12,10 +13,17 @@ class Solution:
             line_sweep[start].append((start, end))
 
         res = 0
+        index = 0
         
         for day in range(max_end + 1):
-            for start, end in line_sweep[day]:
+            while index < N:
+                start, end = events[index]
+                if start != day:
+                    break
                 heapq.heappush(choices, (end, start))
+                index += 1
+            # for start, end in line_sweep[day]:
+            #     heapq.heappush(choices, (end, start))
             found = False
             while choices:
                 end, start = heapq.heappop(choices)
