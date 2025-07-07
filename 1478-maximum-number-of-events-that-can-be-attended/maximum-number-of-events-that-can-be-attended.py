@@ -2,15 +2,9 @@ class Solution:
     def maxEvents(self, events: List[List[int]]) -> int:
         N = len(events)
         events.sort()
-        # d = {}
-        # for start, end in events:
-
 
         choices = [] # min_heap [(end, start)]
-        max_end = max(event[1] for event in events)
-        # line_sweep = [[] for _ in range(max_end + 1)]
-        # for start, end in events:
-        #     line_sweep[start].append((start, end))
+        max_end = max(end for start, end in events)
 
         res = 0
         index = 0
@@ -22,8 +16,7 @@ class Solution:
                     break
                 heapq.heappush(choices, (end, start))
                 index += 1
-            # for start, end in line_sweep[day]:
-            #     heapq.heappush(choices, (end, start))
+
             found = False
             while choices:
                 end, start = heapq.heappop(choices)
