@@ -1,6 +1,5 @@
 class Solution:
     def maxEvents(self, events: List[List[int]]) -> int:
-        banned = set()
         choices = [] # min_heap [(end, start)]
         line_sweep = defaultdict(list)
 
@@ -14,14 +13,11 @@ class Solution:
             for is_over, start, end in line_sweep[day]:
                 if not is_over:
                     heapq.heappush(choices, (end, start))
-                else:
-                    # banned.add((start, end))
-                    pass
             #print(f"{choices=}")
             start = end = None
             while choices:
                 end, start = heapq.heappop(choices)
-                if (start, end) not in banned and day <= end:
+                if day <= end:
                     break
                 # else:
                     #print(f"{(start, end)} is INVALID. {banned=}")
