@@ -8,9 +8,9 @@ class Solution:
 
         choices = [] # min_heap [(end, start)]
         max_end = max(event[1] for event in events)
-        line_sweep = [[] for _ in range(max_end + 1)]
-        for start, end in events:
-            line_sweep[start].append((start, end))
+        # line_sweep = [[] for _ in range(max_end + 1)]
+        # for start, end in events:
+        #     line_sweep[start].append((start, end))
 
         res = 0
         index = 0
