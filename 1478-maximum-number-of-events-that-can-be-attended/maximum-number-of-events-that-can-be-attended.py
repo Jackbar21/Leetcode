@@ -4,15 +4,11 @@ class Solution:
         events.sort()
 
         choices = [] # min_heap [(end, start)]
-        # max_end = max(end for start, end in events)
+        max_end = max(end for start, end in events)
 
-        max_end = float("-inf")
-        d = defaultdict(list)
+        d = [[] for _ in range(max_end + 1)]
         for start, end in events:
-            day = start
-            d[day].append((start, end))
-            if max_end < end:
-                max_end = end
+            d[start].append((start, end))
 
         res = 0
         index = 0
