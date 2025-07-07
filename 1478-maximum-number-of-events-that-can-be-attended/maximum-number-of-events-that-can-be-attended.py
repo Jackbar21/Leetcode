@@ -5,9 +5,7 @@ class Solution:
 
         for start, end in events:
             line_sweep[start].append((start, end))
-            # line_sweep[end + 1].append((True, start, end))
-            # line_sweep[end]
-        
+
         res = 0
         max_end = max(event[1] for event in events)
         for day in range(max_end + 1):
