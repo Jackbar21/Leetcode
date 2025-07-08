@@ -39,6 +39,7 @@ class Solution:
                 # Invalid case, look for larger but potentially valid intervals!
                 l = mid + 1
         # assert leftmost is not None
+        assert leftmost == l
         case2 = value + self.dp(leftmost, k - 1)
 
         res = case1 if case1 > case2 else case2
