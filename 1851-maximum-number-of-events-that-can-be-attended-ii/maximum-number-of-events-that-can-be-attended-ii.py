@@ -1,14 +1,12 @@
 class Solution:
     def maxValue(self, events: List[List[int]], k: int) -> int:
-        events.sort()
-        print(f"{events=}")
-        self.events = events
-        self.k = k
-
+        self.events, self.memo = sorted(events), {}
         return self.dp(0, k)
     
-    @cache
     def dp(self, i, k):
+        if (i, k) in self.memo:
+            return self.memo[(i, k)]
+
         events = self.events
         N = len(events)
         START, END, VALUE = 0, 1, 2
@@ -24,10 +22,11 @@ class Solution:
         # Case 2: Pick current event
         # In this case, we earn value points from event, but can only
         # go to events whose start time is at least end + 1
-        i += 1
-        while i < N and events[i][START] <= end:
-            i += 1
-        case2 = value + self.dp(i, k - 1)
+        index = i + 1
+        while index < N and events[index][START] <= end:
+            index += 1
+        case2 = value + self.dp(index, k - 1)
 
-        return max(case1, case2)
-
+        res = case1 if case1 > case2 else case2
+        self.memo[(i, k)] = res
+        return res
