@@ -14,7 +14,7 @@ class Solution:
         if k == 0 or i >= N:
             return 0
         
-        start, end, value = events[i]
+        _, end, value = events[i]
 
         # Case 1: Skip current event
         case1 = self.dp(i + 1, k)
