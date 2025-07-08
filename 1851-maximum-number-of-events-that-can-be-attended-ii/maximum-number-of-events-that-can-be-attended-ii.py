@@ -24,7 +24,6 @@ class Solution:
         # go to events whose start time is at least end + 1. So find
         # leftmost valid index for which this is the case.
         l, r = i + 1, N - 1
-        leftmost = N
         # index = i + 1
         # while index < N and events[index][START] <= end:
         #     index += 1
@@ -38,9 +37,7 @@ class Solution:
             else:
                 # Invalid case, look for larger but potentially valid intervals!
                 l = mid + 1
-        # assert leftmost is not None
-        assert leftmost == l
-        case2 = value + self.dp(leftmost, k - 1)
+        case2 = value + self.dp(l, k - 1)
 
         res = case1 if case1 > case2 else case2
         self.memo[(i, k)] = res
