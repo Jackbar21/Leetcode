@@ -7,7 +7,7 @@ class Solution:
         # min_heap = [(0, room_number) for room_number in range(1, n + 1)]
         # heapq.heapify(min_heap)
         # #print(f"{min_heap=}")
-        d = {room_number: 0 for room_number in range(n)} # room_number: time_available
+        d = [0] * n # room_number: time_available
 
         for start, end in meetings:
             # Grab earliest meeting 
@@ -18,7 +18,7 @@ class Solution:
                     break
             if room is None:
                 #print(f"room is None, {d=}")
-                assert (earliest_available := min(d.values())) > start
+                assert (earliest_available := min(d)) > start
                 for room_number in range(n):
                     if d[room_number] == earliest_available:
                         room = room_number
