@@ -1,9 +1,7 @@
 class Solution:
     def mostBooked(self, n: int, meetings: List[List[int]]) -> int:
-        # assert meetings == sorted(meetings)
         meetings.sort()
-        # used = [0] * (n + 1)
-        count = {room_number: 0 for room_number in range(n)}
+        count = [0] * n
 
         # (time_available, room_number)
         # min_heap = [(0, room_number) for room_number in range(1, n + 1)]
@@ -40,7 +38,7 @@ class Solution:
         #print(f"{count=}")
 
         res = None
-        max_count = max(count.values())
+        max_count = max(count)
         #print(f"{max_count=}")
         for room_number in range(n):
             if count[room_number] == max_count:
