@@ -1,24 +1,17 @@
 class Solution:
     def mostBooked(self, n: int, meetings: List[List[int]]) -> int:
         meetings.sort()
-        count = [0] * n
-
-        # (time_available, room_number)
-        # min_heap = [(0, room_number) for room_number in range(1, n + 1)]
-        # heapq.heapify(min_heap)
-        # #print(f"{min_heap=}")
-        d = [0] * n # room_number: time_available
+        count = defaultdict(int) # room_number: count used
+        d = defaultdict(int)     # room_number: time_available
 
         for start, end in meetings:
-            # Grab earliest meeting 
             room = None
             for room_number in range(n):
                 if d[room_number] <= start:
                     room = room_number
                     break
             if room is None:
-                #print(f"room is None, {d=}")
-                assert (earliest_available := min(d)) > start
+                earliest_available = min(d.values())
                 for room_number in range(n):
                     if d[room_number] == earliest_available:
                         room = room_number
@@ -38,7 +31,7 @@ class Solution:
         #print(f"{count=}")
 
         res = None
-        max_count = max(count)
+        max_count = max(count.values())
         #print(f"{max_count=}")
         for room_number in range(n):
             if count[room_number] == max_count:
