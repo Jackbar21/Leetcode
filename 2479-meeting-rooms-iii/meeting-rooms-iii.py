@@ -22,7 +22,6 @@ class Solution:
                 d[room] = end
 
             count[room] += 1
-        
 
         res = None
         max_count = float("-inf")
