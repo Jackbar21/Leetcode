@@ -7,7 +7,13 @@ class Solution:
     def getDecimalValue(self, head: Optional[ListNode]) -> int:
         digits = []
         while head:
-            digits.append(str(head.val))
+            digits.append(head.val)
             head = head.next
-        return int("".join(digits), 2)
+        
+        res = 0
+        power = 1
+        for digit in reversed(digits):
+            res += digit * power
+            power *= 2
+        return res
             
