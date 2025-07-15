@@ -4,5 +4,5 @@ class Solution:
             len(word) >= 3 and
             word.isalnum() and
             any(letter in "aeiouAEIOU" for letter in word) and
-            any(letter.lower() in "bcdfghjklmnpqrstvwxyz" for letter in word)
+            any(letter not in "aeiouAEIOU" and letter.isalpha() for letter in word)
         )
