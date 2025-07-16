@@ -20,14 +20,10 @@ class Solution:
             return 0
         num = nums[i]
 
-        # Case 1: Include index i (can only do so if parity matches!)
-        case1 = float("-inf")
-        if (prev_num_parity + num) % 2 == parity:
-            case1 = 1 + self.dp(i + 1, parity, num % 2)
-        
-        # Case 2: Don't include index i
-        case2 = self.dp(i + 1, parity, prev_num_parity)
-
-        res = max(case1, case2)
+        res = (
+            1 + self.dp(i + 1, parity, num % 2)
+            if (prev_num_parity + num) % 2 == parity
+            else self.dp(i + 1, parity, prev_num_parity)
+        )
         self.memo[(i, parity, prev_num_parity)] = res
         return res
