@@ -1,7 +1,7 @@
 class Solution:
     def maximumLength(self, nums: List[int]) -> int:
         N, self.nums, self.memo = len(nums), nums, {}
-        return max(self.dp(i, parity, nums[i - 1] % 2) for i in range(1, N) for parity in range(2))
+        return max(1 + self.dp(i, parity, nums[i - 1] % 2) for i in range(1, N) for parity in [0, 1])
 
     def dp(self, i, parity, prev_num_parity):
         if (i, parity, prev_num_parity) in self.memo:
@@ -10,7 +10,7 @@ class Solution:
         N = len(nums)
 
         if i >= N:
-            return 1
+            return 0
         num = nums[i]
 
         res = (
