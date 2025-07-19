@@ -1,7 +1,7 @@
 class Solution:
     def removeSubfolders(self, folder: List[str]) -> List[str]:
         # O(m * n) solution, where m == len(folder), n == max(len(folder[i]) for i in range(m))
-        folders = set(folder)
+        folders = set(sorted(folder))
         res = []
 
         for folder in folders:
