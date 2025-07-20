@@ -1,10 +1,12 @@
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
-        self.grid = grid
+        self.grid, self.memo = grid, {}
         return self.dp(0, 0)
     
-    @cache
     def dp(self, i, j):
+        if (i, j) in self.memo:
+            return self.memo[(i, j)]
+
         grid = self.grid
         M, N = len(grid), len(grid[0])
 
@@ -21,4 +23,6 @@ class Solution:
         # Case 2: Move Down
         case2 = cost + self.dp(i + 1, j)
 
-        return min(case1, case2)
+        res = case1 if case1 < case2 else case2
+        self.memo[(i, j)] = res
+        return res
