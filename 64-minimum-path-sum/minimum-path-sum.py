@@ -22,8 +22,3 @@ class Solution:
                     continue
 
                 heapq.heappush(fringe, (cost + grid[neigh_x][neigh_y], neigh_x, neigh_y))
-
-                
-
-
-        
