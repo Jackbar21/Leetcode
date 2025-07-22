@@ -1,10 +1,10 @@
 class Solution:
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
-        d = defaultdict(int)
+        d = {}
         l = 0
         res = cur_sum = 0
         for r, num in enumerate(nums):
-            d[num] += 1
+            d[num] = d.get(num, 0) + 1
             cur_sum += num
             if d[num] > 1:
                 flag = True
