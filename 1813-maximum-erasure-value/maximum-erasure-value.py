@@ -6,11 +6,14 @@ class Solution:
         for r, num in enumerate(nums):
             d[num] += 1
             cur_sum += num
-            while d[num] > 1:
-                l_num = nums[l]
-                d[l_num] -= 1
-                cur_sum -= l_num
-                l += 1
+            if d[num] > 1:
+                flag = True
+                while flag:
+                    l_num = nums[l]
+                    d[l_num] -= 1
+                    cur_sum -= l_num
+                    l += 1
+                    flag = l_num != num
             
             if res < cur_sum:
                 res = cur_sum
