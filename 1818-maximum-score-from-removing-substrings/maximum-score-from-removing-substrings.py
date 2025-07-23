@@ -1,30 +1,51 @@
 class Solution:
     def maximumGain(self, s: str, x: int, y: int) -> int:
+        return self.xHelper(s, x, y) if x >= y else self.yHelper(s, x, y)
+    
+    def xHelper(self, s, x, y):
         res = 0
-        if x > y:
-            (count, new_s) = self.removeAllSubstrings(s, "ab")
-            res += x * count
-            res += y * self.removeAllSubstrings(new_s, "ba")[0]
-        else:
-            (count, new_s) = self.removeAllSubstrings(s, "ba")
-            res += y * count
-            res += x * self.removeAllSubstrings(new_s, "ab")[0]
+
+        # Handle x first
+        stack = [None]
+        for letter in s:
+            if stack[-1] == "a" and letter == "b":
+                stack.pop()
+                res += x
+            else:
+                stack.append(letter)
+        
+        # Handle y second
+        s = "".join(letter for letter in stack[1:])
+        stack = [None]
+        for letter in s:
+            if stack[-1] == "b" and letter == "a":
+                stack.pop()
+                res += y
+            else:
+                stack.append(letter)
         
         return res
+    
+    def yHelper(self, s, x, y):
+        res = 0
 
-    def removeAllSubstrings(self, s, sub):
-        # removes all occurrances of 'sub' in 's'
-        # returns two-item tuple with:
-        #    (1) count of all removed occurrances
-        #    (2) updated string s itself
-        new_s = []
-        count = 0
-
-        for char in s:
-            new_s.append(char)
-            if len(new_s) >= len(sub) and ''.join(new_s[-len(sub):]) == sub:
-                count += 1
-                for _ in range(len(sub)):
-                    new_s.pop()
+        # Handle y first
+        stack = [None]
+        for letter in s:
+            if stack[-1] == "b" and letter == "a":
+                stack.pop()
+                res += y
+            else:
+                stack.append(letter)
         
-        return count, ''.join(new_s)
+        # Handle x second
+        s = "".join(letter for letter in stack[1:])
+        stack = [None]
+        for letter in s:
+            if stack[-1] == "a" and letter == "b":
+                stack.pop()
+                res += x
+            else:
+                stack.append(letter)
+        
+        return res
