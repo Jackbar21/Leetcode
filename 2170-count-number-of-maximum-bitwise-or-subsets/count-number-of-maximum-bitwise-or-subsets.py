@@ -13,7 +13,7 @@ class Solution:
 
         # Case 1: Don't include index i
         case1 = self.countDp(i + 1, bitwise_or)
-        
+
         # Case 2: Include index i
         case2 = self.countDp(i + 1, bitwise_or | self.nums[i])
 
