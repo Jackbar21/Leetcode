@@ -13,11 +13,12 @@ class Solution:
         cur_length = 0
         for num in nums:
             if num != max_num:
-                longest_sequence = max(longest_sequence, cur_length)
+                if longest_sequence < cur_length:
+                    longest_sequence = cur_length
                 cur_length = 0
             else:
                 cur_length += 1
         
-        return max(longest_sequence, cur_length)
-            
-
+        if longest_sequence < cur_length:
+            longest_sequence = cur_length
+        return longest_sequence
