@@ -64,7 +64,7 @@ class Solution:
         # Case 3: Move to (i + 1, j + 1)
         case3 = fruit_amount + self.dp_c2(i + 1, j + 1)
 
-        res = max(case1, case2, case3)
+        res = case1 if case1 > case2 and case1 > case3 else case2 if case2 > case3 else case3
         self.memo_c2[(i, j)] = res
         return res
 
@@ -95,6 +95,6 @@ class Solution:
         # Case 3: Move to (i + 1, j + 1)
         case3 = fruit_amount + self.dp_c3(i + 1, j + 1)
 
-        res = max(case1, case2, case3)
+        res = case1 if case1 > case2 and case1 > case3 else case2 if case2 > case3 else case3
         self.memo_c3[(i, j)] = res
         return res
