@@ -45,7 +45,7 @@ class Solution:
         N = len(fruits)
 
         # Index i must always be +1, so terminal condition is when i == N - 1
-        assert i <= N - 1
+        # assert i <= N - 1
         if i == N - 1:
             return fruits[i][j] if j == N - 1 else float("-inf")
         
@@ -76,7 +76,7 @@ class Solution:
         N = len(fruits)
 
         # Index i must always be +1, so terminal condition is when i == N - 1
-        assert j <= N - 1
+        # assert j <= N - 1
         if j == N - 1:
             return fruits[i][j] if i == N - 1 else float("-inf")
         
