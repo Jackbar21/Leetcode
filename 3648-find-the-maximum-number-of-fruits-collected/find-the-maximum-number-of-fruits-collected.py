@@ -32,12 +32,15 @@ class Solution:
         # is fixed for c2 and c3 (right for c2 and down for c3), that only leaves the other direction
         # in question with n - 1 exact moves constraint. We can use DP instead for a total of
         # <= (n - 1) * (n - 1) subproblems, each in constant time, for total runtime O(N^2) complexity.
+        self.memo_c2, self.memo_c3 = {}, {}
         res += self.dp_c2(0, N - 1)
         res += self.dp_c3(N - 1, 0)
         return res
     
-    @cache
     def dp_c2(self, i, j):
+        if (i, j) in self.memo_c2:
+            return self.memo_c2[(i, j)]
+
         fruits = self.fruits
         N = len(fruits)
 
@@ -62,11 +65,13 @@ class Solution:
         case3 = fruit_amount + self.dp_c2(i + 1, j + 1)
 
         res = max(case1, case2, case3)
+        self.memo_c2[(i, j)] = res
         return res
 
-
-    @cache
     def dp_c3(self, i, j):
+        if (i, j) in self.memo_c3:
+            return self.memo_c3[(i, j)]
+
         fruits = self.fruits
         N = len(fruits)
 
@@ -91,4 +96,5 @@ class Solution:
         case3 = fruit_amount + self.dp_c3(i + 1, j + 1)
 
         res = max(case1, case2, case3)
+        self.memo_c3[(i, j)] = res
         return res
