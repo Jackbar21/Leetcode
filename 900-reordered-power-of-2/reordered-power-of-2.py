@@ -1,3 +1,3 @@
 class Solution:
     def reorderedPowerOf2(self, n: int) -> bool:
-        return any(comb[0] != "0" and (num := int("".join(comb))) == 2 ** int(math.log(num, 2)) for comb in itertools.permutations([digit for digit in str(n)]))
+        return any(c[0]!="0"and(n:=int(''.join(c)))==2**int(log(n,2)) for c in permutations([d for d in str(n)]))
