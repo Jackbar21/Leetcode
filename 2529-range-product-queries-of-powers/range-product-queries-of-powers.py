@@ -44,6 +44,7 @@ class Solution:
     def productQueries(self, n: int, queries: List[List[int]]) -> List[int]:
         # Smallest set of powers of 2 that sum to n is simply the powers of 2
         # from binary representation of n.
+        MOD = pow(10, 9) + 7
         binary = bin(n)
         power = 1
         powers = []
@@ -52,6 +53,13 @@ class Solution:
                 powers.append(power)
             power *= 2
         
-        MOD = pow(10, 9) + 7
-        tree = GenericSegmentTree(powers, lambda x, y: x * y, 1)
-        return [tree.rangeQuery(l, r + 1) % MOD for l, r in queries]
+        # tree = GenericSegmentTree(powers, lambda x, y: x * y, 1)
+        # return [tree.rangeQuery(l, r + 1) % MOD for l, r in queries]
+
+        prefix_products = [] # Don't have to worry about zeroes, so might as well!
+        cur_product = 1
+        for power in powers:
+            cur_product *= power
+            prefix_products.append(cur_product)
+        getSubarrayProduct = lambda i, j: prefix_products[j] // (prefix_products[i - 1] if i > 0 else 1)
+        return [getSubarrayProduct(l, r) % MOD for l, r in queries]
