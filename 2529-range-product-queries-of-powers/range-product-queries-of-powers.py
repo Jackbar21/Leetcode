@@ -53,6 +53,7 @@ class Solution:
                 powers.append(power)
             power *= 2
         
+        # Practice with Segment Trees!
         # tree = GenericSegmentTree(powers, lambda x, y: x * y, 1)
         # return [tree.rangeQuery(l, r + 1) % MOD for l, r in queries]
 
