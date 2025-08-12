@@ -13,10 +13,13 @@ class Solution:
         x = self.x
         MOD = self.MOD
         exp = pow(base, x, MOD)
-        assert exp > 0 and n >= 0
+        # assert exp > 0 and n >= 0
+
+        if n == 0:
+            return 1
 
         if exp > n:
-            return 1 if n == 0 else 0
+            return 0
         
         # Case 1: Include exp
         case1 = self.dp(n - exp, base + 1) # Cannot use same base again, since must be **unique** positive integers
