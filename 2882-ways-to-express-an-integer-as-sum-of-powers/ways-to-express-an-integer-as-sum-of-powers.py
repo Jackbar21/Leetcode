@@ -11,7 +11,8 @@ class Solution:
         if (n, base) in self.memo:
             return self.memo[(n, base)]
         x = self.x
-        exp = pow(base, x)
+        MOD = self.MOD
+        exp = pow(base, x, MOD)
         # assert exp > 0 and n >= 0
 
         if n == 0:
@@ -26,6 +27,6 @@ class Solution:
         # Case 2: Don't include exp
         case2 = self.dp(n, base + 1) # Move on to next base
 
-        res = case1 + case2
+        res = (case1 + case2) % MOD
         self.memo[(n, base)] = res
         return res
