@@ -12,7 +12,7 @@ class Solution:
             return self.memo[(n, base)]
         x = self.x
         MOD = self.MOD
-        exp = pow(base, x, MOD)
+        exp = pow(base, x)
         # assert exp > 0 and n >= 0
 
         if n == 0:
