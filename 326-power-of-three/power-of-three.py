@@ -6,9 +6,6 @@ class Solution:
             return False # 3^x > 0 for any integer x
 
         base = 1
-        while base <= n:
-            if base == n:
-                return True
+        while base < n:
             base *= 3
-
-        return False
+        return base == n
