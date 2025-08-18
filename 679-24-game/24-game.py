@@ -18,7 +18,6 @@ class Solution:
                     for op3 in operations:
                         try:
                             val = op2(op1(a,b), op3(c,d))
-                            print(f"{val=}")
                             if abs(val - 24) < error_bounds:
                                 return True
                         except:
@@ -30,7 +29,6 @@ class Solution:
                     for op3 in operations:
                         try:
                             val = op1(a, op2(b, op3(c,d)))
-                            print(f"{val=}")
                             if abs(val - 24) < error_bounds:
                                 return True
                         except:
@@ -42,7 +40,6 @@ class Solution:
                     for op3 in operations:
                         try:
                             val = op1(a, op3(op2(b,c), d))
-                            print(f"{val=}")
                             if abs(val - 24) < error_bounds:
                                 return True
                         except:
@@ -54,7 +51,6 @@ class Solution:
                     for op3 in operations:
                         try:
                             val = op3(op1(a, op2(b, c)), d)
-                            print(f"{val=}")
                             if abs(val - 24) < error_bounds:
                                 return True
                         except:
@@ -66,7 +62,6 @@ class Solution:
                     for op3 in operations:
                         try:
                             val = op3(op2(op1(a, b), c), d)
-                            print(f"{val=}")
                             if abs(val - 24) < error_bounds:
                                 return True
                         except:
