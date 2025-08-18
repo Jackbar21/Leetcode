@@ -11,8 +11,7 @@ class Solution:
         operations = [lambda x, y: x + y, lambda x, y: x - y, lambda x, y: x * y, lambda x, y: x / y]
         error_bounds = pow(10, -5)
 
-        for a, b, c, d in permutations(cards):
-
+        for a, b, c, d in set(permutations(cards)):
             # 1. (A,B),(C,D)
             for op1 in operations:
                 for op2 in operations:
