@@ -5,5 +5,6 @@ class Solution:
             r += 1
             if num != 0:
                 l = r
-            res += r - l
+            else:
+                res += r - l
         return res
