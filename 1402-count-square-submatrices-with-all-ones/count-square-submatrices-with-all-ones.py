@@ -1,4 +1,9 @@
 class Solution:
+    # 1^2 == 1 square of side n
+    # 2^2 == 4 sqaures of side (n - 1)
+    # 3^2 == 9 squares of side (n - 2)
+    # ...
+    # n^2      squares of side 1
     def countSquares(self, matrix: List[List[int]]) -> int:
         count = 0
         for i in range(len(matrix)):
