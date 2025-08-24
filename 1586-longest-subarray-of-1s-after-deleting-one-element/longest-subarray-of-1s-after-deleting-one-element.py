@@ -1,21 +1,31 @@
 class Solution:
     def longestSubarray(self, nums: List[int]) -> int:
         self.nums = nums
+        self.memo = {}
         return max(self.dp(i, True) for i in range(len(nums)))
     
-    @cache
     def dp(self, i, can_delete):
+        if (i, can_delete) in self.memo:
+            return self.memo[(i, can_delete)]
         nums = self.nums
         N = len(nums)
         
         assert i < N
         if i == N - 1:
-            return int(nums[i] == 1 and can_delete == False)
+            res = int(nums[i] == 1 and can_delete == False)
+            self.memo[(i, can_delete)] = res
+            return res
         
         if nums[i] == 1:
-            return 1 + self.dp(i + 1, can_delete)
+            res = 1 + self.dp(i + 1, can_delete)
+            self.memo[(i, can_delete)] = res
+            return res
         
         if can_delete:
-            return self.dp(i + 1, False)
+            res = self.dp(i + 1, False)
+            self.memo[(i, can_delete)] = res
+            return res
         
-        return 0
+        res = 0
+        self.memo[(i, can_delete)] = res
+        return res
