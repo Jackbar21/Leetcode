@@ -7,6 +7,6 @@ class Solution:
             for j in range(N):
                 diagonals[i + j].append(mat[i][j])
         res = []
-        for i in range(M + N - 1):
-            res.extend(diagonals[i] if i % 2 == 1 else diagonals[i][::-1])
+        for i, diagonal in enumerate(diagonals):
+            res.extend(diagonal if i % 2 == 1 else diagonal[::-1])
         return res
