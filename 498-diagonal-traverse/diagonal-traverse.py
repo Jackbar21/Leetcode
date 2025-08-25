@@ -7,6 +7,8 @@ class Solution:
             for j in range(N):
                 diagonals[i + j].append(mat[i][j])
         res = []
-        for i, diagonal in enumerate(diagonals):
-            res.extend(diagonal if i % 2 == 1 else diagonal[::-1])
+        rotate = False
+        for diagonal in diagonals:
+            res.extend(diagonal if rotate else diagonal[::-1])
+            rotate = not rotate
         return res
