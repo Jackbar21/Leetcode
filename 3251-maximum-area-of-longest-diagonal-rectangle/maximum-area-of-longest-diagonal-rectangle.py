@@ -3,7 +3,7 @@ class Solution:
         max_diagonal = 0
         max_area = 0
         for length, width in dimensions:
-            diagonal = length * length + width * width
+            diagonal = length * length + width * width # No need to sqrt for comparison checks :)
             area = length * width
             if diagonal > max_diagonal:
                 max_diagonal = diagonal
