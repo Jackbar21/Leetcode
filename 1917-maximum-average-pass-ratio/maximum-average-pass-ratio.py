@@ -13,4 +13,3 @@ class Solution:
             heapq.heappush(min_heap, (-new_ratio_increase, passing, total))
         
         return sum(passing/total for _, passing, total in min_heap) / len(min_heap)
-        
