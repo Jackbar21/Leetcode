@@ -1,5 +1,4 @@
 class FoodRatings:
-
     def __init__(self, foods: List[str], cuisines: List[str], ratings: List[int]):
         self.food_to_rating = {} # food: rating
         self.food_to_cuisine = {} # food: cuisine
