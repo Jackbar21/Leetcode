@@ -5,7 +5,7 @@ class FoodRatings:
         self.food_to_cuisine = {} # food: cuisine
         self.cuisine_max_heaps = defaultdict(list) # cuisine: max heap
 
-        assert len(foods) == len(cuisines) == len(ratings)
+        # assert len(foods) == len(cuisines) == len(ratings)
         N = len(foods)
         for i in range(N):
             food, cuisine, rating = foods[i], cuisines[i], ratings[i]
@@ -13,9 +13,6 @@ class FoodRatings:
             self.food_to_cuisine[food] = cuisine
             heapq.heappush(self.cuisine_max_heaps[cuisine], (-rating, food))
         
-        print(f"{self.food_to_rating=}")
-        print(f"{self.cuisine_max_heaps=}")
-
     def changeRating(self, food: str, newRating: int) -> None:
         self.food_to_rating[food] = newRating
         cuisine = self.food_to_cuisine[food]
@@ -25,17 +22,16 @@ class FoodRatings:
     def highestRated(self, cuisine: str) -> str:
         max_heap = self.cuisine_max_heaps[cuisine]
         while True:
-            assert len(max_heap) > 0
+            # assert len(max_heap) > 0
             rating, food = heapq.heappop(max_heap)
-            assert rating <= 0
+            # assert rating <= 0
             rating = -rating
-            assert rating >= 0
+            # assert rating >= 0
 
             if rating != (actual_rating := self.food_to_rating[food]):
-                # heapq.heappush(max_heap, (-actual_rating, food))
                 continue
             
-            assert rating == actual_rating
+            # assert rating == actual_rating
             heapq.heappush(max_heap, (-rating, food))
             return food
 
