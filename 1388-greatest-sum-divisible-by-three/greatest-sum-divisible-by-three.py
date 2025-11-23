@@ -5,8 +5,9 @@ class Solution:
 
         return self.dp(0, 0)
     
-    @cache
     def dp(self, i, needed_remainder):
+        if (i, needed_remainder) in self.memo:
+            return self.memo[(i, needed_remainder)]
         nums = self.nums
         N = len(nums)
         if i >= N:
@@ -23,4 +24,6 @@ class Solution:
             new_needed_remainder += 3
         case2 = num + self.dp(i + 1, new_needed_remainder)
 
-        return max(case1, case2)
+        res = max(case1, case2)
+        self.memo[(i, needed_remainder)] = res
+        return res
