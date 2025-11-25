@@ -24,6 +24,6 @@ class Solution:
         # Case 2: Skip coins[i]
         case2 = self.dp(i + 1, amount_left)
 
-        res = min(case1, case2)
+        res = case1 if case1 < case2 else case2
         self.memo[(i, amount_left)] = res
         return res
