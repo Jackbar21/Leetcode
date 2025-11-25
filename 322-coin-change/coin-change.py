@@ -14,9 +14,10 @@ class Solution:
 
         if amount_left < 0:
             return float("inf")
-
-        if i >= N:
-            return 0 if amount_left == 0 else float("inf")
+        elif amount_left == 0:
+            return 0
+        elif i >= N:
+            return float("inf")
         
         # Case 1: Pick coins[i]
         case1 = 1 + self.dp(i, amount_left - coins[i])
