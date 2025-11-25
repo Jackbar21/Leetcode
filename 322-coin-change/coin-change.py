@@ -21,8 +21,9 @@ class Solution:
         
         res = float("inf")
         for coin in self.coins:
-            if self.dp(amount_left - coin) < res - 1:
-                res = 1 + self.dp(amount_left - coin)
+            count = 1 + self.dp(amount_left - coin)
+            if res > count:
+                res = count
 
         self.memo[amount_left] = res
         return res
