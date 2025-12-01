@@ -1,9 +1,8 @@
 class Solution:
     def maxRunTime(self, n: int, batteries: List[int]) -> int:
+        # Sort
         N = len(batteries)
         batteries.sort()
-        sum_batteries = sum(batteries)
-        l, r = 0, sum_batteries
 
         # Prefix sums
         prefix = []
@@ -12,15 +11,16 @@ class Solution:
             cur_sum += battery
             prefix.append(cur_sum)
         
-        assert prefix[-1] == sum_batteries
-
         def getLimitedSum(limit: int) -> int:
             # Compute sum of batteries where we can only use at most
             # 'limit' per battery.
-            # return sum(min(battery, limit) for battery in batteries)
+            # res = 0
+            # for battery in batteries:
+            #     res += battery if battery <= mid else mid
+            # return res
 
-            # We do this via leftmost binary search, to find leftmost
-            # index l such that batteries[l] > limit (if any)
+            # We can also do this via leftmost binary search, by finding 
+            # leftmost index l such that batteries[l] > limit (if any)
             if batteries[-1] <= limit:
                 return sum_batteries
             elif batteries[0] >= limit:
@@ -34,25 +34,17 @@ class Solution:
                 else:
                     l = mid + 1
             
-            # Not first nor last index
-            # print(f"{l=}, {}")
-            assert l > 0
-            # assert l < N - 1
-
+            # assert l > 0
             return prefix[l - 1] + limit * (N - l)
 
-
-
+        sum_batteries = prefix[-1]
+        l, r = 0, sum_batteries
         while l <= r:
             mid = (l + r) // 2
             # Check if can have all N computers running for 'mid' time
             # If a battery is more than 'mid', only 'mid' of it can be used
             amount_needed = mid * n
-            # amount_have = 0
-            # for battery in batteries:
-            #     amount_have += battery if battery <= mid else mid
             amount_have = getLimitedSum(mid)
-
             if amount_have >= amount_needed:
                 # Look for potentially larger but also correct solutions
                 l = mid + 1
