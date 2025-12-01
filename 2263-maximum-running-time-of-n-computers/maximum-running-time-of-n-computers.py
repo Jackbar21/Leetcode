@@ -14,12 +14,7 @@ class Solution:
         def getLimitedSum(limit: int) -> int:
             # Compute sum of batteries where we can only use at most
             # 'limit' per battery.
-            # res = 0
-            # for battery in batteries:
-            #     res += battery if battery <= mid else mid
-            # return res
-
-            # We can also do this via leftmost binary search, by finding 
+            # We can do this via leftmost binary search, by finding 
             # leftmost index l such that batteries[l] > limit (if any)
             if batteries[-1] <= limit:
                 return sum_batteries
