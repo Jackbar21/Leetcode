@@ -23,6 +23,5 @@ class Solution:
         res = 0
         for pair_count in pair_counts:
             remaining_pair_count -= pair_count
-            # res += pair_count * remaining_pair_count
             res = (res + pair_count * remaining_pair_count) % MOD
         return res
