@@ -4,10 +4,13 @@ class Solution:
         for p in power:
             d[p] += 1
         self.sorted_power_freqs = [(key, d[key]) for key in sorted(d.keys())]
+        self.memo = {}
         return self.dp(0)
     
-    @cache
     def dp(self, i):
+        if i in self.memo:
+            return self.memo[i]
+
         sorted_power_freqs = self.sorted_power_freqs
         N = len(sorted_power_freqs)
 
@@ -26,4 +29,6 @@ class Solution:
             index += 1
         case2 = power * freq + self.dp(index)
 
-        return max(case1, case2)
+        res = case1 if case1 > case2 else case2
+        self.memo[i] = res
+        return res
