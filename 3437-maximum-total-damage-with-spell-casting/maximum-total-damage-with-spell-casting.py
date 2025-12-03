@@ -24,7 +24,7 @@ class Solution:
         # This means you can keep all of same power, but must then skip any that is of
         # power + 1 or power + 2
         power, freq = sorted_power_freqs[i]
-        index = i
+        index = i + 1
         while index < N and sorted_power_freqs[index][0] <= power + 2:
             index += 1
         case2 = power * freq + self.dp(index)
