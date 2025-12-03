@@ -24,10 +24,18 @@ class Solution:
         # This means you can keep all of same power, but must then skip any that is of
         # power + 1 or power + 2
         power, freq = sorted_power_freqs[i]
-        index = i + 1
-        while index < N and sorted_power_freqs[index][0] <= power + 2:
-            index += 1
-        case2 = power * freq + self.dp(index)
+        case2 = power * freq
+
+        # Find leftmost index l such that sorted_power_freqs[l][0] > power + 2
+        if sorted_power_freqs[N - 1][0] > power + 2:
+            l, r = i + 1, N - 1
+            while l <= r:
+                mid = (l + r) // 2
+                if sorted_power_freqs[mid][0] > power + 2:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+            case2 += self.dp(l)
 
         res = case1 if case1 > case2 else case2
         self.memo[i] = res
