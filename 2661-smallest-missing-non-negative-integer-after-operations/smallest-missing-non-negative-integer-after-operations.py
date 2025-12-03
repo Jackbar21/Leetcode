@@ -3,9 +3,9 @@ class Solution:
         d = defaultdict(int)
         for num in nums:
             d[num % value] += 1
-        print(f"{d=}")
         for i in range(len(nums)):
-            if d[i % value] == 0:
+            val = i % value
+            if d[val] == 0:
                 return i
-            d[i % value] -= 1
+            d[val] -= 1
         return len(nums)
