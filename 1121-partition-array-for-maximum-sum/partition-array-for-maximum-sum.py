@@ -1,13 +1,13 @@
 class Solution:
     def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
-        self.nums = arr
-        self.k = k
+        self.nums, self.k, self.memo = arr, k, {}
         return self.dp(0)
     
-    @cache
     def dp(self, i):
-        nums = self.nums
-        k = self.k
+        if i in self.memo:
+            return self.memo[i]
+
+        nums, k = self.nums, self.k
         N = len(nums)
 
         nums_left = N - i
@@ -24,4 +24,5 @@ class Solution:
             
             res = max(res, length * max_num + self.dp(i + length))
 
+        self.memo[i] = res
         return res
