@@ -5,7 +5,7 @@ class Solution:
         while (perfect_square := base * base) <= n:
             perfect_squares.append(perfect_square)
             base += 1
-        self.perfect_squares = perfect_squares[::-1]
+        self.perfect_squares = perfect_squares
         return self.dp(n)
     
     @cache
@@ -13,11 +13,10 @@ class Solution:
         if i == 0:
             return 0
         
-        if i < 0:
-            return float("inf")
-        
         res = float("inf")
         for perfect_square in self.perfect_squares:
+            if perfect_square > i:
+                break
             count = 1 + self.dp(i - perfect_square)
             if res > count:
                 res = count
