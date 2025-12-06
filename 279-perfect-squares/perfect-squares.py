@@ -6,13 +6,16 @@ class Solution:
             perfect_squares.append(perfect_square)
             base += 1
         self.perfect_squares = perfect_squares
+        self.memo = {}
         return self.dp(n)
     
-    @cache
     def dp(self, i):
+        if i in self.memo:
+            return self.memo[i]
+
         if i == 0:
             return 0
-        
+
         res = float("inf")
         for perfect_square in self.perfect_squares:
             if perfect_square > i:
@@ -20,4 +23,5 @@ class Solution:
             count = 1 + self.dp(i - perfect_square)
             if res > count:
                 res = count
+        self.memo[i] = res
         return res
