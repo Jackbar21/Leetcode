@@ -25,6 +25,6 @@ class Solution:
         # Case 2: Don't rob current node
         case2 = self.dp(node.left, True) + self.dp(node.right, True)
 
-        res = max(case1, case2)
+        res = case1 if case1 > case2 else case2
         self.memo[(node, can_rob)] = res
         return res
