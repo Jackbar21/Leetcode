@@ -5,7 +5,7 @@ class Solution:
         while (perfect_square := base * base) <= n:
             perfect_squares.append(perfect_square)
             base += 1
-        self.perfect_squares = perfect_squares
+        self.perfect_squares = perfect_squares[::-1]
         return self.dp(n)
     
     @cache
