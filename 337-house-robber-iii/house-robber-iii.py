@@ -6,10 +6,13 @@
 #         self.right = right
 class Solution:
     def rob(self, root: Optional[TreeNode]) -> int:
+        self.memo = {}
         return self.dp(root, True)
     
-    @cache
     def dp(self, node: Optional[TreeNode], can_rob: bool) -> int:
+        if (node, can_rob) in self.memo:
+            return self.memo[(node, can_rob)]
+
         # Base Case:
         if not node:
             return 0
@@ -23,4 +26,5 @@ class Solution:
         case2 = self.dp(node.left, True) + self.dp(node.right, True)
 
         res = max(case1, case2)
+        self.memo[(node, can_rob)] = res
         return res
