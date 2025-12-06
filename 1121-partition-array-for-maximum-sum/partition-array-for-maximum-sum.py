@@ -12,7 +12,9 @@ class Solution:
 
         nums_left = N - i
         if nums_left <= k:
-            return max(nums[i:]) * nums_left
+            res = max(nums[i:]) * nums_left
+            self.memo[i] = res
+            return res
         
         # Can pick any num elements in range [1..k]
         res = float("-inf")
