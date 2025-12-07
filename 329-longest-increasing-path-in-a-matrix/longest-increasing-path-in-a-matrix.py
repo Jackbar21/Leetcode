@@ -4,7 +4,13 @@ class Solution:
         self.matrix, self.memo = matrix, {}
         self.DIRECTIONS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         self.inBounds = lambda i, j: 0 <= i < M and 0 <= j < N
-        return max(self.dp(i, j) for i in range(M) for j in range(N))
+
+        res = 0
+        for i in range(M):
+            for j in range(N):
+                if res < (val := self.dp(i, j)):
+                    res = val
+        return res
     
     def dp(self, i, j):
         if (i, j) in self.memo:
