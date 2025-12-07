@@ -1,32 +1,26 @@
 class Solution:
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
         M, N = len(matrix), len(matrix[0])
-        DIRECTIONS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        inBounds = lambda x, y: 0 <= x < M and 0 <= y < N
+        self.matrix, self.memo = matrix, {}
+        self.DIRECTIONS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        self.inBounds = lambda i, j: 0 <= i < M and 0 <= j < N
+        return max(self.dp(i, j) for i in range(M) for j in range(N))
+    
+    def dp(self, i, j):
+        if (i, j) in self.memo:
+            return self.memo[(i, j)]
+        
+        val = self.matrix[i][j]
+        res = 1 # Current cell only
+        for di, dj in self.DIRECTIONS:
+            neigh_i, neigh_j = i + di, j + dj
+            if not self.inBounds(neigh_i, neigh_j):
+                continue
 
-        memo = {}
-        def dp(i, j):
-            if (i, j) in memo:
-                return memo[(i, j)]
-            val = matrix[i][j]
-            
-            res = 1
-            for di, dj in DIRECTIONS:
-                neigh_i, neigh_j = i + di, j + dj
-                if not inBounds(neigh_i, neigh_j):
-                    continue
-                
-                # Don't have to worry about infinite cycles (i.e. re-visiting nodes)
-                # since path must be STRICTLY increasing. So if we can go from u->v,
-                # because v is LARGER than u, then we cannot go back via v->u. Therefore
-                # this forms a DAG, and we can apply DP safely :)
-                neigh_val = matrix[neigh_i][neigh_j]
-                if neigh_val > val:
-                    path_len = 1 + dp(neigh_i, neigh_j)
-                    if res < path_len:
-                        res = path_len
-            
-            memo[(i, j)] = res
-            return res
-
-        return max(dp(i, j) for i in range(M) for j in range(N))
+            if self.matrix[neigh_i][neigh_j] > val:
+                case = 1 + self.dp(neigh_i, neigh_j)
+                if case > res:
+                    res = case
+        
+        self.memo[(i, j)] = res
+        return res
