@@ -1,62 +1,33 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
-        # Top-Down Solution:
         self.word1, self.word2 = word1, word2
-        self.memo = {}
         return self.dp(0, 0)
-
-        # Bottom-Up Solution:
-        M, N = len(word1), len(word2)
-        dp = [[float("inf")] * (N + 1) for _ in range(M + 1)]
-        dp[M][N] = 0
-        for i in range(M):
-            dp[i][N] = M - i
-        for j in range(N):
-            dp[M][j] = N - j
-
-        for i in range(M - 1, -1, -1):
-            for j in range(N - 1, -1, -1):
-                if word1[i] == word2[j]:
-                    dp[i][j] = dp[i + 1][j + 1]
-                    continue
-
-                dp[i][j] = 1 + min(
-                    dp[i][j + 1],
-                    dp[i + 1][j],
-                    dp[i + 1][j + 1]
-                )
-
-        return dp[0][0]
-
+    
+    @cache
     def dp(self, i, j):
-        if (i, j) in self.memo:
-            return self.memo[(i, j)]
+        word1, word2 = self.word1, self.word2
+        N, M = len(word1), len(word2)
+
+        if i >= N:
+            # We've used up all of word1, so only action left is to delete
+            # all remaining letters from word2 (possibly zero)
+            return M - j
+        elif j >= M:
+            # Similar to above, except we now delete remaining letters for word1
+            return N - i
         
-        # Base Case 1: We've "exhausted" every letter in word2.
-        if j >= len(self.word2):
-            # Can only delete characters from this point onwards!
-            return len(self.word1) - i
-        
-        # Base Case 2: We've "exhausted" every letter in word1.
-        if i >= len(self.word1):
-            # Can only insert characters from this point onwards!
-            return len(self.word2) - j
+        letter_i, letter_j = word1[i], word2[j]
 
-        # Base Case 3: If both letters already match, no need for any edits!
-        if self.word1[i] == self.word2[j]:
-            res = self.dp(i + 1, j + 1)
-            self.memo[(i, j)] = res
-            return res
-        
-        # Case 1: Insert a character
-        case1 = 1 + self.dp(i, j + 1)
+        # Case 1: Same letter, in which case we can skip
+        case1 = float("inf") if letter_i != letter_j else self.dp(i + 1, j + 1)
 
-        # Case 2: Delete a character
-        case2 = 1 + self.dp(i + 1, j)
+        # Case 2: Insert a character in word1, specifically to match current letter from word2
+        case2 = 1 + self.dp(i, j + 1)
 
-        # Case 3: Replace a character
-        case3 = 1 + self.dp(i + 1, j + 1)
+        # Case 3: Insert a character in word2, specifically to match current letter from word1
+        case3 = 1 + self.dp(i + 1, j)
 
-        res = min(case1, case2, case3)
-        self.memo[(i, j)] = res
-        return res
+        # Case 4: Replace current letter in word1 to one from word2 (or vise versa)
+        case4 = 1 + self.dp(i + 1, j + 1)
+
+        return min(case1, case2, case3, case4)
