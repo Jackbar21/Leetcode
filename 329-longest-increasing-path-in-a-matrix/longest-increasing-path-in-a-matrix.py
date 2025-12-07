@@ -25,7 +25,7 @@ class Solution:
 
             if self.matrix[neigh_i][neigh_j] > val:
                 case = 1 + self.dp(neigh_i, neigh_j)
-                if case > res:
+                if res < case:
                     res = case
         
         self.memo[(i, j)] = res
