@@ -14,16 +14,15 @@ class Solution:
     def dp(self, i, j):
         # Any number in range [1..n] can be root node
         if i >= j:
-            return [TreeNode(i)] if i == j else [None]
+            yield TreeNode(i) if i == j else None
+            return
 
-        res = []
         for root in range(i, j + 1):
-            left = self.dp(i, root - 1)
-            right = self.dp(root + 1, j)
+            left = list(self.dp(i, root - 1))
+            right = list(self.dp(root + 1, j))
             for l in left:
                 for r in right:
                     node = TreeNode(root)
                     node.left = l
                     node.right = r
-                    res.append(node)
-        return res       
+                    yield node        
