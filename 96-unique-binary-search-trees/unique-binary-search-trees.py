@@ -1,17 +1,7 @@
 class Solution:
-    def numTrees(self, n: int) -> int:
-        return self.dp(n)
-    
     @cache
-    def dp(self, i):
-        if i <= 1:
-            return 1
-        
+    def numTrees(self, n: int) -> int:
         # Let x be the number of nodes we choose to include in left subtree
-        # Then, x can be as small as 0 or as large as i - 1. Then, the number
-        # of nodes in right subtree will simply be i - 1 - x.
-        res = 0
-        for x in range(i):
-            left, right = x, i - 1 - x
-            res += self.dp(left) * self.dp(right)
-        return res
+        # Then, x can be as small as 0 or as large as n - 1. Then for each x,
+        # the number of nodes in right subtree will simply be n - 1 - x.
+        return 1 if n <= 1 else sum(self.numTrees(x) * self.numTrees(n - 1 - x) for x in range(n))
