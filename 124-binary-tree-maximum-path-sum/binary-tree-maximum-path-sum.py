@@ -6,28 +6,75 @@
 #         self.right = right
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        # There are only three possible cases:
-        # Case 1: Best solution is in left subtree
-        # Case 2: Best solution is in right subtree
-        # Case 3: Solution goes through the root. Greedily find the best path including root.
-        if not root:
-            return float("-inf")
+        # We must guarantee the path is non-empty.
+        max_val = float("-inf")
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node.val > max_val:
+                max_val = node.val
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
         
-        case1 = self.maxPathSum(root.left)
-        case2 = self.maxPathSum(root.right)
-        case3 = root.val + max(0, self.greedyPathSum(root.left)) + max(0, self.greedyPathSum(root.right))
+        # If largest value is negative (or zero), then simply picking 
+        # that node will produce the "maximum path sum"
+        if max_val <= 0:
+            return max_val
+        
+        # Since there is at least one positive node in the tree, we can
+        # use our dp-helper function, which returns 0 on root = None
+        return self.maxPathSumDp(root)
+
+    @cache
+    def maxPathSumDp(self, root: Optional[TreeNode]) -> int:
+        # Base Case
+        if not root:
+            return 0
+
+        # Case 1: Largest path goes through root
+        case1 = self.maxPathSumThroughRoot(root)
+
+        # Case 2: Largest path belongs in left subtree
+        case2 = self.maxPathSumDp(root.left)
+
+        # Case 3: Largest path belongs in right subtree
+        case3 = self.maxPathSumDp(root.right)
+
         return max(case1, case2, case3)
     
     @cache
-    def greedyPathSum(self, root):
+    def maxPathSumThroughRoot(self, root: Optional[TreeNode]) -> int:
+        # Return maximum path sum, such that the path MUST go through 'root'
+        res = root.val
+        left = self.maxDirectPathSum(root.left)
+        right = self.maxDirectPathSum(root.right)
+
+        # Don't have to pick nodes on left/right if produces negative values!
+        if left < 0:
+            left = 0
+        if right < 0:
+            right = 0
+
+        return left + root.val + right
+    
+    @cache
+    def maxDirectPathSum(self, root: Optional[TreeNode]) -> int:
+        # Return maximum path sum from root downwards
         if not root:
-            return float("-inf")
+            return 0
 
-        left_sum = self.greedyPathSum(root.left)
-        right_sum = self.greedyPathSum(root.right)
+        if not root.left and not root.right:
+            return root.val
 
-        case1 = root.val                # Just root
-        case2 = root.val + left_sum     # Just root + left subtree
-        case3 = root.val + right_sum    # Just root + right subtree
-        return max(case1, case2, case3)
+        if not root.left:
+            return root.val + max(0, self.maxDirectPathSum(root.right))
+
+        if not root.right:
+            return root.val + max(0, self.maxDirectPathSum(root.left))
+
+        return root.val + max(0, self.maxDirectPathSum(root.left), self.maxDirectPathSum(root.right))
+
+
         
