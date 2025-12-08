@@ -47,7 +47,7 @@ class Solution:
         # Case 3: Largest path belongs in right subtree
         case3 = self.maxPathSumDp(root.right)
 
-        res = max(case1, case2, case3)
+        res = case1 if case1 > case2 and case1 > case3 else case2 if case2 > case3 else case3
         self.maxPathSumDpMemo[root] = res
         return res
     
