@@ -6,7 +6,17 @@
 #         self.right = right
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        # We must guarantee the path is non-empty.
+        self.maxPathSumThroughRootMemo = {}
+        self.maxDirectPathSumMemo = {}
+        self.maxPathSumDpMemo = {}
+        res = self.maxPathSumDp(root)
+        if res > 0:
+            return res
+        
+        # Since result was zero, it could have been because our dp-helper
+        # function returns 0 on null nodes, but it very well could be
+        # that every node in the tree is negative. Hence, in this case,
+        # the maximum path sum will simply be the value of the largest node
         max_val = float("-inf")
         stack = [root]
         while stack:
@@ -18,17 +28,7 @@ class Solution:
             if node.right:
                 stack.append(node.right)
         
-        # If largest value is negative (or zero), then simply picking 
-        # that node will produce the "maximum path sum"
-        if max_val <= 0:
-            return max_val
-        
-        # Since there is at least one positive node in the tree, we can
-        # use our dp-helper function, which returns 0 on root = None
-        self.maxPathSumThroughRootMemo = {}
-        self.maxDirectPathSumMemo = {}
-        self.maxPathSumDpMemo = {}
-        return self.maxPathSumDp(root)
+        return max_val
 
     def maxPathSumDp(self, root: Optional[TreeNode]) -> int:
         if root in self.maxPathSumDpMemo:
