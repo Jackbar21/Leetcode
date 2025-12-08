@@ -25,7 +25,9 @@ class Solution:
         
         # Since there is at least one positive node in the tree, we can
         # use our dp-helper function, which returns 0 on root = None
+        self.maxPathSumThroughRootMemo = {}
         self.maxDirectPathSumMemo = {}
+        self.maxPathSumDpMemo = {}
         return self.maxPathSumDp(root)
 
     @cache
@@ -45,9 +47,11 @@ class Solution:
 
         return max(case1, case2, case3)
     
-    @cache
     def maxPathSumThroughRoot(self, root: Optional[TreeNode]) -> int:
         # Return maximum path sum, such that the path MUST go through 'root'
+        if root in self.maxPathSumThroughRootMemo:
+            return self.maxPathSumThroughRootMemo[root]
+
         res = root.val
         left = self.maxDirectPathSum(root.left)
         right = self.maxDirectPathSum(root.right)
@@ -58,7 +62,9 @@ class Solution:
         if right < 0:
             right = 0
 
-        return left + root.val + right
+        res = left + root.val + right
+        self.maxPathSumThroughRootMemo[root] = res
+        return res
     
     def maxDirectPathSum(self, root: Optional[TreeNode]) -> int:
         # Return maximum path sum from root downwards
