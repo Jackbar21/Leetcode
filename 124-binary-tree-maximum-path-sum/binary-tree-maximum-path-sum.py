@@ -74,8 +74,19 @@ class Solution:
         # Return maximum path sum from root downwards
         if root in self.maxDirectPathSumMemo:
             return self.maxDirectPathSumMemo[root]
+        
+        if not root:
+            return 0
 
-        res = 0 if not root else root.val + max(0, self.maxDirectPathSum(root.left), self.maxDirectPathSum(root.right))
+        left = self.maxDirectPathSum(root.left)
+        if left < 0:
+            left = 0
+        
+        right = self.maxDirectPathSum(root.right)
+        if right < 0:
+            right = 0
+
+        res = root.val + (left if left > right else right)
         self.maxDirectPathSumMemo[root] = res
         return res
         
