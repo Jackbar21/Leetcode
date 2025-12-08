@@ -62,19 +62,7 @@ class Solution:
     @cache
     def maxDirectPathSum(self, root: Optional[TreeNode]) -> int:
         # Return maximum path sum from root downwards
-        if not root:
-            return 0
-
-        if not root.left and not root.right:
-            return root.val
-
-        if not root.left:
-            return root.val + max(0, self.maxDirectPathSum(root.right))
-
-        if not root.right:
-            return root.val + max(0, self.maxDirectPathSum(root.left))
-
-        return root.val + max(0, self.maxDirectPathSum(root.left), self.maxDirectPathSum(root.right))
+        return 0 if not root else root.val + max(0, self.maxDirectPathSum(root.left), self.maxDirectPathSum(root.right))
 
 
         
