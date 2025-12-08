@@ -30,8 +30,10 @@ class Solution:
         self.maxPathSumDpMemo = {}
         return self.maxPathSumDp(root)
 
-    @cache
     def maxPathSumDp(self, root: Optional[TreeNode]) -> int:
+        if root in self.maxPathSumDpMemo:
+            return self.maxPathSumDpMemo[root]
+
         # Base Case
         if not root:
             return 0
@@ -45,7 +47,9 @@ class Solution:
         # Case 3: Largest path belongs in right subtree
         case3 = self.maxPathSumDp(root.right)
 
-        return max(case1, case2, case3)
+        res = max(case1, case2, case3)
+        self.maxPathSumDpMemo[root] = res
+        return res
     
     def maxPathSumThroughRoot(self, root: Optional[TreeNode]) -> int:
         # Return maximum path sum, such that the path MUST go through 'root'
