@@ -21,9 +21,7 @@ class Solution:
             right[num] -= 1
 
             target = 2 * num
-            left_freq = left[target]
-            right_freq = right[target]
-            res += left_freq * right_freq
+            res = (res + left[target] * right[target]) % MOD
 
             left[num] += 1
 
