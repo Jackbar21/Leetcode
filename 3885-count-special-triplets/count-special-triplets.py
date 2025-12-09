@@ -21,7 +21,8 @@ class Solution:
             right[num] -= 1
 
             target = 2 * num
-            res = (res + left[target] * right[target]) % MOD
+            res += left[target] * right[target]
+            res %= MOD
 
             left[num] += 1
 
