@@ -22,7 +22,6 @@ class Solution:
 
             target = 2 * num
             res += left[target] * right[target]
-            res %= MOD
 
             left[num] += 1
 
