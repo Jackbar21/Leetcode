@@ -12,4 +12,9 @@ class Solution:
         for i in range(1, N):
             if complexity[i] <= first_complexity:
                 return 0
-        return math.factorial(N - 1) % MOD
+        def factorial(n):
+            assert n >= 0
+            if n <= 1:
+                return 1
+            return n * factorial(n - 1) % MOD
+        return factorial(N - 1)
