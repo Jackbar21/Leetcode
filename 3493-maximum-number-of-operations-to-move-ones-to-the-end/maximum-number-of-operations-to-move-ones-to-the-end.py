@@ -14,13 +14,14 @@ class Solution:
                 count = 1
         if count > 0:
             arr.append(count)
-        print(f"{arr=}")
 
+        N = len(arr)
         res = 0
         i = 0
-        while i < len(arr) - 1:
-            res += arr[i]
-            if i + 2 < len(arr):
-                arr[i + 2] += arr[i]
+        while i < N - 1:
+            amount = arr[i]
+            res += amount
             i += 2
+            if i < N:
+                arr[i] += amount
         return res
