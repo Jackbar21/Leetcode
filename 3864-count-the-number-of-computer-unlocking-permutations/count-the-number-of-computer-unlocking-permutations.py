@@ -9,7 +9,9 @@ class Solution:
 
         # I checked the hints, this is really lame...
         first_complexity = complexity[0]
-        for i in range(1, N):
-            if complexity[i] <= first_complexity:
+        count = 0
+        for c in complexity:
+            count += c <= first_complexity
+            if count > 1:
                 return 0
         return math.factorial(N - 1) % MOD
