@@ -9,38 +9,20 @@ class Solution:
         if not root:
             return []
 
-        level_to_value = {}
-        max_level = 0
+        queue = collections.deque([(0, root)]) # (depth, node)
+        depths = []
+        max_depth = 0
+        while queue:
+            depth, node = queue.popleft()
+            if len(depths) <= depth:
+                depths.append(node.val)
+            else:
+                depths[depth] = node.val
 
-        queue = collections.deque([(root, 0)]) # (node, level)
-        while len(queue) > 0:
-            node, level = queue.popleft()
-            if node.right:
-                queue.append((node.right, level + 1))
             if node.left:
-                queue.append((node.left, level + 1))
-            # if node.right:
-            #     queue.append((node.right, level + 1))
-
-            # Since we add node.left before node.right for each node we pop
-            # from the queue, whenever we traverse a node, we can be sure
-            # it's the rightmost node we've seen AT ITS LEVEL! Hence, everytime
-            # we see such a node (i.e. such as right now!), we will append the
-            # value at key=level inside level_to_value dict with node's value :)
-            # level_to_value[level] = node.val
-            if level not in level_to_value:
-                level_to_value[level] = node.val
-            # if max_level < level:
-            #     max_level = level
-
-        return [
-            level_to_value[level]
-            for level in level_to_value
-        ]
-
-# level=0: [1]
-# level=1: 3 [2,3]
-# level=2: [4]
-# level=3: [5]
-
-# [1, 3, 4, 5]
+                queue.append((depth + 1, node.left))
+            
+            if node.right:
+                queue.append((depth + 1, node.right))
+        
+        return depths
