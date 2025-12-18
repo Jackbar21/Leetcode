@@ -10,10 +10,7 @@ class Solution:
 
         for i in range(M):
             for j in range(N):
-                if grid[i][j] != LAND:
-                    continue
-                
-                if (i, j) in visited:
+                if grid[i][j] != LAND or (i, j) in visited:
                     continue
 
                 queue = deque([(i, j)])
