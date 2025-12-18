@@ -13,15 +13,15 @@ class Solution:
                 if grid[i][j] != LAND or (i, j) in visited:
                     continue
 
-                queue = deque([(i, j)])
+                stack = [(i, j)]
                 visited.add((i, j))
                 
-                while queue:
-                    x, y = queue.popleft()
+                while stack:
+                    x, y = stack.pop()
                     for dx, dy in DIRECTIONS:
                         nx, ny = x + dx, y + dy
                         if inBounds(nx, ny) and (nx, ny) not in visited and grid[nx][ny] == LAND:
-                            queue.append((nx, ny))
+                            stack.append((nx, ny))
                             visited.add((nx, ny))
                 
                 res += 1
