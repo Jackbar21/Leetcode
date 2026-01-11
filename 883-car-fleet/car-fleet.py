@@ -7,18 +7,21 @@ class Solution:
         cars = [(position[i], speed[i]) for i in range(N)]
         cars.sort(key = lambda car: car[POSITION], reverse=True)
 
-        stack = [float("-inf")]
+        # stack = [float("-inf")]
+        res = 0
+        latest_time = float("-inf")
 
         for car in cars:
             pos, spd = car
             time_to_arrive = (target - pos) / spd
 
-            if time_to_arrive > stack[-1]:
+            if time_to_arrive > latest_time:
                 # Takes longer to arrive than current fleet, hence begins its own
                 # new fleet
-                stack.append(time_to_arrive)
+                latest_time = time_to_arrive
+                res += 1
             else:
                 # Joins part of current fleet
                 continue
         
-        return len(stack) - 1
+        return res
