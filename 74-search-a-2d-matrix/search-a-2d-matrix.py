@@ -6,22 +6,30 @@ class Solution:
         # Want to find "rightmost" (largest index) row such that row[0] <= target
 
         l, r = 0, M - 1
-        rightmost = None
+        index = None
 
         while l <= r:
             mid = (l + r) // 2
             row = matrix[mid]
-            if row[0] <= target:
-                # Found a valid row, look for potentially "rightmore" ones
-                l = mid + 1
-                rightmost = mid
-            else:
+
+            left, right = row[0], row[N - 1]
+
+            if left <= target <= right:
+                index = mid
+                break
+            
+            if target < left:
                 r = mid - 1
-        
-        if rightmost is None:
+                continue
+            
+            assert right < target
+            l = mid + 1
+
+
+        if index is None:
             return False
         
-        row = matrix[rightmost]
+        row = matrix[index]
         # Now, if target exists, it's in this row 'row'
         # Let's binary search to see if it's there!
         l, r = 0, N - 1
