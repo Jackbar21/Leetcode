@@ -2,30 +2,29 @@ class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         self.candidates = sorted(candidates)
         self.target = target
-        self.res = collections.deque()
-        self.backtrack(0, 0, [], None)
-        return list(set(self.res))
-    
-    def backtrack(self, i: int, cur_sum: int, res: list, prev_num = int | None) -> None:        
-        if cur_sum >= self.target or i >= len(self.candidates):
-            if cur_sum == self.target:
-                self.res.append(tuple(res))
+        self.cache = []
+        self.res = set()
+        # return list(set([tuple(sorted(arr)) for arr in (self.backtrack(0, 0))]))
+        self.backtrack(0, 0)
+        return list(self.res)
+
+    def backtrack(self, i, total):
+        candidates, target, cache = self.candidates, self.target, self.cache
+        N = len(candidates)
+        # total = sum(res)
+
+        if total == target:
+            self.res.add(tuple(self.cache))
             return
 
-        # Case 1: Include num at index i (CAN ONLY DO THIS ONCE!)
-        candidate = self.candidates[i]
-        new_sum = cur_sum + candidate
-        if new_sum < self.target:
-            res.append(candidate)
-            self.backtrack(i + 1, cur_sum + candidate, res, candidate)
-            res.pop()
-        elif new_sum == self.target:
-            res.append(candidate)
-            self.res.append(tuple(res))
-            res.pop()
-            return
+        if i >= N or total > target:
+            return        
 
-        # Case 2: Don't include num at index i. If candidate is same as prev_num,
-        # then do NOT consider this case, as it is unnecessary repeated work!!!
-        if prev_num != candidate:
-            self.backtrack(i + 1, cur_sum, res, prev_num)
+        num = candidates[i]
+        self.cache.append(num)
+        self.backtrack(i + 1, total + num)
+        self.cache.pop()
+        while i + 1 < N and candidates[i] == candidates[i + 1]:
+            i += 1
+        self.backtrack(i + 1, total)
+        return
