@@ -1,21 +1,26 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        adj_list = [[] for i in range(numCourses)]
-        indegree = [0] * numCourses
+        adj_list = {node: set() for node in range(numCourses)}
+        indegree = {node: 0 for node in range(numCourses)}
 
         for a, b in prerequisites:
-            adj_list[b].append(a)
+            adj_list[b].add(a)
             indegree[a] += 1
-        
-        queue = deque([node for node in range(numCourses) if indegree[node] == 0])
-        topo = []
+
+        topo_sort = []
+        queue = collections.deque([node for node in range(numCourses) if indegree[node] == 0])
         while queue:
             node = queue.popleft()
-            topo.append(node)
+            topo_sort.append(node)
 
+            # Now, node is no longer a prerequisite for any other course. 
             for neigh in adj_list[node]:
                 indegree[neigh] -= 1
                 if indegree[neigh] == 0:
                     queue.append(neigh)
         
-        return topo if len(topo) == numCourses else []
+        if len(topo_sort) < numCourses:
+            # There was a cycle in the graph, no solution
+            return []
+        
+        return topo_sort
