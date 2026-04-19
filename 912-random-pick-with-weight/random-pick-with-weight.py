@@ -11,43 +11,22 @@ class Solution:
             prefix.append(cur_sum)
         self.prefix = prefix
         self.total = cur_sum
-        self.w = w
-        #print(f"{self.w=}")
-        #print(f"{self.prefix=}")
-        #print(f"{self.total=}")
-
-        # r = random.randint(0, self.total)
-        # #print(f"{r=}, {self.pickIndex()}")
-
-        # [1,3,5]
 
     def pickIndex(self) -> int:
         rand = random.randint(0, self.total - 1)
-        # help(random.randint)
-        # #print(f"{r=}")
-        # return 0
+
         leftmost = 0
         l, r = 0, len(self.prefix) - 1
         while l <= r:
             mid = (l + r) // 2
-            weight = self.prefix[mid]
-            # is_valid = weight < rand
-            is_valid = rand < weight
-            #print(f"{weight=}, {rand=}, {is_valid=}, {mid=}, {leftmost=}")
-            if is_valid:
-                # good, look for even leftmost solutions
-                leftmost = mid
-                # l = mid + 1
+            if rand < self.prefix[mid]:
+                # good, look for even more "leftmost" valid solutions
                 r = mid - 1
             else:
-                # r = mid - 1
+                # bad, look for rightmost but potentially valid solutions
                 l = mid + 1
 
-        assert leftmost is not None
-        #print(f"{rand=}, {leftmost=}")
-        return leftmost
-
-        
+        return l
 
 
 # Your Solution object will be instantiated and called as such:
