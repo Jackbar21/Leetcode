@@ -6,4 +6,4 @@ class Solution:
                 break
             i += 1
             j -= 1
-        return i + 1 == j or (isPalindrome := lambda s: s == s[::-1])(s[i+1:j+1]) or isPalindrome(s[i:j])
+        return abs(i - j) <= 1 or (isPalindrome := lambda s: s == s[::-1])(s[i+1:j+1]) or isPalindrome(s[i:j])
