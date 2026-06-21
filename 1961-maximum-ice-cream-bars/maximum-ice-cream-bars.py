@@ -5,4 +5,4 @@ class Solution:
             if coins < cost:
                 return i
             coins -= cost
-        return i + 1
+        return len(costs)
