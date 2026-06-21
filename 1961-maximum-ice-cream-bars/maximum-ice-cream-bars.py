@@ -1,4 +1,9 @@
 class Solution:
     def maxIceCream(self, costs: List[int], coins: int) -> int:
-        return sum(1 for coin in sorted(costs) if (coins := coins - coin) >= 0)
+        res = 0
+        heapq.heapify(costs)
+        while costs and (val := heapq.heappop(costs)) <= coins:
+            coins -= val
+            res += 1
+        return res
         
