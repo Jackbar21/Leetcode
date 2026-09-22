@@ -1,13 +1,7 @@
 class Solution:
     def minDeletions(self, s: str) -> int:
-        d = defaultdict(int)
-        for char in s:
-            d[char] += 1
-        values = d.values()
-
-        used = set()
-        res = 0
-        for val in values:
+        res, used = 0, set()
+        for val in Counter(s).values():
             while val > 0 and val in used:
                 val -= 1
                 res += 1
