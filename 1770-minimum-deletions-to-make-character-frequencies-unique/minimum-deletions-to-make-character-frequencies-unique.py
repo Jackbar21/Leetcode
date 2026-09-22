@@ -3,7 +3,7 @@ class Solution:
         d = defaultdict(int)
         for char in s:
             d[char] += 1
-        values = sorted(d.values())
+        values = d.values()
 
         used = set()
         res = 0
